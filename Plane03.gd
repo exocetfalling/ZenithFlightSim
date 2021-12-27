@@ -42,12 +42,9 @@ func _physics_process(delta):
 	else:
 		# Roll the body based on the turn input
 		$Mesh/Body.rotation.y = lerp($Mesh/Body.rotation.y, turn_input, level_speed * delta)
-		# If on the ground, don't pitch the body
-	if grounded:
-		$Mesh/Body.rotation.x = 0
-	else:
-		# Pitch the body based on the speed
-		$Mesh/Body.rotation.x = -(max_flight_speed - forward_speed) / 75
+
+	# Pitch the body based on the speed
+	$Mesh/Body.rotation.x = -(max_flight_speed - forward_speed) / 85
 	# Accelerate/decelerate
 	forward_speed = lerp(forward_speed, target_speed, acceleration * delta)
 	# Movement is always forward
