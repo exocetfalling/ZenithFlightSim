@@ -38,7 +38,9 @@ var pitch_input = 0
 func _ready():
 	DebugOverlay.stats.add_property(self, "grounded", "")
 	DebugOverlay.stats.add_property(self, "target_speed", "round")
-
+	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
+	DebugOverlay.stats.add_property(self, "angular_velocity", "round")
+	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
 	var x1 = -PI
@@ -65,10 +67,17 @@ func _calc_lift_coeff(angle_alpha_rad):
 
 func _calc_drag_coeff(angle_rad):
 	return 0.05 * sin(angle_rad)
+	
+func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
+	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * lift_coeff
+
+func _calc_drag_force(air_density, airspeed_true, surface_area, drag_coeff):
+	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * drag_coeff
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
+	velocity = linear_velocity
 
 func get_input(delta):
 	# Throttle input
@@ -85,5 +94,5 @@ func get_input(delta):
 	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
 
 func _integrate_forces(state):
-	add_force(Vector3(0, 10, -target_speed), Vector3(0, 0, 0))
+	add_force(Vector3(0, 0, -throttle_current), Vector3(0, 0, 0))
 	add_torque(Vector3(pitch_input, turn_input, 0))
