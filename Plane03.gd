@@ -1,4 +1,11 @@
-extends KinematicBody
+extends RigidBody
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+var throttle_max = 100
+var throttle_min = 0
 
 # Can't fly below this speed
 var min_flight_speed = 10
@@ -16,9 +23,9 @@ var throttle_delta = 30
 var acceleration = 6.0
 
 # Current speed
-var forward_speed = 0
+var forward_speed = 20
 # Throttle input speed
-var target_speed = 0
+var target_speed = 20
 # Lets us change behavior when grounded
 var grounded = false
 
@@ -26,39 +33,40 @@ var velocity = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
 
-
+# Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "grounded", "")
-	DebugOverlay.stats.add_property(self, "forward_speed", "round")
-	
-func _physics_process(delta):
-	get_input(delta)
-	# Rotate the transform based on the input values
-	transform.basis = transform.basis.rotated(transform.basis.x, pitch_input * pitch_speed * delta)
-	transform.basis = transform.basis.rotated(Vector3.UP, turn_input * turn_speed * delta)
-	# If on the ground, don't roll the body
-	if grounded:
-		$Mesh/Body.rotation.y = 0
-	else:
-		# Roll the body based on the turn input
-		$Mesh/Body.rotation.y = lerp($Mesh/Body.rotation.y, turn_input, level_speed * delta)
+	pass # Replace with function body.
 
-	# Pitch the body based on the speed
-	$Mesh/Body.rotation.x = -(max_flight_speed - forward_speed) / 85
-	# Accelerate/decelerate
-	forward_speed = lerp(forward_speed, target_speed, acceleration * delta)
-	# Movement is always forward
-	velocity = -transform.basis.z * forward_speed
-	# Handle landing/taking off
-	if is_on_floor():
-		if not grounded:
-			rotation.x = 0
-		velocity.y -= 1
-		grounded = true
-	else:
-		grounded = false
+# Lift coeffecient calculation function
+func _calc_lift_coeff(angle_alpha_rad):
+	var x1 = -PI
+	var y1 = 0
+	var x2 = -PI/12
+	var y2 = -1.5
+	var x3 = PI/12
+	var y3 = 1.5
+	var x4 = PI
+	var y4 = 0
+
+	var a = (y2 - y1) / (x2 - x1)
+	var b = (y3 - y2) / (x3 - x2)
+	var c = (y4 - y3) / (x4 - x3)
+
+	if ((angle_alpha_rad > x1) and (angle_alpha_rad <= x2)):
+		return (a * (angle_alpha_rad - x1) + y1)
 	
-	velocity = move_and_slide(velocity, Vector3.UP)
+	elif ((angle_alpha_rad > x2) and (angle_alpha_rad <= x3)):
+		return (b * (angle_alpha_rad - x2) + y2)
+
+	elif ((angle_alpha_rad > x3) and (angle_alpha_rad <= x4)):
+		return (c * (angle_alpha_rad - x3) + y3)
+
+func _calc_drag_coeff(angle_rad):
+	return 0.05 * sin(angle_rad)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
 
 func get_input(delta):
 	# Throttle input
@@ -73,9 +81,8 @@ func get_input(delta):
 		turn_input -= Input.get_action_strength("roll_right")
 		turn_input += Input.get_action_strength("roll_left")
 	# Pitch (climb/dive) input
-	pitch_input = 0
-	if not grounded:
-		pitch_input -= Input.get_action_strength("pitch_down")
-	if forward_speed >= min_flight_speed:
-		pitch_input += Input.get_action_strength("pitch_up")
+	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
 
+func _integrate_forces(state):
+	add_force(Vector3(0, 10, -10), Vector3(0, 0, 0))
+	add_torque(Vector3(100*pitch_input, turn_input, 0))
