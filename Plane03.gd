@@ -6,9 +6,10 @@ extends RigidBody
 # var b = "text"
 var throttle_max = 100
 var throttle_min = 0
+var throttle_current = 0
 
 # Can't fly below this speed
-var min_flight_speed = 10
+var min_flight_speed = 0
 # Maximum airspeed
 var max_flight_speed = 30
 # Turn rate
@@ -25,7 +26,7 @@ var acceleration = 6.0
 # Current speed
 var forward_speed = 20
 # Throttle input speed
-var target_speed = 20
+var target_speed = 0
 # Lets us change behavior when grounded
 var grounded = false
 
@@ -35,7 +36,8 @@ var pitch_input = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	DebugOverlay.stats.add_property(self, "grounded", "")
+	DebugOverlay.stats.add_property(self, "target_speed", "round")
 
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -66,15 +68,14 @@ func _calc_drag_coeff(angle_rad):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	get_input(delta)
 
 func get_input(delta):
 	# Throttle input
 	if Input.is_action_pressed("throttle_up"):
-		target_speed = min(forward_speed + throttle_delta * delta, max_flight_speed)
+		throttle_current = throttle_current + 1 
 	if Input.is_action_pressed("throttle_down"):
-		var limit = 0 if grounded else min_flight_speed
-		target_speed = max(forward_speed - throttle_delta * delta, limit)
+		throttle_current = throttle_current - 1
 	# Turn (roll/yaw) input
 	turn_input = 0
 	if forward_speed > 0.5:
@@ -84,5 +85,5 @@ func get_input(delta):
 	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
 
 func _integrate_forces(state):
-	add_force(Vector3(0, 10, -10), Vector3(0, 0, 0))
-	add_torque(Vector3(100*pitch_input, turn_input, 0))
+	add_force(Vector3(0, 10, -target_speed), Vector3(0, 0, 0))
+	add_torque(Vector3(pitch_input, turn_input, 0))
