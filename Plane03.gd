@@ -36,13 +36,13 @@ var down_local = Vector3.ZERO
 var pos_wing = Vector3(0, 0, -2)
 var pos_h_tail = Vector3(0, 0, 20)
 var pos_v_tail = Vector3(0, 0, 20)
-var pos_aileron_l = Vector3(-10, 0, 0)
-var pos_aileron_r = Vector3(10, 0, 0)
+var pos_aileron_l = Vector3(-8, 0, 0)
+var pos_aileron_r = Vector3( 8, 0, 0)
 var pos_elevator = Vector3(0, 0, 22)
 var pos_rudder = Vector3(0, 4, 22)
 
 # Areas in m^2
-var area_wing = 100 
+var area_wing = 120 
 var area_h_tail = 40
 var area_v_tail = 20
 var area_aileron = 10
@@ -68,7 +68,7 @@ var force_drag_rudder = 0
 
 # Deflection in radians
 var control_deflection = PI/18
-var angle_incidence = 0.02
+var angle_incidence = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -174,7 +174,7 @@ func _integrate_forces(state):
 	up_local = get_global_transform().basis.y
 	down_local = -get_global_transform().basis.y
 	
-	vel_total = vel_local.z
+	vel_total = sqrt(pow(vel_local.x, 2) + pow(vel_local.y, 2) + pow(vel_local.z, 2))
 	
 	vel_local_intermediate = (self.transform.basis.xform_inv(linear_velocity))
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
