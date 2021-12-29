@@ -8,7 +8,7 @@
 [ext_resource path="res://Plane03.gd" type="Script" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.02
+friction = 0.0
 
 [sub_resource type="ArrayMesh" id=2]
 surfaces/0 = {
@@ -197,7 +197,7 @@ mass = 2500.0
 physics_material_override = SubResource( 1 )
 continuous_cd = true
 can_sleep = false
-angular_damp = 25.0
+angular_damp = 60.0
 script = ExtResource( 6 )
 
 [node name="Mesh" type="Spatial" parent="."]
