@@ -39,6 +39,13 @@ var yaw_input = 0
 var angle_alpha = 0
 var angle_beta = 0
 
+var forward_local = Vector3.ZERO
+var aft_local = Vector3.ZERO
+var right_local = Vector3.ZERO
+var left_local = Vector3.ZERO
+var up_local = Vector3.ZERO
+var down_local = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DebugOverlay.stats.add_property(self, "grounded", "")
@@ -104,6 +111,12 @@ func get_input(delta):
 	
 
 func _integrate_forces(state):
-	var forward_local = -get_global_transform().basis.z
+	forward_local = -get_global_transform().basis.z
+	aft_local = get_global_transform().basis.z
+	right_local = get_global_transform().basis.x
+	left_local = -get_global_transform().basis.x
+	up_local = get_global_transform().basis.y
+	down_local = -get_global_transform().basis.y
+	
 	add_force(forward_local * throttle_current, Vector3(0, 0, 0))
 	add_torque(Vector3(pitch_input, -yaw_input, turn_input))
