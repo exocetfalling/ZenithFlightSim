@@ -33,6 +33,8 @@ var grounded = false
 var pos_local = Vector3.ZERO
 
 var corr_velocity = Vector3.ZERO
+
+var vel_local = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
 var yaw_input = 0
@@ -51,6 +53,7 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "grounded", "")
 	DebugOverlay.stats.add_property(self, "target_speed", "round")
 	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
+	DebugOverlay.stats.add_property(self, "vel_local", "round")
 	DebugOverlay.stats.add_property(self, "angular_velocity", "round")
 	
 # Lift coeffecient calculation function
@@ -86,6 +89,12 @@ func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
 func _calc_drag_force(air_density, airspeed_true, surface_area, drag_coeff):
 	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * drag_coeff
 
+func _calc_alpha(vel_forward, vel_down):
+	return atan2(vel_down, vel_forward)
+
+func _calc_beta(vel_forward, vel_left):
+	return atan2(vel_left, vel_forward)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
@@ -117,6 +126,8 @@ func _integrate_forces(state):
 	left_local = -get_global_transform().basis.x
 	up_local = get_global_transform().basis.y
 	down_local = -get_global_transform().basis.y
+	
+	vel_local = self.transform.basis.xform_inv(linear_velocity)
 	
 	add_force(forward_local * throttle_current, Vector3(0, 0, 0))
 	add_torque(Vector3(pitch_input, -yaw_input, turn_input))
