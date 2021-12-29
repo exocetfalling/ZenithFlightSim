@@ -30,9 +30,14 @@ var target_speed = 0
 # Lets us change behavior when grounded
 var grounded = false
 
-var velocity = Vector3.ZERO
+var pos_local = Vector3.ZERO
+
+var corr_velocity = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
+var yaw_input = 0
+var angle_alpha = 0
+var angle_beta = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -77,8 +82,9 @@ func _calc_drag_force(air_density, airspeed_true, surface_area, drag_coeff):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
-	velocity = linear_velocity
+	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
 
+	
 func get_input(delta):
 	# Throttle input
 	if Input.is_action_pressed("throttle_up"):
@@ -87,12 +93,17 @@ func get_input(delta):
 		throttle_current = throttle_current - 1
 	# Turn (roll/yaw) input
 	turn_input = 0
-	if forward_speed > 0.5:
-		turn_input -= Input.get_action_strength("roll_right")
-		turn_input += Input.get_action_strength("roll_left")
+	turn_input -= Input.get_action_strength("roll_right")
+	turn_input += Input.get_action_strength("roll_left")
 	# Pitch (climb/dive) input
 	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
+	
+	# yaw input
+	yaw_input = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
+	
+	
 
 func _integrate_forces(state):
-	add_force(Vector3(0, 0, -throttle_current), Vector3(0, 0, 0))
-	add_torque(Vector3(pitch_input, turn_input, 0))
+	var forward_local = -get_global_transform().basis.z
+	add_force(forward_local * throttle_current, Vector3(0, 0, 0))
+	add_torque(Vector3(pitch_input, -yaw_input, turn_input))
