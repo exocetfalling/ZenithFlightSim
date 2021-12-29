@@ -34,6 +34,7 @@ var pos_local = Vector3.ZERO
 
 var corr_velocity = Vector3.ZERO
 
+var vel_local_intermediate = Vector3.ZERO
 var vel_local = Vector3.ZERO
 var turn_input = 0
 var pitch_input = 0
@@ -55,6 +56,8 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
 	DebugOverlay.stats.add_property(self, "vel_local", "round")
 	DebugOverlay.stats.add_property(self, "angular_velocity", "round")
+	DebugOverlay.stats.add_property(self, "angle_alpha", "round")
+	DebugOverlay.stats.add_property(self, "angle_beta", "round")
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -99,7 +102,8 @@ func _calc_beta(vel_forward, vel_left):
 func _process(delta):
 	get_input(delta)
 	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
-
+	angle_alpha = _calc_alpha(vel_local.z, -vel_local.y)
+	angle_beta = _calc_beta(vel_local.z, -vel_local.x)
 	
 func get_input(delta):
 	# Throttle input
@@ -127,7 +131,7 @@ func _integrate_forces(state):
 	up_local = get_global_transform().basis.y
 	down_local = -get_global_transform().basis.y
 	
-	vel_local = self.transform.basis.xform_inv(linear_velocity)
-	
+	vel_local_intermediate = (self.transform.basis.xform_inv(linear_velocity))
+	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	add_force(forward_local * throttle_current, Vector3(0, 0, 0))
 	add_torque(Vector3(pitch_input, -yaw_input, turn_input))
