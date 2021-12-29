@@ -39,7 +39,7 @@ var pos_v_tail = Vector3(0, 0, 20)
 var pos_aileron_l = Vector3(-8, 0, 0)
 var pos_aileron_r = Vector3( 8, 0, 0)
 var pos_elevator = Vector3(0, 0, 22)
-var pos_rudder = Vector3(0, 4, 22)
+var pos_rudder = Vector3(0, 1, 22)
 
 # Areas in m^2
 var area_wing = 120 
@@ -164,7 +164,7 @@ func get_input(delta):
 	force_lift_aileron_l = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha - roll_input * control_deflection))
 	force_lift_aileron_r = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + roll_input * control_deflection))
 	force_lift_elevator = _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection))
-	force_lift_rudder = _calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta + yaw_input * control_deflection))
+	force_lift_rudder = _calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection))
 	
 func _integrate_forces(state):
 	forward_local = -get_global_transform().basis.z
