@@ -209,5 +209,8 @@ func _integrate_forces(state):
 	add_force(aft_local * force_drag_h_tail, pos_h_tail)
 	add_force(aft_local * force_drag_v_tail, pos_v_tail)
 	
-
-	# add_torque(Vector3(10000 * pitch_input, -10000 * yaw_input, 10000 * roll_input))
+	# Rot. drag
+	force_drag_rot.x = -80 * pow(angular_velocity.x, 2)
+	force_drag_rot.y = -80 * pow(angular_velocity.y, 2)
+	force_drag_rot.z = -80 * pow(angular_velocity.z, 2)
+	add_torque(force_drag_rot)
