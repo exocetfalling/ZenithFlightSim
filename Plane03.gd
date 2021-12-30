@@ -80,7 +80,7 @@ var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
 var control_deflection = PI/20
-var angle_incidence = 0.02
+var angle_incidence = 0.03
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
