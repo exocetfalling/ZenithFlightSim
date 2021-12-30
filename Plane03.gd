@@ -84,6 +84,8 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "force_lift_aileron_l", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_aileron_r", "round")
 	DebugOverlay.stats.add_property(self, "pitch_input", "round")
+	DebugOverlay.stats.add_property(self, "roll_input", "round")
+	DebugOverlay.stats.add_property(self, "yaw_input", "round")
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
 	var x1 = -PI
@@ -150,10 +152,8 @@ func get_input(delta):
 		throttle_current = throttle_current + 1 
 	if (Input.is_action_pressed("throttle_down") && throttle_current >= throttle_min):
 		throttle_current = throttle_current - 1
-	# Turn (roll/yaw) input
-	roll_input = 0
-	roll_input -= Input.get_action_strength("roll_right")
-	roll_input += Input.get_action_strength("roll_left")
+	# Roll input
+	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
 	# Pitch (climb/dive) input
 	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
 	
@@ -170,8 +170,8 @@ func get_input(delta):
 	force_drag_v_tail = _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta))
 	
 	# Control forces calc.
-	force_lift_aileron_l = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha - roll_input * control_deflection))
-	force_lift_aileron_r = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + roll_input * control_deflection))
+	force_lift_aileron_l = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + roll_input * control_deflection))
+	force_lift_aileron_r = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha - roll_input * control_deflection))
 	force_lift_elevator = _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection))
 	force_lift_rudder = _calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection))
 	
