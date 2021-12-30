@@ -38,8 +38,8 @@ var down_local = Vector3.ZERO
 var pos_wing = Vector3(0, 1, 0)
 var pos_h_tail = Vector3(0, 3, 11)
 var pos_v_tail = Vector3(0, 1.5, 10)
-var pos_h_fuse = Vector3(0, 0, 3)
-var pos_v_fuse = Vector3(0, 0, 3)
+var pos_h_fuse = Vector3(0, 0, 5)
+var pos_v_fuse = Vector3(0, 0, 5)
 var pos_aileron_l = Vector3(-8, 1, 0)
 var pos_aileron_r = Vector3( 8, 1, 0)
 var pos_elevator = Vector3(0, 3, 11)
@@ -79,7 +79,7 @@ var force_drag_rudder = 0
 var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
-var control_deflection = PI/12
+var control_deflection = PI/20
 var angle_incidence = 0.02
 
 # Called when the node enters the scene tree for the first time.
