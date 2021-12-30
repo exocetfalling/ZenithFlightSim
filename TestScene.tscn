@@ -53,6 +53,7 @@ size = Vector3( 8, 20, 8 )
 script = ExtResource( 2 )
 
 [node name="Ground" type="MeshInstance" parent="."]
+transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -73,7 +74,7 @@ offset = Vector3( 0, 5, 15 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.829353, 40.5275 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.28221, 9.80573, -18.9735 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7937, 9.80573, -18.9735 )
 mesh = SubResource( 5 )
 material/0 = null
 
