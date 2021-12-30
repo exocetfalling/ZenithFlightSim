@@ -21,7 +21,9 @@ var roll_input = 0
 var pitch_input = 0
 var yaw_input = 0
 var angle_alpha = 0
+var angle_alpha_deg = 0
 var angle_beta = 0
+var angle_beta_deg = 0
 
 var forward_local = Vector3.ZERO
 var aft_local = Vector3.ZERO
@@ -33,19 +35,19 @@ var down_local = Vector3.ZERO
 # MQ-9 Specs, modified for jet propulsion
 
 # Positions as (x, y, z) m, z reversed
-var pos_wing = Vector3(0, 0, -2)
-var pos_h_tail = Vector3(0, 0, 20)
-var pos_v_tail = Vector3(0, 0, 20)
-var pos_aileron_l = Vector3(-8, 0, 0)
-var pos_aileron_r = Vector3( 8, 0, 0)
-var pos_elevator = Vector3(0, 0, 22)
-var pos_rudder = Vector3(0, 1, 22)
+var pos_wing = Vector3(0, 1, 0)
+var pos_h_tail = Vector3(0, 3, 11)
+var pos_v_tail = Vector3(0, 1.5, 10)
+var pos_aileron_l = Vector3(-8, 1, 0)
+var pos_aileron_r = Vector3( 8, 1, 0)
+var pos_elevator = Vector3(0, 3, 11)
+var pos_rudder = Vector3(0, 1.6, 11)
 
 # Areas in m^2
 var area_wing = 120 
-var area_h_tail = 40
-var area_v_tail = 20
-var area_aileron = 10
+var area_h_tail = 20
+var area_v_tail = 10
+var area_aileron = 20
 var area_elevator = 40
 var area_rudder = 40
 
@@ -69,16 +71,17 @@ var force_drag_rudder = 0
 var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
-var control_deflection = PI/18
-var angle_incidence = 0.05
+var control_deflection = PI/12
+var angle_incidence = 0.08
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
 	DebugOverlay.stats.add_property(self, "vel_local", "round")
+	DebugOverlay.stats.add_property(self, "vel_total", "round")
 	DebugOverlay.stats.add_property(self, "angular_velocity", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha", "round")
-	DebugOverlay.stats.add_property(self, "angle_beta", "round")
+	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_wing", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_elevator", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_aileron_l", "round")
@@ -86,6 +89,7 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "pitch_input", "round")
 	DebugOverlay.stats.add_property(self, "roll_input", "round")
 	DebugOverlay.stats.add_property(self, "yaw_input", "round")
+	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
 	var x1 = -PI
@@ -132,18 +136,21 @@ func _calc_drag_induced_force(air_density, airspeed_true, surface_area, drag_coe
 	else:
 		return 0
 
-func _calc_alpha(vel_forward, vel_down):
-	return atan2(vel_down, vel_forward)
+func _calc_alpha(vel_up, vel_fwd):
+	return atan2(-vel_up, vel_fwd)
 
-func _calc_beta(vel_forward, vel_left):
-	return atan2(vel_left, vel_forward)
+func _calc_beta(vel_right, vel_fwd):
+	return atan2(-vel_right, vel_fwd)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
 	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
-	angle_alpha = _calc_alpha(vel_local.z, -vel_local.y)
-	angle_beta = _calc_beta(vel_local.z, -vel_local.x)
+	angle_alpha = _calc_alpha(vel_local.y, vel_local.z)
+	angle_beta = _calc_beta(vel_local.x, vel_local.z)
+	
+	angle_alpha_deg = rad2deg(angle_alpha)
+	angle_beta_deg = rad2deg(angle_beta)
 
 	
 func get_input(delta):
@@ -152,8 +159,10 @@ func get_input(delta):
 		throttle_current = throttle_current + 1 
 	if (Input.is_action_pressed("throttle_down") && throttle_current >= throttle_min):
 		throttle_current = throttle_current - 1
+	
 	# Roll input
 	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
+	
 	# Pitch (climb/dive) input
 	pitch_input = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
 	
@@ -210,7 +219,7 @@ func _integrate_forces(state):
 	add_force(aft_local * force_drag_v_tail, pos_v_tail)
 	
 	# Rot. drag
-	force_drag_rot.x = -80 * pow(angular_velocity.x, 2)
-	force_drag_rot.y = -80 * pow(angular_velocity.y, 2)
-	force_drag_rot.z = -80 * pow(angular_velocity.z, 2)
+	force_drag_rot.x = -400 * pow(angular_velocity.x, 2)
+	force_drag_rot.y = -100 * pow(angular_velocity.y, 2)
+	force_drag_rot.z = -400 * pow(angular_velocity.z, 2)
 	add_torque(force_drag_rot)

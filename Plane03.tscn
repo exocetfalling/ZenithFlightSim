@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Plane03.gd" type="Script" id=6]
 [ext_resource path="res://Glider.tscn" type="PackedScene" id=7]
@@ -34,9 +34,27 @@ length = 10.0
 length = 10.0
 loop = true
 
-[sub_resource type="CylinderShape" id=17]
-radius = 0.955744
-height = 8.49778
+[sub_resource type="CapsuleShape" id=17]
+radius = 1.10273
+height = 15.0594
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 18.4656, 0.447462, 0.271084 )
+
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 3.07085, 0.133482, 1 )
+
+[sub_resource type="BoxShape" id=20]
+extents = Vector3( 0.150924, 1.8349, 1 )
+
+[sub_resource type="SphereShape" id=21]
+radius = 0.5
+
+[sub_resource type="SphereShape" id=22]
+radius = 0.5
+
+[sub_resource type="SphereShape" id=23]
+radius = 0.5
 
 [node name="Plane03" type="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
@@ -44,7 +62,7 @@ mass = 2500.0
 physics_material_override = SubResource( 1 )
 continuous_cd = true
 can_sleep = false
-angular_damp = 60.0
+angular_damp = 0.5
 script = ExtResource( 6 )
 
 [node name="Glider" parent="." instance=ExtResource( 7 )]
@@ -61,6 +79,30 @@ anims/CylinderCylinder001Action = SubResource( 14 )
 anims/CylinderCylinderAction = SubResource( 15 )
 anims/prop = SubResource( 16 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 3 )
+[node name="CollisionShapeFuselage" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.295 )
 shape = SubResource( 17 )
+
+[node name="CollisionShapeWing" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+shape = SubResource( 18 )
+
+[node name="CollisionShapeHTail" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 11 )
+shape = SubResource( 19 )
+
+[node name="CollisionShapeVTail" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 10 )
+shape = SubResource( 20 )
+
+[node name="CollisionShapeNLG" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -3 )
+shape = SubResource( 21 )
+
+[node name="CollisionShapeMLG_L" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, -1 )
+shape = SubResource( 22 )
+
+[node name="CollisionShapeMLG_R" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1.5, -1 )
+shape = SubResource( 23 )
