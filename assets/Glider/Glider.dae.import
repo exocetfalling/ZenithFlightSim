@@ -2,21 +2,21 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/scene.gltf-884a935a61fa8b2720d51fbcaf1270b3.scn"
+path="res://.import/Glider.dae-f932617ed96cfe497fa50d6e1e3b5405.scn"
 
 [deps]
 
-source_file="res://assets/airplane/scene.gltf"
-dest_files=[ "res://.import/scene.gltf-884a935a61fa8b2720d51fbcaf1270b3.scn" ]
+source_file="res://assets/Glider/Glider.dae"
+dest_files=[ "res://.import/Glider.dae-f932617ed96cfe497fa50d6e1e3b5405.scn" ]
 
 [params]
 
-nodes/root_type="RigidBody"
+nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
 nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
-nodes/use_legacy_names=true
+nodes/use_legacy_names=false
 materials/location=1
 materials/storage=1
 materials/keep_on_reimport=true
