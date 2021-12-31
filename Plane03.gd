@@ -10,7 +10,8 @@ var throttle_current = 0
 var air_density = 1.2
 var grounded = false
 
-var pos_local = Vector3.ZERO
+var force_local
+var pos_local
 
 var corr_velocity = Vector3.ZERO
 
@@ -56,25 +57,25 @@ var area_elevator = 4
 var area_rudder = 4
 
 # forces in N
-var force_lift_wing = 0
-var force_lift_h_tail = 0
-var force_lift_v_tail = 0
-var force_lift_h_fuse = 0
-var force_lift_v_fuse = 0
-var force_lift_aileron_l = 0
-var force_lift_aileron_r = 0
-var force_lift_elevator = 0
-var force_lift_rudder = 0
+var force_lift_wing = Vector3.ZERO
+var force_lift_h_tail = Vector3.ZERO
+var force_lift_v_tail = Vector3.ZERO
+var force_lift_h_fuse = Vector3.ZERO
+var force_lift_v_fuse = Vector3.ZERO
+var force_lift_aileron_l = Vector3.ZERO
+var force_lift_aileron_r = Vector3.ZERO
+var force_lift_elevator = Vector3.ZERO
+var force_lift_rudder = Vector3.ZERO
 
-var force_drag_wing = 0
-var force_drag_h_tail = 0
-var force_drag_v_tail = 0
-var force_drag_h_fuse = 0
-var force_drag_v_fuse = 0
-var force_drag_aileron_l = 0
-var force_drag_aileron_r = 0
-var force_drag_elevator = 0
-var force_drag_rudder = 0
+var force_drag_wing = Vector3.ZERO
+var force_drag_h_tail = Vector3.ZERO
+var force_drag_v_tail = Vector3.ZERO
+var force_drag_h_fuse = Vector3.ZERO
+var force_drag_v_fuse = Vector3.ZERO
+var force_drag_aileron_l = Vector3.ZERO
+var force_drag_aileron_r = Vector3.ZERO
+var force_drag_elevator = Vector3.ZERO
+var force_drag_rudder = Vector3.ZERO
 
 var force_drag_rot = Vector3.ZERO
 
@@ -149,6 +150,11 @@ func _calc_alpha(vel_up, vel_fwd):
 
 func _calc_beta(vel_right, vel_fwd):
 	return atan2(-vel_right, vel_fwd)
+	
+func add_force_local(force: Vector3, pos: Vector3):
+	pos_local = self.transform.basis.xform(pos)
+	force_local = self.transform.basis.xform(force)
+	self.add_force(force_local, pos_local)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -177,33 +183,33 @@ func get_input(delta):
 	# yaw input
 	yaw_input = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
 	
-	# Lift/drag calculations (helpers for add_force)
-	force_lift_wing = _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence))
+	# Lift/drag calculations (helpers for add_force_local)
+	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
 	
-	force_lift_h_tail = _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha))
-	force_lift_v_tail = _calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta))
+	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
+	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
 	
-	force_lift_h_fuse = _calc_lift_force(air_density, vel_total, area_h_fuse, _calc_lift_coeff(angle_alpha))
-	force_lift_v_fuse = _calc_lift_force(air_density, vel_total, area_v_fuse, _calc_lift_coeff(angle_beta))
+	force_lift_h_fuse = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_fuse, _calc_lift_coeff(angle_alpha)), 0)
+	force_lift_v_fuse = Vector3(_calc_lift_force(air_density, vel_total, area_v_fuse, _calc_lift_coeff(angle_beta)), 0, 0)
 
-	force_drag_wing = _calc_drag_induced_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence))
+	force_drag_wing = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)), 0)
 	
-	force_drag_h_tail = _calc_drag_induced_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha))
-	force_drag_v_tail = _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta))
+	force_drag_h_tail = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)), 0)
+	force_drag_v_tail = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)), 0)
 	
-	force_drag_h_fuse = _calc_drag_induced_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha))
-	force_drag_v_fuse = _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta))
+	force_drag_h_fuse = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha)), 0)
+	force_drag_v_fuse = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)), 0)
 	
 	# Control forces calc.
-	force_lift_aileron_l = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + roll_input * control_deflection))
-	force_lift_aileron_r = _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - roll_input * control_deflection))
-	force_lift_elevator = _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection))
-	force_lift_rudder = _calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection))
+	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)), 0)
+	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)), 0)
+	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection)), 0)
+	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection)), 0, 0)
 	
-	force_drag_aileron_l = _calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + roll_input * control_deflection))
-	force_drag_aileron_r = _calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - roll_input * control_deflection))
-	force_drag_elevator = _calc_drag_induced_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha + pitch_input * control_deflection))
-	force_drag_rudder = _calc_drag_induced_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_alpha + yaw_input * control_deflection))
+	force_drag_aileron_l = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)))
+	force_drag_aileron_r = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)))
+	force_drag_elevator = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha + pitch_input * control_deflection)))
+	force_drag_rudder = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_alpha + yaw_input * control_deflection)))
 	
 func _integrate_forces(state):
 	forward_local = -get_global_transform().basis.z
@@ -219,29 +225,29 @@ func _integrate_forces(state):
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	
 	# Thrust forces
-	add_force(forward_local * 10 * throttle_current, Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -10 * throttle_current), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
-	add_force(up_local * force_lift_wing, pos_wing)
-	add_force(up_local * force_lift_h_tail, pos_h_tail)
-	add_force(right_local * force_lift_v_tail, pos_v_tail)
+	add_force_local(force_lift_wing, pos_wing)
+	add_force_local(force_lift_h_tail, pos_h_tail)
+	add_force_local(force_lift_v_tail, pos_v_tail)
 	
-	add_force(up_local * force_lift_h_fuse, pos_h_fuse)
-	add_force(right_local * force_lift_v_fuse, pos_v_fuse)
+	add_force_local(force_lift_h_fuse, pos_h_fuse)
+	add_force_local(force_lift_v_fuse, pos_v_fuse)
 	
 	# Lift forces from control surfaces
-	add_force(up_local * force_lift_aileron_l, pos_aileron_l)
-	add_force(up_local * force_lift_aileron_r, pos_aileron_r)
-	add_force(up_local * force_lift_elevator, pos_elevator)
-	add_force(right_local * force_lift_rudder, pos_rudder)
+	add_force_local(force_lift_aileron_l, pos_aileron_l)
+	add_force_local(force_lift_aileron_r, pos_aileron_r)
+	add_force_local(force_lift_elevator, pos_elevator)
+	add_force_local(force_lift_rudder, pos_rudder)
 	
 	# Drag forces
-	add_force(aft_local * force_drag_wing, pos_wing)
-	add_force(aft_local * force_drag_h_tail, pos_h_tail)
-	add_force(aft_local * force_drag_v_tail, pos_v_tail)
+	add_force_local(-force_drag_wing, pos_wing)
+	add_force_local(-force_drag_h_tail, pos_h_tail)
+	add_force_local(-force_drag_v_tail, pos_v_tail)
 	
-	add_force(aft_local * force_drag_h_fuse, pos_h_fuse)
-	add_force(aft_local * force_drag_v_fuse, pos_v_fuse)
+	add_force_local(-force_drag_h_fuse, pos_h_fuse)
+	add_force_local(-force_drag_v_fuse, pos_v_fuse)
 	
 	# Rot. drag
 	force_drag_rot.x = -400 * pow(angular_velocity.x, 2)
