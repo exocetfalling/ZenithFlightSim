@@ -36,14 +36,14 @@ var down_local = Vector3.ZERO
 # Specs from CollisionShape measurements
 
 # Positions as (x, y, z) m, z reversed
-var pos_wing = Vector3(0, 0, 0)
+var pos_wing = Vector3(0, 1, 0)
 var pos_h_tail = Vector3(0, 0, 11)
 var pos_v_tail = Vector3(0, 1.5, 10)
-var pos_h_fuse = Vector3(0, 0, 5)
-var pos_v_fuse = Vector3(0, 0, 5)
-var pos_aileron_l = Vector3(-5, 0, 0)
-var pos_aileron_r = Vector3( 5, 0, 0)
-var pos_elevator = Vector3(0, 0, 11)
+var pos_h_fuse = Vector3(0, 0, 3)
+var pos_v_fuse = Vector3(0, 0, 3)
+var pos_aileron_l = Vector3(-8, 1, 0)
+var pos_aileron_r = Vector3( 8, 1, 0)
+var pos_elevator = Vector3(0, 3.1, 11)
 var pos_rudder = Vector3(0, 1.6, 11)
 
 # Areas in m^2
