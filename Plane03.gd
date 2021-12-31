@@ -18,9 +18,20 @@ var corr_velocity = Vector3.ZERO
 var vel_local_intermediate = Vector3.ZERO
 var vel_local = Vector3.ZERO
 var vel_total = 0
+
+var pfd_spd = 0
+var pfd_alt = 0
+var pfd_hdg = 0
+
+var pfd_pitch = 0
+var pfd_roll = 0
+
+var pfd_stall = false
+
 var roll_input = 0
 var pitch_input = 0
 var yaw_input = 0
+
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
@@ -85,19 +96,12 @@ var angle_incidence = 0.04
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
-	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_total", "round")
-	DebugOverlay.stats.add_property(self, "angular_velocity", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
-	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
-	DebugOverlay.stats.add_property(self, "force_lift_wing", "round")
-	DebugOverlay.stats.add_property(self, "force_lift_elevator", "round")
-	DebugOverlay.stats.add_property(self, "force_lift_aileron_l", "round")
-	DebugOverlay.stats.add_property(self, "force_lift_aileron_r", "round")
-	DebugOverlay.stats.add_property(self, "pitch_input", "round")
-	DebugOverlay.stats.add_property(self, "roll_input", "round")
-	DebugOverlay.stats.add_property(self, "yaw_input", "round")
+	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
+	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
+	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
+	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
+	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
+	DebugOverlay.stats.add_property(self, "pfd_stall", "")
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -165,6 +169,18 @@ func _process(delta):
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
+	
+	pfd_spd = vel_total
+	pfd_hdg = rotation_degrees.y
+	pfd_alt = transform.origin.y
+	
+	pfd_pitch = rotation_degrees.x
+	pfd_roll = -rotation_degrees.z
+	
+	if (angle_alpha_deg > 11):
+		pfd_stall = true
+	else:
+		pfd_stall = false
 
 	
 func get_input(delta):
