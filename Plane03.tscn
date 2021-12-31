@@ -6,54 +6,54 @@
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
+[sub_resource type="Animation" id=2]
+length = 10.0
+
+[sub_resource type="Animation" id=3]
+length = 5.0
+
+[sub_resource type="Animation" id=4]
+length = 10.0
+
+[sub_resource type="Animation" id=5]
+length = 10.0
+
+[sub_resource type="Animation" id=6]
+length = 10.0
+
+[sub_resource type="Animation" id=7]
+length = 5.0
+
 [sub_resource type="Animation" id=8]
 length = 10.0
 
 [sub_resource type="Animation" id=9]
-length = 5.0
+length = 10.0
 
 [sub_resource type="Animation" id=10]
 length = 10.0
-
-[sub_resource type="Animation" id=11]
-length = 10.0
-
-[sub_resource type="Animation" id=12]
-length = 10.0
-
-[sub_resource type="Animation" id=13]
-length = 5.0
-
-[sub_resource type="Animation" id=14]
-length = 10.0
-
-[sub_resource type="Animation" id=15]
-length = 10.0
-
-[sub_resource type="Animation" id=16]
-length = 10.0
 loop = true
 
-[sub_resource type="CapsuleShape" id=17]
+[sub_resource type="CapsuleShape" id=11]
 radius = 1.10273
 height = 15.0594
 
-[sub_resource type="BoxShape" id=18]
+[sub_resource type="BoxShape" id=12]
 extents = Vector3( 19.7537, 0.447462, 0.271084 )
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 3.07085, 0.133482, 1 )
 
-[sub_resource type="BoxShape" id=20]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.150924, 1.8349, 1 )
 
-[sub_resource type="SphereShape" id=21]
+[sub_resource type="SphereShape" id=15]
 radius = 0.5
 
-[sub_resource type="SphereShape" id=22]
+[sub_resource type="SphereShape" id=16]
 radius = 0.5
 
-[sub_resource type="SphereShape" id=23]
+[sub_resource type="SphereShape" id=17]
 radius = 0.5
 
 [node name="Plane03" type="RigidBody"]
@@ -69,43 +69,43 @@ script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "prop"
-anims/Cylinder001CameraAction = SubResource( 8 )
-anims/Cylinder001CubeAction = SubResource( 9 )
-anims/Cylinder001Cylinder001Action = SubResource( 10 )
-anims/Cylinder001CylinderAction = SubResource( 11 )
-anims/CylinderCameraAction = SubResource( 12 )
-anims/CylinderCubeAction = SubResource( 13 )
-anims/CylinderCylinder001Action = SubResource( 14 )
-anims/CylinderCylinderAction = SubResource( 15 )
-anims/prop = SubResource( 16 )
+anims/Cylinder001CameraAction = SubResource( 2 )
+anims/Cylinder001CubeAction = SubResource( 3 )
+anims/Cylinder001Cylinder001Action = SubResource( 4 )
+anims/Cylinder001CylinderAction = SubResource( 5 )
+anims/CylinderCameraAction = SubResource( 6 )
+anims/CylinderCubeAction = SubResource( 7 )
+anims/CylinderCylinder001Action = SubResource( 8 )
+anims/CylinderCylinderAction = SubResource( 9 )
+anims/prop = SubResource( 10 )
 
 [node name="CollisionShapeFuselage" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.295 )
-shape = SubResource( 17 )
+shape = SubResource( 11 )
 
 [node name="CollisionShapeWing" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
-shape = SubResource( 18 )
+shape = SubResource( 12 )
 
 [node name="CollisionShapeHTail" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 11 )
-shape = SubResource( 19 )
+shape = SubResource( 13 )
 
 [node name="CollisionShapeVTail" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 10 )
-shape = SubResource( 20 )
+shape = SubResource( 14 )
 
 [node name="CollisionShapeNLG" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -3 )
-shape = SubResource( 21 )
+shape = SubResource( 15 )
 disabled = true
 
 [node name="CollisionShapeMLG_L" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, -1 )
-shape = SubResource( 22 )
+shape = SubResource( 16 )
 disabled = true
 
 [node name="CollisionShapeMLG_R" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1.5, -1 )
-shape = SubResource( 23 )
+shape = SubResource( 17 )
 disabled = true

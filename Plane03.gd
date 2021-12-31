@@ -35,14 +35,14 @@ var down_local = Vector3.ZERO
 # Specs from CollisionShape measurements
 
 # Positions as (x, y, z) m, z reversed
-var pos_wing = Vector3(0, 1, 0)
-var pos_h_tail = Vector3(0, 3, 11)
+var pos_wing = Vector3(0, 0, 0)
+var pos_h_tail = Vector3(0, 0, 11)
 var pos_v_tail = Vector3(0, 1.5, 10)
 var pos_h_fuse = Vector3(0, 0, 5)
 var pos_v_fuse = Vector3(0, 0, 5)
-var pos_aileron_l = Vector3(-8, 1, 2)
-var pos_aileron_r = Vector3( 8, 1, 2)
-var pos_elevator = Vector3(0, 3, 11)
+var pos_aileron_l = Vector3(-5, 0, 0)
+var pos_aileron_r = Vector3( 5, 0, 0)
+var pos_elevator = Vector3(0, 0, 11)
 var pos_rudder = Vector3(0, 1.6, 11)
 
 # Areas in m^2
@@ -80,7 +80,7 @@ var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
 var control_deflection = PI/20
-var angle_incidence = 0.03
+var angle_incidence = 0.04
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -219,7 +219,7 @@ func _integrate_forces(state):
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	
 	# Thrust forces
-	add_force(forward_local * 9 * throttle_current, Vector3(0, 0, 0))
+	add_force(forward_local * 10 * throttle_current, Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force(up_local * force_lift_wing, pos_wing)
