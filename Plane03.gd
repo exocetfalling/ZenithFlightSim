@@ -36,6 +36,10 @@ var flaps_max = 1
 var flaps_min = -1
 var flaps_input = 0
 
+var trim_pitch_max = 1
+var trim_pitch_min = -1
+var trim_pitch_input = 0
+
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
@@ -63,15 +67,15 @@ var pos_rudder = Vector3(0, 1.6, 11)
 var pos_flaps = Vector3( 0, 1, 2)
 
 # Areas in m^2
-var area_wing = 10 
+var area_wing = 8 
 var area_h_tail = 3
 var area_v_tail = 1.5
-var area_h_fuse = 20
-var area_v_fuse = 20
-var area_aileron = 4
-var area_elevator = 4
-var area_rudder = 4
-var area_flaps = 8
+var area_h_fuse = 5
+var area_v_fuse = 5
+var area_aileron = 0.5
+var area_elevator = 1
+var area_rudder = 1
+var area_flaps = 1
 
 # forces in N
 var force_lift_wing = Vector3.ZERO
@@ -100,7 +104,7 @@ var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
 var control_deflection = PI/12
-var angle_incidence = 0.04
+var angle_incidence = 0.05
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -115,6 +119,8 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "yaw_input", "round")
 	DebugOverlay.stats.add_property(self, "throttle_input", "round")
 	DebugOverlay.stats.add_property(self, "flaps_input", "round")
+	DebugOverlay.stats.add_property(self, "trim_pitch_input", "round")
+	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -148,7 +154,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_induced_coeff(angle_rad):
-	return 0.0000000001 * sin(angle_rad)
+	return 0.01 * sin(angle_rad)
 	
 func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
 	if airspeed_true > 1:
@@ -221,37 +227,45 @@ func get_input(delta):
 	if (Input.is_action_pressed("flaps_up")):
 		if (flaps_input > flaps_min):
 			flaps_input = flaps_input - 0.25 * delta 
+			
+	# Trim input
+	if (Input.is_action_pressed("trim_pitch_up")):
+		if (trim_pitch_input < trim_pitch_max):
+			trim_pitch_input = trim_pitch_input + 0.25 * delta 
+	if (Input.is_action_pressed("trim_pitch_down")):
+		if (trim_pitch_input > trim_pitch_min):
+			trim_pitch_input = trim_pitch_input - 0.25 * delta 
 	
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
 	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
-	
+
 	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
 	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
-	
+
 	force_lift_h_fuse = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_fuse, _calc_lift_coeff(angle_alpha)), 0)
 	force_lift_v_fuse = Vector3(_calc_lift_force(air_density, vel_total, area_v_fuse, _calc_lift_coeff(angle_beta)), 0, 0)
 
-	force_drag_wing = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)), 0)
-	
-	force_drag_h_tail = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)), 0)
-	force_drag_v_tail = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)), 0)
-	
-	force_drag_h_fuse = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha)), 0)
-	force_drag_v_fuse = Vector3(0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)), 0)
+	force_drag_wing = Vector3(0, 0, _calc_drag_induced_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
+
+	force_drag_h_tail = Vector3(0, 0, _calc_drag_induced_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
+	force_drag_v_tail = Vector3(0, 0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
+
+	force_drag_h_fuse = Vector3(0, 0, _calc_drag_induced_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha)))
+	force_drag_v_fuse = Vector3(0, 0, _calc_drag_induced_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
 	
 	# Control forces calc.
 	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)), 0)
 	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)), 0)
-	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection)), 0)
+	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - (pitch_input + trim_pitch_input) * control_deflection)), 0)
 	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection)), 0, 0)
 	
 	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)), 0)
 	
 	force_drag_aileron_l = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)))
 	force_drag_aileron_r = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)))
-	force_drag_elevator = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha + pitch_input * control_deflection)))
+	force_drag_elevator = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha - (pitch_input + trim_pitch_input) * control_deflection)))
 	force_drag_rudder = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_alpha + yaw_input * control_deflection)))
 	
 	force_drag_flaps = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)))
@@ -269,8 +283,11 @@ func _integrate_forces(_state):
 	vel_local_intermediate = (self.transform.basis.xform_inv(linear_velocity))
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	
+	# Gravity
+	add_central_force(Vector3(0, -weight, 0))
+	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -10 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -5 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)
@@ -286,13 +303,15 @@ func _integrate_forces(_state):
 	add_force_local(force_lift_elevator, pos_elevator)
 	add_force_local(force_lift_rudder, pos_rudder)
 	
+	add_force_local(force_lift_flaps, pos_flaps)
 	# Drag forces
-	add_force_local(-force_drag_wing, pos_wing)
-	add_force_local(-force_drag_h_tail, pos_h_tail)
-	add_force_local(-force_drag_v_tail, pos_v_tail)
+	add_force_local(force_drag_wing, pos_wing)
+	add_force_local(force_drag_h_tail, pos_h_tail)
+	add_force_local(force_drag_v_tail, pos_v_tail)
+	add_force_local(force_drag_flaps, pos_flaps)
 	
-	add_force_local(-force_drag_h_fuse, pos_h_fuse)
-	add_force_local(-force_drag_v_fuse, pos_v_fuse)
+	add_force_local(force_drag_h_fuse, pos_h_fuse)
+	add_force_local(force_drag_v_fuse, pos_v_fuse)
 	
 #	# Rot. drag
 #	force_drag_rot.x = -4000 * pow(angular_velocity.x, 2)

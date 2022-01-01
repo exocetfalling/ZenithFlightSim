@@ -14,6 +14,8 @@ Yaw left: U
 *Control surfaces (secondary):*
 Flaps up: A
 Flaps down: D
+Trim up: H
+Trim down: Y
 **Credits:**
 Basis of the project, rewritten with custom physics:
 [Simplified Airplane Controller](https://kidscancode.org/godot_recipes/3d/simple_airplane/)
