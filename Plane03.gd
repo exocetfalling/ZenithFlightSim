@@ -5,7 +5,7 @@ extends RigidBody
 # var b = "text"
 var throttle_max = 100
 var throttle_min = 0
-var throttle_current = 0
+var throttle_input = 0
 
 var air_density = 1.2
 var grounded = false
@@ -32,6 +32,10 @@ var roll_input = 0
 var pitch_input = 0
 var yaw_input = 0
 
+var flaps_max = 1
+var flaps_min = -1
+var flaps_input = 0
+
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
@@ -52,10 +56,11 @@ var pos_h_tail = Vector3(0, 0, 11)
 var pos_v_tail = Vector3(0, 1.5, 10)
 var pos_h_fuse = Vector3(0, 0, 3)
 var pos_v_fuse = Vector3(0, 0, 3)
-var pos_aileron_l = Vector3(-8, 1, 0)
-var pos_aileron_r = Vector3( 8, 1, 0)
+var pos_aileron_l = Vector3(-8, 1, 1)
+var pos_aileron_r = Vector3( 8, 1, 1)
 var pos_elevator = Vector3(0, 3.1, 11)
 var pos_rudder = Vector3(0, 1.6, 11)
+var pos_flaps = Vector3( 0, 1, 2)
 
 # Areas in m^2
 var area_wing = 10 
@@ -66,6 +71,7 @@ var area_v_fuse = 20
 var area_aileron = 4
 var area_elevator = 4
 var area_rudder = 4
+var area_flaps = 8
 
 # forces in N
 var force_lift_wing = Vector3.ZERO
@@ -77,6 +83,7 @@ var force_lift_aileron_l = Vector3.ZERO
 var force_lift_aileron_r = Vector3.ZERO
 var force_lift_elevator = Vector3.ZERO
 var force_lift_rudder = Vector3.ZERO
+var force_lift_flaps = Vector3.ZERO
 
 var force_drag_wing = Vector3.ZERO
 var force_drag_h_tail = Vector3.ZERO
@@ -87,11 +94,12 @@ var force_drag_aileron_l = Vector3.ZERO
 var force_drag_aileron_r = Vector3.ZERO
 var force_drag_elevator = Vector3.ZERO
 var force_drag_rudder = Vector3.ZERO
+var force_drag_flaps = Vector3.ZERO
 
 var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
-var control_deflection = PI/20
+var control_deflection = PI/12
 var angle_incidence = 0.04
 
 # Called when the node enters the scene tree for the first time.
@@ -102,6 +110,11 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
 	DebugOverlay.stats.add_property(self, "pfd_stall", "")
+	DebugOverlay.stats.add_property(self, "pitch_input", "round")
+	DebugOverlay.stats.add_property(self, "roll_input", "round")
+	DebugOverlay.stats.add_property(self, "yaw_input", "round")
+	DebugOverlay.stats.add_property(self, "throttle_input", "round")
+	DebugOverlay.stats.add_property(self, "flaps_input", "round")
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -135,7 +148,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_induced_coeff(angle_rad):
-	return 0.00001 * sin(angle_rad)
+	return 0.0000000001 * sin(angle_rad)
 	
 func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
 	if airspeed_true > 1:
@@ -185,10 +198,12 @@ func _process(delta):
 	
 func get_input(delta):
 	# Throttle input
-	if (Input.is_action_pressed("throttle_up") && throttle_current <= throttle_max):
-		throttle_current = throttle_current + 1 
-	if (Input.is_action_pressed("throttle_down") && throttle_current >= throttle_min):
-		throttle_current = throttle_current - 1
+	if (Input.is_action_pressed("throttle_up")):
+		if (throttle_input < throttle_max):
+			throttle_input = throttle_input + 1 
+	if (Input.is_action_pressed("throttle_down")):
+		if (throttle_input > throttle_min):
+			throttle_input = throttle_input - 1
 	
 	# Roll input
 	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
@@ -199,7 +214,17 @@ func get_input(delta):
 	# yaw input
 	yaw_input = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
 	
+	# Flaps input
+	if (Input.is_action_pressed("flaps_down")):
+		if (flaps_input < flaps_max):
+			flaps_input = flaps_input + 0.25 * delta 
+	if (Input.is_action_pressed("flaps_up")):
+		if (flaps_input > flaps_min):
+			flaps_input = flaps_input - 0.25 * delta 
+	
 	# Lift/drag calculations (helpers for add_force_local)
+	
+	#Static, non-moving elements
 	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
 	
 	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
@@ -222,12 +247,16 @@ func get_input(delta):
 	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - pitch_input * control_deflection)), 0)
 	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - yaw_input * control_deflection)), 0, 0)
 	
+	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)), 0)
+	
 	force_drag_aileron_l = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)))
 	force_drag_aileron_r = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)))
 	force_drag_elevator = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha + pitch_input * control_deflection)))
 	force_drag_rudder = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_alpha + yaw_input * control_deflection)))
 	
-func _integrate_forces(state):
+	force_drag_flaps = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)))
+	
+func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
 	aft_local = get_global_transform().basis.z
 	right_local = get_global_transform().basis.x
@@ -241,7 +270,7 @@ func _integrate_forces(state):
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -10 * throttle_current), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -10 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)
@@ -265,8 +294,8 @@ func _integrate_forces(state):
 	add_force_local(-force_drag_h_fuse, pos_h_fuse)
 	add_force_local(-force_drag_v_fuse, pos_v_fuse)
 	
-	# Rot. drag
-	force_drag_rot.x = -400 * pow(angular_velocity.x, 2)
-	force_drag_rot.y = -400 * pow(angular_velocity.y, 2)
-	force_drag_rot.z = -400 * pow(angular_velocity.z, 2)
-	add_torque(force_drag_rot)
+#	# Rot. drag
+#	force_drag_rot.x = -4000 * pow(angular_velocity.x, 2)
+#	force_drag_rot.y = -4000 * pow(angular_velocity.y, 2)
+#	force_drag_rot.z = -4000 * pow(angular_velocity.z, 2)
+#	add_torque(force_drag_rot)
