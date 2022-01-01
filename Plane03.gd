@@ -267,6 +267,6 @@ func _integrate_forces(state):
 	
 	# Rot. drag
 	force_drag_rot.x = -400 * pow(angular_velocity.x, 2)
-	force_drag_rot.y = -100 * pow(angular_velocity.y, 2)
+	force_drag_rot.y = -400 * pow(angular_velocity.y, 2)
 	force_drag_rot.z = -400 * pow(angular_velocity.z, 2)
 	add_torque(force_drag_rot)
