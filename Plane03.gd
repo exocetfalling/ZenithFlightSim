@@ -67,15 +67,15 @@ var pos_rudder = Vector3(0, 1.6, 11)
 var pos_flaps = Vector3( 0, 1, 2)
 
 # Areas in m^2
-var area_wing = 8 
+var area_wing = 7 
 var area_h_tail = 3
 var area_v_tail = 1.5
-var area_h_fuse = 5
-var area_v_fuse = 5
-var area_aileron = 0.5
-var area_elevator = 1
+var area_h_fuse = 8
+var area_v_fuse = 8
+var area_aileron = 1.5
+var area_elevator = 1.5
 var area_rudder = 1
-var area_flaps = 1
+var area_flaps = 2
 
 # forces in N
 var force_lift_wing = Vector3.ZERO
@@ -104,7 +104,7 @@ var force_drag_rot = Vector3.ZERO
 
 # Deflection in radians
 var control_deflection = PI/12
-var angle_incidence = 0.05
+var angle_incidence = 0.03
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -287,7 +287,7 @@ func _integrate_forces(_state):
 	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -5 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -3 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)

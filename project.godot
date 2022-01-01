@@ -67,6 +67,8 @@ LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
+window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
@@ -148,5 +150,4 @@ trim_pitch_down={
 
 quality/filters/msaa=1
 quality/filters/use_fxaa=true
-quality/filters/use_debanding=true
 environment/default_environment="res://default_env.tres"
