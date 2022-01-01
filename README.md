@@ -16,6 +16,11 @@ Flaps up: A
 Flaps down: D
 Trim up: H
 Trim down: Y
+*Weapons*
+Station 1: 1
+Station 2: 2
+Station 3: 3
+Station 4: 4
 **Credits:**
 Basis of the project, rewritten with custom physics:
 [Simplified Airplane Controller](https://kidscancode.org/godot_recipes/3d/simple_airplane/)

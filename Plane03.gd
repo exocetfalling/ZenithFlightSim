@@ -1,5 +1,6 @@
 extends RigidBody
 
+var rocket_scene = preload("GPRocket.tscn")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -236,6 +237,33 @@ func get_input(delta):
 		if (trim_pitch_input > trim_pitch_min):
 			trim_pitch_input = trim_pitch_input - 0.25 * delta 
 	
+	if Input.is_action_just_pressed("fire_sta_1"):
+		var clone = rocket_scene.instance()
+		var scene_root = get_tree().root.get_children()[0]
+		scene_root.add_child(clone)
+		clone.global_transform = $WpnRack_1.global_transform
+		clone.linear_velocity = self.linear_velocity
+	
+	if Input.is_action_just_pressed("fire_sta_2"):
+		var clone = rocket_scene.instance()
+		var scene_root = get_tree().root.get_children()[0]
+		scene_root.add_child(clone)
+		clone.global_transform = $WpnRack_2.global_transform
+		clone.linear_velocity = self.linear_velocity
+
+	if Input.is_action_just_pressed("fire_sta_3"):
+		var clone = rocket_scene.instance()
+		var scene_root = get_tree().root.get_children()[0]
+		scene_root.add_child(clone)
+		clone.global_transform = $WpnRack_3.global_transform
+		clone.linear_velocity = self.linear_velocity
+	
+	if Input.is_action_just_pressed("fire_sta_4"):
+		var clone = rocket_scene.instance()
+		var scene_root = get_tree().root.get_children()[0]
+		scene_root.add_child(clone)
+		clone.global_transform = $WpnRack_4.global_transform
+		clone.linear_velocity = self.linear_velocity
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
@@ -287,7 +315,7 @@ func _integrate_forces(_state):
 	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -3 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -2 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)

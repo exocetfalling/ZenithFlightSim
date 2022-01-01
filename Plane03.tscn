@@ -86,3 +86,35 @@ shape = SubResource( 13 )
 [node name="CollisionShapeVTail" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 10 )
 shape = SubResource( 14 )
+
+[node name="WpnRack_1" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.75, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="WpnRack_1"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_2" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.75, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="WpnRack_2"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_3" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.75, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="WpnRack_3"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_4" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.75, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="WpnRack_4"]
+width = 0.1
+height = 0.5
+depth = 0.5
