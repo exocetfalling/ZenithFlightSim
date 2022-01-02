@@ -151,7 +151,7 @@ target_path = NodePath("../Plane03")
 offset = Vector3( 0, 5, 15 )
 
 [node name="Plane03" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.829353, 40.5275 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.1, 40.528 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7937, 9.80573, -18.9735 )

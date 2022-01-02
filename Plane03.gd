@@ -298,6 +298,15 @@ func get_input(delta):
 	
 	force_drag_flaps = Vector3(0, 0, -_calc_drag_induced_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)))
 	
+	# Animations
+	$Glider_CSG_Mesh/Hinge_Aileron_L.rotation.x =  roll_input * control_deflection
+	$Glider_CSG_Mesh/Hinge_Aileron_R.rotation.x = -roll_input * control_deflection
+	$Glider_CSG_Mesh/Hinge_Elevator_L.rotation.x = -(pitch_input + trim_pitch_input) * control_deflection
+	$Glider_CSG_Mesh/Hinge_Elevator_R.rotation.x = -(pitch_input + trim_pitch_input) * control_deflection
+	$Glider_CSG_Mesh/Hinge_Rudder.rotation.y =  yaw_input * control_deflection
+
+	$Glider_CSG_Mesh/Hinge_Flap_L.rotation.x = flaps_input * control_deflection
+	$Glider_CSG_Mesh/Hinge_Flap_R.rotation.x = flaps_input * control_deflection
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
 	aft_local = get_global_transform().basis.z

@@ -21,6 +21,7 @@ func add_force_local(force: Vector3, pos: Vector3):
 
 func _on_body_entered(body):
 	emit_signal("exploded", transform.origin)
+	fuel = 0
 	var clone = explosion_scene.instance()
 	add_child(clone)
 	clone.global_transform = self.global_transform
@@ -30,8 +31,10 @@ func _on_body_entered(body):
 func _process(delta):
 	if (fuel > 0):
 		fuel = fuel - 5 * delta
+	if (fuel <= 0):
+		queue_free()
 	
 
 func _integrate_forces(_state):
 	if (fuel > 0):
-		add_force_local(Vector3(0, 0, -5000), Vector3(0, 0, 0))
+		add_force_local(Vector3(0, 0, -500), Vector3(0, 0, 0))
