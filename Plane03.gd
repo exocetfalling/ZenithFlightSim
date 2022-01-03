@@ -1,6 +1,7 @@
 extends RigidBody
 
 var rocket_scene = preload("GPRocket.tscn")
+signal flight_data
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -109,19 +110,20 @@ var angle_incidence = 0.03
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
-	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
-	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
-	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
-	DebugOverlay.stats.add_property(self, "pfd_stall", "")
-	DebugOverlay.stats.add_property(self, "pitch_input", "round")
-	DebugOverlay.stats.add_property(self, "roll_input", "round")
-	DebugOverlay.stats.add_property(self, "yaw_input", "round")
-	DebugOverlay.stats.add_property(self, "throttle_input", "round")
-	DebugOverlay.stats.add_property(self, "flaps_input", "round")
-	DebugOverlay.stats.add_property(self, "trim_pitch_input", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_stall", "")
+#	DebugOverlay.stats.add_property(self, "pitch_input", "round")
+#	DebugOverlay.stats.add_property(self, "roll_input", "round")
+#	DebugOverlay.stats.add_property(self, "yaw_input", "round")
+#	DebugOverlay.stats.add_property(self, "throttle_input", "round")
+#	DebugOverlay.stats.add_property(self, "flaps_input", "round")
+#	DebugOverlay.stats.add_property(self, "trim_pitch_input", "round")
+#	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+	pass
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -191,7 +193,7 @@ func _process(delta):
 	angle_beta_deg = rad2deg(angle_beta)
 	
 	pfd_spd = vel_total
-	pfd_hdg = rotation_degrees.y
+	pfd_hdg = fmod(-rotation_degrees.y + 360, 360)
 	pfd_alt = transform.origin.y
 	
 	pfd_pitch = rotation_degrees.x
@@ -211,6 +213,11 @@ func get_input(delta):
 	if (Input.is_action_pressed("throttle_down")):
 		if (throttle_input > throttle_min):
 			throttle_input = throttle_input - 1
+			
+	if (Input.is_action_pressed("ui_left")):
+		$Camera.current = true
+	if (Input.is_action_pressed("ui_right")):
+		$Camera2.current = true
 	
 	# Roll input
 	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")

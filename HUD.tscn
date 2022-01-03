@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://HUD.gd" type="Script" id=1]
+[ext_resource path="res://HUD_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://HorizonLine_Pos.gd" type="Script" id=3]
+
+[node name="HUD" type="MarginContainer"]
+anchor_right = 1.0
+margin_bottom = 160.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Speed Data" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 140.0
+
+[node name="Label" type="Label" parent="Speed Data"]
+margin_right = 145.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "SPD: 	"
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Speed Data"]
+margin_left = 149.0
+margin_right = 236.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+align = 1
+uppercase = true
+
+[node name="Alt Data" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 140.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Alt Data"]
+margin_left = 1644.0
+margin_right = 1789.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "alt: "
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Alt Data"]
+margin_left = 1793.0
+margin_right = 1880.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+uppercase = true
+
+[node name="Heading Data" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 140.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Heading Data"]
+margin_left = 822.0
+margin_right = 967.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "HDG: "
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Heading Data"]
+margin_left = 971.0
+margin_right = 1058.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+uppercase = true
+
+[node name="HorizonLine_Pos" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Line2D" type="Line2D" parent="HorizonLine_Pos"]
+points = PoolVector2Array( -2000, 0, 2000, 0 )
+width = 20.0
+default_color = Color( 0.0862745, 0.905882, 0.137255, 1 )

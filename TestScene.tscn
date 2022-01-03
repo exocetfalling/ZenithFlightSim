@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Plane03.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TestScene.gd" type="Script" id=2]
-[ext_resource path="res://Camera.gd" type="Script" id=3]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/prototype_textures/Dark/texture_03.png" type="Texture" id=4]
 [ext_resource path="res://assets/prototype_textures/Red/texture_09.png" type="Texture" id=5]
 [ext_resource path="res://assets/prototype_textures/Orange/texture_02.png" type="Texture" id=6]
@@ -142,14 +142,6 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Ground/StaticBody"]
 shape = SubResource( 3 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0159, 11.3196, -2.06824 )
-current = true
-far = 5000.0
-script = ExtResource( 3 )
-target_path = NodePath("../Plane03")
-offset = Vector3( 0, 5, 15 )
-
 [node name="Plane03" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 40.528 )
 
@@ -180,6 +172,4 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 8 )
 
-[node name="Camera2" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -27.2758, 28.5167, -6.91097 )
-far = 5000.0
+[node name="HUD" parent="." instance=ExtResource( 3 )]

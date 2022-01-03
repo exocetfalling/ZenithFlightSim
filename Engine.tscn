@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Glider_Engine.tres" type="Material" id=1]
+[ext_resource path="res://Glider_Body.tres" type="Material" id=2]
 
 [node name="Engine" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
@@ -10,7 +11,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0 )
 radius = 0.5
 radial_segments = 16
 rings = 16
-material = ExtResource( 1 )
+material = ExtResource( 2 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="EnginePod"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )

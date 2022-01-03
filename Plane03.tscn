@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Glider_Body.tres" type="Material" id=1]
 [ext_resource path="res://Glider_Flaps.tres" type="Material" id=2]
@@ -11,9 +11,10 @@
 [ext_resource path="res://LG_Strut.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Engine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Glider_Gear_Bay.tres" type="Material" id=11]
+[ext_resource path="res://default_env.tres" type="Environment" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
+friction = 0.01
 
 [sub_resource type="Animation" id=2]
 resource_name = "Aileron"
@@ -290,3 +291,11 @@ shape = SubResource( 16 )
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, -2.554, 0.948 )
 shape = SubResource( 16 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.45868 )
+
+[node name="Camera2" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 30 )
+environment = ExtResource( 12 )
+far = 5000.0
