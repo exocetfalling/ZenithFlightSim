@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Glider_Body.tres" type="Material" id=1]
 [ext_resource path="res://Glider_Flaps.tres" type="Material" id=2]
@@ -8,31 +8,29 @@
 [ext_resource path="res://Plane03.gd" type="Script" id=6]
 [ext_resource path="res://Glider_Tail_V.tres" type="Material" id=7]
 [ext_resource path="res://Glider_Engine.tres" type="Material" id=8]
-[ext_resource path="res://Wheel.tres" type="Material" id=9]
-[ext_resource path="res://Strut.tres" type="Material" id=10]
+[ext_resource path="res://LG_Strut.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Engine.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Glider_Gear_Bay.tres" type="Material" id=11]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=2]
 resource_name = "Aileron"
 length = 5.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 length = 10.0
 tracks/0/type = "transform"
-tracks/0/path = NodePath("Glider_CSG_Mesh/Hinge_Aileron_L/ControlSurface")
+tracks/0/path = NodePath("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L/ControlSurface")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = PoolRealArray(  )
 
-[sub_resource type="Animation" id=3]
-length = 5.0
-
 [sub_resource type="Animation" id=4]
-length = 10.0
+length = 5.0
 
 [sub_resource type="Animation" id=5]
 length = 10.0
@@ -41,33 +39,36 @@ length = 10.0
 length = 10.0
 
 [sub_resource type="Animation" id=7]
-length = 5.0
+length = 10.0
 
 [sub_resource type="Animation" id=8]
-length = 10.0
+length = 5.0
 
 [sub_resource type="Animation" id=9]
 length = 10.0
 
 [sub_resource type="Animation" id=10]
 length = 10.0
+
+[sub_resource type="Animation" id=11]
+length = 10.0
 loop = true
 
-[sub_resource type="CapsuleShape" id=16]
+[sub_resource type="CapsuleShape" id=12]
 height = 13.2845
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 20, 0.2, 2 )
 
-[sub_resource type="BoxShape" id=18]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 4, 0.1, 1.2 )
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.1, 1.5, 1 )
 
-[sub_resource type="CylinderShape" id=20]
+[sub_resource type="CylinderShape" id=16]
 radius = 0.5
-height = 0.5
+height = 0.25
 
 [node name="Plane03" type="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
@@ -84,16 +85,16 @@ script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "prop"
-anims/Aileron = SubResource( 15 )
-anims/Cylinder001CameraAction = SubResource( 2 )
-anims/Cylinder001CubeAction = SubResource( 3 )
-anims/Cylinder001Cylinder001Action = SubResource( 4 )
-anims/Cylinder001CylinderAction = SubResource( 5 )
-anims/CylinderCameraAction = SubResource( 6 )
-anims/CylinderCubeAction = SubResource( 7 )
-anims/CylinderCylinder001Action = SubResource( 8 )
-anims/CylinderCylinderAction = SubResource( 9 )
-anims/prop = SubResource( 10 )
+anims/Aileron = SubResource( 2 )
+anims/Cylinder001CameraAction = SubResource( 3 )
+anims/Cylinder001CubeAction = SubResource( 4 )
+anims/Cylinder001Cylinder001Action = SubResource( 5 )
+anims/Cylinder001CylinderAction = SubResource( 6 )
+anims/CylinderCameraAction = SubResource( 7 )
+anims/CylinderCubeAction = SubResource( 8 )
+anims/CylinderCylinder001Action = SubResource( 9 )
+anims/CylinderCylinderAction = SubResource( 10 )
+anims/prop = SubResource( 11 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="."]
 
@@ -115,18 +116,19 @@ height = 8.0
 sides = 32
 material = ExtResource( 5 )
 
-[node name="Wing" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid"]
-transform = Transform( -2.18557e-09, -1, 0, -2.18557e-09, 1.91069e-15, -1, 0.05, -4.37114e-08, -4.37114e-08, 0.00378609, 0.000108033, 0.999999 )
-radius = 2.0
-height = 40.0
-sides = 32
-material = ExtResource( 4 )
-
 [node name="Fuse_Nose" type="CSGSphere" parent="Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -3, 0, 1, -1.31134e-07, 0.00378609, 3.00011, -9.53674e-07 )
 radial_segments = 32
 rings = 32
 material = ExtResource( 1 )
+
+[node name="NLG_Bay" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Fuse_Nose"]
+transform = Transform( 1, 0, 0, 0, 1, -2.71051e-20, 0, 0, 1, 0, -0.606604, 0.482059 )
+operation = 2
+width = 0.25
+height = 1.0
+depth = 1.0
+material = ExtResource( 11 )
 
 [node name="Fuse_Aft" type="CSGSphere" parent="Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -8, 0, 1, -3.49691e-07, 0.00378609, -2.99989, -9.53674e-07 )
@@ -134,34 +136,90 @@ radial_segments = 32
 rings = 32
 material = ExtResource( 1 )
 
-[node name="Hinge_Aileron_L" type="Spatial" parent="Glider_CSG_Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, 2 )
+[node name="Wing_Origin" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Aileron_L"]
+[node name="Wing" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( -6.55671e-09, -1, 4.37114e-08, 0, -4.37114e-08, -1, 0.15, -4.37114e-08, 3.55271e-15, 0, 0, 0 )
+radius = 2.0
+height = 40.0
+sides = 32
+material = ExtResource( 4 )
+
+[node name="Intake" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
+transform = Transform( 1, -1.27379e-14, 5.68434e-14, 1.57486e-16, 1, 0, 0, 0, 1, 0, 0, -1.87 )
+operation = 2
+height = 4.0
+material = ExtResource( 8 )
+
+[node name="MLG_Bay" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
+transform = Transform( -7.43113e-08, -6.54393, 5.68434e-14, 1.70004, -2.86044e-07, 0, 0, 0, 1, -0.569283, 4.27251e-08, 0.892046 )
+operation = 2
+width = 6.0
+height = 0.5
+depth = 1.0
+material = ExtResource( 11 )
+
+[node name="WpnRack_1" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.25, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_2" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_3" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="WpnRack_4" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.25, 0 )
+
+[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4"]
+width = 0.1
+height = 0.5
+depth = 0.5
+
+[node name="Hinge_Aileron_L" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16, -2.045, 0 )
+
+[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 3 )
 
-[node name="Hinge_Aileron_R" type="Spatial" parent="Glider_CSG_Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 1, 2 )
+[node name="Hinge_Aileron_R" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 16, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Aileron_R"]
+[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 3 )
 
-[node name="Hinge_Flap_L" type="Spatial" parent="Glider_CSG_Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.9, 1, 2 )
+[node name="Hinge_Flap_L" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.9, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Flap_L"]
+[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 2 )
 
-[node name="Hinge_Flap_R" type="Spatial" parent="Glider_CSG_Mesh"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 1, 2 )
+[node name="Hinge_Flap_R" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 7.9, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Flap_R"]
+[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 2 )
@@ -188,179 +246,47 @@ material = ExtResource( 5 )
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.5, 11 )
 
 [node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Rudder"]
-transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.2 )
-height = 3.0
+transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0.253772, -1.10928e-08, 0.2 )
+height = 2.5
 depth = 0.5
 material = ExtResource( 7 )
 
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2 )
-shape = SubResource( 16 )
+shape = SubResource( 12 )
 
 [node name="CollisionShape_Wing" type="CollisionShape" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.869743, 0 )
-shape = SubResource( 17 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
+shape = SubResource( 13 )
 
 [node name="CollisionShape_Tail_H" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.8 )
-shape = SubResource( 18 )
+shape = SubResource( 14 )
 
 [node name="CollisionShape_Tail_V" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 10 )
-shape = SubResource( 19 )
+shape = SubResource( 15 )
 
-[node name="WpnRack_1" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.75, 0 )
+[node name="Engine" parent="." instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 
-[node name="CSGBox" type="CSGBox" parent="WpnRack_1"]
-width = 0.1
-height = 0.5
-depth = 0.5
+[node name="LG_AttachPoint" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.884391, -3.82012 )
 
-[node name="WpnRack_2" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.75, 0 )
+[node name="LG_AttachPoint_Main_L" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80751, -0.832628, 0.878767 )
 
-[node name="CSGBox" type="CSGBox" parent="WpnRack_2"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="WpnRack_3" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.75, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="WpnRack_3"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="WpnRack_4" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.75, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="WpnRack_4"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="Engine" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-
-[node name="EnginePod" type="CSGSphere" parent="Engine"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0 )
-radius = 0.5
-radial_segments = 16
-rings = 16
-material = ExtResource( 8 )
-
-[node name="CSGCylinder" type="CSGCylinder" parent="Engine/EnginePod"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-operation = 2
-radius = 0.3
-sides = 16
-material = ExtResource( 8 )
-
-[node name="CSGCylinder2" type="CSGCylinder" parent="Engine/EnginePod"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.1 )
-radius = 0.3
-height = 0.1
-sides = 16
-material = ExtResource( 8 )
-
-[node name="CSGCylinder3" type="CSGCylinder" parent="Engine/EnginePod"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0.1 )
-radius = 0.3
-height = 0.5
-sides = 16
-cone = true
-material = ExtResource( 8 )
-
-[node name="CSGCylinder4" type="CSGCylinder" parent="Engine/EnginePod/CSGCylinder3"]
-transform = Transform( -1, -8.74228e-08, 3.82137e-15, 8.74228e-08, -1, 8.74228e-08, -3.82137e-15, 8.74228e-08, 1, 0, -0.3, 0 )
-radius = 0.3
-height = 0.5
-sides = 16
-cone = true
-material = ExtResource( 8 )
-
-[node name="CSGBox" type="CSGBox" parent="Engine/EnginePod"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.550301, 0 )
-width = 0.05
-height = 0.8
-depth = 0.6
-material = ExtResource( 8 )
-
-[node name="LG_Strut_Nose" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.85738, -3.45645 )
-width = 0.5
-depth = 0.5
-material = ExtResource( 10 )
-
-[node name="CSGBox" type="CSGBox" parent="LG_Strut_Nose"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.676978, 0 )
-operation = 2
-width = 0.25
-height = 0.8
-depth = 1.0
-material = ExtResource( 10 )
-
-[node name="CSGCylinder" type="CSGCylinder" parent="LG_Strut_Nose"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.02903, 0 )
-radius = 0.5
-height = 0.2
-sides = 64
-material = ExtResource( 9 )
-
-[node name="LG_Strut_Main_L" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04023, -1.0024, 1 )
-width = 0.5
-height = 4.0
-depth = 0.5
-material = ExtResource( 10 )
-
-[node name="CSGBox" type="CSGBox" parent="LG_Strut_Main_L"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47748, 0 )
-operation = 2
-width = 0.25
-height = 0.5
-depth = 1.0
-material = ExtResource( 10 )
-
-[node name="CSGCylinder" type="CSGCylinder" parent="LG_Strut_Main_L"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.05814, 0 )
-radius = 0.5
-height = 0.2
-sides = 64
-material = ExtResource( 9 )
-
-[node name="LG_Strut_Main_R" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.04, -1.002, 1 )
-width = 0.5
-height = 4.0
-depth = 0.5
-material = ExtResource( 10 )
-
-[node name="CSGBox" type="CSGBox" parent="LG_Strut_Main_R"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47748, 0 )
-operation = 2
-width = 0.25
-height = 0.5
-depth = 1.0
-material = ExtResource( 10 )
-
-[node name="CSGCylinder" type="CSGCylinder" parent="LG_Strut_Main_R"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.05814, 0 )
-radius = 0.5
-height = 0.2
-sides = 64
-material = ExtResource( 9 )
+[node name="LG_AttachPoint_Main_R" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.88642, -3.45645 )
-shape = SubResource( 20 )
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.69633, -3.87114 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5, -3, 1 )
-shape = SubResource( 20 )
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5, -2.55419, 0.947923 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, -3, 1 )
-shape = SubResource( 20 )
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, -2.554, 0.948 )
+shape = SubResource( 16 )
