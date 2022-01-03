@@ -12,6 +12,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$"Speed Data"/Variable.text = str($'../Plane03'.pfd_spd)
-	$"Alt Data"/Variable.text = str($'../Plane03'.pfd_alt)
-	$"Heading Data"/Variable.text = str($'../Plane03'.pfd_hdg)
+	$Speed_Data/Variable.text = str(stepify($'../../'.pfd_spd, 1))
+	$Alt_Data/Variable.text = str(stepify($'../../'.pfd_alt, 1))
+	$Heading_Data/Variable.text = str(stepify($'../../'.pfd_hdg, 1))
+	$Flaps_Data/Variable.text = str(stepify($'../../'.flaps_input, 0.01))
+	$Gear_Data/Variable.text = str(stepify($'../../'.gear_pos, 0.01))

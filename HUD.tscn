@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://HorizonLine_Pos.gd" type="Script" id=3]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture" id=4]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=5]
+[ext_resource path="res://EADI_Image.gd" type="Script" id=6]
+[ext_resource path="res://EADI_Mask.gd" type="Script" id=7]
 
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
@@ -16,13 +20,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Speed Data" type="HBoxContainer" parent="."]
+[node name="Speed_Data" type="HBoxContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 140.0
 
-[node name="Label" type="Label" parent="Speed Data"]
+[node name="Label" type="Label" parent="Speed_Data"]
 margin_right = 145.0
 margin_bottom = 120.0
 size_flags_vertical = 1
@@ -32,7 +36,7 @@ text = "SPD: 	"
 align = 1
 uppercase = true
 
-[node name="Variable" type="Label" parent="Speed Data"]
+[node name="Variable" type="Label" parent="Speed_Data"]
 margin_left = 149.0
 margin_right = 236.0
 margin_bottom = 120.0
@@ -43,14 +47,14 @@ text = "xxx"
 align = 1
 uppercase = true
 
-[node name="Alt Data" type="HBoxContainer" parent="."]
+[node name="Alt_Data" type="HBoxContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 140.0
 alignment = 2
 
-[node name="Label" type="Label" parent="Alt Data"]
+[node name="Label" type="Label" parent="Alt_Data"]
 margin_left = 1644.0
 margin_right = 1789.0
 margin_bottom = 120.0
@@ -61,7 +65,7 @@ text = "alt: "
 align = 1
 uppercase = true
 
-[node name="Variable" type="Label" parent="Alt Data"]
+[node name="Variable" type="Label" parent="Alt_Data"]
 margin_left = 1793.0
 margin_right = 1880.0
 margin_bottom = 120.0
@@ -71,14 +75,14 @@ custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
 text = "xxx"
 uppercase = true
 
-[node name="Heading Data" type="HBoxContainer" parent="."]
+[node name="Heading_Data" type="HBoxContainer" parent="."]
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 140.0
 alignment = 1
 
-[node name="Label" type="Label" parent="Heading Data"]
+[node name="Label" type="Label" parent="Heading_Data"]
 margin_left = 822.0
 margin_right = 967.0
 margin_bottom = 120.0
@@ -89,7 +93,7 @@ text = "HDG: "
 align = 1
 uppercase = true
 
-[node name="Variable" type="Label" parent="Heading Data"]
+[node name="Variable" type="Label" parent="Heading_Data"]
 margin_left = 971.0
 margin_right = 1058.0
 margin_bottom = 120.0
@@ -99,10 +103,82 @@ custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
 text = "xxx"
 uppercase = true
 
+[node name="Flaps_Data" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 140.0
+
+[node name="Label" type="Label" parent="Flaps_Data"]
+margin_right = 203.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "flaps: "
+align = 1
+valign = 2
+uppercase = true
+
+[node name="Variable" type="Label" parent="Flaps_Data"]
+margin_left = 207.0
+margin_right = 294.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+valign = 2
+uppercase = true
+
+[node name="Gear_Data" type="HBoxContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 140.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Gear_Data"]
+margin_left = 1615.0
+margin_right = 1789.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "gear: "
+align = 1
+valign = 2
+uppercase = true
+
+[node name="Variable" type="Label" parent="Gear_Data"]
+margin_left = 1793.0
+margin_right = 1880.0
+margin_bottom = 120.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+valign = 2
+uppercase = true
+
 [node name="HorizonLine_Pos" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 3 )
 
 [node name="Line2D" type="Line2D" parent="HorizonLine_Pos"]
 points = PoolVector2Array( -2000, 0, 2000, 0 )
-width = 20.0
+width = 5.0
 default_color = Color( 0.0862745, 0.905882, 0.137255, 1 )
+
+[node name="EADI_Mask" type="Light2D" parent="."]
+position = Vector2( 91.5595, 933.254 )
+texture = ExtResource( 5 )
+mode = 3
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="EADI_Image" type="Sprite" parent="EADI_Mask"]
+texture = ExtResource( 4 )
+script = ExtResource( 6 )

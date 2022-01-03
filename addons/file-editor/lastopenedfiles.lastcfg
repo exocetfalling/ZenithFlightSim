@@ -1,3 +1,6 @@
 [Opened]
 
 README.md="res://README.md"
+"LICENSE.*.md ; md file.md"="res://LICENSE.*.md ; md file.md"
+LICENSE.MD.md="res://LICENSE.MD.md"
+LICENSE.md="res://LICENSE.md"

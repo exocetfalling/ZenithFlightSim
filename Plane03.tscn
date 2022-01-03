@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Glider_Body.tres" type="Material" id=1]
 [ext_resource path="res://Glider_Flaps.tres" type="Material" id=2]
@@ -12,48 +12,52 @@
 [ext_resource path="res://Engine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Glider_Gear_Bay.tres" type="Material" id=11]
 [ext_resource path="res://default_env.tres" type="Environment" id=12]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Gear_Retract.anim" type="Animation" id=14]
+[ext_resource path="res://WpnRack.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.01
 
-[sub_resource type="Animation" id=2]
-resource_name = "Aileron"
-length = 5.0
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=17]
+resource_name = "Gear_Extend"
 length = 10.0
-tracks/0/type = "transform"
-tracks/0/path = NodePath("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L/ControlSurface")
+tracks/0/type = "value"
+tracks/0/path = NodePath("LG_AttachPoint_Nose:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/keys = PoolRealArray(  )
-
-[sub_resource type="Animation" id=4]
-length = 5.0
-
-[sub_resource type="Animation" id=5]
-length = 10.0
-
-[sub_resource type="Animation" id=6]
-length = 10.0
-
-[sub_resource type="Animation" id=7]
-length = 10.0
-
-[sub_resource type="Animation" id=8]
-length = 5.0
-
-[sub_resource type="Animation" id=9]
-length = 10.0
-
-[sub_resource type="Animation" id=10]
-length = 10.0
-
-[sub_resource type="Animation" id=11]
-length = 10.0
-loop = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( -90, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("LG_AttachPoint_Main_L:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("LG_AttachPoint_Main_R:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 10 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, -90 ), Vector3( 0, 0, 0 ) ]
+}
 
 [sub_resource type="CapsuleShape" id=12]
 height = 13.2845
@@ -85,17 +89,8 @@ angular_damp = 1.0
 script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "prop"
-anims/Aileron = SubResource( 2 )
-anims/Cylinder001CameraAction = SubResource( 3 )
-anims/Cylinder001CubeAction = SubResource( 4 )
-anims/Cylinder001Cylinder001Action = SubResource( 5 )
-anims/Cylinder001CylinderAction = SubResource( 6 )
-anims/CylinderCameraAction = SubResource( 7 )
-anims/CylinderCubeAction = SubResource( 8 )
-anims/CylinderCylinder001Action = SubResource( 9 )
-anims/CylinderCylinderAction = SubResource( 10 )
-anims/prop = SubResource( 11 )
+anims/Gear_Extend = SubResource( 17 )
+anims/Gear_Retract = ExtResource( 14 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="."]
 
@@ -161,38 +156,6 @@ height = 0.5
 depth = 1.0
 material = ExtResource( 11 )
 
-[node name="WpnRack_1" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -0.25, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="WpnRack_2" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.25, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="WpnRack_3" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.25, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
-[node name="WpnRack_4" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -0.25, 0 )
-
-[node name="CSGBox" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4"]
-width = 0.1
-height = 0.5
-depth = 0.5
-
 [node name="Hinge_Aileron_L" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16, -2.045, 0 )
 
@@ -224,6 +187,18 @@ transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 7.9, -2
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 2 )
+
+[node name="WpnRack_1" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3, 0, -0.2 )
+
+[node name="WpnRack_2" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 0, -0.2 )
+
+[node name="WpnRack_3" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 0, -0.2 )
+
+[node name="WpnRack_4" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 0, -0.2 )
 
 [node name="Hinge_Elevator_L" type="Spatial" parent="Glider_CSG_Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, 10.5 )
@@ -271,7 +246,7 @@ shape = SubResource( 15 )
 [node name="Engine" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 
-[node name="LG_AttachPoint" parent="." instance=ExtResource( 9 )]
+[node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.884391, -3.82012 )
 
 [node name="LG_AttachPoint_Main_L" parent="." instance=ExtResource( 9 )]
@@ -294,8 +269,12 @@ shape = SubResource( 16 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.45868 )
+current = true
+far = 10000.0
+
+[node name="HUD" parent="Camera" instance=ExtResource( 13 )]
 
 [node name="Camera2" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 30 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3, 20 )
 environment = ExtResource( 12 )
-far = 5000.0
+far = 10000.0

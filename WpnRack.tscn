@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="WpnRack_1" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
+width = 0.1
+height = 0.5
+depth = 1.0

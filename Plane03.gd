@@ -42,6 +42,10 @@ var trim_pitch_max = 1
 var trim_pitch_min = -1
 var trim_pitch_input = 0
 
+var gear_max = 1
+var gear_min = 0
+var gear_pos = 0
+
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
@@ -242,34 +246,42 @@ func get_input(delta):
 			trim_pitch_input = trim_pitch_input + 0.25 * delta 
 	if (Input.is_action_pressed("trim_pitch_down")):
 		if (trim_pitch_input > trim_pitch_min):
-			trim_pitch_input = trim_pitch_input - 0.25 * delta 
+			trim_pitch_input = trim_pitch_input - 0.25 * delta
+
+	# Gear input
+	if (Input.is_action_pressed("gear_retract")):
+		if (gear_pos < gear_max):
+			gear_pos = gear_pos + 0.25 * delta 
+	if (Input.is_action_pressed("gear_extend")):
+		if (gear_pos > gear_min):
+			gear_pos = gear_pos - 0.25 * delta 
 	
 	if Input.is_action_just_pressed("fire_sta_1"):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
 		scene_root.add_child(clone)
-		clone.global_transform = $WpnRack_1.global_transform
+		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1.global_transform
 		clone.linear_velocity = self.linear_velocity
 	
 	if Input.is_action_just_pressed("fire_sta_2"):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
 		scene_root.add_child(clone)
-		clone.global_transform = $WpnRack_2.global_transform
+		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2.global_transform
 		clone.linear_velocity = self.linear_velocity
 
 	if Input.is_action_just_pressed("fire_sta_3"):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
 		scene_root.add_child(clone)
-		clone.global_transform = $WpnRack_3.global_transform
+		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3.global_transform
 		clone.linear_velocity = self.linear_velocity
 	
 	if Input.is_action_just_pressed("fire_sta_4"):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
 		scene_root.add_child(clone)
-		clone.global_transform = $WpnRack_4.global_transform
+		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4.global_transform
 		clone.linear_velocity = self.linear_velocity
 	# Lift/drag calculations (helpers for add_force_local)
 	
@@ -314,6 +326,10 @@ func get_input(delta):
 
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = flaps_input * control_deflection + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = flaps_input * control_deflection + PI/2
+	
+	$LG_AttachPoint_Nose.rotation.x = gear_pos * -PI/2
+	$LG_AttachPoint_Main_L.rotation.z = gear_pos * PI/2
+	$LG_AttachPoint_Main_R.rotation.z = gear_pos * -PI/2
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
 	aft_local = get_global_transform().basis.z

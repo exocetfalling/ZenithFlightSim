@@ -16,6 +16,9 @@ Flaps up: A
 Flaps down: D
 Trim up: H
 Trim down: Y
+*Gear*
+Gear up: T
+Gear down: G
 *Weapons*
 Station 1: 1
 Station 2: 2
