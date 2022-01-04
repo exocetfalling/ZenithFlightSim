@@ -211,7 +211,7 @@ show_behind_parent = true
 light_mask = 2
 texture = ExtResource( 9 )
 
-[node name="Line2D" type="Line2D" parent="EADI_Mask"]
+[node name="Boresight" type="Line2D" parent="EADI_Mask"]
 points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
 width = 2.0
 default_color = Color( 0.152941, 0.152941, 0.152941, 1 )
@@ -321,3 +321,84 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Box_FLAPS" type="Label" parent="EADI_Mask"]
+light_mask = 2
+margin_left = -160.0
+margin_top = 339.0
+margin_right = -100.0
+margin_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_FLAPS" type="Label" parent="EADI_Mask/Box_FLAPS"]
+light_mask = 2
+margin_left = -101.0
+margin_top = -48.5
+margin_right = 160.0
+margin_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "FLAPS"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_TRIM" type="Label" parent="EADI_Mask"]
+light_mask = 2
+margin_left = 413.0
+margin_top = 339.0
+margin_right = -100.0
+margin_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_TRIM" type="Label" parent="EADI_Mask/Box_TRIM"]
+light_mask = 2
+margin_left = -101.0
+margin_top = -48.5
+margin_right = 160.0
+margin_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "trim"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gear_Indicator" type="Line2D" parent="EADI_Mask"]
+light_mask = 4
+position = Vector2( 0, 150 )
+points = PoolVector2Array( -50, 0, 50, 0, 0, 50, -50, 0 )
+default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2

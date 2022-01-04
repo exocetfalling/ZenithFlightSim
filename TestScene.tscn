@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Plane03.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TestScene.gd" type="Script" id=2]
+[ext_resource path="res://Target.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/prototype_textures/Dark/texture_03.png" type="Texture" id=4]
 [ext_resource path="res://assets/prototype_textures/Red/texture_09.png" type="Texture" id=5]
 [ext_resource path="res://assets/prototype_textures/Orange/texture_02.png" type="Texture" id=6]
@@ -145,17 +146,17 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 40.528 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 35.7937, 9.80573, -18.9735 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 9.806, -18.973 )
 mesh = SubResource( 5 )
 material/0 = null
 
 [node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.7462, 11.9899, -6.8877 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 11.99, -30 )
 mesh = SubResource( 7 )
 material/0 = null
 
 [node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2632, 9.83015, 17.6479 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 161.161, 9.83015, 67.8949 )
 mesh = SubResource( 9 )
 material/0 = null
 
@@ -170,3 +171,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 8 )
+
+[node name="Target" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1145.53 )
