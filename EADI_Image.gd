@@ -13,5 +13,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	rotation_degrees = -$'../../../../'.pfd_roll
-	position.y = $'../'.position.y - 0*$'../../../../'.pfd_pitch
+
+	
+	if (abs(rotation_degrees) < 60):
+		visible = true
+	else:
+		visible = false

@@ -16,3 +16,4 @@ func _process(delta):
 	centre_position = get_viewport_rect().size/2
 	position.y = centre_position.y + $'../../../'.pfd_pitch * get_viewport_rect().size.y/100*1.5
 	rotation_degrees = -$'../../../'.pfd_roll
+	position.x = position.y * tan(deg2rad($'../../../'.pfd_roll)) - centre_position.x

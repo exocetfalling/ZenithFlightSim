@@ -19,7 +19,7 @@
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.01
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=2]
 resource_name = "Gear_Extend"
 length = 10.0
 tracks/0/type = "value"
@@ -59,19 +59,19 @@ tracks/2/keys = {
 "values": [ Vector3( 0, 0, -90 ), Vector3( 0, 0, 0 ) ]
 }
 
-[sub_resource type="CapsuleShape" id=12]
+[sub_resource type="CapsuleShape" id=3]
 height = 13.2845
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 20, 0.2, 2 )
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 4, 0.1, 1.2 )
 
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=6]
 extents = Vector3( 0.1, 1.5, 1 )
 
-[sub_resource type="CylinderShape" id=16]
+[sub_resource type="CylinderShape" id=7]
 radius = 0.5
 height = 0.25
 
@@ -89,7 +89,7 @@ angular_damp = 1.0
 script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Gear_Extend = SubResource( 17 )
+anims/Gear_Extend = SubResource( 2 )
 anims/Gear_Retract = ExtResource( 14 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="."]
@@ -229,19 +229,19 @@ material = ExtResource( 7 )
 
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2 )
-shape = SubResource( 12 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape_Wing" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
-shape = SubResource( 13 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape_Tail_H" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.8 )
-shape = SubResource( 14 )
+shape = SubResource( 5 )
 
 [node name="CollisionShape_Tail_V" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 10 )
-shape = SubResource( 15 )
+shape = SubResource( 6 )
 
 [node name="Engine" parent="." instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
@@ -257,15 +257,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.69633, -3.87114 )
-shape = SubResource( 16 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -5, -2.55419, 0.947923 )
-shape = SubResource( 16 )
+shape = SubResource( 7 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 5, -2.554, 0.948 )
-shape = SubResource( 16 )
+shape = SubResource( 7 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.45868 )

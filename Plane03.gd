@@ -1,5 +1,6 @@
 extends RigidBody
 
+var HUD_active = true
 var rocket_scene = preload("GPRocket.tscn")
 signal flight_data
 # Declare member variables here. Examples:
@@ -220,8 +221,10 @@ func get_input(delta):
 			
 	if (Input.is_action_pressed("ui_left")):
 		$Camera.current = true
+		HUD_active = true
 	if (Input.is_action_pressed("ui_right")):
 		$Camera2.current = true
+		HUD_active = false
 	
 	# Roll input
 	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
