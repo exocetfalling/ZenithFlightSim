@@ -1,6 +1,8 @@
 **Zenith Flight Simulator**
 A FOSS, physics based flight sim in Godot.
+
 **Controls**
+
 *Engine:*
 Throttle up: W
 Throttle down: S
@@ -24,6 +26,13 @@ Station 1: 1
 Station 2: 2
 Station 3: 3
 Station 4: 4
+*Camera:*
+FPV: Left Arrow
+Exterior: Right Arrow
+
+**Flying**
+All units are SI units for now. Rotate at 25-30 m/s, land at 25 m/s with flaps down. 
+
 **Credits:**
 Basis of the project, rewritten with custom physics:
 [Simplified Airplane Controller](https://kidscancode.org/godot_recipes/3d/simple_airplane/)
