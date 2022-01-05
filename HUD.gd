@@ -57,15 +57,15 @@ func _process(_delta):
 	get_node("EADI_Mask/Box_FLAPS").text = "%.2f" % stepify(display_flaps, 0.01)
 	
 	if (display_gear == 1):
-		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(22, 222, 22)
+		get_node("ICAWS/Gear_Indicator").default_color = Color8(22, 222, 22)
 	if ((display_gear > 0) && (display_gear < 1)):
-		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(222, 222, 22)
+		get_node("ICAWS/Gear_Indicator").default_color = Color8(222, 222, 22)
 	if (display_gear == 0):
-		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(222, 22, 22)
+		get_node("ICAWS/Gear_Indicator").default_color = Color8(222, 22, 22)
 	
 	if (display_ap == 1):
 		get_node("EADI_Mask/AP").visible = true
 	else:
 		get_node("EADI_Mask/AP").visible = false
 		
-	get_node("EADI_Mask/Throttle").value = display_throttle
+	get_node("ICAWS/Throttle").value = display_throttle

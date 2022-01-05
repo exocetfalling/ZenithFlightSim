@@ -1,38 +1,13 @@
 **Zenith Flight Simulator**
 A FOSS, physics based flight sim in Godot.
 
-**Controls**
-
-*Engine:*
-Throttle up: W
-Throttle down: S
-*Control surfaces (primary):*
-Pitch up: K
-Pitch down: I
-Roll right: L
-Roll left: J
-Yaw right: O
-Yaw left: U
-*Control surfaces (secondary):*
-Flaps up: A
-Flaps down: D
-Trim up: H
-Trim down: Y
-*Gear*
-Gear toggle: G
-*Autoflight:*
-Autopilot toggle: Z
-*Weapons*
-Station 1: 1
-Station 2: 2
-Station 3: 3
-Station 4: 4
-*Camera:*
-FPV: Left Arrow
-Exterior: Right Arrow
-
 **Flying**
-All units are SI units for now. Rotate at 25-30 m/s, land at 25 m/s with flaps down. 
+See left MFD for PFD with flight data. 
+All units are SI units for now. 
+Rotate at 20 m/s, land at 20 m/s with flaps down. Do not exceed 35 m/s.
+
+**Controls**
+See right MFD for controls.
 
 **Credits:**
 Basis of the project, rewritten with custom physics:
