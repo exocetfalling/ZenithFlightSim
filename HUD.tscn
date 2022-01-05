@@ -402,3 +402,51 @@ default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
+
+[node name="Throttle" type="VSlider" parent="EADI_Mask"]
+light_mask = 2
+margin_left = 216.0
+margin_top = -234.0
+margin_right = 248.0
+margin_bottom = 227.0
+size_flags_horizontal = 1
+rounded = true
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="EADI_Mask/Throttle"]
+show_behind_parent = true
+light_mask = 2
+margin_left = 2.0
+margin_top = -7.0
+margin_right = 32.0
+margin_bottom = 466.0
+mouse_filter = 1
+color = Color( 0.713726, 0.713726, 0.713726, 1 )
+
+[node name="Label" type="Label" parent="EADI_Mask/Throttle"]
+light_mask = 2
+margin_left = -73.0
+margin_right = 7.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+text = "thr
+pct"
+uppercase = true
+
+[node name="AP" type="Label" parent="EADI_Mask"]
+light_mask = 2
+margin_left = -30.0
+margin_top = -235.0
+margin_right = 11.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
+text = "a/p"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}

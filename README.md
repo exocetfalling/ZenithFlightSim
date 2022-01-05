@@ -19,8 +19,9 @@ Flaps down: D
 Trim up: H
 Trim down: Y
 *Gear*
-Gear up: T
-Gear down: G
+Gear toggle: G
+*Autoflight:*
+Autopilot toggle: Z
 *Weapons*
 Station 1: 1
 Station 2: 2

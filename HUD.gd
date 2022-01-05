@@ -8,6 +8,8 @@ var display_hdg = 0
 var display_flaps = 0
 var display_trim = 0
 var display_gear = 0
+var display_throttle = 0
+var display_ap = 0
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -19,7 +21,7 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if ($'../../'.HUD_active == true):
 		visible = true
 	else:
@@ -33,6 +35,8 @@ func _process(delta):
 	display_flaps = $'../../'.flaps_input
 	display_trim = $'../../'.trim_pitch_input
 	display_gear = $'../../'.gear_pos
+	display_throttle = $'../../'.throttle_input
+	display_ap = $'../../'.autopilot_on
 	
 	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify($'../../'.pfd_spd, 1)
 	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify($'../../'.pfd_alt, 1)
@@ -52,7 +56,16 @@ func _process(delta):
 	get_node("EADI_Mask/Box_TRIM").text = "%.2f" % stepify(display_trim, 0.01)
 	get_node("EADI_Mask/Box_FLAPS").text = "%.2f" % stepify(display_flaps, 0.01)
 	
-	if (display_gear == 0):
+	if (display_gear == 1):
 		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(22, 222, 22)
-	if (display_gear > 0):
+	if ((display_gear > 0) && (display_gear < 1)):
 		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(222, 222, 22)
+	if (display_gear == 0):
+		get_node("EADI_Mask/Gear_Indicator").default_color = Color8(222, 22, 22)
+	
+	if (display_ap == 1):
+		get_node("EADI_Mask/AP").visible = true
+	else:
+		get_node("EADI_Mask/AP").visible = false
+		
+	get_node("EADI_Mask/Throttle").value = display_throttle

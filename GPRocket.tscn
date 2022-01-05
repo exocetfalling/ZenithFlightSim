@@ -1,11 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://GPRocket.gd" type="Script" id=1]
-[ext_resource path="res://Explosion.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Explosion.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
-radius = 0.05
+radius = 0.2
 
 [sub_resource type="Gradient" id=2]
 
@@ -35,6 +33,7 @@ radius = 0.5
 height = 0.5
 
 [node name="RigidBody" type="RigidBody"]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0, 0, 0 )
 mass = 50.0
 continuous_cd = true
 contacts_reported = 512
@@ -47,18 +46,18 @@ shape = SubResource( 1 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-radius = 0.05
+radius = 0.2
 sides = 16
 
 [node name="CSGSphere" type="CSGSphere" parent="CSGCylinder"]
 transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -0.5, 0 )
-radius = 0.05
+radius = 0.2
 radial_segments = 16
 rings = 16
 
 [node name="CSGCylinder" type="CSGCylinder" parent="CSGCylinder"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
-radius = 0.05
+radius = 0.2
 height = 0.5
 sides = 16
 cone = true
@@ -67,13 +66,13 @@ cone = true
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
 width = 0.01
 height = 0.5
-depth = 0.5
+depth = 1.0
 
 [node name="CSGBox2" type="CSGBox" parent="CSGCylinder"]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.75, 0 )
 width = 0.01
 height = 0.5
-depth = 0.5
+depth = 1.0
 
 [node name="Particles" type="Particles" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2 )
@@ -83,9 +82,6 @@ lifetime = 16.0
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 6 )
 
-[node name="Explosion" parent="." instance=ExtResource( 2 )]
-visible = false
-script = ExtResource( 3 )
-
-[connection signal="body_shape_entered" from="." to="Explosion" method="_on_RigidBody_body_shape_entered"]
-[connection signal="exploded" from="." to="Explosion" method="_on_RigidBody_exploded"]
+[node name="RayCast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, -20 )
