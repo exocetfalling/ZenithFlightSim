@@ -191,34 +191,35 @@ points = PoolVector2Array( -2000, 0, 2000, 0 )
 width = 5.0
 default_color = Color( 0.0862745, 0.905882, 0.137255, 1 )
 
-[node name="EADI_Mask" type="Light2D" parent="."]
-position = Vector2( 253.787, 820.428 )
+[node name="PFD" type="Light2D" parent="."]
+position = Vector2( 253.787, 819.428 )
 texture = ExtResource( 5 )
 mode = 3
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="EADI_Fail_X" type="Sprite" parent="EADI_Mask"]
-texture = ExtResource( 8 )
-
-[node name="EADI_Image" type="Sprite" parent="EADI_Mask"]
-texture = ExtResource( 4 )
-script = ExtResource( 6 )
-
-[node name="EADI_Background" type="Sprite" parent="EADI_Mask"]
-show_behind_parent = true
-light_mask = 2
-texture = ExtResource( 9 )
-
-[node name="Boresight" type="Line2D" parent="EADI_Mask"]
+[node name="Wings" type="Line2D" parent="PFD"]
+z_index = 1
 points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
 width = 2.0
 default_color = Color( 0.152941, 0.152941, 0.152941, 1 )
 antialiased = true
 
-[node name="Box_SPD" type="Label" parent="EADI_Mask"]
+[node name="EADI_Fail_X" type="Line2D" parent="PFD"]
+light_mask = 2
+points = PoolVector2Array( 0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0 )
+texture = ExtResource( 8 )
+
+[node name="EADI_Image" type="Sprite" parent="PFD"]
+texture = ExtResource( 4 )
+script = ExtResource( 6 )
+
+[node name="EADI_Background" type="Sprite" parent="PFD"]
+show_behind_parent = true
+light_mask = 2
+position = Vector2( 20, -14 )
+texture = ExtResource( 9 )
+
+[node name="Box_SPD" type="Label" parent="PFD"]
 light_mask = 2
 margin_left = -150.0
 margin_right = -110.0
@@ -235,12 +236,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_SPD" type="Label" parent="EADI_Mask/Box_SPD"]
+[node name="Label_SPD" type="Label" parent="PFD/Box_SPD"]
 light_mask = 2
-margin_left = -101.0
-margin_top = -48.5
-margin_right = 160.0
-margin_bottom = 11.5
+margin_left = -111.011
+margin_top = -38.4887
+margin_right = 149.989
+margin_bottom = 21.5113
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 2 )
@@ -253,7 +254,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Box_ALT" type="Label" parent="EADI_Mask"]
+[node name="Box_ALT" type="Label" parent="PFD"]
 light_mask = 2
 margin_left = 300.0
 margin_bottom = 14.0
@@ -269,12 +270,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_ALT" type="Label" parent="EADI_Mask/Box_ALT"]
+[node name="Label_ALT" type="Label" parent="PFD/Box_ALT"]
 light_mask = 2
-margin_left = 201.0
-margin_top = -48.5
-margin_right = -100.0
-margin_bottom = 11.5
+margin_left = 14.4796
+margin_top = -43.1606
+margin_right = 50.4796
+margin_bottom = 16.8394
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 2 )
@@ -287,7 +288,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Box_HDG" type="Label" parent="EADI_Mask"]
+[node name="Box_HDG" type="Label" parent="PFD"]
 light_mask = 2
 margin_left = -30.0
 margin_top = -125.0
@@ -305,7 +306,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_HDG" type="Label" parent="EADI_Mask/Box_HDG"]
+[node name="Label_HDG" type="Label" parent="PFD/Box_HDG"]
 light_mask = 2
 margin_left = 64.0
 margin_top = -108.0
@@ -323,7 +324,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Box_FLAPS" type="Label" parent="EADI_Mask"]
+[node name="Box_FLAPS" type="Label" parent="PFD"]
 light_mask = 2
 margin_left = -160.0
 margin_top = 339.0
@@ -341,12 +342,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_FLAPS" type="Label" parent="EADI_Mask/Box_FLAPS"]
+[node name="Label_FLAPS" type="Label" parent="PFD/Box_FLAPS"]
 light_mask = 2
-margin_left = -101.0
-margin_top = -48.5
-margin_right = 160.0
-margin_bottom = 11.5
+margin_left = -99.5017
+margin_top = -38.761
+margin_right = 161.498
+margin_bottom = 21.239
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 2 )
@@ -359,7 +360,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Box_TRIM" type="Label" parent="EADI_Mask"]
+[node name="Box_TRIM" type="Label" parent="PFD"]
 light_mask = 2
 margin_left = 413.0
 margin_top = 339.0
@@ -369,7 +370,7 @@ grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "XXX"
+text = "X.XX"
 align = 1
 valign = 1
 uppercase = true
@@ -377,12 +378,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_TRIM" type="Label" parent="EADI_Mask/Box_TRIM"]
+[node name="Label_TRIM" type="Label" parent="PFD/Box_TRIM"]
 light_mask = 2
-margin_left = -101.0
-margin_top = -48.5
-margin_right = 160.0
-margin_bottom = 11.5
+margin_left = -104.686
+margin_top = -36.761
+margin_right = 156.314
+margin_bottom = 23.239
 grow_horizontal = 2
 grow_vertical = 2
 custom_fonts/font = ExtResource( 2 )
@@ -395,12 +396,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AP" type="Label" parent="EADI_Mask"]
+[node name="AP" type="Label" parent="PFD"]
 light_mask = 2
-margin_left = -30.0
-margin_top = -235.0
-margin_right = 11.0
-margin_bottom = 14.0
+margin_left = -18.7627
+margin_top = -248.485
+margin_right = 22.2373
+margin_bottom = 0.515259
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
 text = "CWS"
@@ -409,8 +410,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Line2D_1" type="Line2D" parent="PFD"]
+light_mask = 2
+position = Vector2( -135.848, -180.246 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="Line2D_2" type="Line2D" parent="PFD"]
+light_mask = 2
+position = Vector2( -135.848, 137.754 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
 [node name="ICAWS" type="Sprite" parent="."]
-position = Vector2( 1664.99, 830.609 )
+position = Vector2( 1650.4, 814.895 )
 texture = ExtResource( 10 )
 
 [node name="Throttle" type="VSlider" parent="ICAWS"]
@@ -487,8 +502,7 @@ Station 2: 2
 Station 3: 3
 Station 4: 4
 [color=#11aafe]Camera:*[/color]
-FPV: Left Arrow
-External: Right Arrow"
+Toggle: C"
 text = "Engine:
 Throttle up: W
 Throttle down: S
@@ -514,8 +528,7 @@ Station 2: 2
 Station 3: 3
 Station 4: 4
 Camera:*
-FPV: Left Arrow
-External: Right Arrow"
+Toggle: C"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -542,6 +555,7 @@ __meta__ = {
 }
 
 [node name="Line2D" type="Line2D" parent="ICAWS"]
+light_mask = 2
 position = Vector2( -151.597, 93.6566 )
 points = PoolVector2Array( 0, 0, 300, 0 )
 width = 5.0

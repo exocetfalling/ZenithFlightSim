@@ -45,18 +45,18 @@ func _process(_delta):
 	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_pos, 0.01)
 	
 	var centre_position = get_viewport_rect().size/2
-	get_node("EADI_Mask/Boresight").position = centre_position
+	get_node("Boresight").position = centre_position
 	
-	get_node("EADI_Mask/EADI_Image").rotation_degrees = -display_roll
-	get_node("EADI_Mask/EADI_Image").position.y = display_pitch / 90 * 260
-	get_node("EADI_Mask/EADI_Image").position.x = get_node("EADI_Mask/EADI_Image").position.y * tan(deg2rad($'../../'.pfd_roll))
+	get_node("PFD/EADI_Image").rotation_degrees = -display_roll
+	get_node("PFD/EADI_Image").position.y = display_pitch / 90 * 260
+	get_node("PFD/EADI_Image").position.x = get_node("PFD/EADI_Image").position.y * tan(deg2rad($'../../'.pfd_roll))
 	
-	get_node("EADI_Mask/Box_SPD").text = "%03d" % stepify($'../../'.pfd_spd, 1)
-	get_node("EADI_Mask/Box_ALT").text = "%05d" % stepify($'../../'.pfd_alt, 1)
-	get_node("EADI_Mask/Box_HDG").text = "%03d" % stepify($'../../'.pfd_hdg, 1)
+	get_node("PFD/Box_SPD").text = "%03d" % stepify($'../../'.pfd_spd, 1)
+	get_node("PFD/Box_ALT").text = "%05d" % stepify($'../../'.pfd_alt, 1)
+	get_node("PFD/Box_HDG").text = "%03d" % stepify($'../../'.pfd_hdg, 1)
 	
-	get_node("EADI_Mask/Box_TRIM").text = "%.2f" % stepify(display_trim, 0.01)
-	get_node("EADI_Mask/Box_FLAPS").text = "%.2f" % stepify(display_flaps, 0.01)
+	get_node("PFD/Box_TRIM").text = "%.2f" % stepify(display_trim, 0.01)
+	get_node("PFD/Box_FLAPS").text = "%.2f" % stepify(display_flaps, 0.01)
 	
 	if (display_gear == 1):
 		get_node("ICAWS/Gear_Indicator").default_color = Color8(22, 222, 22)
@@ -66,8 +66,8 @@ func _process(_delta):
 		get_node("ICAWS/Gear_Indicator").default_color = Color8(222, 22, 22)
 	
 	if (display_ap == 1):
-		get_node("EADI_Mask/AP").visible = true
+		get_node("PFD/AP").visible = true
 	else:
-		get_node("EADI_Mask/AP").visible = false
+		get_node("PFD/AP").visible = false
 		
 	get_node("ICAWS/Throttle").value = display_throttle

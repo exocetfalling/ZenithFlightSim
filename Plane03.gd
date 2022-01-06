@@ -8,7 +8,9 @@ var rocket_scene = preload("GPRocket.tscn")
 # var b = "text"
 
 var air_density = 1.2
-var grounded = false
+var ground_contact_NLG = false
+var ground_contact_MLG_L = false
+var ground_contact_MLG_R = false
 
 var force_local
 var pos_local
@@ -44,6 +46,8 @@ var trim_pitch_max = 1
 var trim_pitch_min = -1
 var trim_pitch_input = 0
 
+var braking_input = 0
+
 var gear_max = 1
 var gear_min = 0
 var gear_pos = 1
@@ -75,22 +79,20 @@ var down_local = Vector3.ZERO
 var pos_wing = Vector3(0, -0.75, 0)
 var pos_h_tail = Vector3(0, 0, 11)
 var pos_v_tail = Vector3(0, 1.5, 10)
-var pos_h_fuse = Vector3(0, 0, 3)
-var pos_v_fuse = Vector3(0, 0, 3)
+var pos_fuse = Vector3(0, 0, 3)
 var pos_aileron_l = Vector3(-8, -0.75, 1)
 var pos_aileron_r = Vector3( 8, -0.75, 1)
 var pos_elevator = Vector3(0, 0, 11)
 var pos_rudder = Vector3(0, 1.6, 11)
 var pos_flaps = Vector3( 0, -0.75, 2)
-var pos_gear = Vector3(0, -1.6, 11)
+var pos_gear = Vector3(0, -0.5, 0)
 
 
 # Areas in m^2
 var area_wing = 7 
 var area_h_tail = 3
 var area_v_tail = 1.5
-var area_h_fuse = 8
-var area_v_fuse = 8
+var area_fuse = 3.5
 var area_aileron = 1.5
 var area_elevator = 1.5
 var area_rudder = 1
@@ -112,8 +114,7 @@ var force_lift_flaps = Vector3.ZERO
 var force_drag_wing = Vector3.ZERO
 var force_drag_h_tail = Vector3.ZERO
 var force_drag_v_tail = Vector3.ZERO
-var force_drag_h_fuse = Vector3.ZERO
-var force_drag_v_fuse = Vector3.ZERO
+var force_drag_fuse = Vector3.ZERO
 var force_drag_aileron_l = Vector3.ZERO
 var force_drag_aileron_r = Vector3.ZERO
 var force_drag_elevator = Vector3.ZERO
@@ -177,10 +178,10 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_induced_coeff(angle_rad):
-	return 0.01 * sin(angle_rad) 
+	return 0.2 * sin(angle_rad) 
 
 func _calc_drag_parasite_coeff(angle_rad):
-	return 0.01 * cos(angle_rad)
+	return 0.02 * cos(angle_rad)
 	
 func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
 	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * lift_coeff
@@ -244,9 +245,20 @@ func _process(delta):
 	
 	# NWS
 	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
-		grounded = true
+		ground_contact_NLG = true
 	else:
-		grounded = false
+		ground_contact_NLG = false
+
+	# MLG weight on wheels
+	if (get_node("Wheel_Collider_MLG_L/RayCast").is_colliding() == true):
+		ground_contact_MLG_L = true
+	else:
+		ground_contact_MLG_L = false
+
+	if (get_node("Wheel_Collider_MLG_R/RayCast").is_colliding() == true):
+		ground_contact_MLG_R = true
+	else:
+		ground_contact_MLG_R = false
 
 func get_input(delta):
 	# Throttle input
@@ -257,13 +269,15 @@ func get_input(delta):
 		if (throttle_input > throttle_min):
 			throttle_input = throttle_input - 1
 			
-	if (Input.is_action_pressed("ui_left")):
-		$Camera.current = true
-		HUD_active = true
-	if (Input.is_action_pressed("ui_right")):
-		$Camera2.current = true
-		HUD_active = false
-	
+	# Cameras
+	if (Input.is_action_just_pressed("camera_toggle")):
+		if ($Camera_Ext.current == false):
+			$Camera_Ext.current = true
+			HUD_active = false
+		else:
+			$Camera_FPV.current = true
+			HUD_active = true
+
 	# Roll input
 	roll_input = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
 	
@@ -304,7 +318,8 @@ func get_input(delta):
 		else:
 			autopilot_on = 0
 	
-
+	# Braking input
+	braking_input = Input.get_action_strength("braking")
 	
 	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
 		var clone = rocket_scene.instance()
@@ -349,16 +364,13 @@ func get_input(delta):
 	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
 	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
 
-	force_lift_h_fuse = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_fuse, _calc_lift_coeff(angle_alpha)), 0)
-	force_lift_v_fuse = Vector3(_calc_lift_force(air_density, vel_total, area_v_fuse, _calc_lift_coeff(angle_beta)), 0, 0)
 
 	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
 
 	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
 	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
 
-	force_drag_h_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha)))
-	force_drag_v_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
+	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
 	
 	force_drag_gear = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_gear * gear_pos, _calc_drag_parasite_coeff(angle_alpha)))
 	# Control forces calc.
@@ -415,9 +427,6 @@ func _integrate_forces(_state):
 	add_force_local(force_lift_h_tail, pos_h_tail)
 	add_force_local(force_lift_v_tail, pos_v_tail)
 	
-	add_force_local(force_lift_h_fuse, pos_h_fuse)
-	add_force_local(force_lift_v_fuse, pos_v_fuse)
-	
 	# Lift forces from control surfaces
 	add_force_local(force_lift_aileron_l, pos_aileron_l)
 	add_force_local(force_lift_aileron_r, pos_aileron_r)
@@ -431,11 +440,15 @@ func _integrate_forces(_state):
 	add_force_local(force_drag_v_tail, pos_v_tail)
 	add_force_local(force_drag_flaps, pos_flaps)
 	
-	add_force_local(force_drag_h_fuse, pos_h_fuse)
-	add_force_local(force_drag_v_fuse, pos_v_fuse)
+	add_force_local(force_drag_fuse, pos_fuse)
 	
 	add_force_local(force_drag_gear, pos_gear)
 	
-	# NWS
-	if (grounded == true):
+	# Wheel forces
+	if (ground_contact_NLG == true):
 		add_force_local((Vector3(yaw_input * 100 * vel_total, 0, 0)), Vector3(0, -3, -3))
+	if (ground_contact_MLG_L == true):
+		add_force_local((Vector3(0, 0, braking_input * vel_total * 100)), Vector3(-5, -3, 1))
+	if (ground_contact_MLG_R == true):
+		add_force_local((Vector3(0, 0, braking_input * vel_total * 100)), Vector3( 5, -3, 1))
+		

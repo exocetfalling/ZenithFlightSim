@@ -18,7 +18,7 @@
 [ext_resource path="res://Wheel_Collider.tscn" type="PackedScene" id=16]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.01
+friction = 0.03
 
 [sub_resource type="Animation" id=2]
 resource_name = "Gear_Extend"
@@ -256,23 +256,18 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80751, -0.832628, 0.878767 
 [node name="LG_AttachPoint_Main_R" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 
-[node name="Camera" type="Camera" parent="."]
+[node name="Camera_FPV" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 environment = ExtResource( 12 )
 current = true
 far = 10000.0
 
-[node name="HUD" parent="Camera" instance=ExtResource( 13 )]
+[node name="HUD" parent="Camera_FPV" instance=ExtResource( 13 )]
 
-[node name="Camera2" type="Camera" parent="."]
+[node name="Camera_Ext" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3, 20 )
 environment = ExtResource( 12 )
 far = 10000.0
-
-[node name="Air_Ground_Sensor" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, -5, 0 )
-collide_with_areas = true
 
 [node name="Wheel_Collider_NLG" parent="." instance=ExtResource( 16 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.67853, -4.15171 )
