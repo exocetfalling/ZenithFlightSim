@@ -44,6 +44,8 @@ func _process(_delta):
 	$Text_Line_2/Flaps_Data/Variable.text = "%.2f" % stepify($'../../'.flaps_input, 0.01)
 	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_pos, 0.01)
 	
+	var centre_position = get_viewport_rect().size/2
+	get_node("EADI_Mask/Boresight").position = centre_position
 	
 	get_node("EADI_Mask/EADI_Image").rotation_degrees = -display_roll
 	get_node("EADI_Mask/EADI_Image").position.y = display_pitch / 90 * 260

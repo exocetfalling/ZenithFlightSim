@@ -403,7 +403,7 @@ margin_right = 11.0
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
-text = "a/p"
+text = "CWS"
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -546,3 +546,10 @@ position = Vector2( -151.597, 93.6566 )
 points = PoolVector2Array( 0, 0, 300, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="Boresight" type="Line2D" parent="."]
+light_mask = 2
+position = Vector2( 960, 540 )
+points = PoolVector2Array( 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0, 0, -50, 0, 0 )
+width = 5.0
+default_color = Color( 0.117647, 0.8, 0.203922, 1 )

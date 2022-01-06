@@ -48,10 +48,14 @@ var gear_max = 1
 var gear_min = 0
 var gear_pos = 1
 var gear_tgt = 1
-enum gear_state {GEAR_UP, GEAR_EXTENDING, GEAR_DOWN, GEAR_RETRACTING}
 
 var autopilot_on = 0
 var tgt_pitch = 0
+
+var sta_1_rdy = 1
+var sta_2_rdy = 1
+var sta_3_rdy = 1
+var sta_4_rdy = 1
 
 var angle_alpha = 0
 var angle_alpha_deg = 0
@@ -115,8 +119,7 @@ var force_drag_aileron_r = Vector3.ZERO
 var force_drag_elevator = Vector3.ZERO
 var force_drag_rudder = Vector3.ZERO
 var force_drag_flaps = Vector3.ZERO
-
-var force_drag_rot = Vector3.ZERO
+var force_drag_gear = Vector3.ZERO
 
 # Deflection in radians
 var control_deflection = PI/12
@@ -157,33 +160,33 @@ func _calc_lift_coeff(angle_alpha_rad):
 	if (angle_alpha_rad < x1):
 		return (a * (angle_alpha_rad + 2 * PI - x1) + y1)
 		
-	if ((angle_alpha_rad > x1) and (angle_alpha_rad <= x2)):
+	elif ((angle_alpha_rad > x1) and (angle_alpha_rad <= x2)):
 		return (a * (angle_alpha_rad - x1) + y1)
 	
-	if ((angle_alpha_rad > x2) and (angle_alpha_rad <= x3)):
+	elif ((angle_alpha_rad > x2) and (angle_alpha_rad <= x3)):
 		return (b * (angle_alpha_rad - x2) + y2)
 
-	if ((angle_alpha_rad > x3) and (angle_alpha_rad <= x4)):
+	elif ((angle_alpha_rad > x3) and (angle_alpha_rad <= x4)):
 		return (c * (angle_alpha_rad - x3) + y3)
 	
-	if (angle_alpha_rad > x4):
+	elif (angle_alpha_rad > x4):
 		return (a * (angle_alpha_rad - 2 * PI - x1) + y1)
+	
+	else:
+		return 0
 		
 
-func _calc_drag_coeff(angle_rad):
-	return 0.01 * sin(angle_rad) + 0.01 * cos(angle_rad)
+func _calc_drag_induced_coeff(angle_rad):
+	return 0.01 * sin(angle_rad) 
+
+func _calc_drag_parasite_coeff(angle_rad):
+	return 0.01 * cos(angle_rad)
 	
 func _calc_lift_force(air_density, airspeed_true, surface_area, lift_coeff):
-	if airspeed_true > 1:
-		return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * lift_coeff
-	else:
-		return 0
+	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * lift_coeff
 	
 func _calc_drag_force(air_density, airspeed_true, surface_area, drag_coeff):
-	if airspeed_true > 1:
-		return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * drag_coeff
-	else:
-		return 0
+	return 0.5 * air_density * pow(airspeed_true, 2) * surface_area * drag_coeff
 
 func _calc_alpha(vel_up, vel_fwd):
 	return atan2(-vel_up, vel_fwd)
@@ -238,6 +241,13 @@ func _process(delta):
 		trim_pitch_input = trim_pitch_max
 	if (trim_pitch_input < trim_pitch_min):
 		trim_pitch_input = trim_pitch_min
+	
+	# NWS
+	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
+		grounded = true
+	else:
+		grounded = false
+
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
@@ -294,33 +304,43 @@ func get_input(delta):
 		else:
 			autopilot_on = 0
 	
-	if Input.is_action_just_pressed("fire_sta_1"):
+
+	
+	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
+		sta_1_rdy = 0
 		scene_root.add_child(clone)
 		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1.global_transform
 		clone.linear_velocity = self.linear_velocity
+		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1/CSGBox/GPRocket_Mesh/").visible = false
 	
-	if Input.is_action_just_pressed("fire_sta_2"):
+	if (Input.is_action_just_pressed("fire_sta_2") && (sta_2_rdy == 1)):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
+		sta_2_rdy = 0
 		scene_root.add_child(clone)
 		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2.global_transform
 		clone.linear_velocity = self.linear_velocity
+		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2/CSGBox/GPRocket_Mesh/").visible = false
 
-	if Input.is_action_just_pressed("fire_sta_3"):
+	if (Input.is_action_just_pressed("fire_sta_3") && (sta_3_rdy == 1)):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
+		sta_3_rdy = 0
 		scene_root.add_child(clone)
 		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3.global_transform
 		clone.linear_velocity = self.linear_velocity
-	
-	if Input.is_action_just_pressed("fire_sta_4"):
+		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3/CSGBox/GPRocket_Mesh/").visible = false
+
+	if (Input.is_action_just_pressed("fire_sta_4") && (sta_4_rdy == 1)):
 		var clone = rocket_scene.instance()
 		var scene_root = get_tree().root.get_children()[0]
+		sta_4_rdy = 0
 		scene_root.add_child(clone)
 		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4.global_transform
 		clone.linear_velocity = self.linear_velocity
+		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4/CSGBox/GPRocket_Mesh/").visible = false
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
@@ -332,14 +352,15 @@ func get_input(delta):
 	force_lift_h_fuse = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_fuse, _calc_lift_coeff(angle_alpha)), 0)
 	force_lift_v_fuse = Vector3(_calc_lift_force(air_density, vel_total, area_v_fuse, _calc_lift_coeff(angle_beta)), 0, 0)
 
-	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_coeff(angle_alpha + angle_incidence)))
+	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
 
-	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_coeff(angle_alpha)))
-	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_coeff(angle_beta)))
+	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
+	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
 
-	force_drag_h_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_fuse, _calc_drag_coeff(angle_alpha)))
-	force_drag_v_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_coeff(angle_beta)))
+	force_drag_h_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_fuse, _calc_drag_induced_coeff(angle_alpha)))
+	force_drag_v_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
 	
+	force_drag_gear = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_gear * gear_pos, _calc_drag_parasite_coeff(angle_alpha)))
 	# Control forces calc.
 	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)), 0)
 	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)), 0)
@@ -348,12 +369,12 @@ func get_input(delta):
 	
 	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)), 0)
 	
-	force_drag_aileron_l = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)))
-	force_drag_aileron_r = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)))
-	force_drag_elevator = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_elevator, _calc_drag_coeff(angle_alpha - (pitch_input + trim_pitch_input) * control_deflection)))
-	force_drag_rudder = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_rudder, _calc_drag_coeff(angle_alpha + yaw_input * control_deflection)))
+	force_drag_aileron_l = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + roll_input * control_deflection)))
+	force_drag_aileron_r = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - roll_input * control_deflection)))
+	force_drag_elevator = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha - (pitch_input + trim_pitch_input) * control_deflection)))
+	force_drag_rudder = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_alpha + yaw_input * control_deflection)))
 	
-	force_drag_flaps = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)))
+	force_drag_flaps = Vector3(0, 0, -_calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + flaps_input * control_deflection)))
 	
 	# Animations
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L.rotation.x =  roll_input * control_deflection + PI/2
@@ -361,6 +382,7 @@ func get_input(delta):
 	$Glider_CSG_Mesh/Hinge_Elevator_L.rotation.x = -(pitch_input + trim_pitch_input) * control_deflection
 	$Glider_CSG_Mesh/Hinge_Elevator_R.rotation.x = -(pitch_input + trim_pitch_input) * control_deflection
 	$Glider_CSG_Mesh/Hinge_Rudder.rotation.y =  yaw_input * control_deflection
+
 
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = flaps_input * control_deflection + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = flaps_input * control_deflection + PI/2
@@ -383,7 +405,7 @@ func _integrate_forces(_state):
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
 	
 	# Gravity
-#	add_central_force(Vector3(0, -weight, 0))
+	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
 	add_force_local(Vector3(0, 0, -2 * throttle_input), Vector3(0, 0, 0))
@@ -412,8 +434,8 @@ func _integrate_forces(_state):
 	add_force_local(force_drag_h_fuse, pos_h_fuse)
 	add_force_local(force_drag_v_fuse, pos_v_fuse)
 	
-#	# Rot. drag
-#	force_drag_rot.x = -4000 * pow(angular_velocity.x, 2)
-#	force_drag_rot.y = -4000 * pow(angular_velocity.y, 2)
-#	force_drag_rot.z = -4000 * pow(angular_velocity.z, 2)
-#	add_torque(force_drag_rot)
+	add_force_local(force_drag_gear, pos_gear)
+	
+	# NWS
+	if (grounded == true):
+		add_force_local((Vector3(yaw_input * 100 * vel_total, 0, 0)), Vector3(0, -3, -3))

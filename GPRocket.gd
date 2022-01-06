@@ -34,7 +34,8 @@ func _process(delta):
 		emit_signal("exploded", transform.origin)
 		fuel = 0
 		var clone = explosion_scene.instance()
-		add_child(clone)
+		var scene_root = get_tree().root.get_children()[0]
+		scene_root.add_child(clone)
 		clone.global_transform = self.global_transform
 		queue_free()
 
