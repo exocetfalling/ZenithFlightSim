@@ -1,172 +1,18 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Plane03.tscn" type="PackedScene" id=1]
 [ext_resource path="res://TestScene.gd" type="Script" id=2]
-[ext_resource path="res://assets/prototype_textures/Dark/texture_03.png" type="Texture" id=4]
-[ext_resource path="res://assets/prototype_textures/Red/texture_09.png" type="Texture" id=5]
-[ext_resource path="res://assets/prototype_textures/Orange/texture_02.png" type="Texture" id=6]
-[ext_resource path="res://assets/prototype_textures/Green/texture_13.png" type="Texture" id=7]
+[ext_resource path="res://Terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://lighting_env.tres" type="Environment" id=8]
-
-[sub_resource type="SpatialMaterial" id=1]
-albedo_texture = ExtResource( 4 )
-uv1_scale = Vector3( 4, 4, 4 )
-
-[sub_resource type="PlaneMesh" id=2]
-material = SubResource( 1 )
-size = Vector2( 200, 200 )
-
-[sub_resource type="ConcavePolygonShape" id=3]
-data = PoolVector3Array( 100, 0, 100, -100, 0, 100, 100, 0, -100, -100, 0, 100, -100, 0, -100, 100, 0, -100 )
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.466667, 0.317647, 0.317647, 1 )
-albedo_texture = ExtResource( 5 )
-uv1_scale = Vector3( 0.1, 0.1, 0.1 )
-uv1_triplanar = true
-
-[sub_resource type="CubeMesh" id=5]
-material = SubResource( 4 )
-size = Vector3( 8, 20, 8 )
-
-[sub_resource type="SpatialMaterial" id=6]
-albedo_texture = ExtResource( 7 )
-uv1_scale = Vector3( 0.25, 0.25, 0.25 )
-uv1_offset = Vector3( 0.5, 0, 0.5 )
-uv1_triplanar = true
-
-[sub_resource type="CubeMesh" id=7]
-material = SubResource( 6 )
-size = Vector3( 6, 24, 6 )
-
-[sub_resource type="SpatialMaterial" id=8]
-albedo_texture = ExtResource( 6 )
-uv1_scale = Vector3( -0.25, 0.25, -0.25 )
-uv1_triplanar = true
-
-[sub_resource type="CubeMesh" id=9]
-material = SubResource( 8 )
-size = Vector3( 8, 20, 8 )
 
 [node name="TestScene" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="Ground9" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 2000, 0, -2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground9"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground9/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground8" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, -2000, 0, -2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground8"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground8/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground7" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, -2000, 0, 2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground7"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground7/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground6" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 2000, 0, 2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground6"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground6/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground5" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, -2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground5"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground5/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground4" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 2000 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground4"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground4/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground3" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, -2000, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground3"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground3/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground2" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 2000, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground2"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground2/StaticBody"]
-shape = SubResource( 3 )
-
-[node name="Ground" type="MeshInstance" parent="."]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="StaticBody" type="StaticBody" parent="Ground"]
-
-[node name="CollisionShape" type="CollisionShape" parent="Ground/StaticBody"]
-shape = SubResource( 3 )
-
 [node name="Plane03" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 40.528 )
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 150, 9.806, -18.973 )
-mesh = SubResource( 5 )
-material/0 = null
-
-[node name="MeshInstance3" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 11.99, -30 )
-mesh = SubResource( 7 )
-material/0 = null
-
-[node name="MeshInstance4" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 161.161, 9.83015, 67.8949 )
-mesh = SubResource( 9 )
-material/0 = null
-
-[node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 0.996485, -0.0270087, 0.0792953, -0.0669426, -0.825799, 0.559978, 0.0503577, -0.563318, -0.824704, 0, 42.0644, 0 )
-shadow_enabled = true
-
-[node name="DirectionalLight2" type="DirectionalLight" parent="."]
-transform = Transform( 0.996485, -0.0270087, 0.0792953, -0.0459144, 0.61564, 0.786689, -0.0700648, -0.787564, 0.612237, -37.2241, 42.0644, 0 )
-light_energy = 0.25
-shadow_enabled = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 103.1, 934.882 )
+continuous_cd = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 8 )
+
+[node name="Spatial" parent="." instance=ExtResource( 3 )]

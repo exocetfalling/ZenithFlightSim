@@ -74,7 +74,7 @@ extents = Vector3( 0.1, 1.5, 1 )
 
 [node name="Plane03" type="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
-mass = 100.0
+mass = 500.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 continuous_cd = true
@@ -82,7 +82,7 @@ contacts_reported = 32
 contact_monitor = true
 can_sleep = false
 linear_damp = 0.0
-angular_damp = 1.0
+angular_damp = 2.0
 script = ExtResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -205,27 +205,27 @@ material = ExtResource( 11 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, 10.5 )
 
 [node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Elevator_L"]
-transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.2 )
+transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.515065 )
 height = 3.0
-depth = 0.5
+depth = 1.0
 material = ExtResource( 5 )
 
 [node name="Hinge_Elevator_R" type="Spatial" parent="Glider_CSG_Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, 10.5 )
 
 [node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Elevator_R"]
-transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.2 )
+transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.515 )
 height = 3.0
-depth = 0.5
+depth = 1.0
 material = ExtResource( 5 )
 
 [node name="Hinge_Rudder" type="Spatial" parent="Glider_CSG_Mesh"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.5, 11 )
 
 [node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Rudder"]
-transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0.253772, -1.10928e-08, 0.2 )
+transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0.253772, -1.10928e-08, 0.489329 )
 height = 2.5
-depth = 0.5
+depth = 1.0
 material = ExtResource( 7 )
 
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
@@ -260,14 +260,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 environment = ExtResource( 12 )
 current = true
-far = 10000.0
+far = 100000.0
 
 [node name="HUD" parent="Camera_FPV" instance=ExtResource( 13 )]
 
 [node name="Camera_Ext" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3, 20 )
 environment = ExtResource( 12 )
-far = 10000.0
+far = 100000.0
 
 [node name="Wheel_Collider_NLG" parent="." instance=ExtResource( 16 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.67853, -4.15171 )

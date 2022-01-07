@@ -501,8 +501,11 @@ Station 1: 1
 Station 2: 2
 Station 3: 3
 Station 4: 4
-[color=#11aafe]Camera:*[/color]
-Toggle: C"
+[color=#11aafe]Camera:[/color]
+Toggle: C
+
+[color=#11aafe]Flying:[/color]
+See left MFD for PFD with flight data. All units are SI units for now. Rotate at 30 m/s, land at 30 m/s with flaps down. Do not exceed 150 m/s."
 text = "Engine:
 Throttle up: W
 Throttle down: S
@@ -527,8 +530,11 @@ Station 1: 1
 Station 2: 2
 Station 3: 3
 Station 4: 4
-Camera:*
-Toggle: C"
+Camera:
+Toggle: C
+
+Flying:
+See left MFD for PFD with flight data. All units are SI units for now. Rotate at 30 m/s, land at 30 m/s with flaps down. Do not exceed 150 m/s."
 __meta__ = {
 "_edit_use_anchors_": false
 }

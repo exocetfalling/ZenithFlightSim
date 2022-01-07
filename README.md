@@ -2,9 +2,7 @@
 A FOSS, physics based flight sim in Godot.
 
 **Flying**
-See left MFD for PFD with flight data. 
-All units are SI units for now. 
-Rotate at 20 m/s, land at 20 m/s with flaps down. Do not exceed 35 m/s.
+See right MFD for flying. 
 
 **Controls**
 See right MFD for controls.
