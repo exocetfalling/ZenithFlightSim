@@ -32,17 +32,17 @@ func _process(_delta):
 	display_spd = $'../../'.pfd_spd
 	display_hdg = $'../../'.pfd_hdg
 	display_alt = $'../../'.pfd_alt
-	display_flaps = $'../../'.flaps_input
-	display_trim = $'../../'.trim_pitch_input
-	display_gear = $'../../'.gear_pos
+	display_flaps = $'../../'.output_flaps
+	display_trim = $'../../'.output_elevator_trim
+	display_gear = $'../../'.gear_current
 	display_throttle = $'../../'.throttle_input
 	display_ap = $'../../'.autopilot_on
 	
 	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify($'../../'.pfd_spd, 1)
 	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify($'../../'.pfd_alt, 1)
 	$Text_Line_1/Heading_Data/Variable.text = "%03d" % stepify($'../../'.pfd_hdg, 1)
-	$Text_Line_2/Flaps_Data/Variable.text = "%.2f" % stepify($'../../'.flaps_input, 0.01)
-	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_pos, 0.01)
+	$Text_Line_2/Flaps_Data/Variable.text = "%.2f" % stepify($'../../'.input_flaps, 0.01)
+	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_current, 0.01)
 	
 	var centre_position = get_viewport_rect().size/2
 	get_node("Boresight").position = centre_position

@@ -73,7 +73,6 @@ PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
 IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
 UserData="*res://addons/github-integration/scripts/user_data.gd"
 RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
-LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 
 [display]
 
@@ -84,7 +83,7 @@ window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/file-editor/plugin.cfg", "res://addons/github-integration/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/github-integration/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [input]
 

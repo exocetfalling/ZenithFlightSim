@@ -74,7 +74,7 @@ extents = Vector3( 0.1, 1.5, 1 )
 
 [node name="Plane03" type="RigidBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
-mass = 500.0
+mass = 2000.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 continuous_cd = true
@@ -277,3 +277,5 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.8129
 
 [node name="Wheel_Collider_MLG_R" parent="." instance=ExtResource( 16 )]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.813, -2.679, 0.892 )
+
+[node name="Tween" type="Tween" parent="."]
