@@ -142,6 +142,7 @@ var gear_current = 1
 var gear_input = 1
 
 var deflection_rate = 1/(PI/6)
+var deflection_rate_flaps = 1/(2 * PI)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -158,8 +159,9 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
-	DebugOverlay.stats.add_property(self, "input_elevator", "round")
-	DebugOverlay.stats.add_property(self, "output_elevator", "round")
+#	DebugOverlay.stats.add_property(self, "input_elevator", "round")
+#	DebugOverlay.stats.add_property(self, "output_elevator", "round")
+	pass
 	
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -316,12 +318,12 @@ func get_input(delta):
 	input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
 	
 	# Flaps input
-	if (Input.is_action_pressed("flaps_down")):
+	if (Input.is_action_just_pressed("flaps_down")):
 		if (input_flaps < flaps_max):
-			input_flaps = input_flaps + 0.25 * delta 
-	if (Input.is_action_pressed("flaps_up")):
+			input_flaps = input_flaps + 0.25 
+	if (Input.is_action_just_pressed("flaps_up")):
 		if (input_flaps > flaps_min):
-			input_flaps = input_flaps - 0.25 * delta 
+			input_flaps = input_flaps - 0.25
 			
 	# Trim input
 	if (Input.is_action_pressed("trim_pitch_up")):
@@ -407,19 +409,23 @@ func get_input(delta):
 	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)), 0)
 	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - input_rudder * deflection_control_max)), 0, 0)
 	
-	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + input_flaps * deflection_flaps_max)), 0)
+	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)), 0)
 	
 	force_drag_aileron_l = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)))
 	force_drag_aileron_r = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)))
 	force_drag_elevator = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)))
 	force_drag_rudder = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_beta + output_rudder * deflection_control_max)))
 	
-	force_drag_flaps = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + input_flaps * deflection_flaps_max)))
+	force_drag_flaps = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)))
 	
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
 	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
 	output_rudder = interpolate_linear(output_rudder, input_rudder, deflection_rate, delta)
+	
+	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
+	output_elevator_trim = input_elevator_trim
+	
 	# Animations
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L.rotation.x =  output_aileron * deflection_control_max + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R.rotation.x = -output_aileron * deflection_control_max + PI/2
@@ -428,8 +434,8 @@ func get_input(delta):
 	$Glider_CSG_Mesh/Hinge_Rudder.rotation.y =  output_rudder * deflection_control_max
 
 
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = input_flaps * deflection_flaps_max + PI/2
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = input_flaps * deflection_flaps_max + PI/2
+	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
+	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	
 	$LG_AttachPoint_Nose.rotation.x = (1 - gear_current) * -PI/2
 	$LG_AttachPoint_Main_L.rotation.z = (1 - gear_current) * PI/2
@@ -478,11 +484,14 @@ func _integrate_forces(_state):
 	
 	# Wheel forces
 	if (ground_contact_NLG == true):
-		add_force_local((Vector3(vel_local.x * -100 + input_rudder * 100 * vel_total, 0, 0)), Vector3(0, -3, -3))
+		if (abs(vel_local.z) < 10):
+			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight * vel_total, 0, 0)), Vector3(0, -3, -3))
+		else:
+			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
 	if (ground_contact_MLG_L == true):
 		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3(-5, -3, 1))
-		add_force_local((Vector3(vel_local.x * -100, 0, 0)), Vector3(-5, -3, 1))
+		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
 	if (ground_contact_MLG_R == true):
 		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3( 5, -3, 1))
-		add_force_local((Vector3(vel_local.x * -100, 0, 0)), Vector3( 5, -3, 1))
+		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
 		

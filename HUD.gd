@@ -32,7 +32,7 @@ func _process(_delta):
 	display_spd = $'../../'.pfd_spd
 	display_hdg = $'../../'.pfd_hdg
 	display_alt = $'../../'.pfd_alt
-	display_flaps = $'../../'.output_flaps
+	display_flaps = $'../../'.input_flaps * 4
 	display_trim = $'../../'.output_elevator_trim
 	display_gear = $'../../'.gear_current
 	display_throttle = $'../../'.throttle_input
@@ -41,7 +41,7 @@ func _process(_delta):
 	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify($'../../'.pfd_spd, 1)
 	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify($'../../'.pfd_alt, 1)
 	$Text_Line_1/Heading_Data/Variable.text = "%03d" % stepify($'../../'.pfd_hdg, 1)
-	$Text_Line_2/Flaps_Data/Variable.text = "%.2f" % stepify($'../../'.input_flaps, 0.01)
+	$Text_Line_2/Flaps_Data/Variable.text = "%01d" % stepify(display_flaps, 1)
 	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_current, 0.01)
 	
 	var centre_position = get_viewport_rect().size/2
@@ -56,7 +56,7 @@ func _process(_delta):
 	get_node("PFD/Box_HDG").text = "%03d" % stepify($'../../'.pfd_hdg, 1)
 	
 	get_node("PFD/Box_TRIM").text = "%.2f" % stepify(display_trim, 0.01)
-	get_node("PFD/Box_FLAPS").text = "%.2f" % stepify(display_flaps, 0.01)
+	get_node("PFD/Box_FLAPS").text = "%01d" % stepify(display_flaps, 1)
 	
 	if (display_gear == 1):
 		get_node("ICAWS/Gear_Indicator").default_color = Color8(22, 222, 22)

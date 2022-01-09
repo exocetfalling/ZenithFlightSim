@@ -13,9 +13,4 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-
-	
-	if (abs(rotation_degrees) < 60):
-		visible = true
-	else:
-		visible = false
+	pass
