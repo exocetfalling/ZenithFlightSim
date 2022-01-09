@@ -258,7 +258,7 @@ environment = ExtResource( 12 )
 far = 100000.0
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.132 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.833, -4.132 )
 
 [node name="LG_AttachPoint_Main_L" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.808, -0.833, 0.879 )
@@ -266,25 +266,32 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.808, -0.833, 0.879 )
 [node name="LG_AttachPoint_Main_R" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 
-[node name="LG_Joint_1" type="SliderJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.522524, -4.15376 )
+[node name="Joint_NLG_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -4.128 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Nose")
-linear_limit/upper_distance = 0.0
-linear_limit/lower_distance = -0.1
-linear_limit/softness = 0.01
-angular_motion/softness = 0.01
 
-[node name="LG_Joint_2" type="SliderJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65292, -0.522524, 0.940576 )
+[node name="Joint_NLG_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -4.128 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Nose")
+
+[node name="Joint_MLG_L_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00271, -0.194647, 0.517256 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
-angular_limit/softness = 0.01
-angular_motion/softness = 0.01
 
-[node name="LG_Joint_3" type="SliderJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.653, -0.523, 0.941 )
+[node name="Joint_MLG_L_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00271, -0.194647, 0.517256 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
+
+[node name="Joint_MLG_R_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.195, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
-angular_limit/softness = 0.01
-angular_motion/softness = 0.01
+
+[node name="Joint_MLG_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.195, 0.517 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
