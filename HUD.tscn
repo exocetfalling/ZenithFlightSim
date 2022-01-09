@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://HUD.gd" type="Script" id=1]
 [ext_resource path="res://HUD_Font.tres" type="DynamicFont" id=2]
@@ -10,6 +10,13 @@
 [ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=8]
 [ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=9]
 [ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=10]
+[ext_resource path="res://ICAWS_Mode.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.196078, 0.85098, 0.0588235, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="HUD" type="MarginContainer"]
 anchor_right = 1.0
@@ -428,51 +435,11 @@ default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 position = Vector2( 1650.4, 814.895 )
 texture = ExtResource( 10 )
 
-[node name="Throttle" type="VSlider" parent="ICAWS"]
-light_mask = 2
-margin_left = -230.0
-margin_top = -227.0
-margin_right = -198.0
-margin_bottom = 234.0
-size_flags_horizontal = 1
-rounded = true
-tick_count = 10
-ticks_on_borders = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="ICAWS/Throttle"]
-show_behind_parent = true
-light_mask = 2
-margin_left = 1.43091
-margin_top = -5.64319
-margin_right = 31.4309
-margin_bottom = 467.357
-mouse_filter = 1
-color = Color( 0.27451, 0.27451, 0.27451, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="ICAWS/Throttle"]
-light_mask = 2
-margin_left = 51.0
-margin_top = 2.0
-margin_right = 135.0
-margin_bottom = 38.0
-custom_fonts/font = ExtResource( 2 )
-text = "thr pct"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="RichTextLabel" type="RichTextLabel" parent="ICAWS"]
-margin_left = -161.476
-margin_top = -180.51
-margin_right = 204.524
-margin_bottom = 59.4898
+[node name="Page_KEYS" type="RichTextLabel" parent="ICAWS"]
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
@@ -502,10 +469,7 @@ Station 2: 2
 Station 3: 3
 Station 4: 4
 [color=#11aafe]Camera:[/color]
-Toggle: C
-
-[color=#11aafe]Flying:[/color]
-See left MFD for PFD with flight data. All units are SI units for now. Rotate at 30 m/s with flaps 2, land at 30 m/s with flaps 4. Do not exceed 150  m/s."
+Toggle: C"
 text = "Engine:
 Throttle up: W
 Throttle down: S
@@ -531,10 +495,109 @@ Station 2: 2
 Station 3: 3
 Station 4: 4
 Camera:
-Toggle: C
+Toggle: C"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-Flying:
-See left MFD for PFD with flight data. All units are SI units for now. Rotate at 30 m/s with flaps 2, land at 30 m/s with flaps 4. Do not exceed 150  m/s."
+[node name="Page_CHECKLIST" type="RichTextLabel" parent="ICAWS"]
+visible = false
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=#11aafe]PREFLIGHT[/color]
+GEAR - DN
+FLAPS - 0
+TRIM - 0.0
+A/P - OFF
+[color=#11aafe]TAKEOFF[/color]
+FLAPS - 2
+TRIM - 0.2
+MEMO - REVIEW
+V SPEEDS - CHECK
+[color=#11aafe]CLIMB[/color]
+GEAR - UP
+FLAPS - 0
+[color=#11aafe]CRUISE[/color]
+A/P - AS RQRD
+[color=#11aafe]DESCENT[/color]
+A/P - OFF
+MEMO - REVIEW
+V SPEEDS - CHECK
+TRIM - 0.4 / AS RQRD
+[color=#11aafe]LANDING[/color]
+FLAPS - 4
+GEAR - DN"
+text = "PREFLIGHT
+GEAR - DN
+FLAPS - 0
+TRIM - 0.0
+A/P - OFF
+TAKEOFF
+FLAPS - 2
+TRIM - 0.2
+MEMO - REVIEW
+V SPEEDS - CHECK
+CLIMB
+GEAR - UP
+FLAPS - 0
+CRUISE
+A/P - AS RQRD
+DESCENT
+A/P - OFF
+MEMO - REVIEW
+V SPEEDS - CHECK
+TRIM - 0.4 / AS RQRD
+LANDING
+FLAPS - 4
+GEAR - DN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page_MEMO" type="RichTextLabel" parent="ICAWS"]
+visible = false
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=#11aafe]Flying:[/color]
+See left MFD for PFD with flight data. All units are SI units for now. 
+Rotate at VR with flaps as per checklist, land at VAPP with flaps as per checklist. Do not exceed VNE or fly below VS.
+
+[color=#11aafe]V Speeds:[/color]
+V1: 50
+VR: 60
+V2: 70
+
+VAPP: 60
+
+VS: 45
+VNE: 150
+"
+text = "Flying:
+See left MFD for PFD with flight data. All units are SI units for now. 
+Rotate at VR with flaps as per checklist, land at VAPP with flaps as per checklist. Do not exceed VNE or fly below VS.
+
+V Speeds:
+V1: 50
+VR: 60
+V2: 70
+
+VAPP: 60
+
+VS: 45
+VNE: 150
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -548,24 +611,70 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="ICAWS"]
+[node name="Gear_Status" type="Label" parent="ICAWS"]
 margin_left = -62.7023
 margin_top = 103.181
 margin_right = 69.2977
 margin_bottom = 126.181
 custom_fonts/font = ExtResource( 2 )
-text = "gear status"
+text = "gear dn"
+align = 1
 uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Line2D" type="Line2D" parent="ICAWS"]
+[node name="Line2D_1" type="Line2D" parent="ICAWS"]
+light_mask = 2
+position = Vector2( -151.597, -139.343 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="Line2D_2" type="Line2D" parent="ICAWS"]
 light_mask = 2
 position = Vector2( -151.597, 93.6566 )
 points = PoolVector2Array( 0, 0, 300, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="ICAWS_Mode" type="MenuButton" parent="ICAWS"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -276.225
+margin_top = -231.122
+margin_right = -216.225
+margin_bottom = -202.122
+custom_fonts/font = ExtResource( 2 )
+text = "MENU"
+items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false ]
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Thrust_Indicator" type="ProgressBar" parent="ICAWS"]
+margin_left = -196.278
+margin_top = -201.492
+margin_right = -96.2782
+margin_bottom = -176.492
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ICAWS/Thrust_Indicator"]
+margin_left = 14.0
+margin_top = -27.0
+margin_right = 86.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
+text = "THRUST"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Boresight" type="Line2D" parent="."]
 light_mask = 2
