@@ -274,22 +274,22 @@ func _process(delta):
 	if (input_elevator_trim < input_trim_pitch_min):
 		input_elevator_trim = input_trim_pitch_min
 	
-#	# NWS
-#	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
-#		ground_contact_NLG = true
-#	else:
-#		ground_contact_NLG = false
-#
-#	# MLG weight on wheels
-#	if (get_node("Wheel_Collider_MLG_L/RayCast").is_colliding() == true):
-#		ground_contact_MLG_L = true
-#	else:
-#		ground_contact_MLG_L = false
-#
-#	if (get_node("Wheel_Collider_MLG_R/RayCast").is_colliding() == true):
-#		ground_contact_MLG_R = true
-#	else:
-#		ground_contact_MLG_R = false
+	# NWS
+	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_NLG = true
+	else:
+		ground_contact_NLG = false
+
+	# MLG weight on wheels
+	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_MLG_L = true
+	else:
+		ground_contact_MLG_L = false
+
+	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_MLG_R = true
+	else:
+		ground_contact_MLG_R = false
 
 func get_input(delta):
 	# Throttle input

@@ -4,7 +4,7 @@
 [ext_resource path="res://Wheel.tres" type="Material" id=2]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.0
+friction = 0.06
 
 [sub_resource type="CylinderShape" id=2]
 margin = 0.001
@@ -45,6 +45,11 @@ radial_segments = 16
 rings = 16
 material = ExtResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="Wheel" type="CollisionShape" parent="."]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.82628, 0 )
 shape = SubResource( 2 )
+
+[node name="RayCast" type="RayCast" parent="Wheel"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+cast_to = Vector3( 0, -0.55, 0 )
+collide_with_areas = true
