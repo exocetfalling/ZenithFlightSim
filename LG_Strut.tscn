@@ -51,5 +51,6 @@ shape = SubResource( 2 )
 
 [node name="RayCast" type="RayCast" parent="Wheel"]
 transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
 cast_to = Vector3( 0, -0.55, 0 )
 collide_with_areas = true

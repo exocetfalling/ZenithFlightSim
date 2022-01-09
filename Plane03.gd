@@ -160,7 +160,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
-#	DebugOverlay.stats.add_property(self, "output_elevator", "round")
+#	DebugOverlay.stats.add_property(self, "ground_contact_NLG", "")
 	pass
 	
 # Lift coeffecient calculation function
@@ -485,7 +485,7 @@ func _integrate_forces(_state):
 	# Wheel forces
 	if (ground_contact_NLG == true):
 		if (abs(vel_local.z) < 10):
-			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight * vel_total, 0, 0)), Vector3(0, -3, -3))
+			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight/10 * vel_total, 0, 0)), Vector3(0, -3, -3))
 		else:
 			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
 	if (ground_contact_MLG_L == true):
