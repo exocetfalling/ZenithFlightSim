@@ -274,22 +274,22 @@ func _process(delta):
 	if (input_elevator_trim < input_trim_pitch_min):
 		input_elevator_trim = input_trim_pitch_min
 	
-	# NWS
-	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
-		ground_contact_NLG = true
-	else:
-		ground_contact_NLG = false
-
-	# MLG weight on wheels
-	if (get_node("Wheel_Collider_MLG_L/RayCast").is_colliding() == true):
-		ground_contact_MLG_L = true
-	else:
-		ground_contact_MLG_L = false
-
-	if (get_node("Wheel_Collider_MLG_R/RayCast").is_colliding() == true):
-		ground_contact_MLG_R = true
-	else:
-		ground_contact_MLG_R = false
+#	# NWS
+#	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
+#		ground_contact_NLG = true
+#	else:
+#		ground_contact_NLG = false
+#
+#	# MLG weight on wheels
+#	if (get_node("Wheel_Collider_MLG_L/RayCast").is_colliding() == true):
+#		ground_contact_MLG_L = true
+#	else:
+#		ground_contact_MLG_L = false
+#
+#	if (get_node("Wheel_Collider_MLG_R/RayCast").is_colliding() == true):
+#		ground_contact_MLG_R = true
+#	else:
+#		ground_contact_MLG_R = false
 
 func get_input(delta):
 	# Throttle input
@@ -437,9 +437,9 @@ func get_input(delta):
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	
-	$LG_AttachPoint_Nose.rotation.x = (1 - gear_current) * -PI/2
-	$LG_AttachPoint_Main_L.rotation.z = (1 - gear_current) * PI/2
-	$LG_AttachPoint_Main_R.rotation.z = (1 - gear_current) * -PI/2
+#	$LG_AttachPoint_Nose.rotation.x = (1 - gear_current) * -PI/2
+#	$LG_AttachPoint_Main_L.rotation.z = (1 - gear_current) * PI/2
+#	$LG_AttachPoint_Main_R.rotation.z = (1 - gear_current) * -PI/2
 
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Glider_Metal.tres" type="Material" id=1]
 [ext_resource path="res://Plane03.gd" type="Script" id=6]
@@ -10,7 +10,6 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Gear_Retract.anim" type="Animation" id=14]
 [ext_resource path="res://WpnRack.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Wheel_Collider.tscn" type="PackedScene" id=16]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.03
@@ -19,7 +18,7 @@ friction = 0.03
 resource_name = "Gear_Extend"
 length = 10.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("LG_AttachPoint_Nose:rotation_degrees")
+tracks/0/path = NodePath("../LG_AttachPoint_Nose:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -31,7 +30,7 @@ tracks/0/keys = {
 "values": [ Vector3( -90, 0, 0 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("LG_AttachPoint_Main_L:rotation_degrees")
+tracks/1/path = NodePath("../LG_AttachPoint_Main_L:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -43,7 +42,7 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("LG_AttachPoint_Main_R:rotation_degrees")
+tracks/2/path = NodePath("../LG_AttachPoint_Main_R:rotation_degrees")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -56,83 +55,86 @@ tracks/2/keys = {
 }
 
 [sub_resource type="CapsuleShape" id=3]
+margin = 0.001
 height = 13.2845
 
 [sub_resource type="BoxShape" id=4]
+margin = 0.001
 extents = Vector3( 20, 0.2, 2 )
 
 [sub_resource type="BoxShape" id=5]
+margin = 0.001
 extents = Vector3( 4, 0.1, 1.2 )
 
 [sub_resource type="BoxShape" id=6]
+margin = 0.001
 extents = Vector3( 0.1, 1.5, 1 )
 
-[node name="Plane03" type="RigidBody"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0 )
+[node name="Plane" type="Spatial"]
+
+[node name="Plane03" type="RigidBody" parent="."]
 mass = 2000.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
-continuous_cd = true
 contacts_reported = 32
-contact_monitor = true
 can_sleep = false
 linear_damp = 0.0
 angular_damp = 2.0
 script = ExtResource( 6 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Plane03"]
 anims/Gear_Extend = SubResource( 2 )
 anims/Gear_Retract = ExtResource( 14 )
 
-[node name="Glider_CSG_Mesh" type="Spatial" parent="."]
+[node name="Glider_CSG_Mesh" type="Spatial" parent="Plane03"]
 
-[node name="Fuse_Mid" type="CSGCylinder" parent="Glider_CSG_Mesh"]
+[node name="Fuse_Mid" type="CSGCylinder" parent="Plane03/Glider_CSG_Mesh"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -0.045 )
 height = 6.0
 sides = 32
 material = ExtResource( 1 )
 
-[node name="Tail_V" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="Tail_V" type="CSGCylinder" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 0.05, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -10.045, 1.5 )
 height = 3.0
 sides = 32
 material = ExtResource( 1 )
 
-[node name="Tail_H" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="Tail_H" type="CSGCylinder" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( -2.18557e-09, -1, 0, -2.18557e-09, 1.91069e-15, -1, 0.05, -4.37114e-08, -4.37114e-08, 0, -9.545, 0 )
 height = 8.0
 sides = 32
 material = ExtResource( 1 )
 
-[node name="Fuse_Nose" type="CSGSphere" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="Fuse_Nose" type="CSGSphere" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -3, 0, 1, -1.31134e-07, 0.00378609, 3.00011, -9.53674e-07 )
 radial_segments = 32
 rings = 32
 material = ExtResource( 1 )
 
-[node name="Fuse_Aft" type="CSGSphere" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="Fuse_Aft" type="CSGSphere" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -8, 0, 1, -3.49691e-07, 0.00378609, -2.99989, -9.53674e-07 )
 radial_segments = 32
 rings = 32
 material = ExtResource( 1 )
 
-[node name="Wing_Origin" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="Wing_Origin" type="Spatial" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75 )
 
-[node name="Wing" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+[node name="Wing" type="CSGCylinder" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( -6.55671e-09, -1, 4.37114e-08, 0, -4.37114e-08, -1, 0.15, -4.37114e-08, 3.55271e-15, 0, 0, 0 )
 radius = 2.0
 height = 40.0
 sides = 32
 material = ExtResource( 1 )
 
-[node name="Intake" type="CSGCylinder" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
+[node name="Intake" type="CSGCylinder" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
 transform = Transform( 1, -1.27379e-14, 5.68434e-14, 1.57486e-16, 1, 0, 0, 0, 1, 0, 0, -1.87 )
 operation = 2
 height = 4.0
 material = ExtResource( 8 )
 
-[node name="MLG_Bay" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
+[node name="MLG_Bay" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing"]
 transform = Transform( -7.43113e-08, -6.54393, 5.68434e-14, 1.70004, -2.86044e-07, 0, 0, 0, 1, -0.569283, 4.27251e-08, 0.892046 )
 operation = 2
 width = 6.0
@@ -140,135 +142,149 @@ height = 0.5
 depth = 1.0
 material = ExtResource( 11 )
 
-[node name="MLG_Bay_Fill" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing/MLG_Bay"]
+[node name="MLG_Bay_Fill" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Wing/MLG_Bay"]
 transform = Transform( 1, 1.10322e-15, 0, -3.79626e-15, 1, 0, -7.10543e-15, -3.55271e-15, 1, 1.13687e-13, 0, 0 )
 operation = 2
 width = 2.8
 
-[node name="Hinge_Aileron_L" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+[node name="Hinge_Aileron_L" type="Spatial" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -16, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 1 )
 
-[node name="Hinge_Aileron_R" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+[node name="Hinge_Aileron_R" type="Spatial" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 16, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 1 )
 
-[node name="Hinge_Flap_L" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+[node name="Hinge_Flap_L" type="Spatial" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.9, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 1 )
 
-[node name="Hinge_Flap_R" type="Spatial" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
+[node name="Hinge_Flap_R" type="Spatial" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 7.9, -2.045, 0 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.9 )
 height = 8.0
 material = ExtResource( 1 )
 
-[node name="WpnRack_1" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+[node name="WpnRack_1" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -3, 0.7, 0 )
 
-[node name="WpnRack_2" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+[node name="WpnRack_2" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -2, 0.7, 0 )
 
-[node name="WpnRack_3" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+[node name="WpnRack_3" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2, 0.7, 0 )
 
-[node name="WpnRack_4" parent="Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
+[node name="WpnRack_4" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid/Wing_Origin" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 3, 0.7, 0 )
 
-[node name="NLG_Bay" type="CSGBox" parent="Glider_CSG_Mesh/Fuse_Mid"]
+[node name="NLG_Bay" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Fuse_Mid"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -3, 0, 1, -1.31134e-07, 0.00378609, 3.04411, -0.606605 )
 operation = 2
 width = 0.5
 depth = 0.9
 material = ExtResource( 11 )
 
-[node name="Hinge_Elevator_L" type="Spatial" parent="Glider_CSG_Mesh"]
+[node name="Hinge_Elevator_L" type="Spatial" parent="Plane03/Glider_CSG_Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, 10.5 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Elevator_L"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Hinge_Elevator_L"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.515065 )
 height = 3.0
 depth = 1.0
 material = ExtResource( 1 )
 
-[node name="Hinge_Elevator_R" type="Spatial" parent="Glider_CSG_Mesh"]
+[node name="Hinge_Elevator_R" type="Spatial" parent="Plane03/Glider_CSG_Mesh"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, 10.5 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Elevator_R"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Hinge_Elevator_R"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.515 )
 height = 3.0
 depth = 1.0
 material = ExtResource( 1 )
 
-[node name="Hinge_Rudder" type="Spatial" parent="Glider_CSG_Mesh"]
+[node name="Hinge_Rudder" type="Spatial" parent="Plane03/Glider_CSG_Mesh"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 1.5, 11 )
 
-[node name="ControlSurface" type="CSGBox" parent="Glider_CSG_Mesh/Hinge_Rudder"]
+[node name="ControlSurface" type="CSGBox" parent="Plane03/Glider_CSG_Mesh/Hinge_Rudder"]
 transform = Transform( -2.18557e-09, -1, 0, 0.05, -4.37114e-08, 0, 0, 0, 1, 0.253772, -1.10928e-08, 0.489329 )
 height = 2.5
 depth = 1.0
 material = ExtResource( 1 )
 
-[node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
+[node name="CollisionShape_Fuse" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2 )
 shape = SubResource( 3 )
 
-[node name="CollisionShape_Wing" type="CollisionShape" parent="."]
+[node name="CollisionShape_Wing" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
 shape = SubResource( 4 )
 
-[node name="CollisionShape_Tail_H" type="CollisionShape" parent="."]
+[node name="CollisionShape_Tail_H" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.8 )
 shape = SubResource( 5 )
 
-[node name="CollisionShape_Tail_V" type="CollisionShape" parent="."]
+[node name="CollisionShape_Tail_V" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 10 )
 shape = SubResource( 6 )
 
-[node name="Engine" parent="." instance=ExtResource( 10 )]
+[node name="Engine" parent="Plane03" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 
-[node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.884391, -4.1317 )
-
-[node name="LG_AttachPoint_Main_L" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.80751, -0.832628, 0.878767 )
-
-[node name="LG_AttachPoint_Main_R" parent="." instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
-
-[node name="Camera_FPV" type="Camera" parent="."]
+[node name="Camera_FPV" type="Camera" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 environment = ExtResource( 12 )
 current = true
 far = 100000.0
 
-[node name="HUD" parent="Camera_FPV" instance=ExtResource( 13 )]
+[node name="HUD" parent="Plane03/Camera_FPV" instance=ExtResource( 13 )]
 
-[node name="Camera_Ext" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3, 20 )
+[node name="Camera_Ext" type="Camera" parent="Plane03"]
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, -1.57224, -2.41757 )
 environment = ExtResource( 12 )
 far = 100000.0
 
-[node name="Wheel_Collider_NLG" parent="." instance=ExtResource( 16 )]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -2.67853, -4.15171 )
+[node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.132 )
 
-[node name="Wheel_Collider_MLG_L" parent="." instance=ExtResource( 16 )]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -4.81295, -2.679, 0.892077 )
+[node name="LG_AttachPoint_Main_L" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.808, -0.833, 0.879 )
 
-[node name="Wheel_Collider_MLG_R" parent="." instance=ExtResource( 16 )]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 4.813, -2.679, 0.892 )
+[node name="LG_AttachPoint_Main_R" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
+
+[node name="LG_Joint_1" type="SliderJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.522524, -4.15376 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Nose")
+linear_limit/upper_distance = 0.0
+linear_limit/lower_distance = -0.1
+linear_limit/softness = 0.01
+angular_motion/softness = 0.01
+
+[node name="LG_Joint_2" type="SliderJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65292, -0.522524, 0.940576 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
+angular_limit/softness = 0.01
+angular_motion/softness = 0.01
+
+[node name="LG_Joint_3" type="SliderJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.653, -0.523, 0.941 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
+angular_limit/softness = 0.01
+angular_motion/softness = 0.01
