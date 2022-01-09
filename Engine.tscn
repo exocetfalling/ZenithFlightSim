@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Glider_Engine.tres" type="Material" id=1]
-[ext_resource path="res://Glider_Body.tres" type="Material" id=2]
+[ext_resource path="res://Glider_Metal.tres" type="Material" id=2]
 
 [node name="Engine" type="Spatial"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
