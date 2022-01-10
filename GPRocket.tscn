@@ -18,22 +18,20 @@ color = Color( 0.784314, 0.0666667, 0.0666667, 1 )
 hue_variation = 0.39
 
 [sub_resource type="SpatialMaterial" id=5]
-albedo_color = Color( 0.796078, 0.101961, 0.101961, 1 )
+flags_transparent = true
+albedo_color = Color( 0.576471, 0.541176, 0.541176, 1 )
 emission_enabled = true
 emission = Color( 1, 0.780392, 0, 1 )
 emission_energy = 1.0
 emission_operator = 0
 emission_on_uv2 = false
-distance_fade_mode = 2
-distance_fade_min_distance = 0.0
-distance_fade_max_distance = 10.0
 
 [sub_resource type="SphereMesh" id=6]
 material = SubResource( 5 )
 radius = 0.5
-height = 0.5
+height = 1.0
 
-[node name="RigidBody" type="RigidBody"]
+[node name="GPRocket" type="RigidBody"]
 mass = 50.0
 continuous_cd = true
 contacts_reported = 512
@@ -47,10 +45,11 @@ shape = SubResource( 1 )
 [node name="CSGCylinder" parent="." instance=ExtResource( 2 )]
 
 [node name="Particles" type="Particles" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 2 )
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1.40246 )
+visible = false
 cast_shadow = 0
 amount = 64
-lifetime = 16.0
+lifetime = 8.0
 process_material = SubResource( 4 )
 draw_pass_1 = SubResource( 6 )
 

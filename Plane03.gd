@@ -351,41 +351,23 @@ func get_input(delta):
 	# Braking input
 	input_braking = Input.get_action_strength("braking")
 	
+	# Weapons
 	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_1'.launched = true
+		$'../Wpn_Joint_1'.queue_free()
 		sta_1_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1/CSGBox/GPRocket_Mesh/").visible = false
-	
 	if (Input.is_action_just_pressed("fire_sta_2") && (sta_2_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_2'.launched = true
+		$'../Wpn_Joint_2'.queue_free()
 		sta_2_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2/CSGBox/GPRocket_Mesh/").visible = false
-
 	if (Input.is_action_just_pressed("fire_sta_3") && (sta_3_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_3'.launched = true
+		$'../Wpn_Joint_3'.queue_free()
 		sta_3_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3/CSGBox/GPRocket_Mesh/").visible = false
-
 	if (Input.is_action_just_pressed("fire_sta_4") && (sta_4_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_4'.launched = true
+		$'../Wpn_Joint_4'.queue_free()
 		sta_4_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4/CSGBox/GPRocket_Mesh/").visible = false
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
