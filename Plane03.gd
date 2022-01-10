@@ -436,10 +436,25 @@ func get_input(delta):
 
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
-	
-#	$LG_AttachPoint_Nose.rotation.x = (1 - gear_current) * -PI/2
-#	$LG_AttachPoint_Main_L.rotation.z = (1 - gear_current) * PI/2
-#	$LG_AttachPoint_Main_R.rotation.z = (1 - gear_current) * -PI/2
+
+	if (gear_input != gear_current):	
+		# NLG
+		$'../Joint_NLG_1'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_2'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_2'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		
+		# MLG_L
+		$'../Joint_MLG_L_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
+		
+		# MLG_R
+		$'../Joint_MLG_R_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
@@ -489,9 +504,9 @@ func _integrate_forces(_state):
 		else:
 			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
 	if (ground_contact_MLG_L == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3(-5, -3, 1))
+		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3(-5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
 	if (ground_contact_MLG_R == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3( 5, -3, 1))
+		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3( 5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Glider_Metal.tres" type="Material" id=1]
 [ext_resource path="res://Plane03.gd" type="Script" id=6]
@@ -8,51 +8,10 @@
 [ext_resource path="res://Glider_Gear_Bay.tres" type="Material" id=11]
 [ext_resource path="res://default_env.tres" type="Environment" id=12]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Gear_Retract.anim" type="Animation" id=14]
 [ext_resource path="res://WpnRack.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.03
-
-[sub_resource type="Animation" id=2]
-resource_name = "Gear_Extend"
-length = 10.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("../LG_AttachPoint_Nose:rotation_degrees")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( -90, 0, 0 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("../LG_AttachPoint_Main_L:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, 90 ), Vector3( 0, 0, 0 ) ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("../LG_AttachPoint_Main_R:rotation_degrees")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 10 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector3( 0, 0, -90 ), Vector3( 0, 0, 0 ) ]
-}
 
 [sub_resource type="CapsuleShape" id=3]
 margin = 0.001
@@ -81,10 +40,6 @@ can_sleep = false
 linear_damp = 0.0
 angular_damp = 2.0
 script = ExtResource( 6 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Plane03"]
-anims/Gear_Extend = SubResource( 2 )
-anims/Gear_Retract = ExtResource( 14 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="Plane03"]
 
@@ -253,7 +208,7 @@ far = 100000.0
 [node name="HUD" parent="Plane03/Camera_FPV" instance=ExtResource( 13 )]
 
 [node name="Camera_Ext" type="Camera" parent="Plane03"]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, -1.57224, -2.41757 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 8.90095 )
 environment = ExtResource( 12 )
 far = 100000.0
 
@@ -267,31 +222,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.808, -0.833, 0.879 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.808, -0.833, 0.879 )
 
 [node name="Joint_NLG_1" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -4.128 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, -4.128 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Nose")
 
 [node name="Joint_NLG_2" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, -4.128 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, -4.128 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Nose")
 
 [node name="Joint_MLG_L_1" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00271, -0.194647, 0.517256 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
 
 [node name="Joint_MLG_L_2" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.00271, -0.194647, 0.517256 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
 
 [node name="Joint_MLG_R_1" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.195, 0.517 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
 
 [node name="Joint_MLG_R_2" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.195, 0.517 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
