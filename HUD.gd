@@ -19,7 +19,7 @@ var display_ICAWS_mode = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "display_ICAWS_mode", "")
+#	DebugOverlay.stats.add_property(self, "display_ICAWS_mode", "")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
