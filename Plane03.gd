@@ -160,7 +160,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
-#	DebugOverlay.stats.add_property(self, "output_elevator", "round")
+#	DebugOverlay.stats.add_property(self, "ground_contact_NLG", "")
 	pass
 	
 # Lift coeffecient calculation function
@@ -275,18 +275,18 @@ func _process(delta):
 		input_elevator_trim = input_trim_pitch_min
 	
 	# NWS
-	if (get_node("Wheel_Collider_NLG/RayCast").is_colliding() == true):
+	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
 		ground_contact_NLG = true
 	else:
 		ground_contact_NLG = false
 
 	# MLG weight on wheels
-	if (get_node("Wheel_Collider_MLG_L/RayCast").is_colliding() == true):
+	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
 		ground_contact_MLG_L = true
 	else:
 		ground_contact_MLG_L = false
 
-	if (get_node("Wheel_Collider_MLG_R/RayCast").is_colliding() == true):
+	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
 		ground_contact_MLG_R = true
 	else:
 		ground_contact_MLG_R = false
@@ -351,41 +351,23 @@ func get_input(delta):
 	# Braking input
 	input_braking = Input.get_action_strength("braking")
 	
+	# Weapons
 	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_1'.launched = true
+		$'../Wpn_Joint_1'.queue_free()
 		sta_1_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_1/CSGBox/GPRocket_Mesh/").visible = false
-	
 	if (Input.is_action_just_pressed("fire_sta_2") && (sta_2_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_2'.launched = true
+		$'../Wpn_Joint_2'.queue_free()
 		sta_2_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_2/CSGBox/GPRocket_Mesh/").visible = false
-
 	if (Input.is_action_just_pressed("fire_sta_3") && (sta_3_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_3'.launched = true
+		$'../Wpn_Joint_3'.queue_free()
 		sta_3_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_3/CSGBox/GPRocket_Mesh/").visible = false
-
 	if (Input.is_action_just_pressed("fire_sta_4") && (sta_4_rdy == 1)):
-		var clone = rocket_scene.instance()
-		var scene_root = get_tree().root.get_children()[0]
+		$'../GPRocket_4'.launched = true
+		$'../Wpn_Joint_4'.queue_free()
 		sta_4_rdy = 0
-		scene_root.add_child(clone)
-		clone.global_transform = $Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4.global_transform
-		clone.linear_velocity = self.linear_velocity
-		get_node("Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/WpnRack_4/CSGBox/GPRocket_Mesh/").visible = false
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
@@ -436,10 +418,25 @@ func get_input(delta):
 
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
-	
-	$LG_AttachPoint_Nose.rotation.x = (1 - gear_current) * -PI/2
-	$LG_AttachPoint_Main_L.rotation.z = (1 - gear_current) * PI/2
-	$LG_AttachPoint_Main_R.rotation.z = (1 - gear_current) * -PI/2
+
+	if (gear_input != gear_current):	
+		# NLG
+		$'../Joint_NLG_1'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_2'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_2'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		
+		# MLG_L
+		$'../Joint_MLG_L_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
+		
+		# MLG_R
+		$'../Joint_MLG_R_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
@@ -485,13 +482,13 @@ func _integrate_forces(_state):
 	# Wheel forces
 	if (ground_contact_NLG == true):
 		if (abs(vel_local.z) < 10):
-			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight * vel_total, 0, 0)), Vector3(0, -3, -3))
+			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight/10 * vel_total, 0, 0)), Vector3(0, -3, -3))
 		else:
 			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
 	if (ground_contact_MLG_L == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3(-5, -3, 1))
+		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3(-5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
 	if (ground_contact_MLG_R == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * 25)), Vector3( 5, -3, 1))
+		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3( 5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
 		

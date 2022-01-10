@@ -13,7 +13,7 @@
 [ext_resource path="res://ICAWS_Mode.gd" type="Script" id=11]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.196078, 0.85098, 0.0588235, 1 )
+bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0, 0, 0, 1 )
@@ -517,7 +517,7 @@ TRIM - 0.0
 A/P - OFF
 [color=#11aafe]TAKEOFF[/color]
 FLAPS - 2
-TRIM - 0.2
+TRIM - 0.3
 MEMO - REVIEW
 V SPEEDS - CHECK
 [color=#11aafe]CLIMB[/color]
@@ -540,7 +540,7 @@ TRIM - 0.0
 A/P - OFF
 TAKEOFF
 FLAPS - 2
-TRIM - 0.2
+TRIM - 0.3
 MEMO - REVIEW
 V SPEEDS - CHECK
 CLIMB
