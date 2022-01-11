@@ -144,13 +144,15 @@ var gear_input = 1
 var deflection_rate = 1/(PI/6)
 var deflection_rate_flaps = 1/(2 * PI)
 
+var waypoint_data = Vector2.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
-	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_stall", "")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
@@ -161,6 +163,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "ground_contact_NLG", "")
+	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
 	pass
 	
 # Lift coeffecient calculation function
@@ -231,6 +234,14 @@ func interpolate_linear(value_current, value_target, rate, delta_time):
 	else:
 		return value_target
 
+func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
+	var vec_delta_pos = vec_pos_target - vec_pos_source
+	var vec_delta_pos_2d = Vector2(vec_delta_pos.x, vec_delta_pos.z)
+	var vec_delta_pos_2d_norm = vec_delta_pos_2d.normalized()
+	var bearing_to = fmod(-rad2deg(atan2(vec_delta_pos_2d_norm.x, vec_delta_pos_2d_norm.y)) + 360, 360)
+	var range_to = vec_delta_pos_2d.length()
+	return Vector2(bearing_to, range_to)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
@@ -290,7 +301,8 @@ func _process(delta):
 		ground_contact_MLG_R = true
 	else:
 		ground_contact_MLG_R = false
-
+	
+	waypoint_data = find_bearing_and_range_to(Vector3(0, 0, 0), self.translation)
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
