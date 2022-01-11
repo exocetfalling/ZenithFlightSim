@@ -15,3 +15,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 103.1, 934.882 )
 environment = ExtResource( 8 )
 
 [node name="Spatial" parent="." instance=ExtResource( 3 )]
+
+[node name="Beacon" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 106.765, 0 )

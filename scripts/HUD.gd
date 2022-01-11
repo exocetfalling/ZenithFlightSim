@@ -52,7 +52,7 @@ func _process(_delta):
 	get_node("Boresight").position = centre_position
 	
 	get_node("PFD/EADI_Image").rotation_degrees = -display_roll
-	get_node("PFD/EADI_Image").position.y = display_pitch / 90 * 260
+	get_node("PFD/EADI_Image").position.y = (display_pitch / 90 * 260) * cos(deg2rad(display_roll))
 	get_node("PFD/EADI_Image").position.x = get_node("PFD/EADI_Image").position.y * tan(deg2rad($'../../'.pfd_roll))
 	
 	get_node("PFD/Box_SPD").text = "%03d" % stepify($'../../'.pfd_spd, 1)

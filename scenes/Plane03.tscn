@@ -14,19 +14,19 @@
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.03
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=2]
 margin = 0.001
 height = 13.2845
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=3]
 margin = 0.001
 extents = Vector3( 20, 0.2, 2 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=4]
 margin = 0.001
 extents = Vector3( 4, 0.1, 1.2 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 margin = 0.001
 extents = Vector3( 0.1, 1.5, 1 )
 
@@ -171,19 +171,19 @@ material = ExtResource( 1 )
 
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.2 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape_Wing" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape_Tail_H" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.8 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape_Tail_V" type="CollisionShape" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 10 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Engine" parent="Plane03" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
