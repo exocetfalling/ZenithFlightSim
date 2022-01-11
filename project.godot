@@ -63,8 +63,8 @@ _global_script_class_icons={
 [application]
 
 config/name="ZenithFlightSim"
-run/main_scene="res://TestScene.tscn"
-config/icon="res://icon.png"
+run/main_scene="res://scenes/TestScene.tscn"
+config/icon="res://resources/icon.png"
 
 [autoload]
 
@@ -201,4 +201,4 @@ braking={
 
 quality/filters/msaa=1
 quality/filters/use_fxaa=true
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://resources/default_env.tres"

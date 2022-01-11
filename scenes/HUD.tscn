@@ -1,0 +1,684 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
+[ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/HorizonLine_Pos.gd" type="Script" id=3]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture" id=4]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=5]
+[ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=6]
+[ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=7]
+[ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=8]
+[ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=9]
+[ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=10]
+[ext_resource path="res://scripts/ICAWS_Mode.gd" type="Script" id=11]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+
+[node name="HUD" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text_Line_1" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+
+[node name="Speed_Data" type="HBoxContainer" parent="Text_Line_1"]
+margin_right = 1880.0
+margin_bottom = 1040.0
+
+[node name="Label" type="Label" parent="Text_Line_1/Speed_Data"]
+margin_right = 60.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "SPD: 	"
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Text_Line_1/Speed_Data"]
+margin_left = 64.0
+margin_right = 100.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+align = 1
+uppercase = true
+
+[node name="Alt_Data" type="HBoxContainer" parent="Text_Line_1"]
+margin_right = 1880.0
+margin_bottom = 1040.0
+alignment = 2
+
+[node name="Label" type="Label" parent="Text_Line_1/Alt_Data"]
+margin_left = 1780.0
+margin_right = 1840.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "alt: "
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Text_Line_1/Alt_Data"]
+margin_left = 1844.0
+margin_right = 1880.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+uppercase = true
+
+[node name="Heading_Data" type="HBoxContainer" parent="Text_Line_1"]
+margin_right = 1880.0
+margin_bottom = 1040.0
+alignment = 1
+
+[node name="Label" type="Label" parent="Text_Line_1/Heading_Data"]
+margin_left = 890.0
+margin_right = 950.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "HDG: "
+align = 1
+uppercase = true
+
+[node name="Variable" type="Label" parent="Text_Line_1/Heading_Data"]
+margin_left = 954.0
+margin_right = 990.0
+margin_bottom = 1040.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+uppercase = true
+
+[node name="Text_Line_2" type="MarginContainer" parent="."]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+custom_constants/margin_top = 100
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Flaps_Data" type="HBoxContainer" parent="Text_Line_2"]
+margin_top = 100.0
+margin_right = 124.0
+margin_bottom = 123.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Label" type="Label" parent="Text_Line_2/Flaps_Data"]
+margin_right = 84.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "flaps: "
+align = 1
+valign = 2
+uppercase = true
+
+[node name="Variable" type="Label" parent="Text_Line_2/Flaps_Data"]
+margin_left = 88.0
+margin_right = 124.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+valign = 2
+uppercase = true
+
+[node name="Gear_Data" type="HBoxContainer" parent="Text_Line_2"]
+margin_top = 100.0
+margin_right = 1880.0
+margin_bottom = 123.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Text_Line_2/Gear_Data"]
+margin_left = 1768.0
+margin_right = 1840.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "gear: "
+align = 1
+valign = 2
+uppercase = true
+
+[node name="Variable" type="Label" parent="Text_Line_2/Gear_Data"]
+margin_left = 1844.0
+margin_right = 1880.0
+margin_bottom = 23.0
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+text = "xxx"
+valign = 2
+uppercase = true
+
+[node name="HorizonLine_Pos" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 3 )
+
+[node name="Line2D" type="Line2D" parent="HorizonLine_Pos"]
+points = PoolVector2Array( -2000, 0, 2000, 0 )
+width = 5.0
+default_color = Color( 0.0862745, 0.905882, 0.137255, 1 )
+
+[node name="PFD" type="Light2D" parent="."]
+position = Vector2( 253.787, 819.428 )
+texture = ExtResource( 5 )
+mode = 3
+script = ExtResource( 7 )
+
+[node name="Wings" type="Line2D" parent="PFD"]
+z_index = 1
+points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+width = 2.0
+default_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+antialiased = true
+
+[node name="EADI_Fail_X" type="Line2D" parent="PFD"]
+light_mask = 2
+points = PoolVector2Array( 0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0 )
+texture = ExtResource( 8 )
+
+[node name="EADI_Image" type="Sprite" parent="PFD"]
+texture = ExtResource( 4 )
+script = ExtResource( 6 )
+
+[node name="EADI_Background" type="Sprite" parent="PFD"]
+show_behind_parent = true
+light_mask = 2
+position = Vector2( 20, -14 )
+texture = ExtResource( 9 )
+
+[node name="Box_SPD" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = -150.0
+margin_right = -110.0
+margin_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_SPD" type="Label" parent="PFD/Box_SPD"]
+light_mask = 2
+margin_left = -111.011
+margin_top = -38.4887
+margin_right = 149.989
+margin_bottom = 21.5113
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "spd"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_ALT" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = 300.0
+margin_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXXXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_ALT" type="Label" parent="PFD/Box_ALT"]
+light_mask = 2
+margin_left = 14.4796
+margin_top = -43.1606
+margin_right = 50.4796
+margin_bottom = 16.8394
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "ALT"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_HDG" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = -30.0
+margin_top = -125.0
+margin_right = 30.0
+margin_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_HDG" type="Label" parent="PFD/Box_HDG"]
+light_mask = 2
+margin_left = 64.0
+margin_top = -108.0
+margin_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "HDG
+"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_FLAPS" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = -160.0
+margin_top = 339.0
+margin_right = -100.0
+margin_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_FLAPS" type="Label" parent="PFD/Box_FLAPS"]
+light_mask = 2
+margin_left = -99.5017
+margin_top = -38.761
+margin_right = 161.498
+margin_bottom = 21.239
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "FLAPS"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_TRIM" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = 413.0
+margin_top = 339.0
+margin_right = -100.0
+margin_bottom = 25.5
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "X.XX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_TRIM" type="Label" parent="PFD/Box_TRIM"]
+light_mask = 2
+margin_left = -104.686
+margin_top = -36.761
+margin_right = 156.314
+margin_bottom = 23.239
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "trim"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AP" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = -18.7627
+margin_top = -248.485
+margin_right = 22.2373
+margin_bottom = 0.515259
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
+text = "CWS"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D_1" type="Line2D" parent="PFD"]
+light_mask = 2
+position = Vector2( -135.848, -180.246 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="Line2D_2" type="Line2D" parent="PFD"]
+light_mask = 2
+position = Vector2( -135.848, 137.754 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="ICAWS" type="Sprite" parent="."]
+position = Vector2( 1650.4, 814.895 )
+texture = ExtResource( 10 )
+
+[node name="Page_KEYS" type="RichTextLabel" parent="ICAWS"]
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=#11aafe]Engine:[/color]
+Throttle up: W
+Throttle down: S
+[color=#11aafe]Control surfaces (primary):[/color]
+Pitch up: K
+Pitch down: I
+Roll right: L
+Roll left: J
+Yaw right: O
+Yaw left: U
+[color=#11aafe]Control surfaces (secondary):[/color]
+Flaps up: A
+Flaps down: D
+Trim up: H
+Trim down: Y
+[color=#11aafe]Gear:[/color]
+Gear toggle: G
+[color=#11aafe]Autoflight:[/color]
+Autopilot toggle: Z 
+[color=#11aafe]Weapons: [/color]
+Station 1: 1
+Station 2: 2
+Station 3: 3
+Station 4: 4
+[color=#11aafe]Camera:[/color]
+Toggle: C"
+text = "Engine:
+Throttle up: W
+Throttle down: S
+Control surfaces (primary):
+Pitch up: K
+Pitch down: I
+Roll right: L
+Roll left: J
+Yaw right: O
+Yaw left: U
+Control surfaces (secondary):
+Flaps up: A
+Flaps down: D
+Trim up: H
+Trim down: Y
+Gear:
+Gear toggle: G
+Autoflight:
+Autopilot toggle: Z 
+Weapons: 
+Station 1: 1
+Station 2: 2
+Station 3: 3
+Station 4: 4
+Camera:
+Toggle: C"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page_CHECKLIST" type="RichTextLabel" parent="ICAWS"]
+visible = false
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=#11aafe]PREFLIGHT[/color]
+GEAR - DN
+FLAPS - 0
+TRIM - 0.0
+A/P - OFF
+[color=#11aafe]TAKEOFF[/color]
+FLAPS - 2
+TRIM - 0.3
+MEMO - REVIEW
+V SPEEDS - CHECK
+[color=#11aafe]CLIMB[/color]
+GEAR - UP
+FLAPS - 0
+[color=#11aafe]CRUISE[/color]
+A/P - AS RQRD
+[color=#11aafe]DESCENT[/color]
+A/P - OFF
+MEMO - REVIEW
+V SPEEDS - CHECK
+TRIM - 0.4 / AS RQRD
+[color=#11aafe]LANDING[/color]
+FLAPS - 4
+GEAR - DN"
+text = "PREFLIGHT
+GEAR - DN
+FLAPS - 0
+TRIM - 0.0
+A/P - OFF
+TAKEOFF
+FLAPS - 2
+TRIM - 0.3
+MEMO - REVIEW
+V SPEEDS - CHECK
+CLIMB
+GEAR - UP
+FLAPS - 0
+CRUISE
+A/P - AS RQRD
+DESCENT
+A/P - OFF
+MEMO - REVIEW
+V SPEEDS - CHECK
+TRIM - 0.4 / AS RQRD
+LANDING
+FLAPS - 4
+GEAR - DN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Page_MEMO" type="RichTextLabel" parent="ICAWS"]
+visible = false
+margin_left = -201.0
+margin_top = -119.0
+margin_right = 205.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+bbcode_text = "[color=#11aafe]Flying:[/color]
+See left MFD for PFD with flight data. All units are SI units for now. 
+Rotate at VR with flaps as per checklist, land at VAPP with flaps as per checklist. Do not exceed VNE or fly below VS.
+
+[color=#11aafe]V Speeds:[/color]
+V1: 50
+VR: 60
+V2: 70
+
+VAPP: 60
+
+VS: 45
+VNE: 150
+"
+text = "Flying:
+See left MFD for PFD with flight data. All units are SI units for now. 
+Rotate at VR with flaps as per checklist, land at VAPP with flaps as per checklist. Do not exceed VNE or fly below VS.
+
+V Speeds:
+V1: 50
+VR: 60
+V2: 70
+
+VAPP: 60
+
+VS: 45
+VNE: 150
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gear_Indicator" type="Line2D" parent="ICAWS"]
+light_mask = 4
+position = Vector2( 0, 150 )
+points = PoolVector2Array( -50, 0, 50, 0, 0, 50, -50, 0 )
+default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Gear_Status" type="Label" parent="ICAWS"]
+margin_left = -62.7023
+margin_top = 103.181
+margin_right = 69.2977
+margin_bottom = 126.181
+custom_fonts/font = ExtResource( 2 )
+text = "gear dn"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D_1" type="Line2D" parent="ICAWS"]
+light_mask = 2
+position = Vector2( -151.597, -139.343 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="Line2D_2" type="Line2D" parent="ICAWS"]
+light_mask = 2
+position = Vector2( -151.597, 93.6566 )
+points = PoolVector2Array( 0, 0, 300, 0 )
+width = 5.0
+default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+
+[node name="ICAWS_Mode" type="MenuButton" parent="ICAWS"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -276.225
+margin_top = -231.122
+margin_right = -216.225
+margin_bottom = -202.122
+custom_fonts/font = ExtResource( 2 )
+text = "MENU"
+items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false ]
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Thrust_Indicator" type="ProgressBar" parent="ICAWS"]
+margin_left = -196.278
+margin_top = -201.492
+margin_right = -96.2782
+margin_bottom = -176.492
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ICAWS/Thrust_Indicator"]
+margin_left = 14.0
+margin_top = -27.0
+margin_right = 86.0
+margin_bottom = -4.0
+custom_fonts/font = ExtResource( 2 )
+text = "THRUST"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Boresight" type="Line2D" parent="."]
+light_mask = 2
+position = Vector2( 960, 540 )
+points = PoolVector2Array( 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0, 0, -50, 0, 0 )
+width = 5.0
+default_color = Color( 0.117647, 0.8, 0.203922, 1 )

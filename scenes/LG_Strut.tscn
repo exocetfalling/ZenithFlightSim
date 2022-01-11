@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/Strut.tres" type="Material" id=1]
+[ext_resource path="res://resources/Wheel.tres" type="Material" id=2]
+
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.06
+
+[sub_resource type="CylinderShape" id=2]
+margin = 0.001
+radius = 0.5
+height = 0.25
+
+[node name="LG_AttachPoint" type="RigidBody"]
+mass = 100.0
+physics_material_override = SubResource( 1 )
+linear_damp = 0.0
+
+[node name="Strut" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.972696, 0 )
+radius = 0.25
+height = 2.0
+sides = 16
+material = ExtResource( 1 )
+
+[node name="CSGBox" type="CSGBox" parent="Strut"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.475735, 0 )
+operation = 2
+width = 0.25
+height = 1.0
+depth = 1.0
+material = ExtResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Strut"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.864973, 0 )
+radius = 0.5
+height = 0.25
+sides = 32
+material = ExtResource( 2 )
+
+[node name="CSGSphere" type="CSGSphere" parent="Strut"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.984471, 0 )
+radius = 0.25
+radial_segments = 16
+rings = 16
+material = ExtResource( 1 )
+
+[node name="Wheel" type="CollisionShape" parent="."]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -1.82628, 0 )
+shape = SubResource( 2 )
+
+[node name="RayCast" type="RayCast" parent="Wheel"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.55, 0 )
+collide_with_areas = true
