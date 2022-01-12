@@ -10,17 +10,15 @@ var display_trim = 0
 var display_gear = 0
 var display_throttle = 0
 var display_ap = 0
-var display_ICAWS_mode = 0
-var display_NAV1_brg = 0
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var display_MFD_mode = 0
+var display_nav_brg = 0
+var display_nav_range = 0
+var display_nav_waypoint = 0
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	DebugOverlay.stats.add_property(self, "display_ICAWS_mode", "")
+#	DebugOverlay.stats.add_property(self, "display_MFD_mode", "")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,8 +40,10 @@ func _process(_delta):
 	display_throttle = $'../../'.throttle_input
 	display_ap = $'../../'.autopilot_on
 	
-	display_ICAWS_mode = $ICAWS/ICAWS_Mode.item_pressed
-	display_NAV1_brg = $'../../'.waypoint_data.x
+	display_MFD_mode = $MFD/MFD_Mode.item_pressed
+	display_nav_brg = $'../../'.waypoint_data.x
+	display_nav_range = $'../../'.waypoint_data.y
+	display_nav_waypoint = $MFD/Page_NAV/Waypoint_Select.item_pressed
 	
 	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify($'../../'.pfd_spd, 1)
 	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify($'../../'.pfd_alt, 1)
@@ -80,30 +80,32 @@ func _process(_delta):
 	else:
 		get_node("PFD/AP").visible = false
 	
-	# ICAWS
-	get_node("ICAWS/Thrust_Indicator").value = display_throttle
+	# MFD
+	get_node("MFD/Thrust_Indicator").value = display_throttle
 	
-	if (display_ICAWS_mode == "KEYS"):
-		$ICAWS/Page_KEYS.visible = true
-		$ICAWS/Page_CHECKLIST.visible = false
-		$ICAWS/Page_MEMO.visible = false
-		$ICAWS/Page_NAV.visible = false
-	if (display_ICAWS_mode == "CHECKLIST"):
-		$ICAWS/Page_KEYS.visible = false
-		$ICAWS/Page_CHECKLIST.visible = true
-		$ICAWS/Page_MEMO.visible = false
-		$ICAWS/Page_NAV.visible = false
-	if (display_ICAWS_mode == "MEMO"):
-		$ICAWS/Page_KEYS.visible = false
-		$ICAWS/Page_CHECKLIST.visible = false
-		$ICAWS/Page_MEMO.visible = true
-		$ICAWS/Page_NAV.visible = false
-	if (display_ICAWS_mode == "NAV"):
-		$ICAWS/Page_KEYS.visible = false
-		$ICAWS/Page_CHECKLIST.visible = false
-		$ICAWS/Page_MEMO.visible = false
-		$ICAWS/Page_NAV.visible = true
+	if (display_MFD_mode == "KEYS"):
+		$MFD/Page_KEYS.visible = true
+		$MFD/Page_CHECKLIST.visible = false
+		$MFD/Page_MEMO.visible = false
+		$MFD/Page_NAV.visible = false
+	if (display_MFD_mode == "CHECKLIST"):
+		$MFD/Page_KEYS.visible = false
+		$MFD/Page_CHECKLIST.visible = true
+		$MFD/Page_MEMO.visible = false
+		$MFD/Page_NAV.visible = false
+	if (display_MFD_mode == "MEMO"):
+		$MFD/Page_KEYS.visible = false
+		$MFD/Page_CHECKLIST.visible = false
+		$MFD/Page_MEMO.visible = true
+		$MFD/Page_NAV.visible = false
+	if (display_MFD_mode == "NAV"):
+		$MFD/Page_KEYS.visible = false
+		$MFD/Page_CHECKLIST.visible = false
+		$MFD/Page_MEMO.visible = false
+		$MFD/Page_NAV.visible = true
 	
 	# ND
-	get_node("ICAWS/Page_NAV/ND_Rose").rotation_degrees = - display_hdg
-	get_node("ICAWS/Page_NAV/ND_Rose/NAV1_Pointer").rotation_degrees = display_NAV1_brg
+	get_node("MFD/Page_NAV/ND_Rose").rotation_degrees = - display_hdg
+	get_node("MFD/Page_NAV/ND_Rose/NAV1_Pointer").rotation_degrees = display_nav_brg
+	get_node("MFD/Page_NAV/Waypoint_ID").text = display_nav_waypoint
+	get_node("MFD/Page_NAV/Waypoint_Dist").text = ("%0.1f KM" % [display_nav_range/1000])

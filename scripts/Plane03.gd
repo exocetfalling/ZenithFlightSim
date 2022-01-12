@@ -145,6 +145,10 @@ var deflection_rate = 1/(PI/6)
 var deflection_rate_flaps = 1/(2 * PI)
 
 var waypoint_data = Vector2.ZERO
+var wpt_current_coordinates = Vector3.ZERO
+var wpt_01_coodinates = Vector3(0, 0, 0)
+var wpt_02_coodinates = Vector3(2000, 0, 5000)
+var wpt_03_coodinates = Vector3(0, 0, -5000)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -162,8 +166,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
-#	DebugOverlay.stats.add_property(self, "ground_contact_NLG", "")
-	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
+#	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
+#	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
 	pass
 	
 # Lift coeffecient calculation function
@@ -340,7 +344,16 @@ func _process(delta):
 	else:
 		ground_contact_MLG_R = false
 	
-	waypoint_data = find_bearing_and_range_to(self.translation, Vector3(0, 0, 0))
+	# Waypoints
+	waypoint_data = find_bearing_and_range_to(self.translation, wpt_current_coordinates)
+	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
+		wpt_current_coordinates = wpt_01_coodinates
+	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
+		wpt_current_coordinates = wpt_02_coodinates
+	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
+		wpt_current_coordinates = wpt_03_coodinates
+	
+	
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
@@ -505,7 +518,7 @@ func _integrate_forces(_state):
 	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/400 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -weight/300 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
@@ -10,9 +10,10 @@
 [ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=8]
 [ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=9]
 [ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=10]
-[ext_resource path="res://scripts/ICAWS_Mode.gd" type="Script" id=11]
+[ext_resource path="res://scripts/MFD_Mode.gd" type="Script" id=11]
 [ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture" id=12]
 [ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture" id=13]
+[ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
@@ -421,15 +422,15 @@ __meta__ = {
 
 [node name="Line2D_1" type="Line2D" parent="PFD"]
 light_mask = 2
-position = Vector2( -135.848, -180.246 )
-points = PoolVector2Array( 0, 0, 300, 0 )
+position = Vector2( -203.848, -180.246 )
+points = PoolVector2Array( 0, 0, 450, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 
 [node name="Line2D_2" type="Line2D" parent="PFD"]
 light_mask = 2
-position = Vector2( -135.848, 137.754 )
-points = PoolVector2Array( 0, 0, 300, 0 )
+position = Vector2( -206.848, 137.754 )
+points = PoolVector2Array( 0, 0, 450, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 
@@ -457,11 +458,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ICAWS" type="Sprite" parent="."]
+[node name="MFD" type="Sprite" parent="."]
 position = Vector2( 1650.4, 814.895 )
 texture = ExtResource( 10 )
 
-[node name="Page_KEYS" type="RichTextLabel" parent="ICAWS"]
+[node name="Page_KEYS" type="RichTextLabel" parent="MFD"]
+visible = false
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
@@ -526,7 +528,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Page_CHECKLIST" type="RichTextLabel" parent="ICAWS"]
+[node name="Page_CHECKLIST" type="RichTextLabel" parent="MFD"]
 visible = false
 margin_left = -201.0
 margin_top = -119.0
@@ -586,7 +588,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Page_MEMO" type="RichTextLabel" parent="ICAWS"]
+[node name="Page_MEMO" type="RichTextLabel" parent="MFD"]
 visible = false
 margin_left = -201.0
 margin_top = -119.0
@@ -628,14 +630,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Line2D_1" type="Line2D" parent="ICAWS"]
+[node name="Line2D_1" type="Line2D" parent="MFD"]
 light_mask = 2
-position = Vector2( -151.597, -139.343 )
-points = PoolVector2Array( 0, 0, 300, 0 )
+position = Vector2( -225.597, -139.343 )
+points = PoolVector2Array( 0, 0, 450, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 
-[node name="ICAWS_Mode" type="MenuButton" parent="ICAWS"]
+[node name="MFD_Mode" type="MenuButton" parent="MFD"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -276.225
@@ -644,13 +646,14 @@ margin_right = -216.225
 margin_bottom = -202.122
 custom_fonts/font = ExtResource( 2 )
 text = "MENU"
+flat = false
 items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false, "NAV", null, 0, false, false, 3, 0, null, "", false ]
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Thrust_Indicator" type="ProgressBar" parent="ICAWS"]
+[node name="Thrust_Indicator" type="ProgressBar" parent="MFD"]
 margin_left = -196.278
 margin_top = -201.492
 margin_right = -96.2782
@@ -662,7 +665,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="ICAWS/Thrust_Indicator"]
+[node name="Label" type="Label" parent="MFD/Thrust_Indicator"]
 margin_left = 14.0
 margin_top = -27.0
 margin_right = 86.0
@@ -673,35 +676,88 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Page_NAV" type="Light2D" parent="ICAWS"]
-visible = false
+[node name="Page_NAV" type="Light2D" parent="MFD"]
 light_mask = 4
 position = Vector2( 0, 40 )
 texture = ExtResource( 13 )
 mode = 3
 range_item_cull_mask = 4
 
-[node name="ND_Rose" type="Sprite" parent="ICAWS/Page_NAV"]
+[node name="ND_Rose" type="Sprite" parent="MFD/Page_NAV"]
 light_mask = 4
 position = Vector2( 0, 94 )
 scale = Vector2( 1.6, 1.6 )
 texture = ExtResource( 12 )
 
-[node name="NAV1_Pointer" type="Line2D" parent="ICAWS/Page_NAV/ND_Rose"]
+[node name="NAV1_Pointer" type="Line2D" parent="MFD/Page_NAV/ND_Rose"]
 light_mask = 4
 scale = Vector2( 0.625, 0.625 )
-points = PoolVector2Array( 0, 150, 0, -150, 20, -130, 0, -150, -20, -130, 0, -150 )
-width = 2.0
-default_color = Color( 0.47451, 0.890196, 0.160784, 1 )
+points = PoolVector2Array( 0, -150, -10, -150, 0, -170, 10, -150, 0, -150, 0, 150, 10, 150, 10, 170, 0, 160, -10, 170, -10, 170, -10, 150, 0, 150, 0, -150 )
+width = 5.0
+default_color = Color( 0.670588, 0.670588, 0.670588, 1 )
 
-[node name="HDG_Pointer" type="Line2D" parent="ICAWS/Page_NAV"]
+[node name="HDG_Pointer" type="Line2D" parent="MFD/Page_NAV"]
 position = Vector2( 0, -160 )
 points = PoolVector2Array( -5, 0, 5, 0, 0, 10, -5, 0 )
-width = 5.0
+width = 2.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
+
+[node name="Waypoint_Select" type="MenuButton" parent="MFD/Page_NAV"]
+margin_left = -245.947
+margin_top = -166.729
+margin_right = -149.947
+margin_bottom = -137.729
+custom_fonts/font = ExtResource( 2 )
+text = "WPT SEL"
+flat = false
+items = [ "WPT 01", null, 0, false, false, 0, 0, null, "", false, "WPT 02", null, 0, false, false, 1, 0, null, "", false, "WPT 03", null, 0, false, false, 2, 0, null, "", false ]
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Waypoint_ID" type="Label" parent="MFD/Page_NAV"]
+margin_left = 161.518
+margin_top = -162.878
+margin_right = 233.518
+margin_bottom = -139.878
+custom_fonts/font = ExtResource( 2 )
+text = "WPT XX"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Waypoint_Dist" type="Label" parent="MFD/Page_NAV"]
+margin_left = 162.148
+margin_top = -132.64
+margin_right = 234.148
+margin_bottom = -109.64
+custom_fonts/font = ExtResource( 2 )
+text = "XXX KM"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Waypoint_ETA" type="Label" parent="MFD/Page_NAV"]
+visible = false
+margin_left = 163.408
+margin_top = -104.922
+margin_right = 235.408
+margin_bottom = -81.9219
+custom_fonts/font = ExtResource( 2 )
+text = "XX.XXZ"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Boresight" type="Line2D" parent="."]
 light_mask = 2
