@@ -33,7 +33,7 @@ extents = Vector3( 0.1, 1.5, 1 )
 [node name="Plane" type="Spatial"]
 
 [node name="Plane03" type="RigidBody" parent="."]
-mass = 2000.0
+mass = 1500.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 contacts_reported = 32

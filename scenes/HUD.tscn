@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=9]
 [ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=10]
 [ext_resource path="res://scripts/ICAWS_Mode.gd" type="Script" id=11]
+[ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture" id=12]
+[ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture" id=13]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
@@ -431,6 +433,30 @@ points = PoolVector2Array( 0, 0, 300, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
 
+[node name="Gear_Indicator" type="Line2D" parent="PFD"]
+light_mask = 4
+position = Vector2( 3.17479, 188.494 )
+points = PoolVector2Array( -25, 0, 25, 0, 0, 25, -25, 0 )
+width = 5.0
+default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Gear_Status" type="Label" parent="PFD"]
+light_mask = 2
+margin_left = -58.7338
+margin_top = 149.612
+margin_right = 73.2662
+margin_bottom = 172.612
+custom_fonts/font = ExtResource( 2 )
+text = "gear dn"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ICAWS" type="Sprite" parent="."]
 position = Vector2( 1650.4, 814.895 )
 texture = ExtResource( 10 )
@@ -439,7 +465,7 @@ texture = ExtResource( 10 )
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
-margin_bottom = 50.0
+margin_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
@@ -505,7 +531,7 @@ visible = false
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
-margin_bottom = 50.0
+margin_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
@@ -565,7 +591,7 @@ visible = false
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
-margin_bottom = 50.0
+margin_bottom = 196.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/normal_font = ExtResource( 2 )
@@ -602,38 +628,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gear_Indicator" type="Line2D" parent="ICAWS"]
-light_mask = 4
-position = Vector2( 0, 150 )
-points = PoolVector2Array( -50, 0, 50, 0, 0, 50, -50, 0 )
-default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Gear_Status" type="Label" parent="ICAWS"]
-margin_left = -62.7023
-margin_top = 103.181
-margin_right = 69.2977
-margin_bottom = 126.181
-custom_fonts/font = ExtResource( 2 )
-text = "gear dn"
-align = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Line2D_1" type="Line2D" parent="ICAWS"]
 light_mask = 2
 position = Vector2( -151.597, -139.343 )
-points = PoolVector2Array( 0, 0, 300, 0 )
-width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
-
-[node name="Line2D_2" type="Line2D" parent="ICAWS"]
-light_mask = 2
-position = Vector2( -151.597, 93.6566 )
 points = PoolVector2Array( 0, 0, 300, 0 )
 width = 5.0
 default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
@@ -647,7 +644,7 @@ margin_right = -216.225
 margin_bottom = -202.122
 custom_fonts/font = ExtResource( 2 )
 text = "MENU"
-items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false ]
+items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false, "NAV", null, 0, false, false, 3, 0, null, "", false ]
 script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -675,6 +672,36 @@ text = "THRUST"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Page_NAV" type="Light2D" parent="ICAWS"]
+visible = false
+light_mask = 4
+position = Vector2( 0, 40 )
+texture = ExtResource( 13 )
+mode = 3
+range_item_cull_mask = 4
+
+[node name="ND_Rose" type="Sprite" parent="ICAWS/Page_NAV"]
+light_mask = 4
+position = Vector2( 0, 94 )
+scale = Vector2( 1.6, 1.6 )
+texture = ExtResource( 12 )
+
+[node name="NAV1_Pointer" type="Line2D" parent="ICAWS/Page_NAV/ND_Rose"]
+light_mask = 4
+scale = Vector2( 0.625, 0.625 )
+points = PoolVector2Array( 0, 150, 0, -150, 20, -130, 0, -150, -20, -130, 0, -150 )
+width = 2.0
+default_color = Color( 0.47451, 0.890196, 0.160784, 1 )
+
+[node name="HDG_Pointer" type="Line2D" parent="ICAWS/Page_NAV"]
+position = Vector2( 0, -160 )
+points = PoolVector2Array( -5, 0, 5, 0, 0, 10, -5, 0 )
+width = 5.0
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
 
 [node name="Boresight" type="Line2D" parent="."]
 light_mask = 2

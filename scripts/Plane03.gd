@@ -234,6 +234,44 @@ func interpolate_linear(value_current, value_target, rate, delta_time):
 	else:
 		return value_target
 
+func calc_braking_force(vel_fwd, weight_craft, commanded_braking):
+	var x1 = -200
+	var y1 = -1
+	var x2 = -5
+	var y2 = -1
+	var x3 = 5
+	var y3 = 1
+	var x4 = 200
+	var y4 = 1
+
+	var a = (y2 - y1) / (x2 - x1)
+	var b = (y3 - y2) / (x3 - x2)
+	var c = (y4 - y3) / (x4 - x3)
+	
+	var braking_coeff
+	var braking_force
+	
+	if (vel_fwd < x1):
+		braking_coeff = (a * (vel_fwd + 2 * PI - x1) + y1)
+		
+	elif ((vel_fwd > x1) and (vel_fwd <= x2)):
+		braking_coeff = (a * (vel_fwd - x1) + y1)
+	
+	elif ((vel_fwd > x2) and (vel_fwd <= x3)):
+		braking_coeff = (b * (vel_fwd - x2) + y2)
+
+	elif ((vel_fwd > x3) and (vel_fwd <= x4)):
+		braking_coeff = (c * (vel_fwd - x3) + y3)
+	
+	elif (vel_fwd > x4):
+		braking_coeff = (a * (vel_fwd - 2 * PI - x1) + y1)
+	
+	else:
+		braking_coeff = 0
+	
+	braking_force = braking_coeff * weight_craft * input_braking
+	return braking_force
+
 func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var vec_delta_pos = vec_pos_target - vec_pos_source
 	var vec_delta_pos_2d = Vector2(vec_delta_pos.x, vec_delta_pos.z)
@@ -302,7 +340,7 @@ func _process(delta):
 	else:
 		ground_contact_MLG_R = false
 	
-	waypoint_data = find_bearing_and_range_to(Vector3(0, 0, 0), self.translation)
+	waypoint_data = find_bearing_and_range_to(self.translation, Vector3(0, 0, 0))
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
@@ -467,7 +505,7 @@ func _integrate_forces(_state):
 	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -80 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -weight/400 * throttle_input), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)
@@ -498,9 +536,9 @@ func _integrate_forces(_state):
 		else:
 			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
 	if (ground_contact_MLG_L == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3(-5, -3, 1))
+		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3(-5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
 	if (ground_contact_MLG_R == true):
-		add_force_local((Vector3(0, 0, input_braking * vel_local.z * weight/10)), Vector3( 5, -3, 1))
+		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3( 5, -3, 1))
 		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
 		
