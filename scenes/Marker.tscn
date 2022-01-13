@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/HUD/Marker.bmp" type="Texture" id=1]
+
+[node name="Marker" type="Spatial"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+layers = 2
+pixel_size = 0.5
+billboard = 1
+texture = ExtResource( 1 )
