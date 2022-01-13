@@ -81,7 +81,7 @@ var area_aileron = 3
 var area_elevator = 3
 var area_rudder = 3
 var area_flaps = 3
-var area_gear = 5
+var area_gear = 2
 
 # forces in N
 var force_lift_wing = Vector3.ZERO
@@ -208,7 +208,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_induced_coeff(angle_rad):
-	return abs(0.2 * sin(angle_rad)) 
+	return abs(0.1 * sin(angle_rad)) 
 
 func _calc_drag_parasite_coeff(angle_rad):
 	return abs(0.02 * cos(angle_rad))

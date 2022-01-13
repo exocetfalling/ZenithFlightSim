@@ -8,6 +8,7 @@
 [node name="HUD_Point" type="Spatial"]
 
 [node name="FlightPathVector" type="Sprite3D" parent="."]
+layers = 2
 material_override = ExtResource( 3 )
 pixel_size = 1.0
 texture = ExtResource( 2 )
