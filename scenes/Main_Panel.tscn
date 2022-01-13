@@ -1,7 +1,6 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
-[ext_resource path="res://scripts/HorizonLine_Pos.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=3]
 [ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=4]
 [ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=5]
@@ -191,15 +190,6 @@ custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
 text = "xxx"
 valign = 2
 uppercase = true
-
-[node name="HorizonLine_Pos" type="Node2D" parent="."]
-visible = false
-script = ExtResource( 2 )
-
-[node name="Line2D" type="Line2D" parent="HorizonLine_Pos"]
-points = PoolVector2Array( -2000, 0, 2000, 0 )
-width = 5.0
-default_color = Color( 0.0862745, 0.905882, 0.137255, 1 )
 
 [node name="PFD" type="Light2D" parent="."]
 position = Vector2( 253.787, 819.428 )
@@ -760,8 +750,10 @@ __meta__ = {
 }
 
 [node name="Boresight" type="Line2D" parent="."]
-light_mask = 2
 position = Vector2( 960, 540 )
-points = PoolVector2Array( 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0, 0, -50, 0, 0 )
-width = 5.0
-default_color = Color( 0.117647, 0.8, 0.203922, 1 )
+scale = Vector2( 2, 2 )
+z_index = 1
+points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+width = 2.0
+default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
+antialiased = true
