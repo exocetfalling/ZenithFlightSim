@@ -40,7 +40,7 @@ continuous_cd = true
 contacts_reported = 32
 can_sleep = false
 linear_damp = 0.0
-angular_damp = 2.0
+angular_damp = 3.0
 script = ExtResource( 6 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="Plane03"]
