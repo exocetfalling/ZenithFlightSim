@@ -239,36 +239,14 @@ func interpolate_linear(value_current, value_target, rate, delta_time):
 		return value_target
 
 func calc_braking_force(vel_fwd, weight_craft, commanded_braking):
-	var x1 = -200
-	var y1 = -1
-	var x2 = -5
-	var y2 = -1
-	var x3 = 5
-	var y3 = 1
-	var x4 = 200
-	var y4 = 1
-
-	var a = (y2 - y1) / (x2 - x1)
-	var b = (y3 - y2) / (x3 - x2)
-	var c = (y4 - y3) / (x4 - x3)
-	
 	var braking_coeff
 	var braking_force
 	
-	if (vel_fwd < x1):
-		braking_coeff = (a * (vel_fwd + 2 * PI - x1) + y1)
-		
-	elif ((vel_fwd > x1) and (vel_fwd <= x2)):
-		braking_coeff = (a * (vel_fwd - x1) + y1)
-	
-	elif ((vel_fwd > x2) and (vel_fwd <= x3)):
-		braking_coeff = (b * (vel_fwd - x2) + y2)
+	if (vel_fwd > 0):
+		braking_coeff = 0.5
 
-	elif ((vel_fwd > x3) and (vel_fwd <= x4)):
-		braking_coeff = (c * (vel_fwd - x3) + y3)
-	
-	elif (vel_fwd > x4):
-		braking_coeff = (a * (vel_fwd - 2 * PI - x1) + y1)
+	elif (vel_fwd < 0):
+		braking_coeff = -0.5
 	
 	else:
 		braking_coeff = 0
@@ -301,7 +279,7 @@ func _process(delta):
 	pfd_pitch = rotation_degrees.x
 	pfd_roll = -rotation_degrees.z
 	
-	if (angle_alpha_deg > 11):
+	if (angle_alpha_deg > 15):
 		pfd_stall = true
 	else:
 		pfd_stall = false
