@@ -1,6 +1,6 @@
 extends RigidBody
 
-var HUD_active = true
+var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
 #signal flight_data
 # Declare member variables here. Examples:
@@ -27,6 +27,9 @@ var pfd_hdg = 0
 
 var pfd_pitch = 0
 var pfd_roll = 0
+
+var pfd_alpha = 0
+var pfd_beta = 0
 
 var pfd_stall = false
 
@@ -279,6 +282,9 @@ func _process(delta):
 	pfd_pitch = rotation_degrees.x
 	pfd_roll = -rotation_degrees.z
 	
+	pfd_alpha = angle_alpha_deg
+	pfd_beta = angle_beta_deg
+	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
 	else:
@@ -324,13 +330,19 @@ func _process(delta):
 	
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.translation, wpt_current_coordinates)
-	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
+	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
 		wpt_current_coordinates = wpt_01_coodinates
-	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
+	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
 		wpt_current_coordinates = wpt_02_coodinates
-	if(get_node("Camera_FPV/HUD/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
+	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
 		wpt_current_coordinates = wpt_03_coodinates
 	
+	# HUD
+	get_node("HUD_Point/HUD_Ladder").rotation_degrees.z = pfd_roll
+	get_node("HUD_Point/HUD_Ladder").translation.y = -(pfd_pitch / 90 * 260) * cos(deg2rad(pfd_roll))
+	get_node("HUD_Point/HUD_Ladder").translation.x = get_node("HUD_Point/HUD_Ladder").translation.y * -1 * tan(deg2rad(pfd_roll))
+	get_node("HUD_Point/FlightPathVector").translation.y = -(pfd_alpha / 90 * 260)
+	get_node("HUD_Point/FlightPathVector").translation.x = -(pfd_beta / 90 * 260)
 	
 func get_input(delta):
 	# Throttle input
@@ -345,10 +357,10 @@ func get_input(delta):
 	if (Input.is_action_just_pressed("camera_toggle")):
 		if ($Camera_Ext.current == false):
 			$Camera_Ext.current = true
-			HUD_active = false
+			Main_Panel_active = false
 		else:
 			$Camera_FPV.current = true
-			HUD_active = true
+			Main_Panel_active = true
 
 	# Roll input
 	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
