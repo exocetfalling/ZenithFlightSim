@@ -302,6 +302,20 @@ func _process(delta):
 	pfd_alpha = angle_alpha_deg
 	pfd_beta = angle_beta_deg
 	
+	# Panel updates
+	get_node("Camera_FPV/Main_Panel").display_pitch = pfd_pitch
+	get_node("Camera_FPV/Main_Panel").display_roll = pfd_roll
+	get_node("Camera_FPV/Main_Panel").display_spd = pfd_spd
+	get_node("Camera_FPV/Main_Panel").display_hdg = pfd_hdg
+	get_node("Camera_FPV/Main_Panel").display_alt = pfd_alt
+	get_node("Camera_FPV/Main_Panel").display_flaps = input_flaps * 4
+	get_node("Camera_FPV/Main_Panel").display_trim = output_elevator_trim
+	get_node("Camera_FPV/Main_Panel").display_gear = gear_current
+	get_node("Camera_FPV/Main_Panel").display_throttle = throttle_input
+	get_node("Camera_FPV/Main_Panel").display_ap = autopilot_on
+	
+	get_node("Camera_FPV/Main_Panel").display_nav_brg = waypoint_data.x
+	get_node("Camera_FPV/Main_Panel").display_nav_range = waypoint_data.y
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
 	else:
