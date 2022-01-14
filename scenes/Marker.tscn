@@ -16,6 +16,6 @@ albedo_texture = ExtResource( 1 )
 layers = 2
 material_override = SubResource( 1 )
 cast_shadow = 0
-pixel_size = 0.5
+pixel_size = 0.2
 billboard = 1
 texture = ExtResource( 1 )

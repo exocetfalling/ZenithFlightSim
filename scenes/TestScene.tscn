@@ -17,9 +17,20 @@ environment = ExtResource( 8 )
 
 [node name="Terrain" parent="." instance=ExtResource( 3 )]
 
-[node name="Beacon" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 106.765, 0 )
-
-[node name="Marker" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 765.055, -1256.58 )
+[node name="WPT_01" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 244.749, -962.978 )
 visible = false
+
+[node name="Marker" parent="WPT_01" instance=ExtResource( 4 )]
+
+[node name="WPT_02" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1006.6, 244.749, -962.978 )
+visible = false
+
+[node name="Marker" parent="WPT_02" instance=ExtResource( 4 )]
+
+[node name="WPT_03" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1006.6, 244.749, 776.008 )
+visible = false
+
+[node name="Marker" parent="WPT_03" instance=ExtResource( 4 )]
