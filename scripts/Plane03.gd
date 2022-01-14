@@ -2,10 +2,7 @@ extends RigidBody
 
 var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
-#signal flight_data
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+
 
 var air_density = 1.2
 var ground_contact_NLG = false
@@ -138,6 +135,7 @@ var input_trim_pitch_min = -1
 
 var input_braking = 0
 
+#var pid_trim = PID_Controller.new()
 
 var gear_max = 1
 var gear_min = 0
@@ -152,6 +150,8 @@ var wpt_current_coordinates = Vector3.ZERO
 var wpt_01_coodinates = Vector3(0, 0, 0)
 var wpt_02_coodinates = Vector3(2000, 0, 5000)
 var wpt_03_coodinates = Vector3(0, 0, -5000)
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -172,7 +172,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
 #	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
 	pass
-	
+
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
 	var x1 = -PI
@@ -264,7 +264,24 @@ func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var bearing_to = fmod(-rad2deg(atan2(vec_delta_pos_2d_norm.x, vec_delta_pos_2d_norm.y)) + 360, 360)
 	var range_to = vec_delta_pos_2d.length()
 	return Vector2(bearing_to, range_to)
+
+func calc_autopilot_factor(velocity_aircraft):
+	# Factor by which errors should be multiplied before feedback into control loop
+	var autopilot_Kp = 0.1
+	# Multiplier to Kp in high speed mode 
+	var autopilot_speed_mod_factor = 0.75
+	# Above this speed, Kp is multiplied by autopilot_speed_mod_factor
+	var autopilot_med_gain_speed = 70
+	# Above this speed, Kp is multiplied by the sqaare of autopilot_speed_mod_factor
+	var autopilot_low_gain_speed = 90
 	
+	if (velocity_aircraft < autopilot_med_gain_speed):
+		return autopilot_Kp
+	elif ((velocity_aircraft > autopilot_med_gain_speed) && (velocity_aircraft < autopilot_med_gain_speed)):
+		return autopilot_Kp * autopilot_speed_mod_factor
+	else:
+		return autopilot_Kp * pow(autopilot_speed_mod_factor, 2)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_input(delta)
@@ -300,7 +317,8 @@ func _process(delta):
 	if (autopilot_on == 1):
 		if (pfd_stall == false):
 			if ((abs(input_elevator) < 0.1) && (abs(pfd_roll) < 30) && (abs(pfd_pitch) < 20) && (ground_contact_NLG == false)):
-				input_elevator_trim = (tgt_pitch - pfd_pitch) / 25
+					input_elevator_trim = calc_autopilot_factor(vel_total) * (tgt_pitch - pfd_pitch)
+	#				input_elevator_trim = pid_trim.calculate(tgt_pitch, input_elevator_trim)
 			else:
 				tgt_pitch = pfd_pitch
 		if (pfd_stall == true):
