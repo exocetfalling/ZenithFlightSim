@@ -15,8 +15,21 @@ func _ready():
 
 
 func _process(_delta):
-#	$Plane03/Camera_Ext.look_at($Plane03.transform.origin, Vector3.UP)
-	pass
-
+	$Plane/Plane03.WPT_01_coodinates = get_node("WPT_01").translation
+	$Plane/Plane03.WPT_02_coodinates = get_node("WPT_02").translation
+	$Plane/Plane03.WPT_03_coodinates = get_node("WPT_03").translation
+	
+	if ($Plane/Plane03.wpt_current == 'WPT 01'):
+		$WPT_01.visible = true
+		$WPT_02.visible = false
+		$WPT_03.visible = false
+	if ($Plane/Plane03.wpt_current == 'WPT 02'):
+		$WPT_01.visible = false
+		$WPT_02.visible = true
+		$WPT_03.visible = false
+	if ($Plane/Plane03.wpt_current == 'WPT 03'):
+		$WPT_01.visible = false
+		$WPT_02.visible = false
+		$WPT_03.visible = true
 func get_input(delta):
 	pass

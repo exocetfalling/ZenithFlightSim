@@ -1,5 +1,6 @@
 extends MarginContainer
 
+var display_active = 0
 var display_pitch = 0
 var display_roll = 0
 var display_spd = 0
@@ -15,7 +16,6 @@ var display_nav_brg = 0
 var display_nav_range = 0
 var display_nav_waypoint = 0
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	DebugOverlay.stats.add_property(self, "display_MFD_mode", "")
@@ -23,20 +23,18 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-#	# Visibility
-#	if ($'../../'.Main_Panel_active == true):
-#		visible = true
-#	else:
-#		visible = false
+	# Visibility
+	if (display_active == true):
+		visible = true
+	else:
+		visible = false
 
 	display_MFD_mode = $MFD/MFD_Mode.item_pressed
 	display_nav_waypoint = $MFD/Page_NAV/Waypoint_Select.item_pressed
 	
-	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify(display_spd, 1)
-	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify(display_alt, 1)
-	$Text_Line_1/Heading_Data/Variable.text = "%03d" % stepify(display_hdg, 1)
-	$Text_Line_2/Flaps_Data/Variable.text = "%01d" % stepify(display_flaps, 1)
-#	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_current, 0.01)
+	$Speed_Data.text = ("SPD\n%03d" % [display_spd])
+	$Alt_Data.text = ("ALT\n%05d" % [display_alt])
+	$Heading_Data.text = ("HDG\n%03d" % [display_hdg])
 	
 	var centre_position = get_viewport_rect().size/2
 	get_node("Boresight").position = centre_position
@@ -46,12 +44,12 @@ func _process(_delta):
 	get_node("PFD/EADI_Image").position.y = (display_pitch / 90 * 260) * cos(deg2rad(display_roll))
 	get_node("PFD/EADI_Image").position.x = get_node("PFD/EADI_Image").position.y * tan(deg2rad(display_roll))
 	
-	get_node("PFD/Box_SPD").text = "%03d" % stepify(display_spd, 1)
-	get_node("PFD/Box_ALT").text = "%05d" % stepify(display_alt, 1)
-	get_node("PFD/Box_HDG").text = "%03d" % stepify(display_hdg, 1)
+	get_node("PFD/Box_SPD").text = ("SPD\n%03d" % [display_spd])
+	get_node("PFD/Box_ALT").text = ("ALT\n%05d" % [display_alt])
+	get_node("PFD/Box_HDG").text = ("HDG\n%03d" % [display_hdg])
 	
-	get_node("PFD/Box_TRIM").text = "%.1f" % stepify(display_trim, 0.1)
-	get_node("PFD/Box_FLAPS").text = "%01d" % stepify(display_flaps, 1)
+	get_node("PFD/Box_TRIM").text = ("TRIM\n%.1f" % [display_trim])
+	get_node("PFD/Box_FLAPS").text = ("FLAPS\n%01d" % [display_flaps])
 	
 	if (display_gear == 1):
 		get_node("PFD/Gear_Indicator").default_color = Color8(22, 222, 22)

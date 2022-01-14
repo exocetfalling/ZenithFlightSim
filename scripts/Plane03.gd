@@ -147,11 +147,11 @@ var deflection_rate = 1/(PI/6)
 var deflection_rate_flaps = 1/(2 * PI)
 
 var waypoint_data = Vector2.ZERO
+var wpt_current = 'WPT 01'
 var wpt_current_coordinates = Vector3.ZERO
-var wpt_01_coodinates = Vector3(0, 0, 0)
-var wpt_02_coodinates = Vector3(2000, 0, 5000)
-var wpt_03_coodinates = Vector3(0, 0, -5000)
-
+var WPT_01_coodinates = Vector3.ZERO
+var WPT_02_coodinates = Vector3.ZERO
+var WPT_03_coodinates = Vector3.ZERO
 
 
 # Called when the node enters the scene tree for the first time.
@@ -169,8 +169,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
-	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
-	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
+#	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
+#	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
 #	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
 	pass
@@ -320,6 +320,7 @@ func _process(delta):
 	pfd_beta = angle_beta_deg
 	
 	# Panel updates
+	get_node("Camera_FPV/Main_Panel").display_active = Main_Panel_active
 	get_node("Camera_FPV/Main_Panel").display_pitch = pfd_pitch
 	get_node("Camera_FPV/Main_Panel").display_roll = pfd_roll
 	get_node("Camera_FPV/Main_Panel").display_spd = pfd_spd
@@ -333,6 +334,7 @@ func _process(delta):
 	
 	get_node("Camera_FPV/Main_Panel").display_nav_brg = waypoint_data.x
 	get_node("Camera_FPV/Main_Panel").display_nav_range = waypoint_data.y
+	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
 	else:
@@ -386,12 +388,16 @@ func _process(delta):
 	
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.translation, wpt_current_coordinates)
+#	get_node('Camera_FPV/Main_Panel').display_nav_waypoint = wpt_current
 	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
-		wpt_current_coordinates = wpt_01_coodinates
+		wpt_current = 'WPT 01'
+		wpt_current_coordinates = WPT_01_coodinates
 	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
-		wpt_current_coordinates = wpt_02_coodinates
+		wpt_current = 'WPT 02'
+		wpt_current_coordinates = WPT_02_coodinates
 	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
-		wpt_current_coordinates = wpt_03_coodinates
+		wpt_current = 'WPT 03'
+		wpt_current_coordinates = WPT_03_coodinates
 	
 	# HUD
 	get_node("HUD_Point/HUD_Ladder").rotation_degrees.z = pfd_roll
@@ -536,18 +542,24 @@ func get_input(delta):
 		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
 		$'../Joint_NLG_2'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
 		$'../Joint_NLG_2'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_3'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_NLG_3'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
 		
 		# MLG_L
 		$'../Joint_MLG_L_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
 		$'../Joint_MLG_L_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
 		$'../Joint_MLG_L_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
 		$'../Joint_MLG_L_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
+		$'../Joint_MLG_L_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
 		
 		# MLG_R
 		$'../Joint_MLG_R_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
+		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 
 func _integrate_forces(_state):
 	forward_local = -get_global_transform().basis.z
