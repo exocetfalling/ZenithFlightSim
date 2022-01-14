@@ -119,6 +119,7 @@ var output_aileron = 0
 var current_rudder = 0
 var input_rudder = 0
 var output_rudder = 0
+var output_yaw_damper = 0
 
 var current_flaps = 0
 var input_flaps = 0
@@ -168,7 +169,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
-#	DebugOverlay.stats.add_property(self, "input_elevator", "round")
+	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
+	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
 #	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
 	pass
@@ -265,22 +267,37 @@ func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var range_to = vec_delta_pos_2d.length()
 	return Vector2(bearing_to, range_to)
 
-func calc_autopilot_factor(velocity_aircraft):
-	# Factor by which errors should be multiplied before feedback into control loop
-	var autopilot_Kp = 0.1
-	# Multiplier to Kp in high speed mode 
-	var autopilot_speed_mod_factor = 0.75
-	# Above this speed, Kp is multiplied by autopilot_speed_mod_factor
-	var autopilot_med_gain_speed = 70
-	# Above this speed, Kp is multiplied by the sqaare of autopilot_speed_mod_factor
-	var autopilot_low_gain_speed = 90
+func calc_autopilot_factor(velocity_aircraft):	
+	var x1 = 0
+	var y1 = 0.10
+	var x2 = 60
+	var y2 = 0.10
+	var x3 = 160
+	var y3 = 0.02
+	var x4 = 200
+	var y4 = 0.02
+
+	var a = (y2 - y1) / (x2 - x1)
+	var b = (y3 - y2) / (x3 - x2)
+	var c = (y4 - y3) / (x4 - x3)
+
+	if (velocity_aircraft < x1):
+		return 0
+		
+	elif ((velocity_aircraft > x1) and (velocity_aircraft <= x2)):
+		return (a * (velocity_aircraft - x1) + y1)
 	
-	if (velocity_aircraft < autopilot_med_gain_speed):
-		return autopilot_Kp
-	elif ((velocity_aircraft > autopilot_med_gain_speed) && (velocity_aircraft < autopilot_med_gain_speed)):
-		return autopilot_Kp * autopilot_speed_mod_factor
+	elif ((velocity_aircraft > x2) and (velocity_aircraft <= x3)):
+		return (b * (velocity_aircraft - x2) + y2)
+
+	elif ((velocity_aircraft > x3) and (velocity_aircraft <= x4)):
+		return (c * (velocity_aircraft - x3) + y3)
+	
+	elif (velocity_aircraft > x4):
+		return 0
+	
 	else:
-		return autopilot_Kp * pow(autopilot_speed_mod_factor, 2)
+		return 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -332,9 +349,11 @@ func _process(delta):
 		if (pfd_stall == false):
 			if ((abs(input_elevator) < 0.1) && (abs(pfd_roll) < 30) && (abs(pfd_pitch) < 20) && (ground_contact_NLG == false)):
 					input_elevator_trim = calc_autopilot_factor(vel_total) * (tgt_pitch - pfd_pitch)
+					output_yaw_damper = calc_autopilot_factor(vel_total) * -angle_beta_deg
 	#				input_elevator_trim = pid_trim.calculate(tgt_pitch, input_elevator_trim)
 			else:
 				tgt_pitch = pfd_pitch
+				output_yaw_damper = 0
 		if (pfd_stall == true):
 			autopilot_on = 0
 	
@@ -342,6 +361,11 @@ func _process(delta):
 		input_elevator_trim = input_trim_pitch_max
 	if (input_elevator_trim < input_trim_pitch_min):
 		input_elevator_trim = input_trim_pitch_min
+	
+	if (output_rudder > 1):
+		output_rudder = 1
+	if (output_rudder < -1):
+		output_rudder = -1
 	
 	# NWS
 	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
@@ -430,8 +454,10 @@ func get_input(delta):
 		if (autopilot_on == 0):
 			autopilot_on = 1
 			tgt_pitch = pfd_pitch
+			output_yaw_damper = 0
 		else:
 			autopilot_on = 0
+			output_yaw_damper = 0
 	
 	# Braking input
 	input_braking = Input.get_action_strength("braking")
@@ -474,7 +500,7 @@ func get_input(delta):
 	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)), 0)
 	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)), 0)
 	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)), 0)
-	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - input_rudder * deflection_control_max)), 0, 0)
+	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - output_rudder * deflection_control_max)), 0, 0)
 	
 	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)), 0)
 	
@@ -488,7 +514,7 @@ func get_input(delta):
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
 	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
-	output_rudder = interpolate_linear(output_rudder, input_rudder, deflection_rate, delta)
+	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
 	output_elevator_trim = input_elevator_trim
