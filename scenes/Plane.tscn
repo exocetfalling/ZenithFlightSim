@@ -246,6 +246,11 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, -4.128 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Nose")
 
+[node name="Joint_NLG_3" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, -4.128 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Nose")
+
 [node name="Joint_MLG_L_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
@@ -256,12 +261,22 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
 
+[node name="Joint_MLG_L_3" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.003, -0.95, 0.517 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_L")
+
 [node name="Joint_MLG_R_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
 
 [node name="Joint_MLG_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.95, 0.517 )
+nodes/node_a = NodePath("../Plane03")
+nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
+
+[node name="Joint_MLG_R_3" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.003, -0.95, 0.517 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
