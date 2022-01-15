@@ -37,4 +37,4 @@ visible = false
 [node name="Marker" parent="WPT_03" instance=ExtResource( 4 )]
 
 [node name="Target" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.5, 110.617, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.5, 202.423, 0 )

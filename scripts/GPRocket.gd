@@ -202,4 +202,5 @@ func _integrate_forces(_state):
 	add_force_local(force_drag_v_tail, pos_v_tail)
 	
 	if ((fuel > 0) && (launched == true)):
-		add_force_local(Vector3(-2 * cmd_vector.x, -2 * cmd_vector.y, -5000), Vector3(0, 0, 2))
+#		add_force_local(Vector3(-0 * cmd_vector.x, -0 * cmd_vector.y, -5000), Vector3(0, 0, 2))
+		add_force_local(Vector3(-1 * cmd_vector.x, -1 * cmd_vector.y, -5000), Vector3(0, 0, 2))
