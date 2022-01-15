@@ -28,6 +28,9 @@ var pfd_roll = 0
 var pfd_alpha = 0
 var pfd_beta = 0
 
+var pfd_fpa = 0
+var pfd_trk = 0
+
 var pfd_stall = false
 
 var throttle_max = 100
@@ -153,14 +156,15 @@ var WPT_01_coodinates = Vector3.ZERO
 var WPT_02_coodinates = Vector3.ZERO
 var WPT_03_coodinates = Vector3.ZERO
 
+var waypoint_data_3d = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
-#	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-#	DebugOverlay.stats.add_property(self, "pfd_roll", "round")
+	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+	DebugOverlay.stats.add_property(self, "pfd_trk", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_stall", "")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
@@ -172,7 +176,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
-#	DebugOverlay.stats.add_property(self, "waypoint_data", "round")
+	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
 	pass
 
 # Lift coeffecient calculation function
@@ -267,6 +271,14 @@ func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var range_to = vec_delta_pos_2d.length()
 	return Vector2(bearing_to, range_to)
 
+func find_angles_and_distance_to_target(vec_pos_target, vec_pos_source):
+	var vec_delta_pos = vec_pos_target - vec_pos_source
+	var vec_delta_pos_norm = vec_delta_pos.normalized()
+	var pitch_to = fmod(-rad2deg(atan2(vec_delta_pos_norm.y, vec_delta_pos_norm.z)) + 360, 360)
+	var yaw_to = fmod(-rad2deg(atan2(vec_delta_pos_norm.x, vec_delta_pos_norm.z)) + 360, 360)
+	var range_to = vec_delta_pos.length()
+	return Vector3(pitch_to, yaw_to, range_to)
+
 func calc_autopilot_factor(velocity_aircraft):	
 	var x1 = 0
 	var y1 = 0.10
@@ -311,7 +323,7 @@ func _process(delta):
 	
 	pfd_spd = vel_total
 	pfd_hdg = fmod(-rotation_degrees.y + 360, 360)
-	pfd_alt = transform.origin.y
+	pfd_alt = global_transform.origin.y
 	
 	pfd_pitch = rotation_degrees.x
 	pfd_roll = -rotation_degrees.z
@@ -319,6 +331,8 @@ func _process(delta):
 	pfd_alpha = angle_alpha_deg
 	pfd_beta = angle_beta_deg
 	
+	pfd_fpa = pfd_pitch - pfd_alpha
+	pfd_trk = pfd_hdg - pfd_beta
 	# Panel updates
 	get_node("Camera_FPV/Main_Panel").display_active = Main_Panel_active
 	get_node("Camera_FPV/Main_Panel").display_pitch = pfd_pitch
@@ -387,7 +401,8 @@ func _process(delta):
 		ground_contact_MLG_R = false
 	
 	# Waypoints
-	waypoint_data = find_bearing_and_range_to(self.translation, wpt_current_coordinates)
+	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
+	waypoint_data_3d = find_angles_and_distance_to_target(self.global_transform.origin, wpt_current_coordinates)
 #	get_node('Camera_FPV/Main_Panel').display_nav_waypoint = wpt_current
 	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
 		wpt_current = 'WPT 01'
@@ -405,6 +420,11 @@ func _process(delta):
 	get_node("HUD_Point/HUD_Ladder").translation.x = get_node("HUD_Point/HUD_Ladder").translation.y * -1 * tan(deg2rad(pfd_roll))
 	get_node("HUD_Point/FlightPathVector").translation.y = -(pfd_alpha / 90 * 260)
 	get_node("HUD_Point/FlightPathVector").translation.x = -(pfd_beta / 90 * 260)
+	if (vel_total > 2):
+		get_node('HUD_Point/FlightPathVector').visible = true
+	else:
+		get_node('HUD_Point/FlightPathVector').visible = false
+	
 	
 func get_input(delta):
 	# Throttle input
