@@ -3,6 +3,7 @@ extends RigidBody
 var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
 
+var LineDrawer = preload("res://scripts/DrawLine3D.gd").new()
 
 var air_density = 1.2
 var ground_contact_NLG = false
@@ -29,7 +30,9 @@ var pfd_alpha = 0
 var pfd_beta = 0
 
 var pfd_fpa = 0
+var tgt_fpa = 0
 var pfd_trk = 0
+var tgt_trk = 0
 
 var pfd_stall = false
 
@@ -157,9 +160,15 @@ var WPT_02_coodinates = Vector3.ZERO
 var WPT_03_coodinates = Vector3.ZERO
 
 var waypoint_data_3d = Vector3.ZERO
+var global_rotation = Vector3.ZERO
+var global_rotation_deg = Vector3.ZERO
+
+var pfd_fd_commands = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_child(LineDrawer)
+	
 #	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
@@ -175,7 +184,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
-#	DebugOverlay.stats.add_property(self, "wpt_current_coordinates", "")
+	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
 	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
 	pass
 
@@ -271,12 +280,11 @@ func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var range_to = vec_delta_pos_2d.length()
 	return Vector2(bearing_to, range_to)
 
-func find_angles_and_distance_to_target(vec_pos_target, vec_pos_source):
-	var vec_delta_pos = vec_pos_target - vec_pos_source
-	var vec_delta_pos_norm = vec_delta_pos.normalized()
-	var pitch_to = fmod(-rad2deg(atan2(vec_delta_pos_norm.y, vec_delta_pos_norm.z)) + 360, 360)
-	var yaw_to = fmod(-rad2deg(atan2(vec_delta_pos_norm.x, vec_delta_pos_norm.z)) + 360, 360)
-	var range_to = vec_delta_pos.length()
+func find_angles_and_distance_to_target(vec_pos_target):
+	var vec_delta_local = to_local(vec_pos_target)
+	var pitch_to = rad2deg(atan2(vec_delta_local.y, -vec_delta_local.z))
+	var yaw_to = rad2deg(atan2(vec_delta_local.x, -vec_delta_local.z))
+	var range_to = vec_delta_local.length()
 	return Vector3(pitch_to, yaw_to, range_to)
 
 func calc_autopilot_factor(velocity_aircraft):	
@@ -333,6 +341,11 @@ func _process(delta):
 	
 	pfd_fpa = pfd_pitch - pfd_alpha
 	pfd_trk = pfd_hdg - pfd_beta
+	
+	pfd_fd_commands = find_angles_and_distance_to_target(wpt_current_coordinates)
+	
+	global_rotation = global_transform.basis.get_euler()
+	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
 	# Panel updates
 	get_node("Camera_FPV/Main_Panel").display_active = Main_Panel_active
 	get_node("Camera_FPV/Main_Panel").display_pitch = pfd_pitch
@@ -402,7 +415,7 @@ func _process(delta):
 	
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
-	waypoint_data_3d = find_angles_and_distance_to_target(self.global_transform.origin, wpt_current_coordinates)
+	waypoint_data_3d = find_angles_and_distance_to_target(wpt_current_coordinates)
 #	get_node('Camera_FPV/Main_Panel').display_nav_waypoint = wpt_current
 	if(get_node("Camera_FPV/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
 		wpt_current = 'WPT 01'
@@ -420,12 +433,20 @@ func _process(delta):
 	get_node("HUD_Point/HUD_Ladder").translation.x = get_node("HUD_Point/HUD_Ladder").translation.y * -1 * tan(deg2rad(pfd_roll))
 	get_node("HUD_Point/FlightPathVector").translation.y = -(pfd_alpha / 90 * 260)
 	get_node("HUD_Point/FlightPathVector").translation.x = -(pfd_beta / 90 * 260)
+	get_node("HUD_Point/FlightDirector").translation.y = (pfd_fd_commands.x / 90 * 260)
+	get_node("HUD_Point/FlightDirector").translation.x = (pfd_fd_commands.y / 90 * 260)
 	if (vel_total > 2):
 		get_node('HUD_Point/FlightPathVector').visible = true
 	else:
 		get_node('HUD_Point/FlightPathVector').visible = false
+		
+	if (autopilot_on == 1):
+		get_node('HUD_Point/FlightDirector').visible = true
+	else:
+		get_node('HUD_Point/FlightDirector').visible = false
 	
-	
+	# Draw lines
+#	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
@@ -491,18 +512,22 @@ func get_input(delta):
 	# Weapons
 	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
 		$'../GPRocket_1'.launched = true
+		$'../GPRocket_1'.tgt_coordinates = wpt_current_coordinates
 		$'../Wpn_Joint_1'.queue_free()
 		sta_1_rdy = 0
 	if (Input.is_action_just_pressed("fire_sta_2") && (sta_2_rdy == 1)):
 		$'../GPRocket_2'.launched = true
+		$'../GPRocket_2'.tgt_coordinates = wpt_current_coordinates
 		$'../Wpn_Joint_2'.queue_free()
 		sta_2_rdy = 0
 	if (Input.is_action_just_pressed("fire_sta_3") && (sta_3_rdy == 1)):
 		$'../GPRocket_3'.launched = true
+		$'../GPRocket_3'.tgt_coordinates = wpt_current_coordinates
 		$'../Wpn_Joint_3'.queue_free()
 		sta_3_rdy = 0
 	if (Input.is_action_just_pressed("fire_sta_4") && (sta_4_rdy == 1)):
 		$'../GPRocket_4'.launched = true
+		$'../GPRocket_4'.tgt_coordinates = wpt_current_coordinates
 		$'../Wpn_Joint_4'.queue_free()
 		sta_4_rdy = 0
 	# Lift/drag calculations (helpers for add_force_local)

@@ -206,7 +206,7 @@ environment = ExtResource( 3 )
 far = 100000.0
 
 [node name="Wpn_Rack_1" parent="Plane03" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, -1, -1 )
 
 [node name="Wpn_Rack_2" parent="Plane03" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -1 )
@@ -215,7 +215,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1, -1 )
 
 [node name="Wpn_Rack_4" parent="Plane03" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1 )
 
 [node name="HUD_Point" parent="Plane03" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150 )
@@ -282,19 +282,19 @@ nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../LG_AttachPoint_Main_R")
 
 [node name="GPRocket_1" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1.665, -1.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, -1.665, -0.9 )
 
 [node name="GPRocket_2" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.665, -1.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.665, -0.9 )
 
 [node name="GPRocket_3" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.665, -1.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.665, -0.9 )
 
 [node name="GPRocket_4" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1.665, -1.2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1.665, -0.9 )
 
 [node name="Wpn_Joint_1" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, -1, -1.1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7, -1, -1.1 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../GPRocket_1")
 
@@ -309,6 +309,6 @@ nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../GPRocket_3")
 
 [node name="Wpn_Joint_4" type="Generic6DOFJoint" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, -1, -1.1 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1.1 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../GPRocket_4")
