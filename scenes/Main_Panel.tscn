@@ -529,7 +529,6 @@ XXX"
 uppercase = true
 
 [node name="Heading_Data" type="Label" parent="."]
-visible = false
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
