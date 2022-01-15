@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/Plane.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/TestScene.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Marker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Target.tscn" type="PackedScene" id=5]
 [ext_resource path="res://resources/lighting_env.tres" type="Environment" id=8]
 
 [node name="TestScene" type="Spatial"]
@@ -34,3 +35,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1006.6, 244.749, 776.008 )
 visible = false
 
 [node name="Marker" parent="WPT_03" instance=ExtResource( 4 )]
+
+[node name="Target" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1184.5, 110.617, 0 )
