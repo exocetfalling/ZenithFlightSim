@@ -1,7 +1,7 @@
 extends Spatial
 
 func _ready():
-	preload("res://scenes/TestScene.tscn")
+#	preload("res://scenes/TestScene.tscn")
 	# Clear the viewport.
 	var viewport = $Viewport
 	$Viewport.set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
