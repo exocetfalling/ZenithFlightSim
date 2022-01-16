@@ -172,8 +172,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
-	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
-	DebugOverlay.stats.add_property(self, "pfd_trk", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_trk", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_stall", "")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
@@ -184,8 +184,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
-	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
-	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
+#	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
+#	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
 	pass
 
 # Lift coeffecient calculation function
