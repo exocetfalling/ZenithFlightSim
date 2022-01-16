@@ -285,7 +285,7 @@ func find_angles_and_distance_to_target(vec_pos_target):
 	var pitch_to = rad2deg(atan2(vec_delta_local.y, -vec_delta_local.z))
 	var yaw_to = rad2deg(atan2(vec_delta_local.x, -vec_delta_local.z))
 	var range_to = vec_delta_local.length()
-	return Vector3(pitch_to, yaw_to, range_to)
+	return Vector3(yaw_to, pitch_to, range_to)
 
 func calc_autopilot_factor(velocity_aircraft):	
 	var x1 = 0
@@ -433,8 +433,8 @@ func _process(delta):
 	get_node("HUD_Point/HUD_Ladder").translation.x = get_node("HUD_Point/HUD_Ladder").translation.y * -1 * tan(deg2rad(pfd_roll))
 	get_node("HUD_Point/FlightPathVector").translation.y = -(pfd_alpha / 90 * 260)
 	get_node("HUD_Point/FlightPathVector").translation.x = -(pfd_beta / 90 * 260)
-	get_node("HUD_Point/FlightDirector").translation.y = (pfd_fd_commands.x / 90 * 260)
-	get_node("HUD_Point/FlightDirector").translation.x = (pfd_fd_commands.y / 90 * 260)
+	get_node("HUD_Point/FlightDirector").translation.y = (pfd_fd_commands.y / 90 * 260)
+	get_node("HUD_Point/FlightDirector").translation.x = (pfd_fd_commands.x / 90 * 260)
 	if (vel_total > 2):
 		get_node('HUD_Point/FlightPathVector').visible = true
 	else:
