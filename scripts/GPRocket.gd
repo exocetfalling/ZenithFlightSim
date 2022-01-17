@@ -1,7 +1,7 @@
 extends RigidBody
 
-var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
-var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
+#var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
+#var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
