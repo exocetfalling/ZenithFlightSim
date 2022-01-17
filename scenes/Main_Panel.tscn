@@ -207,8 +207,9 @@ __meta__ = {
 }
 
 [node name="MFD" type="Sprite" parent="."]
-position = Vector2( 1650.4, 814.895 )
+position = Vector2( 1650.4, 819.895 )
 texture = ExtResource( 8 )
+offset = Vector2( 0, -5 )
 
 [node name="Page_KEYS" type="RichTextLabel" parent="MFD"]
 visible = false
@@ -508,6 +509,7 @@ __meta__ = {
 }
 
 [node name="Boresight" type="Line2D" parent="."]
+visible = false
 position = Vector2( 960, 540 )
 scale = Vector2( 2, 2 )
 z_index = 1
@@ -517,10 +519,11 @@ default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
 antialiased = true
 
 [node name="Speed_Data" type="Label" parent="."]
+light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 195.0
+margin_bottom = 198.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
@@ -529,10 +532,11 @@ XXX"
 uppercase = true
 
 [node name="Heading_Data" type="Label" parent="."]
+light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 195.0
+margin_bottom = 198.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
@@ -542,10 +546,11 @@ align = 1
 uppercase = true
 
 [node name="Alt_Data" type="Label" parent="."]
+light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 195.0
+margin_bottom = 198.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
@@ -553,13 +558,3 @@ text = "ALT
 XXXXX"
 align = 2
 uppercase = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-light_mask = 8
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 20.0
-margin_bottom = 20.0
-size_flags_horizontal = 0
-size_flags_vertical = 0

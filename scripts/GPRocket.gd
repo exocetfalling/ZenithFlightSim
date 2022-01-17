@@ -1,6 +1,7 @@
 extends RigidBody
 
-
+var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
+var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -68,7 +69,7 @@ var force_drag_aileron_l = Vector3.ZERO
 var force_drag_aileron_r = Vector3.ZERO
 var force_drag_elevator = Vector3.ZERO
 var force_drag_rudder = Vector3.ZERO
-
+var tgt_vector = Vector3.ZERO
 var cmd_vector = Vector3.ZERO
 var tgt_coordinates = Vector3.ZERO
 
@@ -79,6 +80,8 @@ signal exploded
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	DebugOverlay.stats.add_property(self, "tgt_vector", "round")
+#	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
 	$Particles.visible = false
 
 # Lift coeffecient calculation function
@@ -173,7 +176,12 @@ func _process(delta):
 
 	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
 	if (launched == true):
-		cmd_vector = find_angles_and_distance_to_target(tgt_coordinates)
+		tgt_vector = find_angles_and_distance_to_target(tgt_coordinates)
+		cmd_vector.x = 5 * tgt_vector.x
+		cmd_vector.y = 5 * tgt_vector.y
+#		cmd_vector.x = 0.1 * DerivCalc1.find_derivative(tgt_coordinates.x, delta)
+#		cmd_vector.y = 0.1 * DerivCalc2.find_derivative(tgt_coordinates.y, delta)
+		
 		if (fuel > 0):
 			$Particles.visible = true
 			fuel = fuel - 1 * delta
@@ -203,4 +211,4 @@ func _integrate_forces(_state):
 	
 	if ((fuel > 0) && (launched == true)):
 #		add_force_local(Vector3(-0 * cmd_vector.x, -0 * cmd_vector.y, -5000), Vector3(0, 0, 2))
-		add_force_local(Vector3(-1 * cmd_vector.x, -1 * cmd_vector.y, -5000), Vector3(0, 0, 2))
+		add_force_local(Vector3(-cmd_vector.x, -cmd_vector.y, -1000), Vector3(0, 0, 2))
