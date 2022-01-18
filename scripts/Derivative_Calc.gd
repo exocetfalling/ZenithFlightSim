@@ -11,7 +11,7 @@ var x_delta = 0
 var time_delta
 var derivative
 
-func find_derivative(value_current, dt):
+func calc_derivative(value_current, dt):
 	x_previous = x_current
 	x_current = value_current
 	
