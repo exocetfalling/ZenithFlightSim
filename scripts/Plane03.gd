@@ -408,8 +408,8 @@ func _physics_process(delta):
 			(ground_contact_NLG == false)\
 			):
 					input_elevator_trim = \
-					0.08 * (tgt_pitch - pfd_pitch) + \
-					0.05 * IntegralCalc.calc_integral((tgt_pitch - pfd_pitch), delta) + \
+					0.20 * (tgt_pitch - pfd_pitch) + \
+					2.00 * IntegralCalc.calc_integral((tgt_pitch - pfd_pitch), delta) + \
 					0.02 * DerivCalc.calc_derivative((tgt_pitch - pfd_pitch), delta)
 					
 					
