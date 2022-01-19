@@ -1,18 +1,18 @@
 [gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
-[ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=3]
-[ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=4]
-[ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=5]
-[ext_resource path="res://scripts/MFD_Mode.gd" type="Script" id=6]
-[ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=7]
-[ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=8]
-[ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture" id=9]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture" id=10]
-[ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture" id=11]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=12]
-[ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=13]
+[ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=2]
+[ext_resource path="res://scripts/MFD_Mode.gd" type="Script" id=3]
+[ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=5]
+[ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=6]
+[ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture" id=7]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture" id=8]
+[ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=9]
+[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=10]
+[ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=11]
+[ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture" id=12]
+[ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=13]
 [ext_resource path="res://resources/Display_Font.tres" type="DynamicFont" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -34,14 +34,10 @@ __meta__ = {
 }
 
 [node name="PFD" type="Light2D" parent="."]
-position = Vector2( 353.377, 715.601 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 12 )
+position = Vector2( 253.787, 819.428 )
+texture = ExtResource( 10 )
 mode = 3
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
+script = ExtResource( 4 )
 
 [node name="Wings" type="Line2D" parent="PFD"]
 z_index = 1
@@ -53,20 +49,17 @@ antialiased = true
 [node name="EADI_Fail_X" type="Line2D" parent="PFD"]
 light_mask = 2
 points = PoolVector2Array( 0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0 )
-texture = ExtResource( 7 )
+texture = ExtResource( 11 )
 
 [node name="EADI_Image" type="Sprite" parent="PFD"]
-texture = ExtResource( 10 )
-script = ExtResource( 4 )
+texture = ExtResource( 8 )
+script = ExtResource( 2 )
 
 [node name="EADI_Background" type="Sprite" parent="PFD"]
 show_behind_parent = true
 light_mask = 2
 position = Vector2( 20, -14 )
-texture = ExtResource( 13 )
-__meta__ = {
-"_edit_group_": true
-}
+texture = ExtResource( 6 )
 
 [node name="Box_SPD" type="Label" parent="PFD"]
 light_mask = 2
@@ -214,12 +207,9 @@ __meta__ = {
 }
 
 [node name="MFD" type="Sprite" parent="."]
-position = Vector2( 1542.33, 690.64 )
-scale = Vector2( 1.5, 1.5 )
-texture = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( 1650.4, 819.895 )
+texture = ExtResource( 9 )
+offset = Vector2( 0, -5 )
 
 [node name="Page_KEYS" type="RichTextLabel" parent="MFD"]
 visible = false
@@ -407,7 +397,7 @@ custom_fonts/font = ExtResource( 14 )
 text = "MENU"
 flat = false
 items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false, "NAV", null, 0, false, false, 3, 0, null, "", false ]
-script = ExtResource( 6 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -438,7 +428,7 @@ __meta__ = {
 [node name="Page_NAV" type="Light2D" parent="MFD"]
 light_mask = 4
 position = Vector2( 0, 40 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 mode = 3
 range_item_cull_mask = 4
 
@@ -446,7 +436,7 @@ range_item_cull_mask = 4
 light_mask = 4
 position = Vector2( 0, 94 )
 scale = Vector2( 1.6, 1.6 )
-texture = ExtResource( 11 )
+texture = ExtResource( 12 )
 
 [node name="NAV1_Pointer" type="Line2D" parent="MFD/Page_NAV/ND_Rose"]
 light_mask = 4
@@ -473,7 +463,7 @@ custom_fonts/font = ExtResource( 14 )
 text = "WPT SEL"
 flat = false
 items = [ "WPT 01", null, 0, false, false, 0, 0, null, "", false, "WPT 02", null, 0, false, false, 1, 0, null, "", false, "WPT 03", null, 0, false, false, 2, 0, null, "", false ]
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -535,7 +525,7 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 text = "SPEED
 XXX"
@@ -548,7 +538,7 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 text = "HDG
 XXX"
@@ -562,7 +552,7 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 13 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 text = "ALT
 XXXXX"

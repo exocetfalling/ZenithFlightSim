@@ -62,28 +62,28 @@ func _process(_delta):
 
 	get_node("Boresight").position = current_centre_position
 	
-	# Dynamic sizing
-	get_node('PFD').position = \
-		ui_element_dynamic_pos(current_viewport_size, \
-		Vector2(1920, 1080), \
-		Vector2(254, 819), \
-		Vector2(600, 600))
-	get_node('PFD').scale = \
-		ui_element_dynamic_scale(current_viewport_size, \
-		Vector2(1920, 1080), \
-		Vector2(254, 819), \
-		Vector2(600, 600))
-
-	get_node('MFD').position = \
-		ui_element_dynamic_pos(current_viewport_size, \
-		Vector2(1920, 1080), \
-		Vector2(1650, 819), \
-		Vector2(600, 600))
-	get_node('MFD').scale = \
-		ui_element_dynamic_scale(current_viewport_size, \
-		Vector2(1920, 1080), \
-		Vector2(1650, 819), \
-		Vector2(600, 600))
+#	# Dynamic sizing
+#	get_node('PFD').position = \
+#		ui_element_dynamic_pos(current_viewport_size, \
+#		Vector2(1920, 1080), \
+#		Vector2(254, 819), \
+#		Vector2(600, 600))
+#	get_node('PFD').scale = \
+#		ui_element_dynamic_scale(current_viewport_size, \
+#		Vector2(1920, 1080), \
+#		Vector2(254, 819), \
+#		Vector2(600, 600))
+#
+#	get_node('MFD').position = \
+#		ui_element_dynamic_pos(current_viewport_size, \
+#		Vector2(1920, 1080), \
+#		Vector2(1650, 819), \
+#		Vector2(600, 600))
+#	get_node('MFD').scale = \
+#		ui_element_dynamic_scale(current_viewport_size, \
+#		Vector2(1920, 1080), \
+#		Vector2(1650, 819), \
+#		Vector2(600, 600))
 	# PFD 
 	
 	get_node("PFD/EADI_Image").rotation_degrees = -display_roll
