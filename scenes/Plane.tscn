@@ -1,12 +1,11 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://resources/Glider_Metal.tres" type="Material" id=1]
 [ext_resource path="res://scenes/GPRocket.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=3]
 [ext_resource path="res://scenes/HUD_Point.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/Integral_Calc.gd" type="Script" id=5]
+[ext_resource path="res://scripts/PID_Calc.gd" type="Script" id=5]
 [ext_resource path="res://scripts/Plane03.gd" type="Script" id=6]
-[ext_resource path="res://scripts/Derivative_Calc.gd" type="Script" id=7]
 [ext_resource path="res://resources/Glider_Engine.tres" type="Material" id=8]
 [ext_resource path="res://scenes/LG_Strut.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Engine.tscn" type="PackedScene" id=10]
@@ -222,8 +221,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1 )
 [node name="HUD_Point" parent="Plane03" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150 )
 
-[node name="PID_Loop" type="Node" parent="Plane03"]
+[node name="Trim_PID_Calc" type="Node" parent="Plane03"]
 script = ExtResource( 5 )
+term_P = 0.2
+term_I = 2.0
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.833, -4.132 )
@@ -313,10 +314,3 @@ nodes/node_b = NodePath("../GPRocket_3")
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1.1 )
 nodes/node_a = NodePath("../Plane03")
 nodes/node_b = NodePath("../GPRocket_4")
-
-[node name="Derivative_Calc" type="Node" parent="."]
-script = ExtResource( 7 )
-
-[node name="Integral_Calc" type="Node" parent="."]
-script = ExtResource( 5 )
-term_I = 1.0
