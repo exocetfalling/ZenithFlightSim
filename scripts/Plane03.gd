@@ -4,9 +4,6 @@ var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
 
 var LineDrawer = preload("res://scripts/DrawLine3D.gd").new()
-var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
-var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
-var DerivCalc3 = preload("res://scripts/Derivative_Calc.gd").new()
 
 var air_density = 1.2
 var ground_contact_NLG = false
@@ -145,8 +142,6 @@ var input_trim_pitch_min = -1
 
 var input_braking = 0
 
-var pid_trim = PID_Controller.new()
-
 var gear_max = 1
 var gear_min = 0
 var gear_current = 1
@@ -169,10 +164,11 @@ var global_rotation_deg = Vector3.ZERO
 var pfd_fd_commands = Vector3.ZERO
 var rate_pitch = 0
 var cmd_vector = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
-	
+
 #	DebugOverlay.stats.add_property(self, "pfd_spd", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
@@ -184,13 +180,20 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "throttle_input", "round")
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
-#	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-#	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
+	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
+	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
 #	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
+#	DebugOverlay.stats.add_property(self, "proportional", "round")
+#	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
+#	DebugOverlay.stats.add_property(self, "value_current", "round")
+#	DebugOverlay.stats.add_property(self, "output_P", "round")
+#	DebugOverlay.stats.add_property(self, "output_I", "round")
+#	DebugOverlay.stats.add_property(self, "output_D", "round")
+#	DebugOverlay.stats.add_property(self, "output_total", "round")
 	pass
 
 # Lift coeffecient calculation function
@@ -324,7 +327,7 @@ func calc_autopilot_factor(velocity_aircraft):
 	else:
 		return 0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input(delta)
 	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
@@ -349,14 +352,9 @@ func _physics_process(delta):
 	
 	pfd_fd_commands = find_angles_and_distance_to_target(wpt_current_coordinates)
 	
-#	rate_pitch = DerivCalc.find_derivative(pfd_pitch, delta)
-	
-	cmd_vector.x = DerivCalc1.find_derivative(waypoint_data_3d.x, delta)
-	cmd_vector.y = DerivCalc2.find_derivative(waypoint_data_3d.y, delta)
-	cmd_vector.z = DerivCalc3.find_derivative(waypoint_data_3d.z, delta)
-	
 	global_rotation = global_transform.basis.get_euler()
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
+	
 	# Panel updates
 	get_node("Camera_FPV/Main_Panel").display_active = Main_Panel_active
 	get_node("Camera_FPV/Main_Panel").display_pitch = pfd_pitch
@@ -384,13 +382,24 @@ func _physics_process(delta):
 		gear_current = gear_current - 0.2 * delta
 	if (abs(gear_current - gear_input) < 0.01):
 		gear_current = gear_input
-	
+
 	if (autopilot_on == 1):
 		if (pfd_stall == false):
-			if ((abs(input_elevator) < 0.1) && (abs(pfd_roll) < 30) && (abs(pfd_pitch) < 20) && (ground_contact_NLG == false)):
-					input_elevator_trim = calc_autopilot_factor(vel_total) * (tgt_pitch - pfd_pitch)
+			if (\
+			(abs(input_elevator) < 0.1) && \
+			(abs(pfd_roll) < 30) && \
+			(abs(pfd_pitch) < 20) && \
+			(ground_contact_NLG == false)\
+			):
+					input_elevator_trim = \
+					$Trim_PID_Calc.calc_proportional_output(tgt_pitch, pfd_pitch, delta) + \
+					$Trim_PID_Calc.calc_integral_output(tgt_pitch, pfd_pitch, delta) + \
+					$Trim_PID_Calc.calc_derivative_output(tgt_pitch, pfd_pitch, delta)
+					
+					
+					
 					output_yaw_damper = calc_autopilot_factor(vel_total) * -angle_beta_deg
-#					input_elevator_trim = pid_trim.calculate(tgt_pitch, pfd_pitch)
+#					input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
 				tgt_pitch = pfd_pitch
 				output_yaw_damper = 0
