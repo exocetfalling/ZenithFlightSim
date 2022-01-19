@@ -165,6 +165,8 @@ var pfd_fd_commands = Vector3.ZERO
 var rate_pitch = 0
 var cmd_vector = Vector3.ZERO
 
+onready var Panel_Node = get_node("3D_GCS/Viewport/Main_Panel")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -356,20 +358,20 @@ func _physics_process(delta):
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
 	
 	# Panel updates
-	get_node("3D_GCS/Viewport/Main_Panel").display_active = Main_Panel_active
-	get_node("3D_GCS/Viewport/Main_Panel").display_pitch = pfd_pitch
-	get_node("3D_GCS/Viewport/Main_Panel").display_roll = pfd_roll
-	get_node("3D_GCS/Viewport/Main_Panel").display_spd = pfd_spd
-	get_node("3D_GCS/Viewport/Main_Panel").display_hdg = pfd_hdg
-	get_node("3D_GCS/Viewport/Main_Panel").display_alt = pfd_alt
-	get_node("3D_GCS/Viewport/Main_Panel").display_flaps = input_flaps * 4
-	get_node("3D_GCS/Viewport/Main_Panel").display_trim = output_elevator_trim
-	get_node("3D_GCS/Viewport/Main_Panel").display_gear = gear_current
-	get_node("3D_GCS/Viewport/Main_Panel").display_throttle = throttle_input
-	get_node("3D_GCS/Viewport/Main_Panel").display_ap = autopilot_on
+	Panel_Node.display_active = Main_Panel_active
+	Panel_Node.display_pitch = pfd_pitch
+	Panel_Node.display_roll = pfd_roll
+	Panel_Node.display_spd = pfd_spd
+	Panel_Node.display_hdg = pfd_hdg
+	Panel_Node.display_alt = pfd_alt
+	Panel_Node.display_flaps = input_flaps * 4
+	Panel_Node.display_trim = output_elevator_trim
+	Panel_Node.display_gear = gear_current
+	Panel_Node.display_throttle = throttle_input
+	Panel_Node.display_ap = autopilot_on
 	
-	get_node("3D_GCS/Viewport/Main_Panel").display_nav_brg = waypoint_data.x
-	get_node("3D_GCS/Viewport/Main_Panel").display_nav_range = waypoint_data.y
+	Panel_Node.display_nav_brg = waypoint_data.x
+	Panel_Node.display_nav_range = waypoint_data.y
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
@@ -437,15 +439,15 @@ func _physics_process(delta):
 	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
 	waypoint_data_3d = find_angles_and_distance_to_target(wpt_current_coordinates)
 #	get_node('3D_GCS/Viewport/Main_Panel').display_nav_waypoint = wpt_current
-	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
-		wpt_current = 'WPT 01'
-		wpt_current_coordinates = WPT_01_coodinates
-	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
-		wpt_current = 'WPT 02'
-		wpt_current_coordinates = WPT_02_coodinates
-	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
-		wpt_current = 'WPT 03'
-		wpt_current_coordinates = WPT_03_coodinates
+#	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
+#		wpt_current = 'WPT 01'
+#		wpt_current_coordinates = WPT_01_coodinates
+#	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 02'):
+#		wpt_current = 'WPT 02'
+#		wpt_current_coordinates = WPT_02_coodinates
+#	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
+#		wpt_current = 'WPT 03'
+#		wpt_current_coordinates = WPT_03_coodinates
 	
 	# HUD
 	get_node("HUD_Point/HUD_Ladder").rotation_degrees.z = pfd_roll
