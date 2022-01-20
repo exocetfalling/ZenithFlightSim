@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://resources/Glider_Metal.tres" type="Material" id=1]
 [ext_resource path="res://scenes/GPRocket.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://scenes/LG_Strut.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/Engine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://resources/Glider_Gear_Bay.tres" type="Material" id=11]
+[ext_resource path="res://scenes/3D_HUD_V2.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scenes/WpnRack.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -218,6 +219,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1 )
 
 [node name="HUD_Point" parent="Plane03" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150 )
+visible = false
 
 [node name="Trim_PID_Calc" type="Node" parent="Plane03"]
 script = ExtResource( 5 )
@@ -225,7 +227,10 @@ term_P = 0.2
 term_I = 2.0
 
 [node name="3D_GCS" parent="Plane03" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -2.17772, -7.76239 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -1.82799, -7.76239 )
+
+[node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.833, -4.132 )

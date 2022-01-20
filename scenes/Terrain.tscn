@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=2]
@@ -9,6 +9,10 @@
 script = ExtResource( 2 )
 mode = 0
 textures = [ [  ], [  ] ]
+
+[sub_resource type="SpatialMaterial" id=2]
+params_depth_draw_mode = 1
+albedo_texture = ExtResource( 4 )
 
 [node name="Spatial" type="Spatial"]
 
@@ -27,7 +31,12 @@ custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 
 [node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.106, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.2, 0 )
+material_override = SubResource( 2 )
+cast_shadow = 0
+extra_cull_margin = 869.95
 pixel_size = 0.5
 axis = 1
+shaded = true
+alpha_cut = 2
 texture = ExtResource( 4 )

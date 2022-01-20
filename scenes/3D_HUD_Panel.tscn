@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/HUD/HUD_Ladder.bmp" type="Texture" id=1]
+[ext_resource path="res://scripts/3D_HUD_Panel.gd" type="Script" id=2]
+[ext_resource path="res://assets/HUD/HUD_V2_Mask.bmp" type="Texture" id=3]
+[ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=12]
+
+[node name="3D_HUD_Panel" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Boresight" type="Line2D" parent="."]
+position = Vector2( 960, 540 )
+scale = Vector2( 2, 2 )
+z_index = 1
+points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+width = 2.0
+default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
+antialiased = true
+
+[node name="Speed_Data" type="Label" parent="."]
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 198.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "SPEED
+XXX"
+uppercase = true
+
+[node name="Heading_Data" type="Label" parent="."]
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 198.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "HDG
+XXX"
+align = 1
+uppercase = true
+
+[node name="Alt_Data" type="Label" parent="."]
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 198.0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 12 )
+text = "ALT
+XXXXX"
+align = 2
+uppercase = true
+
+[node name="HUD_Mask" type="Light2D" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 3 )
+mode = 3
+
+[node name="HUD_Ladder" type="Sprite" parent="HUD_Mask"]
+scale = Vector2( 6, 6 )
+texture = ExtResource( 1 )
