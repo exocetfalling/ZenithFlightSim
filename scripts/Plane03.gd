@@ -467,6 +467,11 @@ func _physics_process(delta):
 	else:
 		get_node('HUD_Point/FlightDirector').visible = false
 	
+	if ($Camera_FPV.rotation_degrees.x < -30):
+		$HUD_Point.visible = false
+	else:
+		$HUD_Point.visible = true
+	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
