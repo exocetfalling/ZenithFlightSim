@@ -225,7 +225,7 @@ term_P = 0.2
 term_I = 2.0
 
 [node name="3D_GCS" parent="Plane03" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.25563, -5.06491 )
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -2.17772, -7.76239 )
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.833, -4.132 )

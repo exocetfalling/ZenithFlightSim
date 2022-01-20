@@ -76,8 +76,8 @@ margin_right = -112.121
 margin_bottom = 27.6109
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "SPD
 XXX"
 align = 1
@@ -93,8 +93,8 @@ margin_left = 300.0
 margin_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "ALT
 XXXXX"
 align = 1
@@ -112,8 +112,8 @@ margin_right = 30.0
 margin_bottom = -109.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "HDG
 XXX"
 align = 1
@@ -131,8 +131,8 @@ margin_right = -100.0
 margin_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "FLAPS
 X"
 align = 1
@@ -150,8 +150,8 @@ margin_right = -100.0
 margin_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "TRIM
 X.X"
 align = 1
@@ -167,8 +167,8 @@ margin_left = -18.7627
 margin_top = -248.485
 margin_right = 22.2373
 margin_bottom = 0.515259
-custom_fonts/font = ExtResource( 14 )
 custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
+custom_fonts/font = ExtResource( 14 )
 text = "CWS"
 uppercase = true
 __meta__ = {
@@ -417,9 +417,9 @@ margin_left = -196.278
 margin_top = -201.492
 margin_right = -96.2782
 margin_bottom = -176.492
+custom_fonts/font = ExtResource( 14 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-custom_fonts/font = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -535,8 +535,8 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "SPEED
 XXX"
 uppercase = true
@@ -548,8 +548,8 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "HDG
 XXX"
 align = 1
@@ -562,8 +562,8 @@ margin_top = 20.0
 margin_right = 1900.0
 margin_bottom = 198.0
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "ALT
 XXXXX"
 align = 2

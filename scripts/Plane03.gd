@@ -165,7 +165,7 @@ var pfd_fd_commands = Vector3.ZERO
 var rate_pitch = 0
 var cmd_vector = Vector3.ZERO
 
-onready var Panel_Node = get_node("3D_GCS/Viewport/Main_Panel")
+onready var Panel_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
