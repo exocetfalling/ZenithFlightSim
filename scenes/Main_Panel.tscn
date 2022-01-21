@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
@@ -14,7 +14,6 @@
 [ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=12]
 [ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=13]
 [ext_resource path="res://resources/Display_Font.tres" type="DynamicFont" id=14]
-[ext_resource path="res://assets/Panels/DU_Background.bmp" type="Texture" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
@@ -35,8 +34,8 @@ __meta__ = {
 }
 
 [node name="PFD" type="Light2D" parent="."]
-position = Vector2( 499.583, 588.465 )
-scale = Vector2( 1.6, 1.6 )
+position = Vector2( 353.377, 715.601 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 12 )
 mode = 3
 script = ExtResource( 5 )
@@ -215,8 +214,8 @@ __meta__ = {
 }
 
 [node name="MFD" type="Sprite" parent="."]
-position = Vector2( 1389.77, 521.126 )
-scale = Vector2( 1.6, 1.6 )
+position = Vector2( 1542.33, 690.64 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_group_": true
@@ -530,7 +529,6 @@ default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
 antialiased = true
 
 [node name="Speed_Data" type="Label" parent="."]
-visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -544,7 +542,6 @@ XXX"
 uppercase = true
 
 [node name="Heading_Data" type="Label" parent="."]
-visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -559,7 +556,6 @@ align = 1
 uppercase = true
 
 [node name="Alt_Data" type="Label" parent="."]
-visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -572,12 +568,3 @@ text = "ALT
 XXXXX"
 align = 2
 uppercase = true
-
-[node name="Background" type="Sprite" parent="."]
-show_behind_parent = true
-light_mask = 16
-position = Vector2( 960, 540 )
-texture = ExtResource( 15 )
-__meta__ = {
-"_edit_lock_": true
-}
