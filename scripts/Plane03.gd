@@ -166,7 +166,7 @@ var rate_pitch = 0
 var cmd_vector = Vector3.ZERO
 
 onready var Panel_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel")
-
+onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -372,6 +372,22 @@ func _physics_process(delta):
 	
 	Panel_Node.display_nav_brg = waypoint_data.x
 	Panel_Node.display_nav_range = waypoint_data.y
+	
+	
+	# HUD updates
+	HUD_Node.display_pitch = pfd_pitch
+	HUD_Node.display_roll = pfd_roll
+	HUD_Node.display_spd = pfd_spd
+	HUD_Node.display_hdg = pfd_hdg
+	HUD_Node.display_alt = pfd_alt
+	HUD_Node.display_flaps = input_flaps * 4
+	HUD_Node.display_trim = output_elevator_trim
+	HUD_Node.display_gear = gear_current
+	HUD_Node.display_throttle = throttle_input
+	HUD_Node.display_ap = autopilot_on
+	
+	HUD_Node.display_nav_brg = waypoint_data.x
+	HUD_Node.display_nav_range = waypoint_data.y
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true

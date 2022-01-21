@@ -82,3 +82,14 @@ func _process(_delta):
 #		Vector2(1920, 1080), \
 #		Vector2(1650, 819), \
 #		Vector2(600, 600))
+	
+	# HUD
+	
+	get_node('HUD/HUD_Ladder').rotation_degrees = -display_roll
+	get_node('HUD/HUD_Ladder').position.y = (display_pitch / 90 * 260) * 6 * cos(deg2rad(display_roll))
+	get_node('HUD/HUD_Ladder').position.x = get_node('HUD/HUD_Ladder').position.y * tan(deg2rad(display_roll))
+	
+	get_node("Speed_Data").text = ("SPD\n%03d" % [display_spd])
+	get_node("Alt_Data").text = ("ALT\n%05d" % [display_alt])
+	get_node("Heading_Data").text = ("HDG\n%03d" % [display_hdg])
+	

@@ -67,11 +67,11 @@ XXXXX"
 align = 2
 uppercase = true
 
-[node name="HUD_Mask" type="Light2D" parent="."]
+[node name="HUD" type="Light2D" parent="."]
 position = Vector2( 960, 540 )
 texture = ExtResource( 3 )
 mode = 3
 
-[node name="HUD_Ladder" type="Sprite" parent="HUD_Mask"]
+[node name="HUD_Ladder" type="Sprite" parent="HUD"]
 scale = Vector2( 6, 6 )
 texture = ExtResource( 1 )
