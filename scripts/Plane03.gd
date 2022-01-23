@@ -380,6 +380,10 @@ func _physics_process(delta):
 	HUD_Node.display_spd = pfd_spd
 	HUD_Node.display_hdg = pfd_hdg
 	HUD_Node.display_alt = pfd_alt
+	
+	HUD_Node.display_alpha = pfd_alpha
+	HUD_Node.display_beta = pfd_beta
+	
 	HUD_Node.display_flaps = input_flaps * 4
 	HUD_Node.display_trim = output_elevator_trim
 	HUD_Node.display_gear = gear_current
@@ -388,6 +392,9 @@ func _physics_process(delta):
 	
 	HUD_Node.display_nav_brg = waypoint_data.x
 	HUD_Node.display_nav_range = waypoint_data.y
+	HUD_Node.display_FD_commands = pfd_fd_commands
+
+
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
