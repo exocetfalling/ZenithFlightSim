@@ -5,6 +5,8 @@ var display_pitch = 0
 var display_roll = 0
 var display_spd = 0
 var display_alt = 0
+var display_alpha = 0
+var display_beta = 0
 var display_hdg = 0
 var display_flaps = 0
 var display_trim = 0
@@ -15,6 +17,9 @@ var display_MFD_mode = 0
 var display_nav_brg = 0
 var display_nav_range = 0
 var display_nav_waypoint = 0
+
+var display_HUD_scale = 6
+var display_FD_commands = Vector2.ZERO
 	
 var current_viewport_size = get_viewport_rect().size/2	
 var current_centre_position = get_viewport_rect().size/2
@@ -61,12 +66,12 @@ func _process(_delta):
 	get_node("Boresight").position = current_centre_position
 	
 #	# Dynamic sizing
-#	get_node('PFD').position = \
+#	get_node('display').position = \
 #		ui_element_dynamic_pos(current_viewport_size, \
 #		Vector2(1920, 1080), \
 #		Vector2(254, 819), \
 #		Vector2(600, 600))
-#	get_node('PFD').scale = \
+#	get_node('display').scale = \
 #		ui_element_dynamic_scale(current_viewport_size, \
 #		Vector2(1920, 1080), \
 #		Vector2(254, 819), \
@@ -93,3 +98,17 @@ func _process(_delta):
 	get_node("Alt_Data").text = ("ALT\n%05d" % [display_alt])
 	get_node("Heading_Data").text = ("HDG\n%03d" % [display_hdg])
 	
+
+	get_node("HUD/FlightPathVector").position.y = display_HUD_scale * (display_alpha / 90 * 260)
+	get_node("HUD/FlightPathVector").position.x = -display_HUD_scale * (display_beta / 90 * 260)
+	get_node("HUD/FlightDirector").position.y = display_HUD_scale * (display_FD_commands.y / 90 * 260)
+	get_node("HUD/FlightDirector").position.x = display_HUD_scale * (display_FD_commands.x / 90 * 260)
+	if (display_spd > 2):
+		get_node('HUD/FlightPathVector').visible = true
+	else:
+		get_node('HUD/FlightPathVector').visible = false
+		
+	if (display_ap == 1):
+		get_node('HUD/FlightDirector').visible = true
+	else:
+		get_node('HUD/FlightDirector').visible = false

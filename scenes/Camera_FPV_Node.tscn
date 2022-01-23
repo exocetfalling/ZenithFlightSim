@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=1]
+[ext_resource path="res://scenes/Camera_FPV_Node.gd" type="Script" id=2]
+
+[node name="Camera_FPV_Node" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="Gimbal_X" type="Spatial" parent="."]
+
+[node name="Gimbal_Y" type="Spatial" parent="Gimbal_X"]
+
+[node name="Camera_FPV" type="Camera" parent="Gimbal_X/Gimbal_Y"]
+environment = ExtResource( 1 )
+current = true
+far = 100000.0
