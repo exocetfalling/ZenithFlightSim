@@ -11,6 +11,7 @@ mode = 0
 textures = [ [  ], [  ] ]
 
 [sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
 params_depth_draw_mode = 1
 albedo_texture = ExtResource( 4 )
 
@@ -37,6 +38,7 @@ cast_shadow = 0
 extra_cull_margin = 869.95
 pixel_size = 0.5
 axis = 1
-shaded = true
+transparent = false
+double_sided = false
 alpha_cut = 2
 texture = ExtResource( 4 )

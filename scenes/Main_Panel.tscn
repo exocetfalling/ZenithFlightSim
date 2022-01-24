@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=12]
 [ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=13]
 [ext_resource path="res://resources/Display_Font.tres" type="DynamicFont" id=14]
+[ext_resource path="res://assets/Panels/DU_Background.bmp" type="Texture" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
@@ -214,7 +215,7 @@ __meta__ = {
 }
 
 [node name="MFD" type="Sprite" parent="."]
-position = Vector2( 1542.33, 690.64 )
+position = Vector2( 1532.33, 690.64 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 8 )
 __meta__ = {
@@ -470,7 +471,7 @@ margin_top = -166.729
 margin_right = -149.947
 margin_bottom = -137.729
 custom_fonts/font = ExtResource( 14 )
-text = "WPT SEL"
+text = "WPT ID"
 flat = false
 items = [ "WPT 01", null, 0, false, false, 0, 0, null, "", false, "WPT 02", null, 0, false, false, 1, 0, null, "", false, "WPT 03", null, 0, false, false, 2, 0, null, "", false ]
 script = ExtResource( 3 )
@@ -529,6 +530,7 @@ default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
 antialiased = true
 
 [node name="Speed_Data" type="Label" parent="."]
+visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -542,6 +544,7 @@ XXX"
 uppercase = true
 
 [node name="Heading_Data" type="Label" parent="."]
+visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -556,6 +559,7 @@ align = 1
 uppercase = true
 
 [node name="Alt_Data" type="Label" parent="."]
+visible = false
 light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
@@ -568,3 +572,12 @@ text = "ALT
 XXXXX"
 align = 2
 uppercase = true
+
+[node name="Sprite" type="Sprite" parent="."]
+light_mask = 0
+position = Vector2( 960, 540 )
+z_index = -2
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_lock_": true
+}

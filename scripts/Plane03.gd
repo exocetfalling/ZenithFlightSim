@@ -380,6 +380,10 @@ func _physics_process(delta):
 	HUD_Node.display_spd = pfd_spd
 	HUD_Node.display_hdg = pfd_hdg
 	HUD_Node.display_alt = pfd_alt
+	
+	HUD_Node.display_alpha = pfd_alpha
+	HUD_Node.display_beta = pfd_beta
+	
 	HUD_Node.display_flaps = input_flaps * 4
 	HUD_Node.display_trim = output_elevator_trim
 	HUD_Node.display_gear = gear_current
@@ -388,6 +392,9 @@ func _physics_process(delta):
 	
 	HUD_Node.display_nav_brg = waypoint_data.x
 	HUD_Node.display_nav_range = waypoint_data.y
+	HUD_Node.display_FD_commands = pfd_fd_commands
+
+
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
@@ -507,22 +514,28 @@ func get_input(delta):
 		else:
 			$Camera_FPV.current = true
 			Main_Panel_active = true
+		
+	if (Input.is_action_pressed("ui_up")):
+		$Camera_FPV_Node/Gimbal_X.rotate_x(2 * delta)
+	if (Input.is_action_pressed("ui_down")):
+		$Camera_FPV_Node/Gimbal_X.rotate_x(-2 * delta)
+	if (Input.is_action_pressed("ui_left")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(2 * delta)
+	if (Input.is_action_pressed("ui_right")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(-2 * delta)
+	if (Input.is_action_pressed("ui_page_up")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov -= (10 * delta)
+	if (Input.is_action_pressed("ui_page_down")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov += (10 * delta)
+	if (Input.is_action_pressed("ui_home")):
+		$Camera_FPV_Node/Gimbal_X.rotation = Vector3.ZERO
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotation = Vector3.ZERO
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov = 70
+	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x > 85:
+		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = 85
+	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x < -85:
+		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = -85
 	
-	if ((Input.is_action_pressed("ui_up")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_x(2 * delta)
-	if ((Input.is_action_pressed("ui_down")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_x(-2 * delta)
-	if ((Input.is_action_pressed("ui_left")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_y(-2 * delta)
-	if ((Input.is_action_pressed("ui_right")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_y(2 * delta)
-	if ((Input.is_action_pressed("ui_page_up")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.fov -= (5 * delta)
-	if ((Input.is_action_pressed("ui_page_down")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.fov += (5 * delta)
-	if ((Input.is_action_pressed("ui_home")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotation = Vector3.ZERO
-		$Camera_FPV.fov = 65
 	# Roll input
 	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
 	
