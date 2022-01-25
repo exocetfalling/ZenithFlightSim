@@ -32,7 +32,7 @@ custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 
 [node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.05, 0 )
 material_override = SubResource( 2 )
 cast_shadow = 0
 extra_cull_margin = 869.95
