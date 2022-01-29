@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://resources/Glider_Metal.tres" type="Material" id=1]
 [ext_resource path="res://scenes/GPRocket.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://scenes/Engine.tscn" type="PackedScene" id=10]
 [ext_resource path="res://resources/Glider_Gear_Bay.tres" type="Material" id=11]
 [ext_resource path="res://scenes/3D_HUD_V2.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/Camera_FPV_Node.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/WpnRack.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -192,12 +193,8 @@ shape = SubResource( 5 )
 [node name="Engine" parent="Plane03" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 
-[node name="Camera_FPV" type="Camera" parent="Plane03"]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 0, -6 )
-environment = ExtResource( 3 )
-current = true
-fov = 65.0
-far = 100000.0
+[node name="Camera_FPV_Node" parent="Plane03" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 
 [node name="Camera_Ext" type="Camera" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 8.90095 )
@@ -226,11 +223,11 @@ script = ExtResource( 5 )
 term_P = 0.2
 term_I = 2.0
 
-[node name="3D_GCS" parent="Plane03" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, -1.82799, -7.76239 )
-
 [node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )
+
+[node name="3D_GCS" parent="Plane03" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -1.49546, -6.76695 )
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.833, -4.132 )

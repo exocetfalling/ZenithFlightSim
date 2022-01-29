@@ -36,9 +36,9 @@ var tgt_trk = 0
 
 var pfd_stall = false
 
-var throttle_max = 100
+var throttle_max = 1
 var throttle_min = 0
-var throttle_input = 0
+var input_throttle = 0
 
 var autopilot_on = 0
 var tgt_pitch = 0
@@ -165,7 +165,10 @@ var pfd_fd_commands = Vector3.ZERO
 var rate_pitch = 0
 var cmd_vector = Vector3.ZERO
 
+var panel_throttle = 0
+
 onready var Panel_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel")
+onready var Panel_Throttle_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Throttle")
 onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -180,7 +183,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
-#	DebugOverlay.stats.add_property(self, "throttle_input", "round")
+#	DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
 	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
@@ -367,7 +370,7 @@ func _physics_process(delta):
 	Panel_Node.display_flaps = input_flaps * 4
 	Panel_Node.display_trim = output_elevator_trim
 	Panel_Node.display_gear = gear_current
-	Panel_Node.display_throttle = throttle_input
+	Panel_Node.display_throttle = input_throttle
 	Panel_Node.display_ap = autopilot_on
 	
 	Panel_Node.display_nav_brg = waypoint_data.x
@@ -380,14 +383,22 @@ func _physics_process(delta):
 	HUD_Node.display_spd = pfd_spd
 	HUD_Node.display_hdg = pfd_hdg
 	HUD_Node.display_alt = pfd_alt
+	
+	HUD_Node.display_alpha = pfd_alpha
+	HUD_Node.display_beta = pfd_beta
+	
 	HUD_Node.display_flaps = input_flaps * 4
 	HUD_Node.display_trim = output_elevator_trim
 	HUD_Node.display_gear = gear_current
-	HUD_Node.display_throttle = throttle_input
+	HUD_Node.display_throttle = input_throttle
 	HUD_Node.display_ap = autopilot_on
 	
 	HUD_Node.display_nav_brg = waypoint_data.x
 	HUD_Node.display_nav_range = waypoint_data.y
+	HUD_Node.display_FD_commands = pfd_fd_commands
+
+	# Reading control data
+	input_throttle = Panel_Throttle_Node.value
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
@@ -493,11 +504,11 @@ func _physics_process(delta):
 func get_input(delta):
 	# Throttle input
 	if (Input.is_action_pressed("throttle_up")):
-		if (throttle_input < throttle_max):
-			throttle_input = throttle_input + 1 
+		if (input_throttle < throttle_max):
+			Panel_Throttle_Node.value += 0.5 * delta 
 	if (Input.is_action_pressed("throttle_down")):
-		if (throttle_input > throttle_min):
-			throttle_input = throttle_input - 1
+		if (input_throttle > throttle_min):
+			Panel_Throttle_Node.value -= 0.5 * delta
 			
 	# Cameras
 	if (Input.is_action_just_pressed("camera_toggle")):
@@ -505,24 +516,30 @@ func get_input(delta):
 			$Camera_Ext.current = true
 			Main_Panel_active = false
 		else:
-			$Camera_FPV.current = true
+			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
 			Main_Panel_active = true
+		
+	if (Input.is_action_pressed("ui_up")):
+		$Camera_FPV_Node/Gimbal_X.rotate_x(2 * delta)
+	if (Input.is_action_pressed("ui_down")):
+		$Camera_FPV_Node/Gimbal_X.rotate_x(-2 * delta)
+	if (Input.is_action_pressed("ui_left")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(2 * delta)
+	if (Input.is_action_pressed("ui_right")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(-2 * delta)
+	if (Input.is_action_pressed("ui_page_up")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov -= (10 * delta)
+	if (Input.is_action_pressed("ui_page_down")):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov += (10 * delta)
+	if (Input.is_action_pressed("ui_home")):
+		$Camera_FPV_Node/Gimbal_X.rotation = Vector3.ZERO
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotation = Vector3.ZERO
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov = 70
+	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x > 85:
+		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = 85
+	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x < -85:
+		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = -85
 	
-	if ((Input.is_action_pressed("ui_up")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_x(2 * delta)
-	if ((Input.is_action_pressed("ui_down")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_x(-2 * delta)
-	if ((Input.is_action_pressed("ui_left")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_y(-2 * delta)
-	if ((Input.is_action_pressed("ui_right")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotate_y(2 * delta)
-	if ((Input.is_action_pressed("ui_page_up")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.fov -= (5 * delta)
-	if ((Input.is_action_pressed("ui_page_down")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.fov += (5 * delta)
-	if ((Input.is_action_pressed("ui_home")) && ($Camera_FPV.current == true)):
-		$Camera_FPV.rotation = Vector3.ZERO
-		$Camera_FPV.fov = 65
 	# Roll input
 	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
 	
@@ -681,7 +698,7 @@ func _integrate_forces(_state):
 	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/300 * throttle_input), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -weight/3 * input_throttle), Vector3(0, 0, 0))
 	
 	# Lift forces from static elements (non-moving)
 	add_force_local(force_lift_wing, pos_wing)

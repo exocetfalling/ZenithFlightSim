@@ -37,7 +37,7 @@ func _process(_delta):
 	display_flaps = $'../../'.input_flaps * 4
 	display_trim = $'../../'.output_elevator_trim
 	display_gear = $'../../'.gear_current
-	display_throttle = $'../../'.throttle_input
+	display_throttle = $'../../'.input_throttle
 	display_ap = $'../../'.autopilot_on
 	
 	display_MFD_mode = $MFD/MFD_Mode.item_pressed

@@ -1,0 +1,159 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/MFD_OSB_Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/UpFrontControls.gd" type="Script" id=2]
+
+[node name="UpFrontControls" type="HBoxContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Autopilot" type="VBoxContainer" parent="."]
+margin_right = 300.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Autopilot" type="Button" parent="Autopilot"]
+margin_right = 300.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "A/P"
+
+[node name="Button_FD" type="Button" parent="Autopilot"]
+margin_top = 69.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "FD"
+
+[node name="Button_CWS" type="Button" parent="Autopilot"]
+margin_top = 138.0
+margin_right = 300.0
+margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "CWS"
+
+[node name="Flaps" type="VBoxContainer" parent="."]
+margin_left = 308.0
+margin_right = 608.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Flaps_Up" type="Button" parent="Flaps"]
+margin_right = 300.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 1 )
+text = "FLAPS UP"
+
+[node name="Button_Flaps_Zero" type="Button" parent="Flaps"]
+margin_top = 69.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 1 )
+text = "FLAPS ZERO"
+
+[node name="Button_Flaps_Down" type="Button" parent="Flaps"]
+margin_top = 138.0
+margin_right = 300.0
+margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+text = "FLAPS DN"
+
+[node name="Trim" type="VBoxContainer" parent="."]
+margin_left = 616.0
+margin_right = 916.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Trim_Up" type="Button" parent="Trim"]
+margin_right = 300.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 1 )
+text = "TRIM UP"
+
+[node name="Button_Trim_Zero" type="Button" parent="Trim"]
+margin_top = 69.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 1 )
+text = "TRIM ZERO"
+
+[node name="Button_Trim_Down" type="Button" parent="Trim"]
+margin_top = 138.0
+margin_right = 300.0
+margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+text = "TRIM DN"
+
+[node name="Gear" type="VBoxContainer" parent="."]
+margin_left = 924.0
+margin_right = 1224.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Gear_Up" type="Button" parent="Gear"]
+margin_right = 300.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 1 )
+text = "GEAR UP"
+
+[node name="Button_Gear_Off" type="Button" parent="Gear"]
+margin_top = 69.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 1 )
+text = "GEAR OFF"
+
+[node name="Button_Gear_Down" type="Button" parent="Gear"]
+margin_top = 138.0
+margin_right = 300.0
+margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+text = "GEAR DN"
+
+[node name="Throttle" type="VBoxContainer" parent="."]
+margin_left = 1232.0
+margin_right = 1532.0
+margin_bottom = 199.0
+rect_min_size = Vector2( 300, 0 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Throtte_Up" type="Button" parent="Throttle"]
+margin_right = 300.0
+margin_bottom = 61.0
+custom_fonts/font = ExtResource( 1 )
+text = "THR INC"
+
+[node name="Button_Throttle_Set" type="Button" parent="Throttle"]
+margin_top = 69.0
+margin_right = 300.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 1 )
+text = "THR REF"
+
+[node name="Button_Throttle_Down" type="Button" parent="Throttle"]
+margin_top = 138.0
+margin_right = 300.0
+margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+text = "THR DEC"
