@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/MFD/MFD_Background.svg" type="Texture" id=1]
+[ext_resource path="res://scenes/MFD_OSB.tscn" type="PackedScene" id=2]
+
+[node name="MFD_Root" type="Sprite"]
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="MFD_OSB_01" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -400, -600 )
+
+[node name="MFD_OSB_02" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -200, -600 )
+
+[node name="MFD_OSB_03" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 0, -600 )
+
+[node name="MFD_OSB_04" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 200, -600 )
+
+[node name="MFD_OSB_05" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 400, -600 )
+
+[node name="MFD_OSB_06" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 600, -400 )
+
+[node name="MFD_OSB_07" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 600, -200 )
+
+[node name="MFD_OSB_08" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 600, 0 )
+
+[node name="MFD_OSB_09" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 600, 200 )
+
+[node name="MFD_OSB_10" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 600, 400 )
+
+[node name="MFD_OSB_11" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 400, 600 )
+
+[node name="MFD_OSB_12" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 200, 600 )
+
+[node name="MFD_OSB_13" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( 0, 600 )
+
+[node name="MFD_OSB_14" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -200, 600 )
+
+[node name="MFD_OSB_15" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -400, 600 )
+
+[node name="MFD_OSB_16" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -600, 400 )
+
+[node name="MFD_OSB_17" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -600, 200 )
+
+[node name="MFD_OSB_18" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -600, 0 )
+
+[node name="MFD_OSB_19" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -600, -200 )
+
+[node name="MFD_OSB_20" parent="Buttons" instance=ExtResource( 2 )]
+position = Vector2( -600, -400 )

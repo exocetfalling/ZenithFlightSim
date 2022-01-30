@@ -11,6 +11,7 @@ mode = 0
 textures = [ [  ], [  ] ]
 
 [sub_resource type="SpatialMaterial" id=2]
+flags_unshaded = true
 params_depth_draw_mode = 1
 albedo_texture = ExtResource( 4 )
 
@@ -31,12 +32,13 @@ custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 
 [node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.2, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.05, 0 )
 material_override = SubResource( 2 )
 cast_shadow = 0
 extra_cull_margin = 869.95
 pixel_size = 0.5
 axis = 1
-shaded = true
+transparent = false
+double_sided = false
 alpha_cut = 2
 texture = ExtResource( 4 )

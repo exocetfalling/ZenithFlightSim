@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/Menu_Main_Font.tres" type="DynamicFont" id=1]
+
+[node name="MainMenu" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 80
+custom_constants/margin_top = 80
+custom_constants/margin_left = 80
+custom_constants/margin_bottom = 80
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 80.0
+margin_top = 80.0
+margin_right = 1840.0
+margin_bottom = 1000.0
+
+[node name="Options" type="VBoxContainer" parent="HBoxContainer"]
+margin_right = 392.0
+margin_bottom = 920.0
+
+[node name="Button_Fly" type="Button" parent="HBoxContainer/Options"]
+margin_right = 392.0
+margin_bottom = 98.0
+custom_fonts/font = ExtResource( 1 )
+text = "Fly"
+
+[node name="Button_Scenario" type="Button" parent="HBoxContainer/Options"]
+margin_top = 106.0
+margin_right = 392.0
+margin_bottom = 204.0
+custom_fonts/font = ExtResource( 1 )
+text = "Scenario"
+
+[node name="Button_Missions" type="Button" parent="HBoxContainer/Options"]
+margin_top = 212.0
+margin_right = 392.0
+margin_bottom = 310.0
+custom_fonts/font = ExtResource( 1 )
+text = "Missions"
+
+[node name="Button_Settings" type="Button" parent="HBoxContainer/Options"]
+margin_top = 318.0
+margin_right = 392.0
+margin_bottom = 416.0
+custom_fonts/font = ExtResource( 1 )
+text = "Settings"
+
+[node name="Button_License" type="Button" parent="HBoxContainer/Options"]
+margin_top = 424.0
+margin_right = 392.0
+margin_bottom = 522.0
+custom_fonts/font = ExtResource( 1 )
+text = "License"
+
+[node name="Button_Credits" type="Button" parent="HBoxContainer/Options"]
+margin_top = 530.0
+margin_right = 392.0
+margin_bottom = 628.0
+custom_fonts/font = ExtResource( 1 )
+text = "Credits"
