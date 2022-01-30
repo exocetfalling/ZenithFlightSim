@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/PFD_background.bmp-0877359472d2411b46b3eebaf8ba0913.stex"
+path="res://.import/pfd_background.bmp-006606f4ff9489af24b9903605237c96.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PFD/PFD_background.bmp"
-dest_files=[ "res://.import/PFD_background.bmp-0877359472d2411b46b3eebaf8ba0913.stex" ]
+source_file="res://assets/PFD/pfd_background.bmp"
+dest_files=[ "res://.import/pfd_background.bmp-006606f4ff9489af24b9903605237c96.stex" ]
 
 [params]
 
