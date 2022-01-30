@@ -22,23 +22,23 @@ var slider_flaps = 0
 var current_viewport_size = get_viewport_rect().size/2	
 var current_centre_position = get_viewport_rect().size/2
 
-func ui_element_dynamic_pos(res_current, res_native, position_design, size_design):
-	var scale_factor
-	var offset_design
-	var position_dynamic
-	
-	scale_factor = res_current / res_native
-	position_dynamic = position_design * scale_factor
-	return position_dynamic
-
-func ui_element_dynamic_scale(res_current, res_native, position_design, size_design):
-	var scale_factor
-	var offset_design
-	var scale_dynamic 
-	var position_dynamic
-	
-	scale_dynamic = Vector2((res_current.y / res_native.y), (res_current.y / res_native.y))
-	return scale_dynamic
+#func ui_element_dynamic_pos(res_current, res_native, position_design, size_design):
+#	var scale_factor
+#	var offset_design
+#	var position_dynamic
+#
+#	scale_factor = res_current / res_native
+#	position_dynamic = position_design * scale_factor
+#	return position_dynamic
+#
+#func ui_element_dynamic_scale(res_current, res_native, position_design, size_design):
+#	var scale_factor
+#	var offset_design
+#	var scale_dynamic 
+#	var position_dynamic
+#
+#	scale_dynamic = Vector2((res_current.y / res_native.y), (res_current.y / res_native.y))
+#	return scale_dynamic
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -147,7 +147,7 @@ func _process(_delta):
 	get_node("MFD/Page_NAV/Waypoint_Dist").text = ("%0.1f KM" % [display_nav_range/1000])
 
 	# Sliders
-	get_node("Sliders/Throttle").value = slider_throttle
+#	get_node("Sliders/Throttle").value = slider_throttle
 	
 	# UFC Buttons
 	

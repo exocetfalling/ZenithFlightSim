@@ -168,6 +168,12 @@ var cmd_vector = Vector3.ZERO
 var panel_throttle = 0
 
 onready var Panel_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel")
+
+onready var Panel_Throttle_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Throttle")
+onready var Panel_Flaps_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Flaps")
+onready var Panel_Gear_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Gear")
+onready var Panel_Trim_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Trim")
+
 onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -395,9 +401,7 @@ func _physics_process(delta):
 	HUD_Node.display_nav_brg = waypoint_data.x
 	HUD_Node.display_nav_range = waypoint_data.y
 	HUD_Node.display_FD_commands = pfd_fd_commands
-
-	# Reading control data
-	input_throttle = Panel_Node.slider_throttle
+	
 	
 	if (angle_alpha_deg > 15):
 		pfd_stall = true
@@ -502,12 +506,14 @@ func _physics_process(delta):
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
 	# Throttle input
+	input_throttle = Panel_Throttle_Node.value
+	
 	if (Input.is_action_pressed("throttle_up")):
 		if (input_throttle < throttle_max):
-			Panel_Node.slider_throttle = input_throttle + 0.2 * delta 
+			Panel_Throttle_Node.value += 0.5 * delta 
 	if (Input.is_action_pressed("throttle_down")):
 		if (input_throttle > throttle_min):
-			Panel_Node.slider_throttle = input_throttle - 0.2 * delta
+			Panel_Throttle_Node.value -= 0.5 * delta
 			
 	# Cameras
 	if (Input.is_action_just_pressed("camera_toggle")):
@@ -548,27 +554,34 @@ func get_input(delta):
 	input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
 	
 	# Flaps input
+	
+	# Inverted as slider down should indicate more flaps, not less
+	input_flaps = -Panel_Flaps_Node.value
 	if (Input.is_action_just_pressed("flaps_down")):
-		if (input_flaps < flaps_max):
-			input_flaps = input_flaps + 0.25 
+		Panel_Flaps_Node.value -= 0.25 
 	if (Input.is_action_just_pressed("flaps_up")):
-		if (input_flaps > flaps_min):
-			input_flaps = input_flaps - 0.25
-			
+		Panel_Flaps_Node.value += 0.25
+
 	# Trim input
+	
+	# Inverted as slider down should indicate more trim, not less
+	input_elevator_trim = -Panel_Trim_Node.value
+	
 	if (Input.is_action_pressed("trim_pitch_up")):
-		if (input_elevator_trim < input_trim_pitch_max):
-			input_elevator_trim = input_elevator_trim + 0.25 * delta 
+		Panel_Trim_Node.value -= 0.5 * delta 
 	if (Input.is_action_pressed("trim_pitch_down")):
-		if (input_elevator_trim > input_trim_pitch_min):
-			input_elevator_trim = input_elevator_trim - 0.25 * delta
+		Panel_Trim_Node.value += 0.5 * delta 
 
 	# Gear input
+
+	gear_input = -Panel_Gear_Node.value
+	
 	if (Input.is_action_just_pressed("gear_toggle")):
-		if (gear_input == 0):
-			gear_input = 1
+	
+		if (Panel_Gear_Node.value == 0):
+			Panel_Gear_Node.value = -1
 		else:
-			gear_input = 0
+			Panel_Gear_Node.value = 0
 	
 	# AP input
 	if (Input.is_action_just_pressed("autopilot_toggle")):
