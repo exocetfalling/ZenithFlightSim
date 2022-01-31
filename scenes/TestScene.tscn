@@ -11,7 +11,7 @@
 script = ExtResource( 2 )
 
 [node name="Plane" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 103.1, 934.882 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 303.1, 934.882 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 8 )

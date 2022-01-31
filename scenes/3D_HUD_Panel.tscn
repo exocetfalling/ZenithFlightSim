@@ -35,12 +35,13 @@ light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 198.0
-size_flags_vertical = 0
+margin_bottom = 1060.0
+size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 12 )
 text = "SPEED
 XXX"
+valign = 1
 uppercase = true
 
 [node name="Heading_Data" type="Label" parent="."]
@@ -48,8 +49,8 @@ light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 198.0
-size_flags_vertical = 0
+margin_bottom = 1060.0
+size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 12 )
 text = "HDG
@@ -62,13 +63,14 @@ light_mask = 8
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 198.0
-size_flags_vertical = 0
+margin_bottom = 1060.0
+size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 12 )
 text = "ALT
 XXXXX"
 align = 2
+valign = 1
 uppercase = true
 
 [node name="HUD" type="Light2D" parent="."]

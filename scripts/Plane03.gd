@@ -307,13 +307,13 @@ func find_angles_and_distance_to_target(vec_pos_target):
 
 func calc_autopilot_factor(velocity_aircraft):	
 	var x1 = 0
-	var y1 = 0.10
+	var y1 = 1
 	var x2 = 60
-	var y2 = 0.10
-	var x3 = 160
-	var y3 = 0.02
+	var y2 = 1
+	var x3 = 100
+	var y3 = 0.2
 	var x4 = 200
-	var y4 = 0.02
+	var y4 = 0.2
 
 	var a = (y2 - y1) / (x2 - x1)
 	var b = (y3 - y2) / (x3 - x2)
@@ -423,14 +423,17 @@ func _physics_process(delta):
 			(abs(pfd_pitch) < 20) && \
 			(ground_contact_NLG == false)\
 			):
-					input_elevator_trim = \
+					Panel_Trim_Node.value = \
+					-1 * \
+					calc_autopilot_factor(vel_total) * \
+					( \
 					$Trim_PID_Calc.calc_proportional_output(tgt_pitch, pfd_pitch, delta) + \
 					$Trim_PID_Calc.calc_integral_output(tgt_pitch, pfd_pitch, delta) + \
 					$Trim_PID_Calc.calc_derivative_output(tgt_pitch, pfd_pitch, delta)
+					) \
 					
 					
-					
-					output_yaw_damper = calc_autopilot_factor(vel_total) * -angle_beta_deg
+					output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
 #					input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
 				tgt_pitch = pfd_pitch

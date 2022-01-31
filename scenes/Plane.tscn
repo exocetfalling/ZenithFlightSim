@@ -44,7 +44,7 @@ continuous_cd = true
 contacts_reported = 32
 can_sleep = false
 linear_damp = 0.0
-angular_damp = 3.0
+angular_damp = 1.0
 script = ExtResource( 6 )
 
 [node name="Glider_CSG_Mesh" type="Spatial" parent="Plane03"]
@@ -220,8 +220,9 @@ visible = false
 
 [node name="Trim_PID_Calc" type="Node" parent="Plane03"]
 script = ExtResource( 5 )
-term_P = 0.2
-term_I = 2.0
+term_P = 0.1
+term_I = 20.0
+term_D = 0.05
 
 [node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )

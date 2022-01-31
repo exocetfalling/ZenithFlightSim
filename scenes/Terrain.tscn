@@ -18,7 +18,7 @@ albedo_texture = ExtResource( 4 )
 [node name="Spatial" type="Spatial"]
 
 [node name="HTerrain" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20000, -2200, -20000 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20000, -2000, -20000 )
 script = ExtResource( 1 )
 map_scale = Vector3( 100, 100, 100 )
 _terrain_data = ExtResource( 3 )
@@ -31,8 +31,8 @@ custom_shader = null
 custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 
-[node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 100.05, 0 )
+[node name="Runway" type="Sprite3D" parent="HTerrain"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20000, 2300.05, 20000 )
 material_override = SubResource( 2 )
 cast_shadow = 0
 extra_cull_margin = 869.95
