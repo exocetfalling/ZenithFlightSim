@@ -36,7 +36,7 @@ __meta__ = {
 }
 
 [node name="PFD" type="Light2D" parent="."]
-position = Vector2( 254.151, 794.645 )
+position = Vector2( 254.151, 798.645 )
 texture = ExtResource( 12 )
 mode = 3
 script = ExtResource( 5 )
@@ -587,9 +587,25 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 1900.0
-margin_bottom = 219.0
+margin_bottom = 288.0
 size_flags_horizontal = 1
 alignment = 1
+
+[node name="Modes_Main" parent="UpFrontControls" index="0"]
+margin_left = 328.0
+margin_right = 628.0
+
+[node name="Modes_Vertical" parent="UpFrontControls" index="1"]
+margin_left = 636.0
+margin_right = 936.0
+
+[node name="Modes_Lateral" parent="UpFrontControls" index="2"]
+margin_left = 944.0
+margin_right = 1244.0
+
+[node name="Waypoints" parent="UpFrontControls" index="3"]
+margin_left = 1252.0
+margin_right = 1552.0
 
 [node name="Sliders" type="HBoxContainer" parent="."]
 margin_left = 748.0
@@ -700,3 +716,5 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[editable path="UpFrontControls"]

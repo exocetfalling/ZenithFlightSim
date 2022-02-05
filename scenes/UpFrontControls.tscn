@@ -11,149 +11,157 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Autopilot_Main" type="VBoxContainer" parent="."]
+[node name="Modes_Main" type="VBoxContainer" parent="."]
 margin_right = 300.0
-margin_bottom = 199.0
+margin_bottom = 268.0
 rect_min_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Autopilot" type="Button" parent="Autopilot_Main"]
+[node name="AP" type="Button" parent="Modes_Main"]
 margin_right = 300.0
 margin_bottom = 61.0
 custom_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "A/P"
 
-[node name="Button_FD" type="Button" parent="Autopilot_Main"]
+[node name="FD" type="Button" parent="Modes_Main"]
 margin_top = 69.0
 margin_right = 300.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 1 )
 toggle_mode = true
-text = "FD"
+text = "F/D"
 
-[node name="Button_CWS" type="Button" parent="Autopilot_Main"]
+[node name="YD" type="Button" parent="Modes_Main"]
 margin_top = 138.0
 margin_right = 300.0
 margin_bottom = 199.0
 custom_fonts/font = ExtResource( 1 )
 toggle_mode = true
-text = "CWS"
+text = "Y/D"
 
-[node name="Flaps" type="VBoxContainer" parent="."]
+[node name="FBW" type="Button" parent="Modes_Main"]
+margin_top = 207.0
+margin_right = 300.0
+margin_bottom = 268.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "FBW"
+
+[node name="Modes_Vertical" type="VBoxContainer" parent="."]
 margin_left = 308.0
 margin_right = 608.0
-margin_bottom = 199.0
+margin_bottom = 268.0
 rect_min_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Flaps_Up" type="Button" parent="Flaps"]
+[node name="ALT" type="Button" parent="Modes_Vertical"]
 margin_right = 300.0
 margin_bottom = 61.0
 custom_fonts/font = ExtResource( 1 )
-text = "FLAPS UP"
+toggle_mode = true
+text = "ALT HOLD"
 
-[node name="Button_Flaps_Zero" type="Button" parent="Flaps"]
+[node name="VS" type="Button" parent="Modes_Vertical"]
 margin_top = 69.0
 margin_right = 300.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 1 )
-text = "FLAPS ZERO"
+toggle_mode = true
+text = "V/S HOLD"
 
-[node name="Button_Flaps_Down" type="Button" parent="Flaps"]
+[node name="FLCH" type="Button" parent="Modes_Vertical"]
 margin_top = 138.0
 margin_right = 300.0
 margin_bottom = 199.0
 custom_fonts/font = ExtResource( 1 )
-text = "FLAPS DN"
+toggle_mode = true
+text = "FLCH SPD"
 
-[node name="Trim" type="VBoxContainer" parent="."]
+[node name="VNAV" type="Button" parent="Modes_Vertical"]
+margin_top = 207.0
+margin_right = 300.0
+margin_bottom = 268.0
+custom_fonts/font = ExtResource( 1 )
+toggle_mode = true
+text = "FMS VNAV"
+
+[node name="Modes_Lateral" type="VBoxContainer" parent="."]
 margin_left = 616.0
 margin_right = 916.0
-margin_bottom = 199.0
+margin_bottom = 268.0
 rect_min_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Trim_Up" type="Button" parent="Trim"]
+[node name="ATT" type="Button" parent="Modes_Lateral"]
 margin_right = 300.0
 margin_bottom = 61.0
 custom_fonts/font = ExtResource( 1 )
-text = "TRIM UP"
+toggle_mode = true
+text = "ATT HOLD"
 
-[node name="Button_Trim_Zero" type="Button" parent="Trim"]
+[node name="HDG" type="Button" parent="Modes_Lateral"]
 margin_top = 69.0
 margin_right = 300.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 1 )
-text = "TRIM ZERO"
+toggle_mode = true
+text = "HDG SEL"
 
-[node name="Button_Trim_Down" type="Button" parent="Trim"]
+[node name="LOC" type="Button" parent="Modes_Lateral"]
 margin_top = 138.0
 margin_right = 300.0
 margin_bottom = 199.0
 custom_fonts/font = ExtResource( 1 )
-text = "TRIM DN"
+toggle_mode = true
+text = "VOR LOC"
 
-[node name="Gear" type="VBoxContainer" parent="."]
-margin_left = 924.0
-margin_right = 1224.0
-margin_bottom = 199.0
-rect_min_size = Vector2( 300, 0 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Button_Gear_Up" type="Button" parent="Gear"]
+[node name="LNAV" type="Button" parent="Modes_Lateral"]
+margin_top = 207.0
 margin_right = 300.0
-margin_bottom = 61.0
+margin_bottom = 268.0
 custom_fonts/font = ExtResource( 1 )
-text = "GEAR UP"
-
-[node name="Button_Gear_Off" type="Button" parent="Gear"]
-margin_top = 69.0
-margin_right = 300.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 1 )
-text = "GEAR OFF"
-
-[node name="Button_Gear_Down" type="Button" parent="Gear"]
-margin_top = 138.0
-margin_right = 300.0
-margin_bottom = 199.0
-custom_fonts/font = ExtResource( 1 )
-text = "GEAR DN"
+toggle_mode = true
+text = "FMS LNAV"
 
 [node name="Waypoints" type="VBoxContainer" parent="."]
-margin_left = 1232.0
-margin_right = 1532.0
-margin_bottom = 199.0
+margin_left = 924.0
+margin_right = 1224.0
+margin_bottom = 268.0
 rect_min_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Waypoint_Next" type="Button" parent="Waypoints"]
+[node name="Next" type="Button" parent="Waypoints"]
 margin_right = 300.0
 margin_bottom = 61.0
 custom_fonts/font = ExtResource( 1 )
 text = "WPT NEXT"
 
-[node name="Button_Waypoint_Home" type="Button" parent="Waypoints"]
+[node name="Home" type="Button" parent="Waypoints"]
 margin_top = 69.0
 margin_right = 300.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 1 )
 text = "WPT HOME"
 
-[node name="Button_Waypoint_Prev" type="Button" parent="Waypoints"]
+[node name="Last" type="Button" parent="Waypoints"]
 margin_top = 138.0
 margin_right = 300.0
 margin_bottom = 199.0
+custom_fonts/font = ExtResource( 1 )
+text = "WPT LAST"
+
+[node name="Prev" type="Button" parent="Waypoints"]
+margin_top = 207.0
+margin_right = 300.0
+margin_bottom = 268.0
 custom_fonts/font = ExtResource( 1 )
 text = "WPT PREV"

@@ -101,7 +101,7 @@ func _process(_delta):
 
 	get_node("HUD/FlightPathVector").position.y = display_HUD_scale * (display_alpha / 90 * 260)
 	get_node("HUD/FlightPathVector").position.x = -display_HUD_scale * (display_beta / 90 * 260)
-	get_node("HUD/FlightDirector").position.y = display_HUD_scale * (display_FD_commands.y / 90 * 260)
+	get_node("HUD/FlightDirector").position.y = -display_HUD_scale * (display_FD_commands.y / 90 * 260)
 	get_node("HUD/FlightDirector").position.x = display_HUD_scale * (display_FD_commands.x / 90 * 260)
 	if (display_spd > 2):
 		get_node('HUD/FlightPathVector').visible = true
