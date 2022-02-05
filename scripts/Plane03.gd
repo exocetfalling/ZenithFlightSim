@@ -152,7 +152,8 @@ var deflection_rate_flaps = 1/(2 * PI)
 
 var waypoint_data = Vector2.ZERO
 var wpt_current = 'WPT 01'
-var wpt_current_coordinates = Vector3.ZERO
+#var wpt_current_coordinates = Vector3.ZERO
+var wpt_current_coordinates = Vector3(1184.5, 402.423, 0)
 var WPT_01_coodinates = Vector3.ZERO
 var WPT_02_coodinates = Vector3.ZERO
 var WPT_03_coodinates = Vector3.ZERO
@@ -526,27 +527,6 @@ func get_input(delta):
 		else:
 			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
 			Main_Panel_active = true
-		
-	if (Input.is_action_pressed("ui_up")):
-		$Camera_FPV_Node/Gimbal_X.rotate_x(2 * delta)
-	if (Input.is_action_pressed("ui_down")):
-		$Camera_FPV_Node/Gimbal_X.rotate_x(-2 * delta)
-	if (Input.is_action_pressed("ui_left")):
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(2 * delta)
-	if (Input.is_action_pressed("ui_right")):
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotate_y(-2 * delta)
-	if (Input.is_action_pressed("ui_page_up")):
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov -= (10 * delta)
-	if (Input.is_action_pressed("ui_page_down")):
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov += (10 * delta)
-	if (Input.is_action_pressed("ui_home")):
-		$Camera_FPV_Node/Gimbal_X.rotation = Vector3.ZERO
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y.rotation = Vector3.ZERO
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.fov = 70
-	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x > 85:
-		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = 85
-	if $Camera_FPV_Node/Gimbal_X.rotation_degrees.x < -85:
-		$Camera_FPV_Node/Gimbal_X.rotation_degrees.x = -85
 	
 	# Roll input
 	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")

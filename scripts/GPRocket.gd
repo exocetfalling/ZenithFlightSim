@@ -177,18 +177,18 @@ func _process(delta):
 	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
 	if (launched == true):
 		tgt_vector = find_angles_and_distance_to_target(tgt_coordinates)
-		cmd_vector.x = 5 * tgt_vector.x
-		cmd_vector.y = 5 * tgt_vector.y
+		cmd_vector.x = 5 * (tgt_vector.x + 3 * angle_beta_deg)
+		cmd_vector.y = 5 * (tgt_vector.y + 3 * angle_alpha_deg)
 #		cmd_vector.x = 0.1 * DerivCalc1.find_derivative(tgt_coordinates.x, delta)
 #		cmd_vector.y = 0.1 * DerivCalc2.find_derivative(tgt_coordinates.y, delta)
 		
 		if (fuel > 0):
 			$Particles.visible = true
-			fuel = fuel - 1 * delta
+			fuel = fuel - 75 * delta
 		if (fuel <= 0):
 			$Particles.visible = false
 	
-	if ($RayCast.is_colliding() == true):
+	if (($RayCast.is_colliding() == true) && (launched == true)):
 		emit_signal("exploded", transform.origin)
 		fuel = 0
 		var clone = explosion_scene.instance()
@@ -209,6 +209,8 @@ func _integrate_forces(_state):
 	add_force_local(force_drag_h_tail, pos_h_tail)
 	add_force_local(force_drag_v_tail, pos_v_tail)
 	
-	if ((fuel > 0) && (launched == true)):
+	if (launched == true):
 #		add_force_local(Vector3(-0 * cmd_vector.x, -0 * cmd_vector.y, -5000), Vector3(0, 0, 2))
-		add_force_local(Vector3(-cmd_vector.x, -cmd_vector.y, -1000), Vector3(0, 0, 2))
+		add_force_local(Vector3(cmd_vector.x, cmd_vector.y, 0), Vector3(0, 0, -2))
+		if (fuel > 0):
+			add_force_local(Vector3(0, 0, -8000), Vector3(0, 0, 2))

@@ -56,5 +56,5 @@ draw_pass_1 = SubResource( 6 )
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.903801 )
 enabled = true
-cast_to = Vector3( 0, 0, -0.1 )
+cast_to = Vector3( 0, 0, -1 )
 collide_with_areas = true

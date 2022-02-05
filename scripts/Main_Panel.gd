@@ -18,6 +18,8 @@ var display_nav_waypoint = 0
 
 var slider_throttle = 0
 var slider_flaps = 0
+
+var button_FBW = 0
 	
 var current_viewport_size = get_viewport_rect().size/2	
 var current_centre_position = get_viewport_rect().size/2
@@ -146,10 +148,8 @@ func _process(_delta):
 	get_node("MFD/Page_NAV/Waypoint_ID").text = display_nav_waypoint
 	get_node("MFD/Page_NAV/Waypoint_Dist").text = ("%0.1f KM" % [display_nav_range/1000])
 
-	# Sliders
-#	get_node("Sliders/Throttle").value = slider_throttle
-	
 	# UFC Buttons
 	
-	
+	if (get_node("UpFrontControls/Modes_Main/FBW").pressed == true):
+		button_FBW = 1
 	

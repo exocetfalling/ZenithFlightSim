@@ -5,6 +5,9 @@
 
 [node name="Camera_FPV_Node" type="Spatial"]
 script = ExtResource( 2 )
+mouse_control = true
+invert_y = true
+invert_x = true
 
 [node name="Gimbal_X" type="Spatial" parent="."]
 

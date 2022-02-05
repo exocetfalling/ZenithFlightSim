@@ -7,6 +7,7 @@ ground_bottom_color = Color( 0.101961, 0.462745, 0.823529, 1 )
 background_mode = 2
 background_sky = SubResource( 1 )
 fog_enabled = true
+ss_reflections_enabled = true
 ssao_enabled = true
 dof_blur_far_distance = 8000.0
 dof_blur_far_transition = 2500.0
