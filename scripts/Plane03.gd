@@ -19,6 +19,9 @@ var vel_local_intermediate = Vector3.ZERO
 var vel_local = Vector3.ZERO
 var vel_total = 0
 
+var vel_angular_local = Vector3.ZERO
+var vel_angular_local_deg = Vector3.ZERO
+
 var pfd_spd = 0
 var pfd_alt = 0
 var pfd_hdg = 0
@@ -191,8 +194,9 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
-	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
+	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
+	DebugOverlay.stats.add_property(self, "vel_angular_local_deg", "round")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
@@ -366,6 +370,10 @@ func _physics_process(delta):
 	global_rotation = global_transform.basis.get_euler()
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
 	
+	vel_angular_local = global_transform.basis.z * (angular_velocity)
+	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+#	vel_angular_local = (angular_velocity)
+
 	# Panel updates
 	Panel_Node.display_active = Main_Panel_active
 	Panel_Node.display_pitch = pfd_pitch
@@ -428,16 +436,16 @@ func _physics_process(delta):
 					-1 * \
 					calc_autopilot_factor(vel_total) * \
 					( \
-					$Trim_PID_Calc.calc_proportional_output(tgt_pitch, pfd_pitch, delta) + \
-					$Trim_PID_Calc.calc_integral_output(tgt_pitch, pfd_pitch, delta) + \
-					$Trim_PID_Calc.calc_derivative_output(tgt_pitch, pfd_pitch, delta)
+					$Trim_PID_Calc.calc_proportional_output(tgt_fpa, pfd_fpa, delta) + \
+					$Trim_PID_Calc.calc_integral_output(tgt_fpa, pfd_fpa, delta) + \
+					$Trim_PID_Calc.calc_derivative_output(tgt_fpa, pfd_fpa, delta)
 					) \
 					
 					
 					output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
 #					input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
-				tgt_pitch = pfd_pitch
+				tgt_fpa = pfd_fpa
 				output_yaw_damper = 0
 		if (pfd_stall == true):
 			autopilot_on = 0

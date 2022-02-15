@@ -1,10 +1,11 @@
 extends RigidBody
 
-#var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
-#var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
+#var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
+#var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
 
 var air_density = 1.2
 
@@ -177,14 +178,19 @@ func _process(delta):
 	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
 	if (launched == true):
 		tgt_vector = find_angles_and_distance_to_target(tgt_coordinates)
-		cmd_vector.x = 5 * (tgt_vector.x + 3 * angle_beta_deg)
-		cmd_vector.y = 5 * (tgt_vector.y + 3 * angle_alpha_deg)
-#		cmd_vector.x = 0.1 * DerivCalc1.find_derivative(tgt_coordinates.x, delta)
-#		cmd_vector.y = 0.1 * DerivCalc2.find_derivative(tgt_coordinates.y, delta)
+		if ((abs(tgt_vector.x) < 45) && (abs(tgt_vector.y) < 45)):
+#			cmd_vector.x = 0.01 * DerivCalc1.calc_derivative(tgt_coordinates.x, delta)
+#			cmd_vector.y = 0.01 * DerivCalc2.calc_derivative(tgt_coordinates.y, delta)
+			cmd_vector.x = 5 * (tgt_vector.x + 0.5 * angle_beta_deg)
+			cmd_vector.y = 5 * (tgt_vector.y + 0.5 * angle_alpha_deg)
+		else:
+			cmd_vector = Vector2.ZERO
+		
+
 		
 		if (fuel > 0):
 			$Particles.visible = true
-			fuel = fuel - 75 * delta
+			fuel = fuel - 50 * delta
 		if (fuel <= 0):
 			$Particles.visible = false
 	

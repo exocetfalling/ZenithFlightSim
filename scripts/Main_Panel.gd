@@ -46,8 +46,7 @@ var current_centre_position = get_viewport_rect().size/2
 func _ready():
 #	DebugOverlay.stats.add_property(self, "display_MFD_mode", "")
 	pass # Replace with function body.
-func get_input(delta):
-	pass
+
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
