@@ -179,6 +179,18 @@ onready var Panel_Gear_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sl
 onready var Panel_Trim_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Trim")
 
 onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
+
+# FBW variables
+
+# Pitch, yaw, roll, roll inverted from Godot convention
+# So roll rate is +ve for roll right
+
+var adc_rates = Vector3.ZERO
+var tgt_rates = Vector3.ZERO
+
+# Pitch, yaw, roll, to be sent to servos
+var fbw_output = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -194,9 +206,12 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
-	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
-	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
-	DebugOverlay.stats.add_property(self, "vel_angular_local_deg", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "vel_angular_local_deg", "round")
+	DebugOverlay.stats.add_property(self, "adc_rates", "round")
+	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
+	DebugOverlay.stats.add_property(self, "fbw_output", "")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
@@ -372,8 +387,18 @@ func _physics_process(delta):
 	
 	vel_angular_local = global_transform.basis.z * (angular_velocity)
 	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+	
 #	vel_angular_local = (angular_velocity)
 
+	# FBW
+	adc_rates.x = -vel_angular_local_deg.x
+	adc_rates.y = vel_angular_local_deg.y
+	adc_rates.z = -vel_angular_local_deg.z
+	
+	tgt_rates.x = input_elevator * 5
+	tgt_rates.y = 0
+	tgt_rates.z = input_aileron * 10
+	
 	# Panel updates
 	Panel_Node.display_active = Main_Panel_active
 	Panel_Node.display_pitch = pfd_pitch
@@ -423,7 +448,16 @@ func _physics_process(delta):
 		gear_current = gear_current - 0.2 * delta
 	if (abs(gear_current - gear_input) < 0.01):
 		gear_current = gear_input
+	
+	fbw_output.x = clamp(($PID_Calc_Pitch.calc_PID_output(tgt_rates.x, adc_rates.x, delta)), -1, 1)
+	
+#	if ((adc_rates.x < tgt_rates.x) && (fbw_output.x < 1)):
+#		fbw_output.x += 0.1
+#	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
+#		fbw_output.x -= 0.1
 
+
+	
 	if (autopilot_on == 1):
 		if (pfd_stall == false):
 			if (\
@@ -432,18 +466,20 @@ func _physics_process(delta):
 			(abs(pfd_pitch) < 20) && \
 			(ground_contact_NLG == false)\
 			):
-					Panel_Trim_Node.value = \
-					-1 * \
-					calc_autopilot_factor(vel_total) * \
-					( \
-					$Trim_PID_Calc.calc_proportional_output(tgt_fpa, pfd_fpa, delta) + \
-					$Trim_PID_Calc.calc_integral_output(tgt_fpa, pfd_fpa, delta) + \
-					$Trim_PID_Calc.calc_derivative_output(tgt_fpa, pfd_fpa, delta)
-					) \
-					
-					
-					output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
-#					input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
+#				Panel_Trim_Node.value = \
+#				-1 * \
+#				calc_autopilot_factor(vel_total) * \
+#				( \
+#				$Trim_PID_Calc.calc_proportional_output(tgt_fpa, pfd_fpa, delta) + \
+#				$Trim_PID_Calc.calc_integral_output(tgt_fpa, pfd_fpa, delta) + \
+#				$Trim_PID_Calc.calc_derivative_output(tgt_fpa, pfd_fpa, delta)
+#				) \
+#
+#				Panel_Trim_Node.value = \
+#				-1 * fbw_output.x
+				
+				output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
+#				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
 				tgt_fpa = pfd_fpa
 				output_yaw_damper = 0
@@ -642,7 +678,7 @@ func get_input(delta):
 	
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
-	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
+	output_elevator = interpolate_linear(output_elevator, fbw_output.x, deflection_rate, delta)
 	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
