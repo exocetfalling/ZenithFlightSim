@@ -4,8 +4,8 @@ extends RigidBody
 # var a = 2
 # var b = "text"
 
-#var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
-#var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
+var DerivCalc1 = preload("res://scripts/Derivative_Calc.gd").new()
+var DerivCalc2 = preload("res://scripts/Derivative_Calc.gd").new()
 
 var air_density = 1.2
 
@@ -179,10 +179,10 @@ func _process(delta):
 	if (launched == true):
 		tgt_vector = find_angles_and_distance_to_target(tgt_coordinates)
 		if ((abs(tgt_vector.x) < 45) && (abs(tgt_vector.y) < 45)):
-#			cmd_vector.x = 0.01 * DerivCalc1.calc_derivative(tgt_coordinates.x, delta)
-#			cmd_vector.y = 0.01 * DerivCalc2.calc_derivative(tgt_coordinates.y, delta)
-			cmd_vector.x = 5 * (tgt_vector.x + 0.5 * angle_beta_deg)
-			cmd_vector.y = 5 * (tgt_vector.y + 0.5 * angle_alpha_deg)
+			cmd_vector.x = 0.01 * DerivCalc1.calc_derivative(tgt_coordinates.x, delta)
+			cmd_vector.y = 0.01 * DerivCalc2.calc_derivative(tgt_coordinates.y, delta)
+#			cmd_vector.x = 5 * (tgt_vector.x + 0.5 * angle_beta_deg)
+#			cmd_vector.y = 5 * (tgt_vector.y + 0.5 * angle_alpha_deg)
 		else:
 			cmd_vector = Vector2.ZERO
 		
