@@ -288,7 +288,6 @@ __meta__ = {
 }
 
 [node name="Page_CHECKLIST" type="RichTextLabel" parent="MFD"]
-visible = false
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
@@ -390,6 +389,7 @@ __meta__ = {
 }
 
 [node name="Line2D_1" type="Line2D" parent="MFD"]
+visible = false
 light_mask = 2
 position = Vector2( -225.597, -139.343 )
 points = PoolVector2Array( 0, 0, 450, 0 )
@@ -437,6 +437,7 @@ __meta__ = {
 }
 
 [node name="Page_NAV" type="Light2D" parent="MFD"]
+visible = false
 light_mask = 4
 position = Vector2( 0, 40 )
 texture = ExtResource( 9 )
