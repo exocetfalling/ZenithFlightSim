@@ -99,11 +99,11 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 		integral = 0
 	
 	# Output for derivative term 
-	value_error_previous = value_error_current
-	
+
 	value_error_delta = (value_error_current - value_error_previous)
-	
+	value_error_previous = value_error_current
 	derivative = value_error_delta / time_delta
+
 	output_D = term_D * derivative
 	
 	output_total = output_P + output_I + output_D

@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/Terrain.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/Marker.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Target.tscn" type="PackedScene" id=5]
-[ext_resource path="res://resources/lighting_env.tres" type="Environment" id=8]
+[ext_resource path="res://lighting_env.tres" type="Environment" id=6]
 
 [node name="TestScene" type="Spatial"]
 script = ExtResource( 2 )
@@ -14,7 +14,7 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 303.1, 934.882 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource( 8 )
+environment = ExtResource( 6 )
 
 [node name="Terrain" parent="." instance=ExtResource( 3 )]
 
