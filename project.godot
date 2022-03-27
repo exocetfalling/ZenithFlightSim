@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "RigidBody",
+"class": "AeroBody",
+"language": "GDScript",
+"path": "res://scripts/AeroBody.gd"
+}, {
 "base": "Control",
 "class": "CSVEditor",
 "language": "GDScript",
@@ -75,6 +80,7 @@ _global_script_classes=[ {
 "path": "res://addons/github-integration/scripts/RepositoryItem.gd"
 } ]
 _global_script_class_icons={
+"AeroBody": "",
 "CSVEditor": "",
 "ContributorClass": "",
 "Derivative_Calc": "",
