@@ -6,8 +6,20 @@ class_name AeroBody
 # var a = 2
 # var b = "text"
 
-# Areas, cross-sectional, in m^3
-export var area_planar : Vector3 = Vector3(0, 0, 0)
+# Lengths, x-y-z, in m^3
+export var body_dimensions : Vector3 = Vector3(1, 1, 1)
+
+# Areas, x-y-z, in m^3
+# Calculate, using dimensions, area when viewed along axis
+# Area for X axis is side-on
+# Area for Y axis is top-on
+# Area for Z axis is front-on
+
+var body_areas : Vector3 = \
+	Vector3(\
+	(body_dimensions.y * body_dimensions.z), \
+	(body_dimensions.x * body_dimensions.z), \
+	(body_dimensions.x * body_dimensions.y))
 
 # Position of centre of pressure relative to centre of mass at origin 
 export var pos_COP : Vector3 = Vector3(0, 0, 0)
