@@ -7,7 +7,7 @@ class_name AeroBody
 # var b = "text"
 
 # Lengths, x-y-z, in m^3
-export var body_dimensions : Vector3 = Vector3(1, 1, 1)
+var body_dimensions : Vector3 = Vector3(1, 1, 1)
 
 # Areas, x-y-z, in m^3
 # Calculate, using dimensions, area when viewed along axis
@@ -49,6 +49,7 @@ var angle_beta : float = 0.00
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	body_dimensions = $XForm_CSG.scale
 	pass # Replace with function body.
 
 func add_force_local(force: Vector3, pos: Vector3):
