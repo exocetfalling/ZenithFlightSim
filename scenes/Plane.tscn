@@ -37,7 +37,7 @@ extents = Vector3( 0.1, 1.5, 1 )
 [node name="Plane" type="Spatial"]
 
 [node name="Plane03" type="RigidBody" parent="."]
-mass = 2000.0
+mass = 1000.0
 physics_material_override = SubResource( 1 )
 custom_integrator = true
 continuous_cd = true
@@ -197,7 +197,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 
 [node name="Camera_Ext" type="Camera" parent="Plane03"]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 8.90095 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 16.5864 )
 cull_mask = 1048557
 environment = ExtResource( 3 )
 far = 100000.0
@@ -218,11 +218,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7, -1, -1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150 )
 visible = false
 
-[node name="Trim_PID_Calc" type="Node" parent="Plane03"]
+[node name="PID_Calc_Pitch" type="Node" parent="Plane03"]
 script = ExtResource( 5 )
-term_P = 0.1
-term_I = 20.0
-term_D = 0.05
+term_P = 0.05
+term_I = 0.01
 
 [node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )

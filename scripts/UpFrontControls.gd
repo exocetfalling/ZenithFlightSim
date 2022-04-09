@@ -10,11 +10,11 @@ extends HBoxContainer
 func _ready() -> void:
 	pass # Replace with function body.
 
+func get_input_keyboard(delta):
+#	if Input.is_action_just_pressed("autopilot_toggle"):
+#		$Modes_Main/FBW.pressed = true
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-#	if (get_node("Modes_Main/FBW").pressed == true):
-#		UFC_FBW_button = 1
-#	else:
-#		UFC_FBW_button = 0
-	pass
+	get_input_keyboard(delta)

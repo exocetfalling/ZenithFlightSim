@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_transparent = true
+albedo_color = Color( 0.784314, 0.709804, 0.12549, 0.188235 )
+
+[node name="3D_Cockpit" type="Spatial"]
+
+[node name="Walls" type="Spatial" parent="."]
+
+[node name="CSGSphere" type="CSGSphere" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0 )
+radial_segments = 64
+rings = 64
+
+[node name="CSGBox" type="CSGBox" parent="Walls/CSGSphere"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 0.25, 0, 0.5, -0.45 )
+operation = 2
+height = 1.0
+depth = 3.8
+
+[node name="CSGSphere2" type="CSGSphere" parent="Walls/CSGSphere"]
+radius = 0.998
+radial_segments = 64
+rings = 64
+material = SubResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="Walls"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 2 )
+height = 4.0
+sides = 64

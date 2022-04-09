@@ -288,7 +288,6 @@ __meta__ = {
 }
 
 [node name="Page_CHECKLIST" type="RichTextLabel" parent="MFD"]
-visible = false
 margin_left = -201.0
 margin_top = -119.0
 margin_right = 205.0
@@ -390,6 +389,7 @@ __meta__ = {
 }
 
 [node name="Line2D_1" type="Line2D" parent="MFD"]
+visible = false
 light_mask = 2
 position = Vector2( -225.597, -139.343 )
 points = PoolVector2Array( 0, 0, 450, 0 )
@@ -437,6 +437,7 @@ __meta__ = {
 }
 
 [node name="Page_NAV" type="Light2D" parent="MFD"]
+visible = false
 light_mask = 4
 position = Vector2( 0, 40 )
 texture = ExtResource( 9 )
@@ -591,22 +592,6 @@ margin_bottom = 288.0
 size_flags_horizontal = 1
 alignment = 1
 
-[node name="Modes_Main" parent="UpFrontControls" index="0"]
-margin_left = 328.0
-margin_right = 628.0
-
-[node name="Modes_Vertical" parent="UpFrontControls" index="1"]
-margin_left = 636.0
-margin_right = 936.0
-
-[node name="Modes_Lateral" parent="UpFrontControls" index="2"]
-margin_left = 944.0
-margin_right = 1244.0
-
-[node name="Waypoints" parent="UpFrontControls" index="3"]
-margin_left = 1252.0
-margin_right = 1552.0
-
 [node name="Sliders" type="HBoxContainer" parent="."]
 margin_left = 748.0
 margin_top = 560.0
@@ -716,5 +701,3 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[editable path="UpFrontControls"]

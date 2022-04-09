@@ -19,6 +19,9 @@ var vel_local_intermediate = Vector3.ZERO
 var vel_local = Vector3.ZERO
 var vel_total = 0
 
+var vel_angular_local = Vector3.ZERO
+var vel_angular_local_deg = Vector3.ZERO
+
 var pfd_spd = 0
 var pfd_alt = 0
 var pfd_hdg = 0
@@ -42,6 +45,7 @@ var input_throttle = 0
 
 var autopilot_on = 0
 var tgt_pitch = 0
+var tgt_roll = 0
 
 var sta_1_rdy = 1
 var sta_2_rdy = 1
@@ -110,8 +114,8 @@ var force_drag_flaps = Vector3.ZERO
 var force_drag_gear = Vector3.ZERO
 
 # Deflection in radians
-var deflection_control_max = PI/6
-var deflection_flaps_max = PI/4
+var deflection_control_max = PI/12
+var deflection_flaps_max = PI/6
 var angle_incidence = 0.02
 
 var input_elevator = 0
@@ -152,6 +156,7 @@ var deflection_rate_flaps = 1/(2 * PI)
 
 var waypoint_data = Vector2.ZERO
 var wpt_current = 'WPT 01'
+
 #var wpt_current_coordinates = Vector3.ZERO
 var wpt_current_coordinates = Vector3(1184.5, 402.423, 0)
 var WPT_01_coodinates = Vector3.ZERO
@@ -176,6 +181,18 @@ onready var Panel_Gear_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sl
 onready var Panel_Trim_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Trim")
 
 onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
+
+# FBW variables
+
+# Pitch, yaw, roll, roll inverted from Godot convention
+# So roll rate is +ve for roll right
+
+var adc_rates = Vector3.ZERO
+var tgt_rates = Vector3.ZERO
+
+# Pitch, yaw, roll, to be sent to servos
+var fbw_output = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -191,8 +208,12 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "input_flaps", "round")
-	DebugOverlay.stats.add_property(self, "pfd_pitch", "round")
-	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "vel_angular_local_deg", "round")
+#	DebugOverlay.stats.add_property(self, "adc_rates", "round")
+#	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
+#	DebugOverlay.stats.add_property(self, "fbw_output", "")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
@@ -242,7 +263,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_induced_coeff(angle_rad):
-	return abs(0.1 * sin(angle_rad)) 
+	return abs(0.05 * sin(angle_rad)) 
 
 func _calc_drag_parasite_coeff(angle_rad):
 	return abs(0.02 * cos(angle_rad))
@@ -312,9 +333,9 @@ func calc_autopilot_factor(velocity_aircraft):
 	var x2 = 60
 	var y2 = 1
 	var x3 = 100
-	var y3 = 0.2
+	var y3 = 0.05
 	var x4 = 200
-	var y4 = 0.2
+	var y4 = 0.05
 
 	var a = (y2 - y1) / (x2 - x1)
 	var b = (y3 - y2) / (x3 - x2)
@@ -366,6 +387,20 @@ func _physics_process(delta):
 	global_rotation = global_transform.basis.get_euler()
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
 	
+	vel_angular_local = global_transform.basis.z * (angular_velocity)
+	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+	
+#	vel_angular_local = (angular_velocity)
+
+	# FBW
+	adc_rates.x = -vel_angular_local_deg.x
+	adc_rates.y = vel_angular_local_deg.y
+	adc_rates.z = -vel_angular_local_deg.z
+	
+	tgt_rates.x = input_elevator * 5
+	tgt_rates.y = 0
+	tgt_rates.z = input_aileron * 10
+	
 	# Panel updates
 	Panel_Node.display_active = Main_Panel_active
 	Panel_Node.display_pitch = pfd_pitch
@@ -415,7 +450,16 @@ func _physics_process(delta):
 		gear_current = gear_current - 0.2 * delta
 	if (abs(gear_current - gear_input) < 0.01):
 		gear_current = gear_input
+	
+#	fbw_output.x = clamp(($PID_Calc_Pitch.calc_PID_output(tgt_rates.x, adc_rates.x, delta)), -1, 1)
+	
+#	if ((adc_rates.x < tgt_rates.x) && (fbw_output.x < 1)):
+#		fbw_output.x += 0.1
+#	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
+#		fbw_output.x -= 0.1
 
+
+	
 	if (autopilot_on == 1):
 		if (pfd_stall == false):
 			if (\
@@ -424,20 +468,20 @@ func _physics_process(delta):
 			(abs(pfd_pitch) < 20) && \
 			(ground_contact_NLG == false)\
 			):
-					Panel_Trim_Node.value = \
-					-1 * \
-					calc_autopilot_factor(vel_total) * \
-					( \
-					$Trim_PID_Calc.calc_proportional_output(tgt_pitch, pfd_pitch, delta) + \
-					$Trim_PID_Calc.calc_integral_output(tgt_pitch, pfd_pitch, delta) + \
-					$Trim_PID_Calc.calc_derivative_output(tgt_pitch, pfd_pitch, delta)
-					) \
-					
-					
-					output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
-#					input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
+				Panel_Trim_Node.value = \
+				-1 * \
+				calc_autopilot_factor(vel_total) * \
+				( \
+				$PID_Calc_Pitch.calc_PID_output(tgt_fpa, pfd_fpa, delta)
+				) \
+#
+#				Panel_Trim_Node.value = \
+#				-1 * fbw_output.x
+				
+				output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
+#				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
-				tgt_pitch = pfd_pitch
+				tgt_fpa = pfd_fpa
 				output_yaw_damper = 0
 		if (pfd_stall == true):
 			autopilot_on = 0
