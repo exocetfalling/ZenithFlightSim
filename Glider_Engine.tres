@@ -1,5 +1,0 @@
-[gd_resource type="SpatialMaterial" format=2]
-
-[resource]
-albedo_color = Color( 0.596078, 0.596078, 0.596078, 1 )
-metallic = 1.0

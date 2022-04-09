@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "AeroRootPart",
 "language": "GDScript",
-"path": "res://AeroRootPart.gd"
+"path": "res://scripts/AeroRootPart.gd"
 }, {
 "base": "Control",
 "class": "CSVEditor",
