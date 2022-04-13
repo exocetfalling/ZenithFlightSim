@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 1024,
+	"src": {
+		"a": "res://assets/Terrain_PBR/materials/snow/snow_bump.png",
+		"rgb": "res://assets/Terrain_PBR/materials/snow/snow_albedo.png"
+	}
+}

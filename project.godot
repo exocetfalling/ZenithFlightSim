@@ -105,7 +105,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ZenithFlightSim"
-run/main_scene="res://scenes/TestScene.tscn"
+run/main_scene="res://scenes/TestScene_V2.tscn"
 config/icon="res://resources/icon.png"
 
 [autoload]

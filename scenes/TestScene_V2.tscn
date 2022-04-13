@@ -1,0 +1,56 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/Terrain_PBR/terrain_map/data.hterrain" type="Resource" id=1]
+[ext_resource path="res://resources/slot2_albedo_bump.packed_tex" type="Texture" id=2]
+[ext_resource path="res://resources/slot0_normal_roughness.packed_tex" type="Texture" id=3]
+[ext_resource path="res://resources/slot0_albedo_bump.packed_tex" type="Texture" id=4]
+[ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture" id=5]
+[ext_resource path="res://resources/slot3_albedo_bump.packed_tex" type="Texture" id=6]
+[ext_resource path="res://resources/slot2_normal_roughness.packed_tex" type="Texture" id=7]
+[ext_resource path="res://resources/slot3_normal_roughness.packed_tex" type="Texture" id=8]
+[ext_resource path="res://resources/slot1_albedo_bump.packed_tex" type="Texture" id=9]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=10]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=11]
+[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=12]
+[ext_resource path="res://scenes/Plane.tscn" type="PackedScene" id=13]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 11 )
+mode = 0
+textures = [ [ ExtResource( 4 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 6 ) ], [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ] ]
+
+[node name="TestScene_V2" type="Spatial"]
+
+[node name="Plane" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 203.5, 1990 )
+
+[node name="Spatial" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
+
+[node name="HTerrain" type="Spatial" parent="Spatial"]
+script = ExtResource( 10 )
+map_scale = Vector3( 100, 100, 100 )
+_terrain_data = ExtResource( 1 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 1 )
+shader_params/u_ground_uv_scale_per_texture = Plane( 20, 20, 20, 20 )
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
+shader_params/u_globalmap_blend_start = null
+shader_params/u_globalmap_blend_distance = null
+shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 199.9, 0 )
+pixel_size = 1.0
+axis = 1
+transparent = false
+shaded = true
+texture = ExtResource( 12 )

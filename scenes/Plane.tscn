@@ -222,6 +222,7 @@ visible = false
 script = ExtResource( 5 )
 term_P = 0.05
 term_I = 0.01
+param_tuning_active = false
 
 [node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )
