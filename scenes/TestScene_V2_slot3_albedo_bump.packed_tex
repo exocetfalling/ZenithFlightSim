@@ -1,0 +1,8 @@
+{
+	"contains_albedo": true,
+	"resolution": 512,
+	"src": {
+		"a": "res://assets/Terrain_PBR/materials/concrete/concrete_bump.png",
+		"rgb": "res://assets/Terrain_PBR/materials/water/water_albedo.png"
+	}
+}
