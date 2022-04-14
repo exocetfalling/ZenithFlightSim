@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/metal_bump.png-337fe507633c1aa5ff77d948ad79cd24.stex"
+path="res://.import/metal_bump.png-79739fed8c1aea4223c1d54ac14f0829.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/PBR_Aircraft/materials/metal/metal_bump.png"
-dest_files=[ "res://.import/metal_bump.png-337fe507633c1aa5ff77d948ad79cd24.stex" ]
+source_file="res://assets/Aircraft_PBR/materials/metal/metal_bump.png"
+dest_files=[ "res://.import/metal_bump.png-79739fed8c1aea4223c1d54ac14f0829.stex" ]
 
 [params]
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/metal_roughness.png-d7ca85e44c848e805a212f6c10ab9a16.s3tc.stex"
-path.etc2="res://.import/metal_roughness.png-d7ca85e44c848e805a212f6c10ab9a16.etc2.stex"
+path.s3tc="res://.import/metal_albebo.png-b7dde269d6ff0d4d7df971961d061792.s3tc.stex"
+path.etc2="res://.import/metal_albebo.png-b7dde269d6ff0d4d7df971961d061792.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/PBR_Aircraft/materials/metal/metal_roughness.png"
-dest_files=[ "res://.import/metal_roughness.png-d7ca85e44c848e805a212f6c10ab9a16.s3tc.stex", "res://.import/metal_roughness.png-d7ca85e44c848e805a212f6c10ab9a16.etc2.stex" ]
+source_file="res://assets/Aircraft_PBR/materials/metal/metal_albebo.png"
+dest_files=[ "res://.import/metal_albebo.png-b7dde269d6ff0d4d7df971961d061792.s3tc.stex", "res://.import/metal_albebo.png-b7dde269d6ff0d4d7df971961d061792.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=2
+flags/srgb=1
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

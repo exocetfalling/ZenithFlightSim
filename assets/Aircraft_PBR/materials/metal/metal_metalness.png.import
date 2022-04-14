@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/metal_metalness.png-8df742b98b57c2375a15d444d1d548ca.s3tc.stex"
-path.etc2="res://.import/metal_metalness.png-8df742b98b57c2375a15d444d1d548ca.etc2.stex"
+path.s3tc="res://.import/metal_metalness.png-b0edf93567607d1886ee5bb7c7591333.s3tc.stex"
+path.etc2="res://.import/metal_metalness.png-b0edf93567607d1886ee5bb7c7591333.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/PBR_Aircraft/materials/metal/metal_metalness.png"
-dest_files=[ "res://.import/metal_metalness.png-8df742b98b57c2375a15d444d1d548ca.s3tc.stex", "res://.import/metal_metalness.png-8df742b98b57c2375a15d444d1d548ca.etc2.stex" ]
+source_file="res://assets/Aircraft_PBR/materials/metal/metal_metalness.png"
+dest_files=[ "res://.import/metal_metalness.png-b0edf93567607d1886ee5bb7c7591333.s3tc.stex", "res://.import/metal_metalness.png-b0edf93567607d1886ee5bb7c7591333.etc2.stex" ]
 
 [params]
 
