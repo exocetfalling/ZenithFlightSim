@@ -5,10 +5,11 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-# Angles in radians 
+# Angles in radians unless stated otherwise
 
 # Euler angles for body (pitch, yaw, roll) 
 var body_angles : Vector3 = Vector3(0, 0, 0)
+var body_angles_deg : Vector3 = Vector3(0, 0, 0)
 
 # Euler angles for HMD relative to body (pitch, yaw, roll) 
 var HMD_angles : Vector3 = Vector3(0, 0, 0)
@@ -22,8 +23,16 @@ var hmd_scale_factor : float = 1.00
 # Viewport centre 
 var viewport_centre : Vector2 = Vector2(960, 540)
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DebugOverlay.stats.add_property(self, "body_angles_deg", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_hdg", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
+#	DebugOverlay.stats.add_property(self, "pfd_trk", "round")
+	
 	pass # Replace with function body.
 
 
@@ -32,6 +41,8 @@ func _process(delta):
 	hmd_scale_factor = 1 / (cam_fov / 2)
 	
 	viewport_centre = get_viewport_rect().size/2
+	
+	body_angles_deg.x = rad2deg(body_angles.x)
 	
 	$Horizon.rotation_degrees = -1 * rad2deg(body_angles.z)
 	$Horizon.position.y = viewport_centre.y + (body_angles.x) * hmd_scale_factor * 10000 * cos(body_angles.z)
