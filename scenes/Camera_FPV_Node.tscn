@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=1]
 [ext_resource path="res://scenes/Camera_FPV_Node.gd" type="Script" id=2]
+[ext_resource path="res://scenes/HMD.tscn" type="PackedScene" id=3]
 
 [node name="Camera_FPV_Node" type="Spatial"]
 script = ExtResource( 2 )
@@ -17,3 +18,5 @@ invert_x = true
 environment = ExtResource( 1 )
 current = true
 far = 100000.0
+
+[node name="HMD" parent="." instance=ExtResource( 3 )]

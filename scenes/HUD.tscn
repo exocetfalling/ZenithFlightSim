@@ -44,22 +44,22 @@ margin_right = 1880.0
 margin_bottom = 1040.0
 
 [node name="Label" type="Label" parent="Text_Line_1/Speed_Data"]
-margin_right = 60.0
+margin_right = 230.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "SPD: 	"
 align = 1
 uppercase = true
 
 [node name="Variable" type="Label" parent="Text_Line_1/Speed_Data"]
-margin_left = 64.0
-margin_right = 100.0
+margin_left = 238.0
+margin_right = 376.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "xxx"
 align = 1
 uppercase = true
@@ -70,23 +70,23 @@ margin_bottom = 1040.0
 alignment = 2
 
 [node name="Label" type="Label" parent="Text_Line_1/Alt_Data"]
-margin_left = 1780.0
-margin_right = 1840.0
+margin_left = 1504.0
+margin_right = 1734.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "alt: "
 align = 1
 uppercase = true
 
 [node name="Variable" type="Label" parent="Text_Line_1/Alt_Data"]
-margin_left = 1844.0
+margin_left = 1742.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "xxx"
 uppercase = true
 
@@ -96,23 +96,23 @@ margin_bottom = 1040.0
 alignment = 1
 
 [node name="Label" type="Label" parent="Text_Line_1/Heading_Data"]
-margin_left = 890.0
-margin_right = 950.0
+margin_left = 752.0
+margin_right = 982.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "HDG: "
 align = 1
 uppercase = true
 
 [node name="Variable" type="Label" parent="Text_Line_1/Heading_Data"]
-margin_left = 954.0
-margin_right = 990.0
+margin_left = 990.0
+margin_right = 1128.0
 margin_bottom = 1040.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "xxx"
 uppercase = true
 
@@ -128,8 +128,8 @@ __meta__ = {
 
 [node name="Flaps_Data" type="HBoxContainer" parent="Text_Line_2"]
 margin_top = 100.0
-margin_right = 124.0
-margin_bottom = 123.0
+margin_right = 468.0
+margin_bottom = 186.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 0
@@ -139,23 +139,23 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="Text_Line_2/Flaps_Data"]
-margin_right = 84.0
-margin_bottom = 23.0
+margin_right = 322.0
+margin_bottom = 86.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "flaps: "
 align = 1
 valign = 2
 uppercase = true
 
 [node name="Variable" type="Label" parent="Text_Line_2/Flaps_Data"]
-margin_left = 88.0
-margin_right = 124.0
-margin_bottom = 23.0
+margin_left = 330.0
+margin_right = 468.0
+margin_bottom = 86.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "xxx"
 valign = 2
 uppercase = true
@@ -163,31 +163,31 @@ uppercase = true
 [node name="Gear_Data" type="HBoxContainer" parent="Text_Line_2"]
 margin_top = 100.0
 margin_right = 1880.0
-margin_bottom = 123.0
+margin_bottom = 186.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_vertical = 2
 alignment = 2
 
 [node name="Label" type="Label" parent="Text_Line_2/Gear_Data"]
-margin_left = 1768.0
-margin_right = 1840.0
-margin_bottom = 23.0
+margin_left = 1458.0
+margin_right = 1734.0
+margin_bottom = 86.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "gear: "
 align = 1
 valign = 2
 uppercase = true
 
 [node name="Variable" type="Label" parent="Text_Line_2/Gear_Data"]
-margin_left = 1844.0
+margin_left = 1742.0
 margin_right = 1880.0
-margin_bottom = 23.0
+margin_bottom = 86.0
 size_flags_vertical = 1
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.0313726, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "xxx"
 valign = 2
 uppercase = true
@@ -236,8 +236,8 @@ margin_right = -110.0
 margin_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "XXX"
 align = 1
 valign = 1
@@ -254,8 +254,8 @@ margin_right = 149.989
 margin_bottom = 21.5113
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "spd"
 align = 1
 valign = 1
@@ -270,8 +270,8 @@ margin_left = 300.0
 margin_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "XXXXX"
 align = 1
 valign = 1
@@ -288,8 +288,8 @@ margin_right = 50.4796
 margin_bottom = 16.8394
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "ALT"
 align = 1
 valign = 1
@@ -306,8 +306,8 @@ margin_right = 30.0
 margin_bottom = -88.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "XXX"
 align = 1
 valign = 1
@@ -323,8 +323,8 @@ margin_top = -108.0
 margin_bottom = 106.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "HDG
 "
 align = 1
@@ -342,8 +342,8 @@ margin_right = -100.0
 margin_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "XXX"
 align = 1
 valign = 1
@@ -360,8 +360,8 @@ margin_right = 161.498
 margin_bottom = 21.239
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "FLAPS"
 align = 1
 valign = 1
@@ -378,8 +378,8 @@ margin_right = -100.0
 margin_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "X.XX"
 align = 1
 valign = 1
@@ -396,8 +396,8 @@ margin_right = 156.314
 margin_bottom = 23.239
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "trim"
 align = 1
 valign = 1
@@ -412,8 +412,8 @@ margin_left = -18.7627
 margin_top = -248.485
 margin_right = 22.2373
 margin_bottom = 0.515259
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "CWS"
 uppercase = true
 __meta__ = {
@@ -658,9 +658,9 @@ margin_left = -196.278
 margin_top = -201.492
 margin_right = -96.2782
 margin_bottom = -176.492
+custom_fonts/font = ExtResource( 2 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-custom_fonts/font = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

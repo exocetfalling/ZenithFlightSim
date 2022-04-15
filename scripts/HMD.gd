@@ -1,0 +1,42 @@
+extends Node2D
+
+
+# Declare member variables here. Examples:
+# var a = 2
+# var b = "text"
+
+# Angles in radians 
+
+# Euler angles for body (pitch, yaw, roll) 
+var body_angles : Vector3 = Vector3(0, 0, 0)
+
+# Euler angles for HMD relative to body (pitch, yaw, roll) 
+var HMD_angles : Vector3 = Vector3(0, 0, 0)
+
+# FOV of camera the HMD is attached to 
+var cam_fov : float = 70.0
+
+# Scaling factor for spacing between adjacent markings, using FOV
+var hmd_scale_factor : float = 1.00
+
+# Viewport centre 
+var viewport_centre : Vector2 = Vector2(960, 540)
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	hmd_scale_factor = 1 / (cam_fov / 2)
+	
+	viewport_centre = get_viewport_rect().size/2
+	
+	$Horizon.rotation_degrees = -1 * rad2deg(body_angles.z)
+	$Horizon.position.y = viewport_centre.y + (body_angles.x) * hmd_scale_factor * 10000 * cos(body_angles.z)
+	$Horizon.position.x = viewport_centre.x + ($Horizon.position.y - viewport_centre.y) * tan(body_angles.z)
+	
+	pass
+
+
