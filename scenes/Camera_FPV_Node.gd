@@ -61,5 +61,5 @@ func _process(delta):
 		global_transform.origin = get_node(target).global_transform.origin
 	
 	$HMD.HMD_angles.x = $Gimbal_X.rotation.x
-	$HMD.HMD_angles.y = $Gimbal_X/Gimbal_Y.rotation.y
+	$HMD.HMD_angles.y = -$Gimbal_X/Gimbal_Y.rotation.y
 	$HMD.cam_fov = $Gimbal_X/Gimbal_Y/Camera_FPV.fov
