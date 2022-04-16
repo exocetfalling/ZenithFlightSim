@@ -58,7 +58,11 @@ func get_input_keyboard(delta):
 
 func _process(delta):
 	get_input_keyboard(delta)
-	$Gimbal_X.rotation.x = clamp($Gimbal_X.rotation.x, -1.4, -0.01)
+	$Gimbal_X.rotation.x = clamp($Gimbal_X.rotation.x, -1.0, 1.0)
+	$Gimbal_X/Gimbal_Y.rotation.y = clamp($Gimbal_X/Gimbal_Y.rotation.y, -1.0, 1.0)
 	scale = lerp(scale, Vector3.ONE * zoom, zoom_speed)
 	if target:
 		global_transform.origin = get_node(target).global_transform.origin
+	
+	$HMD.HMD_angles.x = $Gimbal_X.rotation.x
+	$HMD.HMD_angles.y = $Gimbal_X/Gimbal_Y.rotation.y
