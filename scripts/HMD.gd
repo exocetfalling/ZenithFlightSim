@@ -43,9 +43,11 @@ func _process(delta):
 	viewport_centre = get_viewport_rect().size/2
 	
 	body_angles_deg.x = rad2deg(body_angles.x)
+	body_angles_deg.y = rad2deg(body_angles.y)
+	body_angles_deg.z = rad2deg(body_angles.z)
 	
 	$Horizon.rotation_degrees = -1 * rad2deg(body_angles.z)
-	$Horizon.position.y = viewport_centre.y + (body_angles.x) * hmd_scale_factor * 10000 * cos(body_angles.z)
+	$Horizon.position.y = viewport_centre.y + (body_angles.x) * hmd_scale_factor * 25000 * cos(body_angles.z)
 	$Horizon.position.x = viewport_centre.x + ($Horizon.position.y - viewport_centre.y) * tan(body_angles.z)
 	
 	pass
