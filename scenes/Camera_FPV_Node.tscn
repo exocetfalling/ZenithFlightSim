@@ -9,6 +9,7 @@ script = ExtResource( 2 )
 mouse_control = true
 invert_y = true
 invert_x = true
+min_zoom = 0.5
 
 [node name="Gimbal_X" type="Spatial" parent="."]
 
