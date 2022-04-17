@@ -59,11 +59,12 @@ func _process(delta):
 		- (sin(HMD_angles.y) * rad2deg(HMD_angles.x))
 	$Horizon.position.y = \
 		(body_angles.x \
-		+ HMD_angles.x) * hmd_scale_factor * 25000 * cos(body_angles.z)
+		+ HMD_angles.x) * hmd_scale_factor * 30000 * cos(body_angles.z) \
+		- (HMD_angles.x * cos(HMD_angles.y))
 	$Horizon.position.x = \
 		($Horizon.position.y \
 		- viewport_centre.y) * tan(body_angles.z) \
-		- (hmd_scale_factor * 25000 * HMD_angles.y)
+		- (hmd_scale_factor * 30000 * HMD_angles.y)
 	
 	pass
 
