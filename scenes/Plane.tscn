@@ -203,6 +203,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
 [node name="Camera_FPV_Node" parent="Plane03" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
 
+[node name="HMD" parent="Plane03/Camera_FPV_Node" index="1"]
+visible = false
+
 [node name="Camera_Ext" type="Camera" parent="Plane03"]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 16.5864 )
 cull_mask = 1048557
@@ -233,7 +236,6 @@ param_tuning_active = false
 
 [node name="3D_HUD_V2" parent="Plane03" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.68402 )
-visible = false
 
 [node name="3D_GCS" parent="Plane03" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -1.49546, -6.76695 )

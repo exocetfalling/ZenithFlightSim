@@ -46,6 +46,9 @@ var angle_alpha : float = 0.00
 # Angle of sideslip (beta)
 var angle_beta : float = 0.00
 
+export var active_pitch : bool = true
+export var active_roll : bool = true
+export var active_yaw : bool = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -98,7 +101,7 @@ func _calc_drag_induced_coeff(angle_rad):
 	return abs(scalar_drag_induced * sin(angle_rad)) 
 
 func _calc_drag_parasite_coeff(angle_rad):
-	return abs(0.02 * cos(angle_rad))
+	return abs(scalar_drag_parasite * cos(angle_rad))
 	
 func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * lift_coeff
@@ -107,5 +110,5 @@ func _calc_drag_force(air_density_current, airspeed_true, surface_area, drag_coe
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * drag_coeff
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	pass
