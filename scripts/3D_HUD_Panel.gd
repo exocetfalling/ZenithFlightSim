@@ -18,7 +18,7 @@ var display_nav_brg = 0
 var display_nav_range = 0
 var display_nav_waypoint = 0
 
-var display_HUD_scale = 6
+var display_HUD_scale = 1
 var display_FD_commands = Vector2.ZERO
 	
 var current_viewport_size = get_viewport_rect().size/2	
@@ -44,7 +44,7 @@ func ui_element_dynamic_scale(res_current, res_native, position_design, size_des
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	DebugOverlay.stats.add_property(self, "display_MFD_mode", "")
+	DebugOverlay.stats.add_property(self, "display_pitch", "")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -91,7 +91,7 @@ func _process(_delta):
 	# HUD
 	
 	get_node('HUD/HUD_Ladder').rotation_degrees = -display_roll
-	get_node('HUD/HUD_Ladder').position.y = (display_pitch / 90 * 260) * 6 * cos(deg2rad(display_roll))
+	get_node('HUD/HUD_Ladder').position.y = (display_pitch / 90 * 3200) * cos(deg2rad(display_roll))
 	get_node('HUD/HUD_Ladder').position.x = get_node('HUD/HUD_Ladder').position.y * tan(deg2rad(display_roll))
 	
 	get_node("Speed_Data").text = ("SPD\n%03d" % [display_spd])
@@ -99,10 +99,10 @@ func _process(_delta):
 	get_node("Heading_Data").text = ("HDG\n%03d" % [display_hdg])
 	
 
-	get_node("HUD/FlightPathVector").position.y = display_HUD_scale * (display_alpha / 90 * 260)
-	get_node("HUD/FlightPathVector").position.x = -display_HUD_scale * (display_beta / 90 * 260)
-	get_node("HUD/FlightDirector").position.y = -display_HUD_scale * (display_FD_commands.y / 90 * 260)
-	get_node("HUD/FlightDirector").position.x = display_HUD_scale * (display_FD_commands.x / 90 * 260)
+	get_node("HUD/FlightPathVector").position.y = display_HUD_scale * (display_alpha / 90 * 3200)
+	get_node("HUD/FlightPathVector").position.x = -display_HUD_scale * (display_beta / 90 * 3200)
+	get_node("HUD/FlightDirector").position.y = -display_HUD_scale * (display_FD_commands.y / 90 * 3200)
+	get_node("HUD/FlightDirector").position.x = display_HUD_scale * (display_FD_commands.x / 90 * 3200)
 	if (display_spd > 2):
 		get_node('HUD/FlightPathVector').visible = true
 	else:
