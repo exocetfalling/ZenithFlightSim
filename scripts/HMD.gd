@@ -24,7 +24,9 @@ var hmd_scale_factor : float = 1.00
 # Viewport centre 
 var viewport_centre : Vector2 = Vector2(960, 540)
 
-
+# Visible only if outside HUD/panel FOV
+export var hmd_power : bool = true
+var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -65,6 +67,21 @@ func _process(delta):
 	$Horizon.position.x = \
 		($Horizon.position.y - viewport_centre.y) * hmd_scale_factor * sin(body_angles.z) \
 		- (hmd_scale_factor * 30000 * (HMD_angles.y + body_angles.y)) 
+	
+	# HMD power/blanking
+	if (hmd_power == true):
+		if (hmd_blanked == false):
+			self.visible = true
+		else:
+			self.visible = false
+	else:
+		self.visible = false
+	
+	# Blanking conditions
+	if ((HMD_angles_deg.x < 15) && (abs(HMD_angles_deg.y) < 30)):
+		hmd_blanked = true
+	else:
+		hmd_blanked = false
 	
 	pass
 
