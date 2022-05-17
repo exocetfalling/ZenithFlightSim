@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/sr22.obj-18787fe3064e4c796189f0e6f1d313e6.mesh"
+
+[deps]
+
+files=[ "res://.import/sr22.obj-18787fe3064e4c796189f0e6f1d313e6.mesh" ]
+
+source_file="res://assets/SR22/sr22.obj"
+dest_files=[ "res://.import/sr22.obj-18787fe3064e4c796189f0e6f1d313e6.mesh", "res://.import/sr22.obj-18787fe3064e4c796189f0e6f1d313e6.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
