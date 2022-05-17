@@ -550,6 +550,13 @@ func _physics_process(delta):
 #	else:
 #		$HUD_Point.visible = true
 #
+
+
+	# HMD 
+	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(pfd_pitch)
+	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(pfd_roll)
+
+
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
