@@ -1,0 +1,11 @@
+Model Information:
+* title:	GeoFS Official AgustaWestland AW609
+* source:	https://sketchfab.com/3d-models/geofs-official-agustawestland-aw609-d7c6506e33914c4c99bf735c4a3cdf33
+* author:	JAaMDG Official (https://sketchfab.com/jsong.js.us)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "GeoFS Official AgustaWestland AW609" (https://sketchfab.com/3d-models/geofs-official-agustawestland-aw609-d7c6506e33914c4c99bf735c4a3cdf33) by JAaMDG Official (https://sketchfab.com/jsong.js.us) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
