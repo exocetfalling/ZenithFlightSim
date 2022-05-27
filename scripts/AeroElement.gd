@@ -6,6 +6,12 @@ class_name AeroElement
 # var a = 2
 # var b = "text"
 
+# Air temperature, K
+var air_temperature : float = 288.0
+
+# Air pressure, Pa
+var air_pressure : float = 101325
+
 # Air density, kg/m^3
 var air_density = 1.2
 
@@ -20,6 +26,15 @@ export var scalar_drag_induced : float = 0.05
 
 # Drag (parasite) scalar, dimensionless
 export var scalar_drag_parasite : float = 0.02
+
+# Lift coeffecient, dimensionless
+var coeffecient_lift : float = 0.00
+
+# Drag (induced) coeffecient, dimensionless
+var coeffecient_drag_induced : float = 0.00
+
+# Drag (parasite) coeffecient, dimensionless
+var coeffecient_drag_parasite : float = 0.00
 
 # Angle of attack (alpha)
 var angle_alpha : float = 0.00
@@ -94,6 +109,35 @@ func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coe
 	
 func _calc_drag_force(air_density_current, airspeed_true, surface_area, drag_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * drag_coeff
+	
+func calc_atmo_properties(height_metres):
+	# Store atmospheric properties as Vector3
+	# X value is air temperature, deg K
+	# Y value is air pressure, Pa
+	# Z value is air density, kg m^-3
+	
+	# From https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html
+	
+	var atmo_properties : Vector3
+	if (height_metres <= 11000):
+		atmo_properties.x = 288.19 - 0.00649 * height_metres
+		atmo_properties.y = 101.29 * pow((atmo_properties.x/288.08), 5.256)
+		
+	elif ((height_metres > 11000) && (height_metres <= 25000)): 
+		atmo_properties.x = 216.69
+		atmo_properties.y = 22.65 * exp(1.73 - 0.000157 * height_metres)
+	
+	elif (height_metres > 25000):
+		atmo_properties.x = 141.94 + .00299 * height_metres
+		atmo_properties.y = 2.488 * pow((atmo_properties.x/ 216.6), -11.388)
+	
+	else:
+		atmo_properties.x = 101290
+		atmo_properties.y = 288.19
+	
+	atmo_properties.z = atmo_properties.y / (0.2869 * atmo_properties.y)
+	
+	return atmo_properties
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -102,6 +146,7 @@ func _process(delta):
 # Called every frame. 'delta' is the elapsed time since the previous physics frame.
 func _physics_process(delta):
 	vel_local = self.transform.basis.xform(linear_velocity)
+	vel_total = vel_local.length()
 	
 	angle_alpha = atan2(-vel_local.y, vel_local.z)
 	angle_beta = atan2(-vel_local.x, vel_local.z)
@@ -109,5 +154,5 @@ func _physics_process(delta):
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
-	
+	force_lift_element = _calc_lift_coeff(angle_alpha)
 	pass
