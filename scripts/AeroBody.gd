@@ -77,42 +77,41 @@ export var deflection_control_max = PI/12
 export var deflection_flaps_max = PI/6
 export var angle_wing_incidence = 0.02
 
-var input_elevator = 0
-var current_elevator = 0
-var output_elevator = 0
-
+# Current position/state 
 var current_aileron = 0
-var input_aileron = 0
-var output_aileron = 0
-
+var current_elevator = 0
 var current_rudder = 0
+var current_flaps = 0
+var current_elevator_trim = 0
+var gear_current = 1
+
+# Input values 
+var input_aileron = 0
+var input_elevator = 0
 var input_rudder = 0
+var input_flaps = 0
+var input_elevator_trim = 0
+var input_throttle = 0
+var input_braking = 0
+var gear_input = 1
+
+# Output values
+var output_aileron = 0
+var output_elevator = 0
 var output_rudder = 0
 var output_yaw_damper = 0
-
-var current_flaps = 0
-var input_flaps = 0
 var output_flaps = 0
-var flaps_max = 1
-var flaps_min = -1
-
-var current_elevator_trim = 0
-var input_elevator_trim = 0
 var output_elevator_trim = 0
 
+var flaps_max = 1
+var flaps_min = -1
 var input_trim_pitch_max = 1
 var input_trim_pitch_min = -1
-
 var throttle_max = 1
 var throttle_min = 0
-var input_throttle = 0
-
-var input_braking = 0
-
 var gear_max = 1
 var gear_min = 0
-var gear_current = 1
-var gear_input = 1
+
 
 var deflection_rate = 1/(PI/6)
 var deflection_rate_flaps = 1/(2 * PI)

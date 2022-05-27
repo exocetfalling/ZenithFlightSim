@@ -6,58 +6,36 @@ class_name AeroElement
 # var a = 2
 # var b = "text"
 
-# Positions as (x, y, z) m, z reversed
-export var pos_wing : Vector3 = Vector3(0, -0.75, 0)
-export var pos_h_tail : Vector3 = Vector3(0, 0, 11)
-export var pos_v_tail : Vector3 = Vector3(0, 1.5, 10)
-export var pos_fuse : Vector3 = Vector3(0, 0, 3)
-export var pos_aileron_l : Vector3 = Vector3(-8, -0.75, 1)
-export var pos_aileron_r : Vector3 = Vector3( 8, -0.75, 1)
-export var pos_elevator : Vector3 = Vector3(0, 0, 11)
-export var pos_rudder : Vector3 = Vector3(0, 1.6, 11)
-export var pos_flaps : Vector3 = Vector3( 0, -0.75, 2)
-export var pos_gear : Vector3 = Vector3(0, -0.5, 0)
+# Air density, kg/m^3
+var air_density = 1.2
 
+# Position of centre of pressure relative to centre of mass
+export var pos_cop : Vector3 = Vector3(0, 0, 0)
 
-# Areas in m^2
-export var area_wing : float = 7 
-export var area_h_tail : float = 3
-export var area_v_tail : float = 1.5
-export var area_fuse : float = 3.5
-export var area_aileron : float = 3
-export var area_elevator : float = 3
-export var area_rudder : float = 3
-export var area_flaps : float = 3
-export var area_gear : float = 2
+# Lift scalar, dimensionless
+export var scalar_lift : float = 1.00
+
+# Drag (induced) scalar, dimensionless
+export var scalar_drag_induced : float = 0.05
+
+# Drag (parasite) scalar, dimensionless
+export var scalar_drag_parasite : float = 0.02
+
+# Angle of attack (alpha)
+var angle_alpha : float = 0.00
+var angle_alpha_deg : float = 0.00
+
+# Angle of sideslip (beta)
+var angle_beta : float = 0.00
+var angle_beta_deg : float = 0.00
 
 # forces in N
-var force_lift_wing : Vector3 = Vector3.ZERO
-var force_lift_h_tail : Vector3 = Vector3.ZERO
-var force_lift_v_tail : Vector3 = Vector3.ZERO
-var force_lift_h_fuse : Vector3 = Vector3.ZERO
-var force_lift_v_fuse : Vector3 = Vector3.ZERO
-var force_lift_aileron_l : Vector3 = Vector3.ZERO
-var force_lift_aileron_r : Vector3 = Vector3.ZERO
-var force_lift_elevator : Vector3 = Vector3.ZERO
-var force_lift_rudder : Vector3 = Vector3.ZERO
-var force_lift_flaps : Vector3 = Vector3.ZERO
+var force_lift_element : Vector3 = Vector3.ZERO
+var force_drag_element : Vector3 = Vector3.ZERO
 
-var force_drag_wing : Vector3 = Vector3.ZERO
-var force_drag_h_tail : Vector3 = Vector3.ZERO
-var force_drag_v_tail : Vector3 = Vector3.ZERO
-var force_drag_fuse : Vector3 = Vector3.ZERO
-var force_drag_aileron_l : Vector3 = Vector3.ZERO
-var force_drag_aileron_r : Vector3 = Vector3.ZERO
-var force_drag_elevator : Vector3 = Vector3.ZERO
-var force_drag_rudder : Vector3 = Vector3.ZERO
-var force_drag_flaps : Vector3 = Vector3.ZERO
-var force_drag_gear : Vector3 = Vector3.ZERO
-
-# Deflection in radians
-export var deflection_control_max = PI/12
-export var deflection_flaps_max = PI/6
-export var angle_wing_incidence = 0.02
-
+# Velocities in m s^-1
+var vel_local : Vector3 = Vector3.ZERO
+var vel_total : float = 0.00
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -119,4 +97,17 @@ func _calc_drag_force(air_density_current, airspeed_true, surface_area, drag_coe
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	pass
+
+# Called every frame. 'delta' is the elapsed time since the previous physics frame.
+func _physics_process(delta):
+	vel_local = self.transform.basis.xform(linear_velocity)
+	
+	angle_alpha = atan2(-vel_local.y, vel_local.z)
+	angle_beta = atan2(-vel_local.x, vel_local.z)
+	
+	angle_alpha_deg = rad2deg(angle_alpha)
+	angle_beta_deg = rad2deg(angle_beta)
+	
+	
 	pass
