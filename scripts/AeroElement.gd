@@ -15,6 +15,21 @@ var air_pressure : float = 101325
 # Air density, kg/m^3
 var air_density = 1.2
 
+# Lengths, x-y-z, in m^3
+export var body_dimensions : Vector3 = Vector3(1, 1, 1)
+
+# Areas, x-y-z, in m^3
+# Calculate, using dimensions, area when viewed along axis
+# Area for X axis is side-on
+# Area for Y axis is top-on
+# Area for Z axis is front-on
+
+var body_areas : Vector3 = \
+	Vector3(\
+	(body_dimensions.y * body_dimensions.z), \
+	(body_dimensions.x * body_dimensions.z), \
+	(body_dimensions.x * body_dimensions.y))
+
 # Position of centre of pressure relative to centre of mass
 export var pos_cop : Vector3 = Vector3(0, 0, 0)
 
@@ -45,8 +60,11 @@ var angle_beta : float = 0.00
 var angle_beta_deg : float = 0.00
 
 # forces in N
-var force_lift_element : Vector3 = Vector3.ZERO
-var force_drag_element : Vector3 = Vector3.ZERO
+var force_lift_element_magnitude : float = 0.00
+var force_drag_element_magnitude : float = 0.00
+
+var force_lift_element_vector : Vector3 = Vector3.ZERO
+var force_drag_element_vector : Vector3 = Vector3.ZERO
 
 # Velocities in m s^-1
 var vel_local : Vector3 = Vector3.ZERO
@@ -110,7 +128,7 @@ func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coe
 func _calc_drag_force(air_density_current, airspeed_true, surface_area, drag_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * drag_coeff
 	
-func calc_atmo_properties(height_metres):
+func _calc_atmo_properties(height_metres):
 	# Store atmospheric properties as Vector3
 	# X value is air temperature, deg K
 	# Y value is air pressure, Pa
@@ -148,11 +166,32 @@ func _physics_process(delta):
 	vel_local = self.transform.basis.xform(linear_velocity)
 	vel_total = vel_local.length()
 	
+	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
+	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
+	air_density = _calc_atmo_properties(global_transform.origin.y).z
+	
 	angle_alpha = atan2(-vel_local.y, vel_local.z)
 	angle_beta = atan2(-vel_local.x, vel_local.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
-	force_lift_element = _calc_lift_coeff(angle_alpha)
+	coeffecient_lift = _calc_lift_coeff(angle_alpha)
+	coeffecient_drag_induced = _calc_drag_induced_coeff(angle_alpha)
+	coeffecient_drag_parasite = _calc_drag_parasite_coeff(angle_alpha)
+	
+	force_lift_element_magnitude = \
+		_calc_lift_force(air_density, vel_total, body_areas.y, coeffecient_lift)
+	force_drag_element_magnitude = \
+		_calc_drag_force(air_density, vel_total, body_areas.y, coeffecient_drag_induced) + \
+		_calc_drag_force(air_density, vel_total, body_areas.z, coeffecient_drag_parasite)
+	
+	force_lift_element_vector = \
+		Vector3(0, force_lift_element_magnitude, 0)
+	
+	force_drag_element_vector = \
+		Vector3(\
+			(sin(angle_beta) * force_drag_element_magnitude), \
+			0, \
+			(cos(angle_beta) * force_drag_element_magnitude))
 	pass
