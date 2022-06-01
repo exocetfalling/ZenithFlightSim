@@ -1,6 +1,6 @@
 extends Node
 
-class_name AeroRootPart
+class_name AeroRootNode
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -21,6 +21,10 @@ var input_thrust = 0.00
 func _ready():
 	pass # Replace with function body.
 
+func get_input(delta):
+#		$'../Joint_NLG_1'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
+#		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
+		pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

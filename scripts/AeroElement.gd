@@ -2,6 +2,8 @@ extends RigidBody
 
 class_name AeroElement
 
+# editor_description = 'Aerodynamic element (wing, fuselage, etc.).' 
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -15,41 +17,40 @@ var air_pressure : float = 101325
 # Air density, kg/m^3
 var air_density = 1.2
 
-# Lengths, x-y-z, in m^3
-export var body_dimensions : Vector3 = Vector3(1, 1, 1)
+# Is the element an airfoil?
+# If it is, calculate aero forces for airfoil shapes
+# If not, use a non-airfoil approximation
+export var is_airfoil : bool = true 
 
-# Areas, x-y-z, in m^3
-# Calculate, using dimensions, area when viewed along axis
-# Area for X axis is side-on
-# Area for Y axis is top-on
-# Area for Z axis is front-on
+# Wing span in m
+export var element_span : float = 1.00
 
-var body_areas : Vector3 = \
-	Vector3(\
-	(body_dimensions.y * body_dimensions.z), \
-	(body_dimensions.x * body_dimensions.z), \
-	(body_dimensions.x * body_dimensions.y))
+# Areas in m^2
+export var element_area_side : float = 1.00
+export var element_area_top : float = 1.00
+export var element_area_front : float = 1.00
 
 # Position of centre of pressure relative to centre of mass
-export var pos_cop : Vector3 = Vector3(0, 0, 0)
+export var pos_COP : Vector3 = Vector3(0, 0, 0)
 
 # Lift scalar, dimensionless
 export var scalar_lift : float = 1.00
 
 # Drag (induced) scalar, dimensionless
-export var scalar_drag_induced : float = 0.05
+export var scalar_drag_induced : float = 1.00
 
-# Drag (parasite) scalar, dimensionless
-export var scalar_drag_parasite : float = 0.02
+# Lift effeciency, varies by planform
+# 0.7 for rectangular wings
+export var element_lift_effeciency : float = 0.7
 
 # Lift coeffecient, dimensionless
 var coeffecient_lift : float = 0.00
 
-# Drag (induced) coeffecient, dimensionless
-var coeffecient_drag_induced : float = 0.00
+# Drag coeffecient, dimensionless
+var coeffecient_drag : float = 0.00
 
-# Drag (parasite) coeffecient, dimensionless
-var coeffecient_drag_parasite : float = 0.00
+# Drag coeffecient at zero lift
+var coeffecient_drag_zero_lift : float = 0.02
 
 # Angle of attack (alpha)
 var angle_alpha : float = 0.00
@@ -116,11 +117,8 @@ func _calc_lift_coeff(angle_alpha_rad):
 		return 0
 		
 
-func _calc_drag_induced_coeff(angle_rad):
-	return abs(scalar_drag_induced * sin(angle_rad)) 
-
-func _calc_drag_parasite_coeff(angle_rad):
-	return abs(scalar_drag_parasite * cos(angle_rad))
+func _calc_drag_coeff(lift_coeff, drag_coeff_zero_lift, wing_span, wing_area, wing_effeciency):
+	return ((pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)))
 	
 func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * lift_coeff
@@ -177,14 +175,18 @@ func _physics_process(delta):
 	angle_beta_deg = rad2deg(angle_beta)
 	
 	coeffecient_lift = _calc_lift_coeff(angle_alpha)
-	coeffecient_drag_induced = _calc_drag_induced_coeff(angle_alpha)
-	coeffecient_drag_parasite = _calc_drag_parasite_coeff(angle_alpha)
+	coeffecient_drag = \
+		_calc_drag_coeff(\
+			coeffecient_lift, \
+			coeffecient_drag_zero_lift, \
+			element_span, \
+			element_area_top, \
+			element_lift_effeciency)
 	
 	force_lift_element_magnitude = \
-		_calc_lift_force(air_density, vel_total, body_areas.y, coeffecient_lift)
+		_calc_lift_force(air_density, vel_total, element_area_top, coeffecient_lift)
 	force_drag_element_magnitude = \
-		_calc_drag_force(air_density, vel_total, body_areas.y, coeffecient_drag_induced) + \
-		_calc_drag_force(air_density, vel_total, body_areas.z, coeffecient_drag_parasite)
+		_calc_drag_force(air_density, vel_total, element_area_top, coeffecient_drag) 
 	
 	force_lift_element_vector = \
 		Vector3(0, force_lift_element_magnitude, 0)
@@ -193,5 +195,6 @@ func _physics_process(delta):
 		Vector3(\
 			(sin(angle_beta) * force_drag_element_magnitude), \
 			0, \
-			(cos(angle_beta) * force_drag_element_magnitude))
+			(cos(angle_beta) * force_drag_element_magnitude) \
+			)
 	pass

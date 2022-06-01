@@ -19,15 +19,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/AeroElement.gd"
 }, {
-"base": "Node",
-"class": "AeroRootPart",
+"base": "Generic6DOFJoint",
+"class": "AeroJoint",
 "language": "GDScript",
-"path": "res://scripts/AeroRootPart.gd"
+"path": "res://scripts/AeroJoint.gd"
 }, {
-"base": "Spatial",
-"class": "AeroSurface",
+"base": "Node",
+"class": "AeroRootNode",
 "language": "GDScript",
-"path": "res://AeroSurface.gd"
+"path": "res://scripts/AeroRootNode.gd"
 }, {
 "base": "Control",
 "class": "CSVEditor",
@@ -97,8 +97,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "AeroBody": "",
 "AeroElement": "",
-"AeroRootPart": "",
-"AeroSurface": "",
+"AeroJoint": "",
+"AeroRootNode": "",
 "CSVEditor": "",
 "ContributorClass": "",
 "Derivative_Calc": "",
