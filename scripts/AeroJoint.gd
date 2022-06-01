@@ -22,7 +22,7 @@ var command_yaw : float = 0.00
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "hinge_pos", "round")
+#	DebugOverlay.stats.add_property(self, "hinge_pos", "round")
 	hinge_pos = self.translation
 	pass # Replace with function body.
 

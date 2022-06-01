@@ -24,7 +24,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/AeroJoint.gd"
 }, {
-"base": "Node",
+"base": "Spatial",
 "class": "AeroRootNode",
 "language": "GDScript",
 "path": "res://scripts/AeroRootNode.gd"

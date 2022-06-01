@@ -1,4 +1,4 @@
-extends Node
+extends Spatial
 
 class_name AeroRootNode
 
@@ -20,11 +20,6 @@ var input_thrust = 0.00
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-
-func get_input(delta):
-	input_pitch = Input.get_axis("pitch_up", "pitch_down")
-	input_roll = Input.get_axis("roll_left", "roll_right")
-	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

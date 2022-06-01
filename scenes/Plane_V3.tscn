@@ -14,7 +14,7 @@ extents = Vector3( 3, 0.05, 0.8 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1.25, 0.05, 0.4 )
 
-[node name="Plane_V3" type="Node"]
+[node name="Plane_V3" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="AeroElement_Fuselage" type="RigidBody" parent="."]
@@ -192,36 +192,36 @@ script = ExtResource( 2 )
 
 [node name="AeroJoint_Aileron_R_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -0.175 )
-nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_a = NodePath("../AeroElement_Wing_R")
 nodes/node_b = NodePath("../AeroElement_Aileron_R")
 script = ExtResource( 2 )
 
 [node name="AeroJoint_Aileron_R_2" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -0.175 )
-nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_a = NodePath("../AeroElement_Wing_R")
 nodes/node_b = NodePath("../AeroElement_Aileron_R")
 script = ExtResource( 2 )
 
 [node name="AeroJoint_Flap_L_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 0, -0.175 )
 nodes/node_a = NodePath("../AeroElement_Wing_L")
-nodes/node_b = NodePath("../AeroElement_Aileron_L")
+nodes/node_b = NodePath("../AeroElement_Flap_L")
 script = ExtResource( 2 )
 
 [node name="AeroJoint_Flap_L_2" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -0.175 )
 nodes/node_a = NodePath("../AeroElement_Wing_L")
-nodes/node_b = NodePath("../AeroElement_Aileron_L")
+nodes/node_b = NodePath("../AeroElement_Flap_L")
 script = ExtResource( 2 )
 
 [node name="AeroJoint_Flap_R_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, -0.175 )
-nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_a = NodePath("../AeroElement_Wing_R")
 nodes/node_b = NodePath("../AeroElement_Flap_R")
 script = ExtResource( 2 )
 
 [node name="AeroJoint_Flap_R_2" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0, -0.175 )
-nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_a = NodePath("../AeroElement_Wing_R")
 nodes/node_b = NodePath("../AeroElement_Flap_R")
 script = ExtResource( 2 )
