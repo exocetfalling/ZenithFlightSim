@@ -20,6 +20,9 @@ script = ExtResource( 2 )
 [node name="AeroElement_Fuselage" type="RigidBody" parent="."]
 mass = 100.0
 script = ExtResource( 1 )
+element_area_side = 8.0
+element_area_top = 8.0
+element_area_front = 3.14
 
 [node name="CollisionShape" type="CollisionShape" parent="AeroElement_Fuselage"]
 shape = SubResource( 1 )
@@ -50,6 +53,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
 mass = 40.0
 script = ExtResource( 1 )
 element_span = 6.0
+element_area_side = 0.04
+element_area_top = 4.8
+element_area_front = 0.3
 
 [node name="CollisionShape" type="CollisionShape" parent="AeroElement_Wing_L"]
 shape = SubResource( 2 )
@@ -64,6 +70,7 @@ material = ExtResource( 4 )
 [node name="AeroElement_Aileron_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 0, 0.2 )
 script = ExtResource( 1 )
+element_span = 2.5
 
 [node name="CollisionShape" type="CollisionShape" parent="AeroElement_Aileron_L"]
 shape = SubResource( 3 )
