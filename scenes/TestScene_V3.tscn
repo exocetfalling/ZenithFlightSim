@@ -87,6 +87,3 @@ texture = ExtResource( 9 )
 
 [node name="Plane_V3" parent="." instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 203.5, 1990 )
-
-[node name="Camera" type="Camera" parent="Plane_V3"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74664, 7.21545 )

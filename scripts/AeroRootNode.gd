@@ -21,6 +21,14 @@ var input_thrust = 0.00
 func _ready():
 	pass # Replace with function body.
 
+func _unhandled_input(event):
+	# Pitch input
+	input_pitch = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
+	# Roll input
+	input_roll = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
+	# Yaw input
+	input_yaw = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

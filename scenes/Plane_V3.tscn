@@ -48,6 +48,9 @@ rings = 64
 smooth_faces = false
 material = ExtResource( 4 )
 
+[node name="Camera" type="Camera" parent="AeroElement_Fuselage"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.796064, 8.37162 )
+
 [node name="AeroElement_Wing_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
 mass = 40.0
