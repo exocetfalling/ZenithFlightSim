@@ -20,5 +20,8 @@ func _unhandled_input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous physics frame.
 func _physics_process(delta):
-	$AeroJoint_Aileron_L_1.set("angular_motor_x/target_velocity", 0)
+	$AeroJoint_Aileron_L_1.input_command_value = -input_roll
+	$AeroJoint_Aileron_L_2.input_command_value = -input_roll
+	$AeroJoint_Aileron_R_1.input_command_value =  input_roll
+	$AeroJoint_Aileron_R_2.input_command_value =  input_roll
 	pass

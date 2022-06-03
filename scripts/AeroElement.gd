@@ -197,4 +197,7 @@ func _physics_process(delta):
 			0, \
 			(cos(angle_beta) * force_drag_element_magnitude) \
 			)
+	
+	add_force_local(force_lift_element_vector, pos_COP)
+	add_force_local(force_drag_element_vector, pos_COP)
 	pass
