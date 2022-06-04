@@ -73,7 +73,9 @@ var vel_total : float = 0.00
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	DebugOverlay.stats.add_property(self, "force_lift_element_vector", "round")
+	DebugOverlay.stats.add_property(self, "force_drag_element_vector", "round")
+	pass
 
 func add_force_local(force: Vector3, pos: Vector3):
 	var pos_local : Vector3
@@ -118,7 +120,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 		
 
 func _calc_drag_coeff(lift_coeff, drag_coeff_zero_lift, wing_span, wing_area, wing_effeciency):
-	return ((pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)))
+	return (drag_coeff_zero_lift + (pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)))
 	
 func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * lift_coeff
@@ -164,9 +166,11 @@ func _physics_process(delta):
 	vel_local = self.transform.basis.xform(linear_velocity)
 	vel_total = vel_local.length()
 	
-	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
-	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
-	air_density = _calc_atmo_properties(global_transform.origin.y).z
+#	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
+#	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
+#	air_density = _calc_atmo_properties(global_transform.origin.y).z
+	
+	air_density = 1.2
 	
 	angle_alpha = atan2(-vel_local.y, vel_local.z)
 	angle_beta = atan2(-vel_local.x, vel_local.z)

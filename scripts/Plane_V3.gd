@@ -24,4 +24,8 @@ func _physics_process(delta):
 	$AeroJoint_Aileron_L_2.input_command_value = -input_roll
 	$AeroJoint_Aileron_R_1.input_command_value =  input_roll
 	$AeroJoint_Aileron_R_2.input_command_value =  input_roll
+	$AeroJoint_Ruddervator_L_1.input_command_value = input_pitch + input_yaw
+	$AeroJoint_Ruddervator_L_2.input_command_value = input_pitch + input_yaw
+	$AeroJoint_Ruddervator_R_1.input_command_value = input_pitch + input_yaw
+	$AeroJoint_Ruddervator_R_2.input_command_value = input_pitch + input_yaw
 	pass

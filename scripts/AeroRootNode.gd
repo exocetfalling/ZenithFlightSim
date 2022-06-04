@@ -23,11 +23,13 @@ func _ready():
 
 func _unhandled_input(event):
 	# Pitch input
-	input_pitch = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
+	input_pitch = Input.get_axis("pitch_down", "pitch_up")
+	
 	# Roll input
-	input_roll = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
+	input_roll = Input.get_axis("roll_left", "roll_right")
+	
 	# Yaw input
-	input_yaw = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
+	input_yaw = Input.get_axis("yaw_left", "yaw_right")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

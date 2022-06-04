@@ -12,7 +12,7 @@ height = 12.0
 extents = Vector3( 1, 0.5, 1 )
 
 [sub_resource type="BoxShape" id=2]
-extents = Vector3( 3, 0.05, 0.8 )
+extents = Vector3( 1.5, 0.05, 0.8 )
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 1.25, 0.05, 0.4 )
@@ -56,7 +56,7 @@ smooth_faces = false
 material = ExtResource( 4 )
 
 [node name="Camera" type="Camera" parent="AeroElement_Fuselage"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.796064, 8.37162 )
+transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 10 )
 
 [node name="AeroElement_Wing_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
@@ -164,6 +164,44 @@ height = 0.05
 depth = 0.8
 material = ExtResource( 4 )
 
+[node name="AeroElement_Ruddervator_L" type="RigidBody" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.78, 1.78, 5 )
+mass = 2.0
+script = ExtResource( 3 )
+element_span = 3.0
+element_area_side = 0.04
+element_area_top = 2.4
+element_area_front = 0.15
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Ruddervator_L"]
+shape = SubResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroElement_Ruddervator_L"]
+transform = Transform( -2.18557e-09, 1, 0, -0.05, -4.37114e-08, 0, 0, 0, 0.8, 0, 0, 0 )
+height = 3.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="AeroElement_Ruddervator_R" type="RigidBody" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.78, 1.78, 5 )
+mass = 40.0
+script = ExtResource( 3 )
+element_span = 3.0
+element_area_side = 0.04
+element_area_top = 2.4
+element_area_front = 0.15
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Ruddervator_R"]
+shape = SubResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroElement_Ruddervator_R"]
+transform = Transform( -2.18557e-09, 1, 0, -0.05, -4.37114e-08, 0, 0, 0, 0.8, 0, 0, 0 )
+height = 3.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 4 )
+
 [node name="AeroJoint_Wing_L_1" type="Generic6DOFJoint" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.8 )
 nodes/node_a = NodePath("../AeroElement_Fuselage")
@@ -239,3 +277,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0, -0.175 )
 nodes/node_a = NodePath("../AeroElement_Wing_R")
 nodes/node_b = NodePath("../AeroElement_Flap_R")
 script = ExtResource( 2 )
+
+[node name="AeroJoint_Ruddervator_L_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.707, 0.707, 5 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Ruddervator_L")
+script = ExtResource( 2 )
+is_servo = true
+
+[node name="AeroJoint_Ruddervator_L_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -2.707, 2.707, 5 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Ruddervator_L")
+script = ExtResource( 2 )
+is_servo = true
+
+[node name="AeroJoint_Ruddervator_R_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.707, 0.707, 5 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Ruddervator_R")
+script = ExtResource( 2 )
+is_servo = true
+
+[node name="AeroJoint_Ruddervator_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 2.707, 2.707, 5 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Ruddervator_R")
+script = ExtResource( 2 )
+is_servo = true
