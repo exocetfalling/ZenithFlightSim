@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://scripts/Plane_V3.gd" type="Script" id=1]
 [ext_resource path="res://scripts/AeroJoint.gd" type="Script" id=2]
 [ext_resource path="res://scripts/AeroElement.gd" type="Script" id=3]
 [ext_resource path="res://resources/Glider_Metal.tres" type="Material" id=4]
+[ext_resource path="res://scripts/AeroElement_Fuselage.gd" type="Script" id=5]
 
 [sub_resource type="CapsuleShape" id=1]
 height = 12.0
@@ -21,11 +22,9 @@ extents = Vector3( 1.25, 0.05, 0.4 )
 script = ExtResource( 1 )
 
 [node name="AeroElement_Fuselage" type="RigidBody" parent="."]
-mass = 100.0
-script = ExtResource( 3 )
-element_area_side = 8.0
-element_area_top = 8.0
-element_area_front = 3.14
+mass = 400.0
+script = ExtResource( 5 )
+pos_COP = Vector3( 0, 0, 5 )
 
 [node name="CollisionShape" type="CollisionShape" parent="AeroElement_Fuselage"]
 shape = SubResource( 1 )
@@ -60,7 +59,7 @@ transform = Transform( 1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0
 
 [node name="AeroElement_Wing_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
-mass = 40.0
+mass = 100.0
 script = ExtResource( 3 )
 element_span = 6.0
 element_area_side = 0.04
@@ -79,7 +78,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Wing_R" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1 )
-mass = 40.0
+mass = 100.0
 script = ExtResource( 3 )
 element_span = 6.0
 element_area_side = 0.04
@@ -98,6 +97,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Aileron_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 0, 0.2 )
+mass = 20.0
 script = ExtResource( 3 )
 element_span = 2.5
 element_area_side = 0.013
@@ -115,6 +115,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Aileron_R" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 0, 0.2 )
+mass = 20.0
 script = ExtResource( 3 )
 element_span = 2.5
 element_area_side = 0.013
@@ -132,6 +133,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Flap_L" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0.2 )
+mass = 20.0
 script = ExtResource( 3 )
 element_span = 2.5
 element_area_side = 0.013
@@ -149,6 +151,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Flap_R" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0.2 )
+mass = 20.0
 script = ExtResource( 3 )
 element_span = 2.5
 element_area_side = 0.013
@@ -166,7 +169,7 @@ material = ExtResource( 4 )
 
 [node name="AeroElement_Ruddervator_L" type="RigidBody" parent="."]
 transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.78, 1.78, 5 )
-mass = 2.0
+mass = 40.0
 script = ExtResource( 3 )
 element_span = 3.0
 element_area_side = 0.04

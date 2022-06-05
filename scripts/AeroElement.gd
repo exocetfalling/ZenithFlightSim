@@ -73,8 +73,7 @@ var vel_total : float = 0.00
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "force_lift_element_vector", "round")
-	DebugOverlay.stats.add_property(self, "force_drag_element_vector", "round")
+
 	pass
 
 func add_force_local(force: Vector3, pos: Vector3):
