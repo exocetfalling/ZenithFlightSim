@@ -376,56 +376,7 @@ func _physics_process(delta):
 		ground_contact_MLG_R = false
 
 func get_input(delta):
-	# Throttle input
-	
-	if (Input.is_action_pressed("throttle_up")):
-		if (input_throttle < throttle_max):
-			input_throttle += 0.5 * delta 
-	if (Input.is_action_pressed("throttle_down")):
-		if (input_throttle > throttle_min):
-			input_throttle -= 0.5 * delta
-	
-	# Roll input
-	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
-	
-	# Pitch (climb/dive) input
-	input_elevator = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
-	# yaw input
-	input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
-	
-	# Flaps input
-	if (Input.is_action_just_pressed("flaps_down")):
-		input_flaps += 0.25 
-	if (Input.is_action_just_pressed("flaps_up")):
-		input_flaps -= 0.25
 
-	# Trim input
-	
-	if (Input.is_action_pressed("trim_pitch_up")):
-		input_elevator_trim += 0.5 * delta 
-	if (Input.is_action_pressed("trim_pitch_down")):
-		input_elevator_trim -= 0.5 * delta 
-
-	# Gear input
-	if (Input.is_action_just_pressed("gear_toggle")):
-	
-		if (gear_input == 0):
-			gear_input = -1
-		else:
-			gear_input = 0
-	
-	# AP input
-	if (Input.is_action_just_pressed("autopilot_toggle")):
-		if (autopilot_on == 0):
-			autopilot_on = 1
-			tgt_pitch = adc_pitch
-			output_yaw_damper = 0
-		else:
-			autopilot_on = 0
-			output_yaw_damper = 0
-	
-	# Braking input
-	input_braking = Input.get_action_strength("braking")
 
 	# Lift/drag calculations (helpers for add_force_local)
 	
