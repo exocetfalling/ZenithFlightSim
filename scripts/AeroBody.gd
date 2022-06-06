@@ -64,28 +64,28 @@ var down_local = Vector3.ZERO
 # Specs from CollisionShape measurements
 
 # Positions as (x, y, z) m, z reversed
-var pos_wing = Vector3(0, -0.75, 0)
-var pos_h_tail = Vector3(0, 0, 11)
-var pos_v_tail = Vector3(0, 1.5, 10)
-var pos_fuse = Vector3(0, 0, 3)
-var pos_aileron_l = Vector3(-8, -0.75, 1)
-var pos_aileron_r = Vector3( 8, -0.75, 1)
-var pos_elevator = Vector3(0, 0, 11)
-var pos_rudder = Vector3(0, 1.6, 11)
-var pos_flaps = Vector3( 0, -0.75, 2)
-var pos_gear = Vector3(0, -0.5, 0)
+export var pos_wing = Vector3(0, -0.75, 0)
+export var pos_h_tail = Vector3(0, 0, 11)
+export var pos_v_tail = Vector3(0, 1.5, 10)
+export var pos_fuse = Vector3(0, 0, 3)
+export var pos_aileron_l = Vector3(-8, -0.75, 1)
+export var pos_aileron_r = Vector3( 8, -0.75, 1)
+export var pos_elevator = Vector3(0, 0, 11)
+export var pos_rudder = Vector3(0, 1.6, 11)
+export var pos_flaps = Vector3( 0, -0.75, 2)
+export var pos_gear = Vector3(0, -0.5, 0)
 
 
 # Areas in m^2
-var area_wing = 7 
-var area_h_tail = 3
-var area_v_tail = 1.5
-var area_fuse = 3.5
-var area_aileron = 3
-var area_elevator = 3
-var area_rudder = 3
-var area_flaps = 3
-var area_gear = 2
+export var area_wing = 7 
+export var area_h_tail = 3
+export var area_v_tail = 1.5
+export var area_fuse = 3.5
+export var area_aileron = 3
+export var area_elevator = 3
+export var area_rudder = 3
+export var area_flaps = 3
+export var area_gear = 2
 
 # forces in N
 var force_lift_wing = Vector3.ZERO

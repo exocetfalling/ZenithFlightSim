@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://assets/png_files/PFD/strip_attitude_indicator.png" type="Texture" id=1]
-[ext_resource path="res://assets/vectors/PFD/strip_attitude_indicator_mask.svg" type="Texture" id=2]
 
 [node name="MFD_V3" type="TabContainer"]
 margin_right = 1100.0
@@ -19,15 +18,22 @@ margin_top = 61.0
 margin_right = -8.0
 margin_bottom = -8.0
 
-[node name="Light2D" type="Light2D" parent="PFD"]
-position = Vector2( 559, 508 )
-texture = ExtResource( 2 )
-mode = 3
-range_item_cull_mask = 2
+[node name="EADI" type="ViewportContainer" parent="PFD"]
+margin_right = 1084.0
+margin_bottom = 1031.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 1000, 1000 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="Sprite" type="Sprite" parent="PFD/Light2D"]
-light_mask = 2
+[node name="Viewport" type="Viewport" parent="PFD/EADI"]
+size = Vector2( 1000, 1000 )
+disable_3d = true
+
+[node name="Strip_Attitude" type="Sprite" parent="PFD/EADI/Viewport"]
 texture = ExtResource( 1 )
+offset = Vector2( 500, 500 )
 
 [node name="NAV" type="MarginContainer" parent="."]
 visible = false
