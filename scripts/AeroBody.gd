@@ -7,13 +7,10 @@ var ground_contact_NLG = false
 var ground_contact_MLG_L = false
 var ground_contact_MLG_R = false
 
-var force_local
-var pos_local
-
 var corr_velocity = Vector3.ZERO
 
-var vel_local_intermediate = Vector3.ZERO
 var vel_local = Vector3.ZERO
+var vel_local_test = Vector3.ZERO
 var vel_total = 0
 
 var vel_angular_local = Vector3.ZERO
@@ -54,12 +51,8 @@ var angle_alpha_deg = 0
 var angle_beta = 0
 var angle_beta_deg = 0
 
-var forward_local = Vector3.ZERO
-var aft_local = Vector3.ZERO
-var right_local = Vector3.ZERO
-var left_local = Vector3.ZERO
-var up_local = Vector3.ZERO
-var down_local = Vector3.ZERO
+var angle_alpha_test = 0
+var angle_alpha_test_deg = 0
 
 # Specs from CollisionShape measurements
 
@@ -219,6 +212,9 @@ func _calc_beta(vel_right, vel_fwd):
 	return atan2(-vel_right, vel_fwd)
 	
 func add_force_local(force: Vector3, pos: Vector3):
+	var force_local
+	var pos_local
+	
 	pos_local = self.transform.basis.xform(pos)
 	force_local = self.transform.basis.xform(force)
 	self.add_force(force_local, pos_local)
@@ -300,8 +296,12 @@ func calc_autopilot_factor(velocity_aircraft):
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input(delta)
-
-
+	
+	vel_total = self.linear_velocity.length()
+	vel_local = (self.transform.basis.xform_inv(linear_velocity))
+	
+	vel_local_test = ($TestProbe.transform.basis.xform_inv(linear_velocity))
+	
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
@@ -379,11 +379,15 @@ func _physics_process(delta):
 		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 
 	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
-	angle_alpha = _calc_alpha(vel_local.y, vel_local.z)
-	angle_beta = _calc_beta(vel_local.x, vel_local.z)
+	angle_alpha = _calc_alpha(vel_local.y, -vel_local.z)
+	angle_beta = _calc_beta(vel_local.x, -vel_local.z)
+	
+	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
+	
+	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
 	adc_spd = vel_total
 	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
@@ -457,11 +461,6 @@ func get_input(delta):
 	pass
 
 func _integrate_forces(_state):
-	vel_total = self.linear_velocity.length()
-	
-	vel_local_intermediate = (self.transform.basis.xform_inv(linear_velocity))
-	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
-	
 	# Gravity
 	add_central_force(Vector3(0, -weight, 0))
 	
