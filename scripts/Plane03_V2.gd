@@ -85,12 +85,7 @@ func _physics_process(delta):
 	
 	global_rotation = global_transform.basis.get_euler()
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
-	
-	vel_angular_local = global_transform.basis.z * (angular_velocity)
-	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
-	
-	vel_local_test = ($TestProbe.transform.basis.xform_inv(vel_local))
-		
+
 #	vel_angular_local = (angular_velocity)
 
 	# Panel updates
@@ -218,10 +213,11 @@ func _physics_process(delta):
 #	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 03'):
 #		wpt_current = 'WPT 03'
 #		wpt_current_coordinates = WPT_03_coodinates
+
+#	vel_local_test = ($TestProbe.transform.basis.xform_inv(vel_local))
 	
-	vel_total = self.linear_velocity.length()
-	vel_local = (self.transform.basis.xform_inv(linear_velocity))
-		
+	vel_local_test = calc_vel_local_with_offset(vel_local, adc_rates, Vector3(-19, 0, 0))
+	
 	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
 	
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)

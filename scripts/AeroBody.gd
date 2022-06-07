@@ -290,10 +290,24 @@ func calc_autopilot_factor(velocity_aircraft):
 	else:
 		return 0
 
+func calc_vel_local_with_offset(vel_linear_local, vel_angular_local, pos_offset):
+	var vel_local_with_offset : Vector3
+	vel_local_with_offset.x = vel_linear_local.x + vel_angular_local.x * pos_offset.x
+	vel_local_with_offset.y = vel_linear_local.y + vel_angular_local.y * pos_offset.y
+	vel_local_with_offset.z = vel_linear_local.z + vel_angular_local.z * pos_offset.z
+	
+	return vel_local_with_offset
+
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input(delta)
-
+	
+	vel_total = self.linear_velocity.length()
+	vel_local = (self.transform.basis.xform_inv(linear_velocity))
+	
+	vel_angular_local = global_transform.basis.z * (angular_velocity)
+	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+	
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
@@ -369,8 +383,7 @@ func _physics_process(delta):
 		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-
-	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
+	
 	angle_alpha = _calc_alpha(vel_local.y, -vel_local.z)
 	angle_beta = _calc_beta(vel_local.x, -vel_local.z)
 	
