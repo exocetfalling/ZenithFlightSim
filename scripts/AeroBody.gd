@@ -300,82 +300,6 @@ func calc_autopilot_factor(velocity_aircraft):
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input(delta)
-	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
-	angle_alpha = _calc_alpha(vel_local.y, vel_local.z)
-	angle_beta = _calc_beta(vel_local.x, vel_local.z)
-	
-	angle_alpha_deg = rad2deg(angle_alpha)
-	angle_beta_deg = rad2deg(angle_beta)
-	
-	adc_spd = vel_total
-	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
-	adc_alt = global_transform.origin.y
-	
-	adc_pitch = rotation_degrees.x
-	adc_roll = -rotation_degrees.z
-	
-	adc_alpha = angle_alpha_deg
-	adc_beta = angle_beta_deg
-	
-	adc_fpa = adc_pitch - adc_alpha
-	adc_trk = adc_hdg - adc_beta
-
-	# FBW
-	adc_rates.x = -vel_angular_local_deg.x
-	adc_rates.y = vel_angular_local_deg.y
-	adc_rates.z = -vel_angular_local_deg.z
-	
-	tgt_rates.x = input_elevator * 5
-	tgt_rates.y = 0
-	tgt_rates.z = input_aileron * 10
-	
-	if (angle_alpha_deg > 15):
-		adc_stall = true
-	else:
-		adc_stall = false
-	
-	if (gear_current < gear_input):
-		gear_current = gear_current + 0.2 * delta
-	if (gear_current > gear_input):
-		gear_current = gear_current - 0.2 * delta
-	if (abs(gear_current - gear_input) < 0.01):
-		gear_current = gear_input
-	
-#	fbw_output.x = clamp(($PID_Calc_Pitch.calc_PID_output(tgt_rates.x, adc_rates.x, delta)), -1, 1)
-	
-#	if ((adc_rates.x < tgt_rates.x) && (fbw_output.x < 1)):
-#		fbw_output.x += 0.1
-#	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
-#		fbw_output.x -= 0.1
-
-	if (input_elevator_trim > input_trim_pitch_max):
-		input_elevator_trim = input_trim_pitch_max
-	if (input_elevator_trim < input_trim_pitch_min):
-		input_elevator_trim = input_trim_pitch_min
-	
-	if (output_rudder > 1):
-		output_rudder = 1
-	if (output_rudder < -1):
-		output_rudder = -1
-	
-	# NWS
-	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_NLG = true
-	else:
-		ground_contact_NLG = false
-
-	# MLG weight on wheels
-	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_L = true
-	else:
-		ground_contact_MLG_L = false
-
-	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_R = true
-	else:
-		ground_contact_MLG_R = false
-
-func get_input(delta):
 
 
 	# Lift/drag calculations (helpers for add_force_local)
@@ -454,15 +378,86 @@ func get_input(delta):
 		$'../Joint_MLG_R_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
 		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
 
-func _integrate_forces(_state):
-	forward_local = -get_global_transform().basis.z
-	aft_local = get_global_transform().basis.z
-	right_local = get_global_transform().basis.x
-	left_local = -get_global_transform().basis.x
-	up_local = get_global_transform().basis.y
-	down_local = -get_global_transform().basis.y
+	corr_velocity = Vector3(linear_velocity.x, linear_velocity.y, -linear_velocity.z)
+	angle_alpha = _calc_alpha(vel_local.y, vel_local.z)
+	angle_beta = _calc_beta(vel_local.x, vel_local.z)
 	
-	vel_total = abs(sqrt(pow(vel_local.x, 2) + pow(vel_local.y, 2) + pow(vel_local.z, 2)))
+	angle_alpha_deg = rad2deg(angle_alpha)
+	angle_beta_deg = rad2deg(angle_beta)
+	
+	adc_spd = vel_total
+	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
+	adc_alt = global_transform.origin.y
+	
+	adc_pitch = rotation_degrees.x
+	adc_roll = -rotation_degrees.z
+	
+	adc_alpha = angle_alpha_deg
+	adc_beta = angle_beta_deg
+	
+	adc_fpa = adc_pitch - adc_alpha
+	adc_trk = adc_hdg - adc_beta
+
+	# FBW
+	adc_rates.x = -vel_angular_local_deg.x
+	adc_rates.y = vel_angular_local_deg.y
+	adc_rates.z = -vel_angular_local_deg.z
+	
+	tgt_rates.x = input_elevator * 5
+	tgt_rates.y = 0
+	tgt_rates.z = input_aileron * 10
+	
+	if (angle_alpha_deg > 15):
+		adc_stall = true
+	else:
+		adc_stall = false
+	
+	if (gear_current < gear_input):
+		gear_current = gear_current + 0.2 * delta
+	if (gear_current > gear_input):
+		gear_current = gear_current - 0.2 * delta
+	if (abs(gear_current - gear_input) < 0.01):
+		gear_current = gear_input
+	
+#	fbw_output.x = clamp(($PID_Calc_Pitch.calc_PID_output(tgt_rates.x, adc_rates.x, delta)), -1, 1)
+	
+#	if ((adc_rates.x < tgt_rates.x) && (fbw_output.x < 1)):
+#		fbw_output.x += 0.1
+#	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
+#		fbw_output.x -= 0.1
+
+	if (input_elevator_trim > input_trim_pitch_max):
+		input_elevator_trim = input_trim_pitch_max
+	if (input_elevator_trim < input_trim_pitch_min):
+		input_elevator_trim = input_trim_pitch_min
+	
+	if (output_rudder > 1):
+		output_rudder = 1
+	if (output_rudder < -1):
+		output_rudder = -1
+	
+	# NWS
+	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_NLG = true
+	else:
+		ground_contact_NLG = false
+
+	# MLG weight on wheels
+	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_MLG_L = true
+	else:
+		ground_contact_MLG_L = false
+
+	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
+		ground_contact_MLG_R = true
+	else:
+		ground_contact_MLG_R = false
+
+func get_input(delta):
+	pass
+
+func _integrate_forces(_state):
+	vel_total = self.linear_velocity.length()
 	
 	vel_local_intermediate = (self.transform.basis.xform_inv(linear_velocity))
 	vel_local = Vector3(vel_local_intermediate.x, vel_local_intermediate.y, -vel_local_intermediate.z)
