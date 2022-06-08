@@ -18,6 +18,7 @@ var vel_surface : Vector3 = Vector3.ZERO
 
 var vel_delta = Vector3.ZERO
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	area_element = (length_chord_root + length_chord_tip) / 2 * length_span

@@ -2,7 +2,15 @@ extends RigidBody
 
 class_name AeroBody
 
+# Air temperature, K
+var air_temperature : float = 288.0
+
+# Air pressure, Pa
+var air_pressure : float = 101325
+
+# Air density, kg/m^3
 var air_density = 1.2
+
 var ground_contact_NLG = false
 var ground_contact_MLG_L = false
 var ground_contact_MLG_R = false
@@ -215,7 +223,36 @@ func add_force_local(force: Vector3, pos: Vector3):
 	pos_local = self.transform.basis.xform(pos)
 	force_local = self.transform.basis.xform(force)
 	self.add_force(force_local, pos_local)
+
+func _calc_atmo_properties(height_metres):
+	# Store atmospheric properties as Vector3
+	# X value is air temperature, deg C
+	# Y value is air pressure, kPa
+	# Z value is air density, kg m^-3
 	
+	# From https://en.wikipedia.org/wiki/Density_of_air#Variation_with_altitude
+	
+	var atmo_properties : Vector3
+	
+	var p_0 = 101325 # Sea level standard atmospheric pressure, Pa
+	var T_0 = 288.15 # Sea level standard temperature, K
+	var g = 9.80665 # Earth-surface gravitational acceleration, m s^-2
+	var L = 0.0065 # Temperature lapse rate, K m^-1
+	var R = 8.31446 # Ideal (universal) gas constant, J K^-1 mol^-1
+	var M = 0.0289652 # molar mass of dry air, kg mol^-1
+	
+	
+	atmo_properties.x = \
+		T_0 - L * height_metres
+	
+	atmo_properties.y = \
+		p_0 * pow((1 - (L * height_metres / T_0)), (g * M / R / L))
+	
+	atmo_properties.z = \
+		(atmo_properties.y * M) / (R * atmo_properties.x)
+	
+	return atmo_properties
+
 func interpolate_linear(value_current, value_target, rate, delta_time):
 	if (abs(value_current - value_target) > delta_time):
 		if (value_current < value_target):
@@ -307,6 +344,10 @@ func _physics_process(delta):
 	
 	vel_angular_local = global_transform.basis.z * (angular_velocity)
 	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+	
+	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
+	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
+	air_density = _calc_atmo_properties(global_transform.origin.y).z
 	
 	# Lift/drag calculations (helpers for add_force_local)
 	

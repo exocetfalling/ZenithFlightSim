@@ -76,6 +76,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_I", "round")
 #	DebugOverlay.stats.add_property(self, "output_D", "round")
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
+	DebugOverlay.stats.add_property(self, "air_density", "round")
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.

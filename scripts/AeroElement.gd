@@ -129,30 +129,30 @@ func _calc_drag_force(air_density_current, airspeed_true, surface_area, drag_coe
 	
 func _calc_atmo_properties(height_metres):
 	# Store atmospheric properties as Vector3
-	# X value is air temperature, deg K
-	# Y value is air pressure, Pa
+	# X value is air temperature, deg C
+	# Y value is air pressure, kPa
 	# Z value is air density, kg m^-3
 	
-	# From https://www.grc.nasa.gov/www/k-12/airplane/atmosmet.html
+	# From https://en.wikipedia.org/wiki/Density_of_air#Variation_with_altitude
 	
 	var atmo_properties : Vector3
-	if (height_metres <= 11000):
-		atmo_properties.x = 288.19 - 0.00649 * height_metres
-		atmo_properties.y = 101.29 * pow((atmo_properties.x/288.08), 5.256)
-		
-	elif ((height_metres > 11000) && (height_metres <= 25000)): 
-		atmo_properties.x = 216.69
-		atmo_properties.y = 22.65 * exp(1.73 - 0.000157 * height_metres)
 	
-	elif (height_metres > 25000):
-		atmo_properties.x = 141.94 + .00299 * height_metres
-		atmo_properties.y = 2.488 * pow((atmo_properties.x/ 216.6), -11.388)
+	var p_0 = 101325 # Sea level standard atmospheric pressure, Pa
+	var T_0 = 288.15 # Sea level standard temperature, K
+	var g = 9.80665 # Earth-surface gravitational acceleration, m s^-2
+	var L = 0.0065 # Temperature lapse rate, K m^-1
+	var R = 8.31446 # Ideal (universal) gas constant, J K^-1 mol^-1
+	var M = 0.0289652 # molar mass of dry air, kg mol^-1
 	
-	else:
-		atmo_properties.x = 101290
-		atmo_properties.y = 288.19
 	
-	atmo_properties.z = atmo_properties.y / (0.2869 * atmo_properties.y)
+	atmo_properties.x = \
+		T_0 - L * height_metres
+	
+	atmo_properties.y = \
+		p_0 * pow((1 - (L * height_metres / T_0)), (g * M / R / L))
+	
+	atmo_properties.z = \
+		(atmo_properties.y * M) / (R * atmo_properties.x)
 	
 	return atmo_properties
 
