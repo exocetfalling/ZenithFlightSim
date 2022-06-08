@@ -162,7 +162,7 @@ func _process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous physics frame.
 func _physics_process(delta):
-	vel_local = self.transform.basis.xform(linear_velocity)
+	vel_local = (self.transform.basis.xform_inv(linear_velocity))
 	vel_total = vel_local.length()
 	
 #	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
@@ -171,8 +171,8 @@ func _physics_process(delta):
 	
 	air_density = 1.2
 	
-	angle_alpha = atan2(-vel_local.y, vel_local.z)
-	angle_beta = atan2(-vel_local.x, vel_local.z)
+	angle_alpha = atan2(-vel_local.y, -vel_local.z)
+	angle_beta = atan2(-vel_local.x, -vel_local.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)

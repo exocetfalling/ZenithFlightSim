@@ -49,6 +49,7 @@ func _ready():
 		self.set("angular_limit_x/lower_angle", angle_lower_limit)
 		self.set("angular_limit_x/upper_angle", angle_upper_limit)
 		self.set("angular_motor_x/enabled", true)
+		self.set("angular_motor_x/force_limit", 50000)
 	pass # Replace with function body.
 
 
