@@ -216,11 +216,13 @@ func _physics_process(delta):
 
 #	vel_local_test = ($TestProbe.transform.basis.xform_inv(vel_local))
 	
-	vel_local_test = calc_vel_local_with_offset(vel_local, adc_rates, Vector3(-19, 0, 0))
+	vel_local_test = calc_vel_local_with_offset(vel_local, vel_angular_local, Vector3(-19, 0, 0))
 	
 	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
 	
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
+	
+	$TestProbe.vel_body = vel_local
 	
 	# HUD
 	get_node("HUD_Point/HUD_Ladder").rotation_degrees.z = adc_roll
