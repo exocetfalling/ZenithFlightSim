@@ -139,11 +139,10 @@ func _ready():
 	
 	DebugOverlay.stats.add_property(self, "vel_surface", "round")
 	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	vel_total = self.linear_velocity.length()
-
 	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
 	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
 	air_density = _calc_atmo_properties(global_transform.origin.y).z
@@ -151,6 +150,7 @@ func _physics_process(delta):
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
 	
 	vel_surface = (self.transform.basis.xform_inv(vel_body))
+	vel_total = vel_surface.length()
 	
 	vel_delta = vel_surface - vel_body
 	
