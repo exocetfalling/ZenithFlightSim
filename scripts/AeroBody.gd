@@ -438,7 +438,6 @@ func _physics_process(delta):
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
-
 	
 	adc_spd = sqrt(2 * air_pressure_dynamic / 1.225)
 	adc_hdg = fmod(-rotation_degrees.y + 360, 360)

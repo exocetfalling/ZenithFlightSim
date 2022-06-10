@@ -242,7 +242,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -1.49546, -6.76695 )
 
 [node name="TestProbe" type="Spatial" parent="Plane03_V2"]
-transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -18, 0, 0 )
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -18, 0, 0 )
 script = ExtResource( 14 )
 
 [node name="LG_AttachPoint_Nose" parent="." instance=ExtResource( 9 )]
