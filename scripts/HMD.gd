@@ -30,8 +30,8 @@ var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "body_angles_deg", "round")
-	DebugOverlay.stats.add_property(self, "HMD_angles_deg", "round")
+#	DebugOverlay.stats.add_property(self, "body_angles_deg", "round")
+#	DebugOverlay.stats.add_property(self, "HMD_angles_deg", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_alt", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "pfd_trk", "round")
