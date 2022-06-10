@@ -18,6 +18,8 @@ var vel_surface : Vector3 = Vector3.ZERO
 
 var vel_delta = Vector3.ZERO
 
+var force_lift_surface : Vector3 = Vector3.ZERO
+var force_drag_surface : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

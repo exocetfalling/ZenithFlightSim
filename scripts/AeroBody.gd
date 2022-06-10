@@ -8,6 +8,9 @@ var air_temperature : float = 288.0
 # Air pressure, Pa
 var air_pressure : float = 101325
 
+# Dynamic pressure, Pa
+var air_pressure_dynamic : float = 0.00
+
 # Air density, kg/m^3
 var air_density = 1.2
 
@@ -335,6 +338,9 @@ func calc_vel_local_with_offset(vel_linear_local, vel_angular_local, pos_offset)
 	
 	return vel_local_with_offset
 
+func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
+	return force_vector.rotated(Vector3(0, 0, 1), surface_node_rotation.x)
+	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	get_input(delta)
@@ -348,6 +354,8 @@ func _physics_process(delta):
 	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
 	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
 	air_density = _calc_atmo_properties(global_transform.origin.y).z
+	
+	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
 	
 	# Lift/drag calculations (helpers for add_force_local)
 	
@@ -432,7 +440,7 @@ func _physics_process(delta):
 	angle_beta_deg = rad2deg(angle_beta)
 
 	
-	adc_spd = vel_total
+	adc_spd = sqrt(2 * air_pressure_dynamic / 1.225)
 	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
 	adc_alt = global_transform.origin.y
 	

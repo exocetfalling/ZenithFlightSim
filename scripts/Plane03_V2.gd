@@ -59,13 +59,13 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
 	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_local_test", "round")
+	DebugOverlay.stats.add_property(self, "vel_local_test", "")
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "fbw_output", "")
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
+#	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+#	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
 #	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -217,10 +217,12 @@ func _physics_process(delta):
 
 #	vel_local_test = ($TestProbe.transform.basis.xform_inv(vel_local))
 	
-	vel_local_test = calc_vel_local_with_offset(vel_local, vel_angular_local, Vector3(-19, 0, 0))
+#	vel_local_test = calc_vel_local_with_offset(vel_local, vel_angular_local, Vector3(-19, 0, 0))
+	vel_local_test = Vector3(0, 1, 0).rotated(Vector3(0, 0, 1), $TestProbe.rotation.x)
 	
-	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
 	
+#	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
+	angle_alpha_test = 0
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
 	$TestProbe.vel_body = vel_local
