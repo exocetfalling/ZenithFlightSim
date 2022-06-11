@@ -1,4 +1,4 @@
-extends RigidBody
+extends VehicleBody
 
 class_name AeroBody
 
@@ -489,23 +489,6 @@ func _physics_process(delta):
 		output_rudder = 1
 	if (output_rudder < -1):
 		output_rudder = -1
-	
-	# NWS
-	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_NLG = true
-	else:
-		ground_contact_NLG = false
-
-	# MLG weight on wheels
-	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_L = true
-	else:
-		ground_contact_MLG_L = false
-
-	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_R = true
-	else:
-		ground_contact_MLG_R = false
 
 func get_input(delta):
 	pass

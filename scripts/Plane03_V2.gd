@@ -184,23 +184,7 @@ func _physics_process(delta):
 	if (output_rudder < -1):
 		output_rudder = -1
 	
-	# NWS
-	if ($'../LG_AttachPoint_Nose/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_NLG = true
-	else:
-		ground_contact_NLG = false
 
-	# MLG weight on wheels
-	if ($'../LG_AttachPoint_Main_L/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_L = true
-	else:
-		ground_contact_MLG_L = false
-
-	if ($'../LG_AttachPoint_Main_R/Wheel/RayCast'.is_colliding() == true):
-		ground_contact_MLG_R = true
-	else:
-		ground_contact_MLG_R = false
-	
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
 	waypoint_data_3d = find_angles_and_distance_to_target(wpt_current_coordinates)
@@ -401,28 +385,3 @@ func get_input(delta):
 
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
 	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
-
-	if (gear_input != gear_current):	
-		# NLG
-		$'../Joint_NLG_1'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_2'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_2'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_3'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_3'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		
-		# MLG_L
-		$'../Joint_MLG_L_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		
-		# MLG_R
-		$'../Joint_MLG_R_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))

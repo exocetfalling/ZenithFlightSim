@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "RigidBody",
+"base": "VehicleBody",
 "class": "AeroBody",
 "language": "GDScript",
 "path": "res://scripts/AeroBody.gd"
