@@ -210,30 +210,6 @@ func _physics_process(delta):
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
 	$TestProbe.vel_body = vel_local
-	
-	# HUD
-	get_node("HUD_Point/HUD_Ladder").rotation_degrees.z = adc_roll
-	get_node("HUD_Point/HUD_Ladder").translation.y = -(adc_pitch / 90 * 260) * cos(deg2rad(adc_roll))
-	get_node("HUD_Point/HUD_Ladder").translation.x = get_node("HUD_Point/HUD_Ladder").translation.y * -1 * tan(deg2rad(adc_roll))
-	get_node("HUD_Point/FlightPathVector").translation.y = -(adc_alpha / 90 * 260)
-	get_node("HUD_Point/FlightPathVector").translation.x = -(adc_beta / 90 * 260)
-	get_node("HUD_Point/FlightDirector").translation.y = (adc_fd_commands.y / 90 * 260)
-	get_node("HUD_Point/FlightDirector").translation.x = (adc_fd_commands.x / 90 * 260)
-	if (vel_total > 2):
-		get_node('HUD_Point/FlightPathVector').visible = true
-	else:
-		get_node('HUD_Point/FlightPathVector').visible = false
-		
-	if (autopilot_on == 1):
-		get_node('HUD_Point/FlightDirector').visible = true
-	else:
-		get_node('HUD_Point/FlightDirector').visible = false
-#
-#	if ($Camera_FPV.rotation_degrees.x < -30):
-#		$HUD_Point.visible = false
-#	else:
-#		$HUD_Point.visible = true
-#
 
 
 	# HMD 
@@ -294,6 +270,13 @@ func get_input(delta):
 	
 	# Braking input
 	input_braking = Input.get_action_strength("braking")
+	brake = input_braking * 5
+	
+	# NWS input
+	if (abs(vel_total) < 10):
+		steering = -0.5 * output_rudder
+	else:
+		steering = 0
 	
 	# Cameras
 	if (Input.is_action_just_pressed("camera_toggle")):
