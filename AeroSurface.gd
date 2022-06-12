@@ -140,6 +140,7 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "vel_surface", "round")
 	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
+	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):
