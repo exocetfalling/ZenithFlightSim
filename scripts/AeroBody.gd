@@ -111,6 +111,8 @@ var force_drag_rudder = Vector3.ZERO
 var force_drag_flaps = Vector3.ZERO
 var force_drag_gear = Vector3.ZERO
 
+var force_v_tail = Vector3.ZERO
+
 # Deflection in radians
 var deflection_control_max = PI/12
 var deflection_flaps_max = PI/6

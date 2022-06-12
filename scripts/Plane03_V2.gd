@@ -58,8 +58,8 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "output_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
-	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_local_test", "")
+#	DebugOverlay.stats.add_property(self, "vel_local", "round")
+#	DebugOverlay.stats.add_property(self, "vel_local_test", "")
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "fbw_output", "")
@@ -67,7 +67,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
-#	DebugOverlay.stats.add_property(self, "waypoint_data_3d", "round")
+	DebugOverlay.stats.add_property(self, "force_v_tail", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
 #	DebugOverlay.stats.add_property(self, "proportional", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
@@ -210,7 +210,11 @@ func _physics_process(delta):
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
 	$AeroSurface_Tail_V.vel_body = vel_local
-
+	force_v_tail = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Tail_V.force_total_surface_vector, \
+			$AeroSurface_Tail_V.rotation \
+			)
 
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
