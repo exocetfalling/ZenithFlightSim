@@ -138,11 +138,11 @@ func _calc_atmo_properties(height_metres):
 func _ready():
 	surface_area = (length_chord_root + length_chord_tip) / 2 * length_span
 	
-	DebugOverlay.stats.add_property(self, "vel_surface", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
-	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
-	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
-	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "vel_surface", "round")
+#	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+#	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):

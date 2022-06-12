@@ -1,5 +1,27 @@
 extends AeroBody
 
+var force_wing_l : Vector3 = Vector3.ZERO
+var force_wing_r : Vector3 = Vector3.ZERO
+
+var force_aileron_l : Vector3 = Vector3.ZERO
+var force_aileron_r : Vector3 = Vector3.ZERO
+var force_flap_l : Vector3 = Vector3.ZERO
+var force_flap_r : Vector3 = Vector3.ZERO
+
+var force_ruddervator_l : Vector3 = Vector3.ZERO
+var force_ruddervator_r : Vector3 = Vector3.ZERO
+
+var pos_wing_l : Vector3 = Vector3.ZERO
+var pos_wing_r : Vector3 = Vector3.ZERO
+
+var pos_aileron_l : Vector3 = Vector3.ZERO
+var pos_aileron_r : Vector3 = Vector3.ZERO
+var pos_flap_l: Vector3 = Vector3.ZERO
+var pos_flap_r : Vector3 = Vector3.ZERO
+
+var pos_ruddervator_l : Vector3 = Vector3.ZERO
+var pos_ruddervator_r : Vector3 = Vector3.ZERO
+
 var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
 
@@ -51,11 +73,11 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
-	DebugOverlay.stats.add_property(self, "input_throttle", "round")
-	DebugOverlay.stats.add_property(self, "input_flaps", "round")
-	DebugOverlay.stats.add_property(self, "output_elevator", "round")
-	DebugOverlay.stats.add_property(self, "output_aileron", "round")
-	DebugOverlay.stats.add_property(self, "output_rudder", "round")
+#	DebugOverlay.stats.add_property(self, "input_throttle", "round")
+#	DebugOverlay.stats.add_property(self, "input_flaps", "round")
+#	DebugOverlay.stats.add_property(self, "output_elevator", "round")
+#	DebugOverlay.stats.add_property(self, "output_aileron", "round")
+#	DebugOverlay.stats.add_property(self, "output_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "vel_local", "round")
@@ -67,7 +89,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
-	DebugOverlay.stats.add_property(self, "force_v_tail", "round")
+#	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
+#	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
 #	DebugOverlay.stats.add_property(self, "proportional", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
@@ -77,10 +100,14 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_D", "round")
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
+	
+	
+	
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(delta): 
+	
 	get_input(delta)
 	adc_fd_commands = find_angles_and_distance_to_target(wpt_current_coordinates)
 	
@@ -209,13 +236,21 @@ func _physics_process(delta):
 	angle_alpha_test = 0
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
-	$AeroSurface_Tail_V.vel_body = vel_local
-	force_v_tail = \
+	$AeroSurface_Wing_L.vel_body = vel_local
+	force_wing_l = \
 		calc_force_rotated_from_surface( \
-			$AeroSurface_Tail_V.force_total_surface_vector, \
-			$AeroSurface_Tail_V.rotation \
+			$AeroSurface_Wing_L.force_total_surface_vector, \
+			$AeroSurface_Wing_L.rotation \
+			)
+	$AeroSurface_Wing_R.vel_body = vel_local
+	force_wing_l = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Wing_R.force_total_surface_vector, \
+			$AeroSurface_Wing_R.rotation \
 			)
 
+	$AeroSurface_Ruddervator_L.rotation.x = output_elevator * 0.2
+	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
 	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
@@ -301,39 +336,6 @@ func get_input(delta):
 			autopilot_on = 0
 			output_yaw_damper = 0
 
-
-	# Lift/drag calculations (helpers for add_force_local)
-	
-	#Static, non-moving elements
-	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
-
-	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
-	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
-
-
-	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
-
-	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
-	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
-
-	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
-	
-	force_drag_gear = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_gear * gear_current, _calc_drag_parasite_coeff(angle_alpha)))
-	# Control forces calc.
-	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)), 0)
-	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)), 0)
-	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)), 0)
-	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - output_rudder * deflection_control_max)), 0, 0)
-	
-	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)), 0)
-	
-	force_drag_aileron_l = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)))
-	force_drag_aileron_r = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)))
-	force_drag_elevator = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)))
-	force_drag_rudder = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_beta + output_rudder * deflection_control_max)))
-	
-	force_drag_flaps = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)))
-	
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
 	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
@@ -341,14 +343,13 @@ func get_input(delta):
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
 	output_elevator_trim = input_elevator_trim
+
+func _integrate_forces(_state):
+	# Gravity
+	add_central_force(Vector3(0, -weight, 0))
 	
-	# Animations
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L.rotation.x =  output_aileron * deflection_control_max + PI/2
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R.rotation.x = -output_aileron * deflection_control_max + PI/2
-	$Glider_CSG_Mesh/Hinge_Elevator_L.rotation.x = -(output_elevator + input_elevator_trim) * deflection_control_max
-	$Glider_CSG_Mesh/Hinge_Elevator_R.rotation.x = -(output_elevator + input_elevator_trim) * deflection_control_max
-	$Glider_CSG_Mesh/Hinge_Rudder.rotation.y =  output_rudder * deflection_control_max
-
-
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
+	# Thrust forces
+	add_force_local(Vector3(0, 0, -weight/3 * input_throttle), Vector3(0, 0, 0))
+	
+	# Forces from surfaces 
+	add_force_local(force_wing_l, pos_wing_l)

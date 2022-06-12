@@ -62,57 +62,6 @@ var angle_alpha_deg = 0
 var angle_beta = 0
 var angle_beta_deg = 0
 
-# Specs from CollisionShape measurements
-
-# Positions as (x, y, z) m, z reversed
-export var pos_wing = Vector3(0, -0.75, 0)
-export var pos_h_tail = Vector3(0, 0, 11)
-export var pos_v_tail = Vector3(0, 1.5, 10)
-export var pos_fuse = Vector3(0, 0, 3)
-export var pos_aileron_l = Vector3(-8, -0.75, 1)
-export var pos_aileron_r = Vector3( 8, -0.75, 1)
-export var pos_elevator = Vector3(0, 0, 11)
-export var pos_rudder = Vector3(0, 1.6, 11)
-export var pos_flaps = Vector3( 0, -0.75, 2)
-export var pos_gear = Vector3(0, -0.5, 0)
-
-
-# Areas in m^2
-export var area_wing = 7 
-export var area_h_tail = 3
-export var area_v_tail = 1.5
-export var area_fuse = 3.5
-export var area_aileron = 3
-export var area_elevator = 3
-export var area_rudder = 3
-export var area_flaps = 3
-export var area_gear = 2
-
-# forces in N
-var force_lift_wing = Vector3.ZERO
-var force_lift_h_tail = Vector3.ZERO
-var force_lift_v_tail = Vector3.ZERO
-var force_lift_h_fuse = Vector3.ZERO
-var force_lift_v_fuse = Vector3.ZERO
-var force_lift_aileron_l = Vector3.ZERO
-var force_lift_aileron_r = Vector3.ZERO
-var force_lift_elevator = Vector3.ZERO
-var force_lift_rudder = Vector3.ZERO
-var force_lift_flaps = Vector3.ZERO
-
-var force_drag_wing = Vector3.ZERO
-var force_drag_h_tail = Vector3.ZERO
-var force_drag_v_tail = Vector3.ZERO
-var force_drag_fuse = Vector3.ZERO
-var force_drag_aileron_l = Vector3.ZERO
-var force_drag_aileron_r = Vector3.ZERO
-var force_drag_elevator = Vector3.ZERO
-var force_drag_rudder = Vector3.ZERO
-var force_drag_flaps = Vector3.ZERO
-var force_drag_gear = Vector3.ZERO
-
-var force_v_tail = Vector3.ZERO
-
 # Deflection in radians
 var deflection_control_max = PI/12
 var deflection_flaps_max = PI/6
@@ -358,39 +307,7 @@ func _physics_process(delta):
 	air_density = _calc_atmo_properties(global_transform.origin.y).z
 	
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
-	
-	# Lift/drag calculations (helpers for add_force_local)
-	
-	#Static, non-moving elements
-	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
 
-	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
-	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
-
-
-	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
-
-	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
-	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
-
-	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
-	
-	force_drag_gear = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_gear * gear_current, _calc_drag_parasite_coeff(angle_alpha)))
-	# Control forces calc.
-	force_lift_aileron_l = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)), 0)
-	force_lift_aileron_r = Vector3(0, _calc_lift_force(air_density, vel_total, area_aileron, _calc_lift_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)), 0)
-	force_lift_elevator = Vector3(0, _calc_lift_force(air_density, vel_total, area_elevator, _calc_lift_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)), 0)
-	force_lift_rudder = Vector3(_calc_lift_force(air_density, vel_total, area_rudder, _calc_lift_coeff(angle_beta - output_rudder * deflection_control_max)), 0, 0)
-	
-	force_lift_flaps = Vector3(0, _calc_lift_force(air_density, vel_total, area_flaps, _calc_lift_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)), 0)
-	
-	force_drag_aileron_l = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_aileron * deflection_control_max)))
-	force_drag_aileron_r = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_aileron, _calc_drag_induced_coeff(angle_alpha + angle_incidence - output_aileron * deflection_control_max)))
-	force_drag_elevator = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_elevator, _calc_drag_induced_coeff(angle_alpha - (output_elevator + input_elevator_trim) * deflection_control_max)))
-	force_drag_rudder = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_rudder, _calc_drag_induced_coeff(angle_beta + output_rudder * deflection_control_max)))
-	
-	force_drag_flaps = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_flaps, _calc_drag_induced_coeff(angle_alpha + angle_incidence + output_flaps * deflection_flaps_max)))
-	
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
 	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
@@ -398,43 +315,7 @@ func _physics_process(delta):
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
 	output_elevator_trim = input_elevator_trim
-	
-	# Animations
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_L.rotation.x =  output_aileron * deflection_control_max + PI/2
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Aileron_R.rotation.x = -output_aileron * deflection_control_max + PI/2
-	$Glider_CSG_Mesh/Hinge_Elevator_L.rotation.x = -(output_elevator + input_elevator_trim) * deflection_control_max
-	$Glider_CSG_Mesh/Hinge_Elevator_R.rotation.x = -(output_elevator + input_elevator_trim) * deflection_control_max
-	$Glider_CSG_Mesh/Hinge_Rudder.rotation.y =  output_rudder * deflection_control_max
 
-
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_L.rotation.x = output_flaps * deflection_flaps_max + PI/2
-	$Glider_CSG_Mesh/Fuse_Mid/Wing_Origin/Hinge_Flap_R.rotation.x = output_flaps * deflection_flaps_max + PI/2
-
-	if (gear_input != gear_current):	
-		# NLG
-		$'../Joint_NLG_1'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_1'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_2'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_2'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_3'.set("angular_limit_x/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_NLG_3'.set("angular_limit_x/upper_angle", ((1 - gear_current) * 90))
-		
-		# MLG_L
-		$'../Joint_MLG_L_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * -90))
-		$'../Joint_MLG_L_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * -90))
-		
-		# MLG_R
-		$'../Joint_MLG_R_1'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_1'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_2'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_2'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_3'.set("angular_limit_z/lower_angle", ((1 - gear_current) * 90))
-		$'../Joint_MLG_R_3'.set("angular_limit_z/upper_angle", ((1 - gear_current) * 90))
-	
 	angle_alpha = _calc_alpha(vel_local.y, -vel_local.z)
 	angle_beta = _calc_beta(vel_local.x, -vel_local.z)
 	
@@ -494,46 +375,3 @@ func _physics_process(delta):
 
 func get_input(delta):
 	pass
-
-func _integrate_forces(_state):
-	# Gravity
-	add_central_force(Vector3(0, -weight, 0))
-	
-	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/3 * input_throttle), Vector3(0, 0, 0))
-	
-	# Lift forces from static elements (non-moving)
-	add_force_local(force_lift_wing, pos_wing)
-	add_force_local(force_lift_h_tail, pos_h_tail)
-	add_force_local(force_lift_v_tail, pos_v_tail)
-	
-	# Lift forces from control surfaces
-	add_force_local(force_lift_aileron_l, pos_aileron_l)
-	add_force_local(force_lift_aileron_r, pos_aileron_r)
-	add_force_local(force_lift_elevator, pos_elevator)
-	add_force_local(force_lift_rudder, pos_rudder)
-	
-	add_force_local(force_lift_flaps, pos_flaps)
-	# Drag forces
-	add_force_local(force_drag_wing, pos_wing)
-	add_force_local(force_drag_h_tail, pos_h_tail)
-	add_force_local(force_drag_v_tail, pos_v_tail)
-	add_force_local(force_drag_flaps, pos_flaps)
-	
-	add_force_local(force_drag_fuse, pos_fuse)
-	
-	add_force_local(force_drag_gear, pos_gear)
-#
-#	# Wheel forces
-#	if (ground_contact_NLG == true):
-#		if (abs(vel_local.z) < 10):
-#			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight/10 * vel_total, 0, 0)), Vector3(0, -3, -3))
-#		else:
-#			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
-#	if (ground_contact_MLG_L == true):
-#		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3(-5, -3, 1))
-#		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
-#	if (ground_contact_MLG_R == true):
-#		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3( 5, -3, 1))
-#		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
-#
