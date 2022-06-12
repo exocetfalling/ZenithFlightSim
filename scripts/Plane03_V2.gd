@@ -297,27 +297,7 @@ func get_input(delta):
 			autopilot_on = 0
 			output_yaw_damper = 0
 
-	# Weapons
-	if (Input.is_action_just_pressed("fire_sta_1") && (sta_1_rdy == 1)):
-		$'../GPRocket_1'.launched = true
-		$'../GPRocket_1'.tgt_coordinates = wpt_current_coordinates
-		$'../Wpn_Joint_1'.queue_free()
-		sta_1_rdy = 0
-	if (Input.is_action_just_pressed("fire_sta_2") && (sta_2_rdy == 1)):
-		$'../GPRocket_2'.launched = true
-		$'../GPRocket_2'.tgt_coordinates = wpt_current_coordinates
-		$'../Wpn_Joint_2'.queue_free()
-		sta_2_rdy = 0
-	if (Input.is_action_just_pressed("fire_sta_3") && (sta_3_rdy == 1)):
-		$'../GPRocket_3'.launched = true
-		$'../GPRocket_3'.tgt_coordinates = wpt_current_coordinates
-		$'../Wpn_Joint_3'.queue_free()
-		sta_3_rdy = 0
-	if (Input.is_action_just_pressed("fire_sta_4") && (sta_4_rdy == 1)):
-		$'../GPRocket_4'.launched = true
-		$'../GPRocket_4'.tgt_coordinates = wpt_current_coordinates
-		$'../Wpn_Joint_4'.queue_free()
-		sta_4_rdy = 0
+
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
