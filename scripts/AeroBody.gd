@@ -521,17 +521,17 @@ func _integrate_forces(_state):
 	add_force_local(force_drag_fuse, pos_fuse)
 	
 	add_force_local(force_drag_gear, pos_gear)
-	
-	# Wheel forces
-	if (ground_contact_NLG == true):
-		if (abs(vel_local.z) < 10):
-			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight/10 * vel_total, 0, 0)), Vector3(0, -3, -3))
-		else:
-			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
-	if (ground_contact_MLG_L == true):
-		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3(-5, -3, 1))
-		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
-	if (ground_contact_MLG_R == true):
-		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3( 5, -3, 1))
-		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
-		
+#
+#	# Wheel forces
+#	if (ground_contact_NLG == true):
+#		if (abs(vel_local.z) < 10):
+#			add_force_local((Vector3(vel_local.x * -weight/10 + input_rudder * weight/10 * vel_total, 0, 0)), Vector3(0, -3, -3))
+#		else:
+#			add_force_local((Vector3(vel_local.x * -weight/10, 0, 0)), Vector3(0, -3, -3))
+#	if (ground_contact_MLG_L == true):
+#		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3(-5, -3, 1))
+#		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3(-5, -3, 1))
+#	if (ground_contact_MLG_R == true):
+#		add_force_local((Vector3(0, 0, calc_braking_force(vel_local.z, weight, input_braking))), Vector3( 5, -3, 1))
+#		add_force_local((Vector3(vel_local.x * -weight, 0, 0)), Vector3( 5, -3, 1))
+#

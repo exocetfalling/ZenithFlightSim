@@ -76,7 +76,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_I", "round")
 #	DebugOverlay.stats.add_property(self, "output_D", "round")
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
-	DebugOverlay.stats.add_property(self, "air_density", "round")
+#	DebugOverlay.stats.add_property(self, "air_density", "round")
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -202,14 +202,14 @@ func _physics_process(delta):
 #	vel_local_test = ($TestProbe.transform.basis.xform_inv(vel_local))
 	
 #	vel_local_test = calc_vel_local_with_offset(vel_local, vel_angular_local, Vector3(-19, 0, 0))
-	vel_local_test = Vector3(0, 1, 0).rotated(Vector3(0, 0, 1), $TestProbe.rotation.x)
+#	vel_local_test = Vector3(0, 1, 0).rotated(Vector3(0, 0, 1), $TestProbe.rotation.x)
 	
 	
 #	angle_alpha_test = _calc_alpha(vel_local_test.y, -vel_local_test.z)
 	angle_alpha_test = 0
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
-	$TestProbe.vel_body = vel_local
+	$AeroSurface_Tail_V.vel_body = vel_local
 
 
 	# HMD 

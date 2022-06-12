@@ -221,8 +221,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10 )
 [node name="3D_GCS" parent="Plane03_V2" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -1.49546, -6.76695 )
 
-[node name="TestProbe" type="Spatial" parent="Plane03_V2"]
-transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -18, 0, 0 )
+[node name="AeroSurface_Tail_V" type="Spatial" parent="Plane03_V2"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 1.8, 10.28 )
 script = ExtResource( 14 )
 
 [node name="VehicleWheel_NLG" type="VehicleWheel" parent="Plane03_V2"]

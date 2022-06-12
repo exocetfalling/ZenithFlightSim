@@ -55,6 +55,7 @@ var force_drag_surface_magnitude : float = 0.00
 
 var force_lift_surface_vector : Vector3 = Vector3.ZERO
 var force_drag_surface_vector : Vector3 = Vector3.ZERO
+var force_total_surface_vector : Vector3 = Vector3.ZERO
 
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
@@ -112,7 +113,7 @@ func _calc_atmo_properties(height_metres):
 	
 	# From https://en.wikipedia.org/wiki/Density_of_air#Variation_with_altitude
 	
-	var atmo_properties : Vector3
+	var atmo_properties : Vector3 = Vector3(288.15, 101325, 1.20)
 	
 	var p_0 = 101325 # Sea level standard atmospheric pressure, Pa
 	var T_0 = 288.15 # Sea level standard temperature, K
@@ -141,6 +142,7 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
 	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
+	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -185,6 +187,8 @@ func _physics_process(delta):
 			(cos(angle_beta) * force_drag_surface_magnitude) \
 			)
 	
+	force_total_surface_vector = \
+		force_lift_surface_vector + force_drag_surface_vector
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
