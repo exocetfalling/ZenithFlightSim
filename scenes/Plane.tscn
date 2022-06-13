@@ -52,7 +52,7 @@ transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0
 shape = SubResource( 5 )
 
 [node name="Camera_FPV_Node" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
 
 [node name="HMD" parent="Camera_FPV_Node" index="1"]
 visible = false
