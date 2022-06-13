@@ -88,7 +88,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-#	DebugOverlay.stats.add_property(self, "global_rotation_deg", "round")
+#	DebugOverlay.stats.add_property(self, "pos_wing_l", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -101,7 +101,17 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 	
+	pos_wing_l = $AeroSurface_Wing_L.translation
+	pos_wing_r = $AeroSurface_Wing_R.translation
 	
+	pos_aileron_l = $AeroSurface_Aileron_L.translation
+	pos_aileron_r = $AeroSurface_Aileron_R.translation
+	
+	pos_flap_l = $AeroSurface_Flap_L.translation
+	pos_flap_r = $AeroSurface_Flap_R.translation
+	
+	pos_ruddervator_l = $AeroSurface_Ruddervator_L.translation
+	pos_ruddervator_r = $AeroSurface_Ruddervator_R.translation
 	
 	pass
 
@@ -236,6 +246,8 @@ func _physics_process(delta):
 	angle_alpha_test = 0
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
+	
+	# Aero forces
 	$AeroSurface_Wing_L.vel_body = vel_local
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
@@ -248,8 +260,25 @@ func _physics_process(delta):
 			$AeroSurface_Wing_R.force_total_surface_vector, \
 			$AeroSurface_Wing_R.rotation \
 			)
-
-	$AeroSurface_Ruddervator_L.rotation.x = output_elevator * 0.2
+	
+	$AeroSurface_Aileron_L.vel_body = vel_local
+	force_aileron_l = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Aileron_L.force_total_surface_vector, 
+			$AeroSurface_Aileron_L.rotation \
+			)
+	
+	$AeroSurface_Aileron_R.vel_body = vel_local
+	force_aileron_r = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Aileron_R.force_total_surface_vector, 
+			$AeroSurface_Aileron_R.rotation \
+			)
+	
+	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
+	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
+	
+	
 	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
