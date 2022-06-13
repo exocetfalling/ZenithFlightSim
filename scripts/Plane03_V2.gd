@@ -255,7 +255,7 @@ func _physics_process(delta):
 			$AeroSurface_Wing_L.rotation \
 			)
 	$AeroSurface_Wing_R.vel_body = vel_local
-	force_wing_l = \
+	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
 			$AeroSurface_Wing_R.rotation \
@@ -264,16 +264,48 @@ func _physics_process(delta):
 	$AeroSurface_Aileron_L.vel_body = vel_local
 	force_aileron_l = \
 		calc_force_rotated_from_surface( \
-			$AeroSurface_Aileron_L.force_total_surface_vector, 
+			$AeroSurface_Aileron_L.force_total_surface_vector, \
 			$AeroSurface_Aileron_L.rotation \
 			)
 	
 	$AeroSurface_Aileron_R.vel_body = vel_local
 	force_aileron_r = \
 		calc_force_rotated_from_surface( \
-			$AeroSurface_Aileron_R.force_total_surface_vector, 
+			$AeroSurface_Aileron_R.force_total_surface_vector, \
 			$AeroSurface_Aileron_R.rotation \
 			)
+	
+	$AeroSurface_Flap_L.vel_body = vel_local
+	force_flap_l = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Flap_L.force_total_surface_vector, \
+			$AeroSurface_Flap_L.rotation \
+		)
+	$AeroSurface_Flap_R.vel_body = vel_local
+	force_flap_r = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Flap_R.force_total_surface_vector, \
+			$AeroSurface_Flap_R.rotation \
+		)
+	
+	$AeroSurface_Ruddervator_L.vel_body = vel_local
+	force_ruddervator_l = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
+			$AeroSurface_Ruddervator_L.rotation \
+			)
+	$AeroSurface_Ruddervator_R.vel_body = vel_local
+	force_ruddervator_r = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
+			$AeroSurface_Ruddervator_R.rotation \
+			)
+	
+	$AeroSurface_Aileron_L.rotation.x =  0.2 * output_aileron
+	$AeroSurface_Aileron_R.rotation.x = -0.2 * output_aileron
+	
+	$AeroSurface_Flap_L.rotation.x = 0.2 * output_flaps
+	$AeroSurface_Flap_R.rotation.x = 0.2 * output_flaps
 	
 	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
 	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
@@ -351,9 +383,9 @@ func get_input(delta):
 		if ($Camera_Ext.current == false):
 			$Camera_Ext.current = true
 			Main_Panel_active = false
-		else:
-			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
-			Main_Panel_active = true
+#		if ($Camera_Ext.current == true):
+#			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
+#			Main_Panel_active = true
 
 	# AP input
 	if (Input.is_action_just_pressed("autopilot_toggle")):
@@ -382,3 +414,13 @@ func _integrate_forces(_state):
 	
 	# Forces from surfaces 
 	add_force_local(force_wing_l, pos_wing_l)
+	add_force_local(force_wing_r, pos_wing_r)
+	
+	add_force_local(force_aileron_l, pos_aileron_l)
+	add_force_local(force_aileron_r, pos_aileron_r)
+	
+	add_force_local(force_flap_l, pos_flap_l)
+	add_force_local(force_flap_r, pos_flap_r)
+	
+	add_force_local(force_ruddervator_l, pos_ruddervator_l)
+	add_force_local(force_ruddervator_r, pos_ruddervator_r)

@@ -58,9 +58,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
 visible = false
 
 [node name="Camera_Ext" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 3.06319, 16.5864 )
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 7 )
 cull_mask = 1048557
 environment = ExtResource( 3 )
+fov = 60.0
 far = 100000.0
 
 [node name="PID_Calc_Pitch" type="Node" parent="."]
