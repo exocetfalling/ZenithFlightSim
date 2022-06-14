@@ -64,6 +64,8 @@ var vel_local_test = Vector3.ZERO
 var angle_alpha_test = 0
 var angle_alpha_test_deg = 0
 
+var vec_test : Vector3 = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -92,7 +94,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-#	DebugOverlay.stats.add_property(self, "pos_wing_l", "round")
+	DebugOverlay.stats.add_property(self, "vec_test", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -321,6 +323,9 @@ func _physics_process(delta):
 	
 	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
 	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
+	
+	$AeroSurface_Fin_Ventral.rotation = \
+		Vector3((0.2 * output_rudder), 0, (-PI/2)).rotated(Vector3(0, 0, 1), $AeroSurface_Fin_Ventral.rotation.z)
 	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
