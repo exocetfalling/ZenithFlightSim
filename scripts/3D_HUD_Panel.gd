@@ -44,7 +44,7 @@ func ui_element_dynamic_scale(res_current, res_native, position_design, size_des
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "display_pitch", "")
+#	DebugOverlay.stats.add_property(self, "display_pitch", "")
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
