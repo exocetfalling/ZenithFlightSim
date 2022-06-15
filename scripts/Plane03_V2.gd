@@ -396,9 +396,9 @@ func get_input(delta):
 		if ($Camera_Ext.current == false):
 			$Camera_Ext.current = true
 			Main_Panel_active = false
-#		if ($Camera_Ext.current == true):
-#			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
-#			Main_Panel_active = true
+		if ($Camera_Ext.current == true):
+			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
+			Main_Panel_active = true
 
 	# AP input
 	if (Input.is_action_just_pressed("autopilot_toggle")):
