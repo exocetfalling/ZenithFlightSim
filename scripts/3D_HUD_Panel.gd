@@ -115,7 +115,7 @@ func _process(_delta):
 		get_node('HUD/FlightDirector').visible = false
 	
 	$HUD/FlightPathVector/EnergyCaret.position.y = 5 * display_accel_z
-	$HUD/FlightPathVector/E_Bracket.position.y = -20 * (display_alpha - 5)
+	$HUD/FlightPathVector/E_Bracket.position.y = 4 * (display_alpha - 5)
 	
 	if (display_flaps > 0):
 		$HUD/FlightPathVector/E_Bracket.visible = true
