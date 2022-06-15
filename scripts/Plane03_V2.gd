@@ -307,12 +307,9 @@ func _physics_process(delta):
 	$AeroSurface_Flap_L.rotation.x = 0.2 * output_flaps
 	$AeroSurface_Flap_R.rotation.x = 0.2 * output_flaps
 	
-	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
-	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
-	
 	$AeroSurface_Ruddervator_L.rotation = \
 		Vector3( \
-			(-0.2 * (output_elevator + output_elevator_trim + output_rudder)), \
+			(-0.1 * (output_elevator + output_elevator_trim + output_rudder)), \
 			0, \
 			($AeroSurface_Ruddervator_L.rotation.z) \
 			)\
@@ -321,7 +318,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Ruddervator_R.rotation = \
 		Vector3( \
-			(-0.2 * (output_elevator + output_elevator_trim - output_rudder)), \
+			(-0.1 * (output_elevator + output_elevator_trim - output_rudder)), \
 			0, \
 			($AeroSurface_Ruddervator_R.rotation.z) \
 			)\
