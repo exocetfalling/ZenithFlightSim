@@ -17,6 +17,7 @@ var display_MFD_mode = 0
 var display_nav_brg = 0
 var display_nav_range = 0
 var display_nav_waypoint = 0
+var display_accel_z = 0
 
 var display_HUD_scale = 1
 var display_FD_commands = Vector2.ZERO
@@ -112,3 +113,11 @@ func _process(_delta):
 		get_node('HUD/FlightDirector').visible = true
 	else:
 		get_node('HUD/FlightDirector').visible = false
+	
+	$HUD/FlightPathVector/EnergyCaret.position.y = 5 * display_accel_z
+	$HUD/FlightPathVector/E_Bracket.position.y = -1 * (display_alpha - 5)
+	
+	if (display_flaps > 0):
+		$HUD/FlightPathVector/E_Bracket.visible = true
+	else:
+		$HUD/FlightPathVector/E_Bracket.visible = false

@@ -83,6 +83,19 @@ texture = ExtResource( 1 )
 scale = Vector2( 4, 4 )
 texture = ExtResource( 4 )
 
+[node name="EnergyCaret" type="Line2D" parent="HUD/FlightPathVector"]
+visible = false
+position = Vector2( 20, 0 )
+points = PoolVector2Array( 10, -5, 0, 0, 10, 5 )
+width = 1.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="E_Bracket" type="Line2D" parent="HUD/FlightPathVector"]
+position = Vector2( -20, 0 )
+points = PoolVector2Array( 5, -20, 0, -20, 0, 0, 5, 0, 0, 0, 0, 20, 5, 20 )
+width = 1.0
+default_color = Color( 0, 1, 0, 1 )
+
 [node name="FlightDirector" type="Sprite" parent="HUD"]
 scale = Vector2( 3, 3 )
 texture = ExtResource( 5 )

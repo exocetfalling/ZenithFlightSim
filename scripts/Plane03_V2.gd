@@ -164,7 +164,6 @@ func _physics_process(delta):
 	HUD_Node.display_nav_range = waypoint_data.y
 	HUD_Node.display_FD_commands = adc_fd_commands
 	
-	
 	if (angle_alpha_deg > 15):
 		adc_stall = true
 	else:
