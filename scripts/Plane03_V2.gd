@@ -11,8 +11,6 @@ var force_flap_r : Vector3 = Vector3.ZERO
 var force_ruddervator_l : Vector3 = Vector3.ZERO
 var force_ruddervator_r : Vector3 = Vector3.ZERO
 
-var force_fin_ventral : Vector3 = Vector3.ZERO
-
 var pos_wing_l : Vector3 = Vector3.ZERO
 var pos_wing_r : Vector3 = Vector3.ZERO
 
@@ -23,8 +21,6 @@ var pos_flap_r : Vector3 = Vector3.ZERO
 
 var pos_ruddervator_l : Vector3 = Vector3.ZERO
 var pos_ruddervator_r : Vector3 = Vector3.ZERO
-
-var pos_fin_ventral : Vector3 = Vector3.ZERO
 
 var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
@@ -94,7 +90,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-	DebugOverlay.stats.add_property(self, "vec_test", "")
+#	DebugOverlay.stats.add_property(self, "vec_test", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -118,9 +114,6 @@ func _ready():
 	
 	pos_ruddervator_l = $AeroSurface_Ruddervator_L.translation
 	pos_ruddervator_r = $AeroSurface_Ruddervator_R.translation
-	
-	pos_fin_ventral = $AeroSurface_Fin_Ventral.translation
-	
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -307,12 +300,6 @@ func _physics_process(delta):
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
 			$AeroSurface_Ruddervator_R.rotation \
-			)
-	$AeroSurface_Fin_Ventral.vel_body = vel_local
-	force_fin_ventral = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Fin_Ventral.force_total_surface_vector, \
-			$AeroSurface_Fin_Ventral.rotation \
 			)
 	
 	$AeroSurface_Aileron_L.rotation.x =  0.2 * output_aileron
