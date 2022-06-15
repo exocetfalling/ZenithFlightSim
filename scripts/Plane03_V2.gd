@@ -324,14 +324,23 @@ func _physics_process(delta):
 	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
 	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
 	
-	$AeroSurface_Fin_Ventral.rotation = \
+	$AeroSurface_Ruddervator_L.rotation = \
 		Vector3( \
-			(0.2 * output_rudder), \
+			(-0.2 * (output_elevator + output_elevator_trim + output_rudder)), \
 			0, \
-			(-PI/2) \
+			($AeroSurface_Ruddervator_L.rotation.z) \
 			)\
 			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Fin_Ventral.rotation.z)
+		-$AeroSurface_Ruddervator_L.rotation.z)
+	
+	$AeroSurface_Ruddervator_R.rotation = \
+		Vector3( \
+			(-0.2 * (output_elevator + output_elevator_trim - output_rudder)), \
+			0, \
+			($AeroSurface_Ruddervator_R.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$AeroSurface_Ruddervator_R.rotation.z)
 	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
