@@ -10,7 +10,6 @@
 [ext_resource path="res://AeroSurface.gd" type="Script" id=14]
 
 [sub_resource type="PhysicsMaterial" id=1]
-friction = 0.03
 
 [sub_resource type="CapsuleShape" id=2]
 margin = 0.001
