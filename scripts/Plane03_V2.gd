@@ -8,11 +8,10 @@ var force_aileron_r : Vector3 = Vector3.ZERO
 var force_flap_l : Vector3 = Vector3.ZERO
 var force_flap_r : Vector3 = Vector3.ZERO
 
-var force_stabilator_l : Vector3 = Vector3.ZERO
-var force_stabilator_r : Vector3 = Vector3.ZERO
+var force_ruddervator_l : Vector3 = Vector3.ZERO
+var force_ruddervator_r : Vector3 = Vector3.ZERO
 
-var force_tail_v : Vector3 = Vector3.ZERO
-var force_rudder : Vector3 = Vector3.ZERO
+var force_fin_ventral : Vector3 = Vector3.ZERO
 
 var pos_wing_l : Vector3 = Vector3.ZERO
 var pos_wing_r : Vector3 = Vector3.ZERO
@@ -22,11 +21,10 @@ var pos_aileron_r : Vector3 = Vector3.ZERO
 var pos_flap_l: Vector3 = Vector3.ZERO
 var pos_flap_r : Vector3 = Vector3.ZERO
 
-var pos_stabilator_l : Vector3 = Vector3.ZERO
-var pos_stabilator_r : Vector3 = Vector3.ZERO
+var pos_ruddervator_l : Vector3 = Vector3.ZERO
+var pos_ruddervator_r : Vector3 = Vector3.ZERO
 
-var pos_tail_v : Vector3 = Vector3.ZERO
-var pos_rudder : Vector3 = Vector3.ZERO
+var pos_fin_ventral : Vector3 = Vector3.ZERO
 
 var Main_Panel_active = true
 var rocket_scene = preload("res://scenes/GPRocket.tscn")
@@ -96,7 +94,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-#	DebugOverlay.stats.add_property(self, "vec_test", "")
+	DebugOverlay.stats.add_property(self, "vec_test", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -118,11 +116,10 @@ func _ready():
 	pos_flap_l = $AeroSurface_Flap_L.translation
 	pos_flap_r = $AeroSurface_Flap_R.translation
 	
-	pos_stabilator_l = $AeroSurface_Stabilator_L.translation
-	pos_stabilator_r = $AeroSurface_Stabilator_R.translation
+	pos_ruddervator_l = $AeroSurface_Ruddervator_L.translation
+	pos_ruddervator_r = $AeroSurface_Ruddervator_R.translation
 	
-	pos_tail_v = $AeroSurface_Tail_V.translation
-	pos_rudder = $AeroSurface_Rudder.translation
+	pos_fin_ventral = $AeroSurface_Fin_Ventral.translation
 	
 	pass
 
@@ -299,66 +296,42 @@ func _physics_process(delta):
 			$AeroSurface_Flap_R.rotation \
 		)
 	
-	$AeroSurface_Stabilator_L.vel_body = vel_local
-	force_stabilator_l = \
+	$AeroSurface_Ruddervator_L.vel_body = vel_local
+	force_ruddervator_l = \
 		calc_force_rotated_from_surface( \
-			$AeroSurface_Stabilator_L.force_total_surface_vector, \
-			$AeroSurface_Stabilator_L.rotation \
+			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
+			$AeroSurface_Ruddervator_L.rotation \
 			)
-	$AeroSurface_Stabilator_R.vel_body = vel_local
-	force_stabilator_r = \
+	$AeroSurface_Ruddervator_R.vel_body = vel_local
+	force_ruddervator_r = \
 		calc_force_rotated_from_surface( \
-			$AeroSurface_Stabilator_R.force_total_surface_vector, \
-			$AeroSurface_Stabilator_R.rotation \
+			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
+			$AeroSurface_Ruddervator_R.rotation \
+			)
+	$AeroSurface_Fin_Ventral.vel_body = vel_local
+	force_fin_ventral = \
+		calc_force_rotated_from_surface( \
+			$AeroSurface_Fin_Ventral.force_total_surface_vector, \
+			$AeroSurface_Fin_Ventral.rotation \
 			)
 	
-	$AeroSurface_Tail_V.vel_body = vel_local
-	force_tail_v = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Tail_V.force_total_surface_vector, \
-			$AeroSurface_Tail_V.rotation \
-			)
-	$AeroSurface_Rudder.vel_body = vel_local
-	force_rudder = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Rudder.force_total_surface_vector, \
-			$AeroSurface_Rudder.rotation \
-			)
 	$AeroSurface_Aileron_L.rotation.x =  0.2 * output_aileron
 	$AeroSurface_Aileron_R.rotation.x = -0.2 * output_aileron
 	
 	$AeroSurface_Flap_L.rotation.x = 0.2 * output_flaps
 	$AeroSurface_Flap_R.rotation.x = 0.2 * output_flaps
 	
-#	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
-#	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
-
-	$AeroSurface_Stabilator_L.rotation = \
-		Vector3( \
-			(-0.2 * (output_elevator + output_elevator_trim)), \
-			0, \
-			($AeroSurface_Stabilator_L.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Stabilator_L.rotation.z)
+	$AeroSurface_Ruddervator_L.rotation.x = -0.2 * (output_elevator + output_rudder)
+	$AeroSurface_Ruddervator_R.rotation.x = -0.2 * (output_elevator - output_rudder)
 	
-	$AeroSurface_Stabilator_R.rotation = \
-		Vector3( \
-			(-0.2 * (output_elevator + output_elevator_trim)), \
-			0, \
-			($AeroSurface_Stabilator_R.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Stabilator_R.rotation.z)
-	
-	$AeroSurface_Rudder.rotation = \
+	$AeroSurface_Fin_Ventral.rotation = \
 		Vector3( \
 			(0.2 * output_rudder), \
 			0, \
-			($AeroSurface_Rudder.rotation.z) \
+			(-PI/2) \
 			)\
 			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Rudder.rotation.z)
+		-$AeroSurface_Fin_Ventral.rotation.z)
 	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
@@ -470,8 +443,5 @@ func _integrate_forces(_state):
 	add_force_local(force_flap_l, pos_flap_l)
 	add_force_local(force_flap_r, pos_flap_r)
 	
-	add_force_local(force_stabilator_l, pos_stabilator_l)
-	add_force_local(force_stabilator_r, pos_stabilator_r)
-	
-	add_force_local(force_tail_v, pos_tail_v)
-	add_force_local(force_rudder, pos_rudder)
+	add_force_local(force_ruddervator_l, pos_ruddervator_l)
+	add_force_local(force_ruddervator_r, pos_ruddervator_r)
