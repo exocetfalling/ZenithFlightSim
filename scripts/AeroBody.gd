@@ -290,7 +290,7 @@ func calc_vel_local_with_offset(vel_linear_local, vel_angular_local, pos_offset)
 	return vel_local_with_offset
 
 func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
-	return force_vector.rotated(Vector3(0, 0, 1), surface_node_rotation.x)
+	return force_vector.rotated(Vector3(0, 0, -1), -surface_node_rotation.z)
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
