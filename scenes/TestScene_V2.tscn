@@ -32,7 +32,7 @@ textures = [ [ ExtResource( 7 ), ExtResource( 9 ) ], [ ExtResource( 5 ), ExtReso
 [node name="TestScene_V2" type="Spatial"]
 
 [node name="Plane" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 201.5, 1990 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200.451, 1990 )
 
 [node name="XForm_Island" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
