@@ -7,7 +7,11 @@ class_name AeroEngine
 # var b = "text"
 
 # Thrust in N
-var thrust_rated : float = 1000
+export var thrust_rated : float = 1000
+var thrust_output : float = 0.00
+
+var vel_freestream : float = 0.00
+var vel_exhaust : float = 0.00
 
 
 # Called when the node enters the scene tree for the first time.
