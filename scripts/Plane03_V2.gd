@@ -92,7 +92,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-	DebugOverlay.stats.add_property(self, "camera_mode", "")
+#	DebugOverlay.stats.add_property(self, "camera_mode", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
