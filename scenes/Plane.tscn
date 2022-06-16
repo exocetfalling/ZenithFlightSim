@@ -279,4 +279,52 @@ height = 0.01
 sides = 32
 material = ExtResource( 1 )
 
+[node name="CSGCylinder_Strut_NLG_L" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00786392, -0.391195, -2 )
+radius = 0.002
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
+[node name="CSGCylinder_Strut_NLG_R" type="CSGCylinder" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008, -0.391, -2 )
+radius = 0.002
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
+[node name="CSGCylinder_Strut_MLG_L" type="CSGCylinder" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.454046, -0.599977, 0.5 )
+radius = 0.01
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGCylinder_Strut_MLG_L"]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.0480116, -0.613576, 0 )
+radius = 0.01
+height = 0.15
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
+[node name="CSGCylinder_Strut_MLG_R" type="CSGCylinder" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.454, -0.6, 0.5 )
+radius = 0.01
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="CSGCylinder_Strut_MLG_R"]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.048, -0.614, 0 )
+radius = 0.01
+height = 0.15
+sides = 16
+smooth_faces = false
+material = ExtResource( 1 )
+
 [editable path="Camera_FPV_Node"]
