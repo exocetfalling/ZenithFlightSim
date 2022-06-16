@@ -329,7 +329,9 @@ func _physics_process(delta):
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
 	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
 
-
+	$CSGCylinder_Axle_MLG_L.translation.y = $VehicleWheel_MLG_L.translation.y
+	$CSGCylinder_Axle_MLG_R.translation.y = $VehicleWheel_MLG_R.translation.y
+	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
