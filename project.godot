@@ -134,6 +134,7 @@ config/icon="res://resources/icon.png"
 
 [autoload]
 
+Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
 
 [display]
