@@ -95,6 +95,8 @@ var input_trim_pitch_min = -1
 
 var input_braking = 0
 
+var input_joystick : Vector2 = Vector2.ZERO
+
 var gear_max = 1
 var gear_min = 0
 var gear_current = 1
@@ -309,8 +311,8 @@ func _physics_process(delta):
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
 
 	# Output delays
-	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
-	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
+	output_aileron = interpolate_linear(output_aileron, input_joystick.x, deflection_rate, delta)
+	output_elevator = interpolate_linear(output_elevator, input_joystick.y, deflection_rate, delta)
 	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)

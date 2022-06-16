@@ -78,7 +78,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
-#	DebugOverlay.stats.add_property(self, "input_flaps", "round")
+	DebugOverlay.stats.add_property(self, "input_joystick", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
@@ -343,13 +343,11 @@ func get_input(delta):
 	if (Input.is_action_pressed("throttle_down")):
 		if (input_throttle > throttle_min):
 			input_throttle -= 0.5 * delta
+
+	# Joystick input (as vector) 
+	input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
 	
-	# Roll input
-	input_aileron = -Input.get_action_strength("roll_left") + Input.get_action_strength("roll_right")
-	
-	# Pitch (climb/dive) input
-	input_elevator = -Input.get_action_strength("pitch_down") + Input.get_action_strength("pitch_up")
-	# yaw input
+	# Yaw input
 	input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
 	
 	# Flaps input
@@ -412,14 +410,6 @@ func get_input(delta):
 		else:
 			autopilot_on = 0
 			output_yaw_damper = 0
-
-	# Output delays
-	output_aileron = interpolate_linear(output_aileron, input_aileron, deflection_rate, delta)
-	output_elevator = interpolate_linear(output_elevator, input_elevator, deflection_rate, delta)
-	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
-	
-	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
-	output_elevator_trim = input_elevator_trim
 
 func _integrate_forces(_state):
 	# Gravity
