@@ -62,6 +62,8 @@ var angle_alpha_test_deg = 0
 
 var vec_test : Vector3 = Vector3.ZERO
 
+var camera_mode = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	add_child(LineDrawer)
@@ -90,7 +92,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
-#	DebugOverlay.stats.add_property(self, "vec_test", "")
+	DebugOverlay.stats.add_property(self, "camera_mode", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
@@ -118,8 +120,6 @@ func _ready():
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
-	
-	get_input(delta)
 	adc_fd_commands = find_angles_and_distance_to_target(wpt_current_coordinates)
 	
 	global_rotation = global_transform.basis.get_euler()
@@ -393,12 +393,13 @@ func get_input(delta):
 	
 	# Cameras
 	if (Input.is_action_just_pressed("camera_toggle")):
-		if ($Camera_Ext.current == false):
-			$Camera_Ext.current = true
-			Main_Panel_active = false
-		if ($Camera_Ext.current == true):
-			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
-			Main_Panel_active = true
+		camera_mode = camera_mode + 1
+	if (camera_mode == 0):
+		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
+	if (camera_mode == 1):
+		$Camera_Ext.current = true
+	if (camera_mode > 1):
+		camera_mode = 0
 
 	# AP input
 	if (Input.is_action_just_pressed("autopilot_toggle")):
