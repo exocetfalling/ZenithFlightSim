@@ -78,7 +78,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
-	DebugOverlay.stats.add_property(self, "input_joystick", "round")
+#	DebugOverlay.stats.add_property(self, "input_joystick", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
