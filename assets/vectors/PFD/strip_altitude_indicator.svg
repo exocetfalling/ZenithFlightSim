@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="4080"
+   viewBox="0 0 52.916665 1079.5"
+   version="1.1"
+   id="svg1687"
+   sodipodi:docname="strip_altitude_indicator.svg"
+   inkscape:export-filename="D:\Godot\Projects\ZenithFlightSim\assets\png_files\PFD\strip_airspeed_indicator.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+  <defs
+     id="defs1681">
+    <rect
+       x="-9.9999999e-07"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166667"
+       id="rect2426" />
+    <rect
+       x="-1e-06"
+       y="518.58331"
+       width="26.458334"
+       height="16.47031"
+       id="rect2308" />
+    <rect
+       id="rect2434"
+       height="21.166667"
+       width="26.458334"
+       y="1068.9167"
+       x="-9.9999999e-07" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-0" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-9" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445-3" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-6" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445-4" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-7" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445-2" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-2" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445-0" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2434-1" />
+    <rect
+       x="-1e-06"
+       y="1068.9167"
+       width="26.458334"
+       height="21.166668"
+       id="rect2445-03" />
+    <filter
+       id="filter2736"
+       style="color-interpolation-filters:sRGB"
+       inkscape:collect="always">
+      <feGaussianBlur
+         id="feGaussianBlur2738"
+         stdDeviation="1.2155316e-05"
+         inkscape:collect="always" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#888792"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.1767767"
+     inkscape:cx="203.3894"
+     inkscape:cy="1070.1548"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer8"
+     inkscape:document-rotation="0"
+     showgrid="true"
+     units="px">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2250"
+       originx="26.458333"
+       originy="264.58333"
+       spacingx="13.229167"
+       spacingy="21.166667"
+       empspacing="4" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata1684">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     style="display:inline"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       id="text2306"
+       style="font-size:8.46667px;line-height:1.25;font-family:'Courier New';-inkscape-font-specification:'Courier New';white-space:pre;shape-inside:url(#rect2308);" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer8"
+     inkscape:label="Layer 2"
+     style="display:inline;opacity:0.999;filter:url(#filter2736)">
+    <path
+       id="path2726"
+       d="M 13.229166,1068.9167 H -1e-6"
+       style="fill:none;stroke:#ffffff;stroke-width:1.05833332;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:normal" />
+  </g>
+</svg>

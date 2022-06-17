@@ -51,7 +51,7 @@ texture = ExtResource( 1 )
 light_mask = 2
 texture = ExtResource( 5 )
 
-[node name="Line2D" type="Line2D" parent="PFD/EADI/Viewport"]
+[node name="Wings" type="Line2D" parent="PFD/EADI/Viewport"]
 position = Vector2( 500, 500 )
 points = PoolVector2Array( -200, 0, -100, 0, -50, 50, 0, 0, 50, 50, 100, 0, 200, 0 )
 default_color = Color( 0.909804, 0.839216, 0.0666667, 1 )
@@ -59,7 +59,7 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Light2D" type="Light2D" parent="PFD/EADI/Viewport"]
+[node name="EADI_Mask" type="Light2D" parent="PFD/EADI/Viewport"]
 position = Vector2( 500, 500 )
 texture = ExtResource( 3 )
 mode = 3
@@ -85,6 +85,8 @@ valign = 1
 uppercase = true
 
 [node name="HDG" type="Label" parent="PFD/EADI"]
+anchor_top = 0.026
+anchor_bottom = 0.026
 margin_left = -42.0
 margin_top = -15.0
 margin_right = 1042.0
@@ -100,6 +102,7 @@ align = 1
 uppercase = true
 
 [node name="ALT" type="Label" parent="PFD/EADI"]
+visible = false
 anchor_top = -0.002
 anchor_bottom = -0.002
 margin_top = 393.0
