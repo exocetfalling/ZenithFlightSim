@@ -22,7 +22,7 @@ export var term_I = 0.00
 export var term_D = 0.00
 
 # Maximum integral value, after which it'll reset 
-export var term_I_max = 0.50
+export var term_I_max = 200
 
 var output_P = 0.00
 var output_I = 0.00
@@ -43,6 +43,8 @@ var param_select = 0
 var param_value = 0
 var param_delta_step = 0.001
 var param_default = 0
+
+var reset_integral : bool = false
 
 #func calc_proportional_output(value_setpoint, value_current, time_delta):
 #	value_error = value_setpoint - value_current
@@ -97,6 +99,9 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 	
 	if (abs(output_I) > term_I_max):
 		integral = 0
+		
+	if (reset_integral == true): 
+		integral = 9
 	
 	# Output for derivative term 
 
@@ -122,7 +127,8 @@ func _ready() -> void:
 		DebugOverlay.stats.add_property(self, "term_D", "round")
 		DebugOverlay.stats.add_property(self, "output_total", "round")
 		DebugOverlay.stats.add_property(self, "param_select", "")
-	#	DebugOverlay.stats.add_property(self, "time_delta", "")
+		DebugOverlay.stats.add_property(self, "time_delta", "")
+		DebugOverlay.stats.add_property(self, "reset_integral", "")
 		pass # Replace with function body.
 	
 

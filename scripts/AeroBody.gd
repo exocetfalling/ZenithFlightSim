@@ -251,37 +251,11 @@ func find_angles_and_distance_to_target(vec_pos_target):
 	var range_to = vec_delta_local.length()
 	return Vector3(yaw_to, pitch_to, range_to)
 
-func calc_autopilot_factor(velocity_aircraft):	
-	var x1 = 0
-	var y1 = 1
-	var x2 = 60
-	var y2 = 1
-	var x3 = 100
-	var y3 = 0.05
-	var x4 = 200
-	var y4 = 0.05
-
-	var a = (y2 - y1) / (x2 - x1)
-	var b = (y3 - y2) / (x3 - x2)
-	var c = (y4 - y3) / (x4 - x3)
-
-	if (velocity_aircraft < x1):
-		return 0
-		
-	elif ((velocity_aircraft > x1) and (velocity_aircraft <= x2)):
-		return (a * (velocity_aircraft - x1) + y1)
-	
-	elif ((velocity_aircraft > x2) and (velocity_aircraft <= x3)):
-		return (b * (velocity_aircraft - x2) + y2)
-
-	elif ((velocity_aircraft > x3) and (velocity_aircraft <= x4)):
-		return (c * (velocity_aircraft - x3) + y3)
-	
-	elif (velocity_aircraft > x4):
-		return 0
-	
+func calc_autopilot_factor(dyn_press):
+	if (dyn_press > 0):
+		return 1 / dyn_press * 2000
 	else:
-		return 0
+		return 1
 
 func calc_vel_local_with_offset(vel_linear_local, vel_angular_local, pos_offset):
 	var vel_local_with_offset : Vector3

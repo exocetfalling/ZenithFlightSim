@@ -78,7 +78,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
-#	DebugOverlay.stats.add_property(self, "input_joystick", "round")
+	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
@@ -89,14 +89,14 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "fbw_output", "")
-#	DebugOverlay.stats.add_property(self, "output_yaw_damper", "round")
+	DebugOverlay.stats.add_property(self, "autopilot_on", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
 #	DebugOverlay.stats.add_property(self, "camera_mode", "")
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
-#	DebugOverlay.stats.add_property(self, "proportional", "round")
+#	DebugOverlay.stats.add_property(self, "adc_stall", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
 #	DebugOverlay.stats.add_property(self, "value_current", "round")
 #	DebugOverlay.stats.add_property(self, "output_P", "round")
@@ -186,31 +186,24 @@ func _physics_process(delta):
 
 	
 	if (autopilot_on == 1):
-		if (adc_stall == false):
-			if (\
-			(abs(input_elevator) < 0.1) && \
-			(abs(adc_roll) < 30) && \
-			(abs(adc_pitch) < 20) && \
-			(ground_contact_NLG == false)\
-			):
-				Panel_Trim_Node.value = \
-				-1 * \
-				calc_autopilot_factor(vel_total) * \
-				( \
-				$PID_Calc_Pitch.calc_PID_output(tgt_fpa, adc_fpa, delta)
-				) \
+		if (abs(input_joystick.y) < 0.1):
+			$PID_Calc_Pitch.reset_integral = false
+			input_elevator_trim = \
+			calc_autopilot_factor(air_pressure_dynamic) * \
+			( \
+			$PID_Calc_Pitch.calc_PID_output(tgt_fpa, adc_fpa, delta)
+			) \
+			
+		else: 
+			$PID_Calc_Pitch.reset_integral = true
+			tgt_fpa = adc_fpa
 #
 #				Panel_Trim_Node.value = \
 #				-1 * fbw_output.x
-				
-				output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
-#				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, adc_pitch, delta)
-			else:
-				tgt_fpa = adc_fpa
-				output_yaw_damper = 0
-		if (adc_stall == true):
-			autopilot_on = 0
 	
+#		output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
+#				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, adc_pitch, delta)
+
 	if (input_elevator_trim > input_trim_pitch_max):
 		input_elevator_trim = input_trim_pitch_max
 	if (input_elevator_trim < input_trim_pitch_min):
@@ -375,12 +368,12 @@ func get_input(delta):
 	if (Input.is_action_just_pressed("autopilot_toggle")):
 		if (autopilot_on == 0):
 			autopilot_on = 1
-			tgt_pitch = adc_pitch
+			tgt_fpa = adc_fpa
 			output_yaw_damper = 0
 		else:
 			autopilot_on = 0
 			output_yaw_damper = 0
-	
+
 	# Braking input
 	input_braking = Input.get_action_strength("braking")
 	brake = input_braking * 5
@@ -400,16 +393,6 @@ func get_input(delta):
 		$Camera_Ext.current = true
 	if (camera_mode > 1):
 		camera_mode = 0
-
-	# AP input
-	if (Input.is_action_just_pressed("autopilot_toggle")):
-		if (autopilot_on == 0):
-			autopilot_on = 1
-			tgt_pitch = adc_pitch
-			output_yaw_damper = 0
-		else:
-			autopilot_on = 0
-			output_yaw_damper = 0
 
 func _integrate_forces(_state):
 	# Gravity
