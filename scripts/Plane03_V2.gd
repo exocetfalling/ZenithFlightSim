@@ -356,13 +356,13 @@ func get_input(delta):
 	if (Input.is_action_pressed("trim_pitch_down")):
 		input_elevator_trim -= 0.1 * delta 
 
-	# Gear input
-	if (Input.is_action_just_pressed("gear_toggle")):
-	
-		if (gear_input == 0):
-			gear_input = -1
-		else:
-			gear_input = 0
+#	# Gear input
+#	if (Input.is_action_just_pressed("gear_toggle")):
+#
+#		if (gear_input == 0):
+#			gear_input = -1
+#		else:
+#			gear_input = 0
 	
 	# AP input
 	if (Input.is_action_just_pressed("autopilot_toggle")):
