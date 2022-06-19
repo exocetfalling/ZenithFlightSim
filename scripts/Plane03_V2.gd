@@ -78,7 +78,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "input_throttle", "round")
-	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
+#	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
@@ -89,7 +89,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "fbw_output", "")
-	DebugOverlay.stats.add_property(self, "autopilot_on", "round")
+#	DebugOverlay.stats.add_property(self, "autopilot_on", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
 #	DebugOverlay.stats.add_property(self, "camera_mode", "")
@@ -191,12 +191,12 @@ func _physics_process(delta):
 			input_elevator_trim = \
 			calc_autopilot_factor(air_pressure_dynamic) * \
 			( \
-			$PID_Calc_Pitch.calc_PID_output(tgt_fpa, adc_fpa, delta)
+			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
 			) \
 			
 		else: 
 			$PID_Calc_Pitch.reset_integral = true
-			tgt_fpa = adc_fpa
+			tgt_pitch = adc_pitch
 #
 #				Panel_Trim_Node.value = \
 #				-1 * fbw_output.x

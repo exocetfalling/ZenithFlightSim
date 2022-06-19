@@ -44,6 +44,10 @@ var param_value = 0
 var param_delta_step = 0.001
 var param_default = 0
 
+var param_default_p : float = 0.00
+var param_default_i : float = 0.00
+var param_default_d : float = 0.00
+
 var reset_integral : bool = false
 
 #func calc_proportional_output(value_setpoint, value_current, time_delta):
@@ -101,7 +105,7 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 		integral = 0
 		
 	if (reset_integral == true): 
-		integral = 9
+		integral = 0
 	
 	# Output for derivative term 
 
@@ -118,6 +122,10 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	param_default_p = term_P
+	param_default_i = term_I
+	param_default_d = term_D
+	
 	if (param_tuning_active == true):
 		DebugOverlay.stats.add_property(self, "output_P", "round")
 		DebugOverlay.stats.add_property(self, "output_I", "round")
@@ -138,10 +146,10 @@ func get_input_keyboard(delta):
 		# Select and loop params using events
 		if Input.is_action_just_pressed("PID_term_next"):
 			param_select += 1
-			param_value = 0
+			param_value = param_default
 		if Input.is_action_just_pressed("PID_term_prev"):
 			param_select -= 1
-			param_value = 0
+			param_value = param_default
 			
 		if (param_select > 2):
 			param_select = 0
@@ -157,10 +165,13 @@ func get_input_keyboard(delta):
 		# Set the parameter according to selection 
 		if (param_select == 0):
 			term_P = param_value
+			param_default_p = term_P
 		if (param_select == 1):
 			term_I = param_value
+			param_default_i = term_I
 		if (param_select == 2):
 			term_D = param_value
+			param_default_d = term_D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

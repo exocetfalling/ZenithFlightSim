@@ -253,7 +253,7 @@ func find_angles_and_distance_to_target(vec_pos_target):
 
 func calc_autopilot_factor(dyn_press):
 	if (dyn_press > 0):
-		return 1 / dyn_press * 2000
+		return 1 / dyn_press * 500
 	else:
 		return 1
 

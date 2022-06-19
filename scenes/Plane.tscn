@@ -65,8 +65,10 @@ far = 100000.0
 
 [node name="PID_Calc_Pitch" type="Node" parent="."]
 script = ExtResource( 5 )
-term_P = 0.05
-term_I = 0.01
+term_P = 0.2
+term_I = 0.1
+term_D = 0.1
+param_tuning_active = false
 
 [node name="3D_HUD_V2" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.90929 )
