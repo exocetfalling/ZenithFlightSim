@@ -195,7 +195,8 @@ func _physics_process(delta):
 			) \
 			
 		else: 
-			$PID_Calc_Pitch.reset_integral = true
+			$PID_Calc_Pitch.integral = 0
+			$PID_Calc_Pitch.output_I = 0
 			tgt_pitch = adc_pitch
 #
 #				Panel_Trim_Node.value = \

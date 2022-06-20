@@ -103,10 +103,7 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 	
 	if (abs(output_I) > term_I_max):
 		integral = 0
-		
-	if (reset_integral == true): 
-		integral = 0
-	
+
 	# Output for derivative term 
 
 	value_error_delta = (value_error_current - value_error_previous)

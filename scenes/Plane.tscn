@@ -66,7 +66,7 @@ far = 100000.0
 [node name="PID_Calc_Pitch" type="Node" parent="."]
 script = ExtResource( 5 )
 term_P = 0.2
-term_I = 0.1
+term_I = 0.2
 term_D = 0.1
 param_tuning_active = false
 
