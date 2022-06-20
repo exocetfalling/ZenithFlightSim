@@ -9,6 +9,7 @@ class_name AeroEngine
 # Thrust in N
 export var thrust_rated : float = 1000
 var thrust_output : float = 0.00
+var thrust_output_vector : Vector3 = Vector3.ZERO
 
 var throttle_current : float = 0.00
 
@@ -29,4 +30,5 @@ func _ready():
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	thrust_output = 0.5 * air_density * fan_area * vel_delta * throttle_current
+	thrust_output_vector = Vector3(0, 0, -thrust_output)
 	pass
