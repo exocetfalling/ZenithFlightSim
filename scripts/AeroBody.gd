@@ -21,6 +21,8 @@ var ground_contact_MLG_R = false
 var corr_velocity = Vector3.ZERO
 
 var vel_local = Vector3.ZERO
+var vel_airspeed : Vector3 = Vector3.ZERO
+var vel_wind : Vector3 = Vector3.ZERO
 
 var vel_total = 0
 
