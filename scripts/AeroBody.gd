@@ -21,7 +21,9 @@ var ground_contact_MLG_R = false
 var corr_velocity = Vector3.ZERO
 
 var vel_local = Vector3.ZERO
-var vel_airspeed : Vector3 = Vector3.ZERO
+var vel_airspeed_true : Vector3 = Vector3.ZERO
+var vel_airspeed_true_total : float = 0.00
+
 var vel_wind : Vector3 = Vector3.ZERO
 
 var vel_total = 0
@@ -277,6 +279,9 @@ func _physics_process(delta):
 	vel_total = self.linear_velocity.length()
 	vel_local = (self.transform.basis.xform_inv(linear_velocity))
 	
+	vel_airspeed_true = vel_local + self.transform.basis.xform_inv(vel_wind)
+	vel_airspeed_true_total = vel_airspeed_true.length()
+	
 	vel_angular_local = global_transform.basis.z * (angular_velocity)
 	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
 	
@@ -284,7 +289,7 @@ func _physics_process(delta):
 	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
 	air_density = _calc_atmo_properties(global_transform.origin.y).z
 	
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
+	air_pressure_dynamic = 0.5 * air_density * pow(vel_airspeed_true_total, 2)
 
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_joystick.x, deflection_rate, delta)

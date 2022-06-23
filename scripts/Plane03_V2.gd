@@ -105,6 +105,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 	
+	vel_wind = Vector3(0, 0, 5)
+	
 	pos_wing_l = $AeroSurface_Wing_L.translation
 	pos_wing_r = $AeroSurface_Wing_R.translation
 	
@@ -242,53 +244,53 @@ func _physics_process(delta):
 	
 	
 	# Aero forces
-	$AeroSurface_Wing_L.vel_body = vel_local
+	$AeroSurface_Wing_L.vel_body = vel_airspeed_true
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
 			$AeroSurface_Wing_L.rotation \
 			)
-	$AeroSurface_Wing_R.vel_body = vel_local
+	$AeroSurface_Wing_R.vel_body = vel_airspeed_true
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
 			$AeroSurface_Wing_R.rotation \
 			)
 	
-	$AeroSurface_Aileron_L.vel_body = vel_local
+	$AeroSurface_Aileron_L.vel_body = vel_airspeed_true
 	force_aileron_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Aileron_L.force_total_surface_vector, \
 			$AeroSurface_Aileron_L.rotation \
 			)
 	
-	$AeroSurface_Aileron_R.vel_body = vel_local
+	$AeroSurface_Aileron_R.vel_body = vel_airspeed_true
 	force_aileron_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Aileron_R.force_total_surface_vector, \
 			$AeroSurface_Aileron_R.rotation \
 			)
 	
-	$AeroSurface_Flap_L.vel_body = vel_local
+	$AeroSurface_Flap_L.vel_body = vel_airspeed_true
 	force_flap_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Flap_L.force_total_surface_vector, \
 			$AeroSurface_Flap_L.rotation \
 		)
-	$AeroSurface_Flap_R.vel_body = vel_local
+	$AeroSurface_Flap_R.vel_body = vel_airspeed_true
 	force_flap_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Flap_R.force_total_surface_vector, \
 			$AeroSurface_Flap_R.rotation \
 		)
 	
-	$AeroSurface_Ruddervator_L.vel_body = vel_local
+	$AeroSurface_Ruddervator_L.vel_body = vel_airspeed_true
 	force_ruddervator_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
 			$AeroSurface_Ruddervator_L.rotation \
 			)
-	$AeroSurface_Ruddervator_R.vel_body = vel_local
+	$AeroSurface_Ruddervator_R.vel_body = vel_airspeed_true
 	force_ruddervator_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
