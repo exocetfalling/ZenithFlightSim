@@ -1,18 +1,13 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=3]
-[ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=4]
-[ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=5]
+[ext_resource path="res://scenes/MFD_V3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/MFD_Mode.gd" type="Script" id=6]
-[ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture" id=7]
 [ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture" id=8]
 [ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture" id=9]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture" id=10]
 [ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture" id=11]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture" id=12]
-[ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture" id=13]
 [ext_resource path="res://resources/Display_Font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://assets/Panels/DU_Background.bmp" type="Texture" id=15]
 [ext_resource path="res://scenes/UpFrontControls.tscn" type="PackedScene" id=16]
@@ -31,185 +26,6 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PFD" type="Light2D" parent="."]
-position = Vector2( 254.151, 798.645 )
-texture = ExtResource( 12 )
-mode = 3
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Wings" type="Line2D" parent="PFD"]
-z_index = 1
-points = PoolVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
-width = 2.0
-default_color = Color( 0.152941, 0.152941, 0.152941, 1 )
-antialiased = true
-
-[node name="EADI_Fail_X" type="Line2D" parent="PFD"]
-light_mask = 2
-points = PoolVector2Array( 0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0 )
-texture = ExtResource( 7 )
-
-[node name="EADI_Image" type="Sprite" parent="PFD"]
-texture = ExtResource( 10 )
-script = ExtResource( 4 )
-
-[node name="EADI_Background" type="Sprite" parent="PFD"]
-show_behind_parent = true
-light_mask = 2
-position = Vector2( 20, -14 )
-texture = ExtResource( 13 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Box_SPD" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = -152.121
-margin_top = -21.3891
-margin_right = -112.121
-margin_bottom = 27.6109
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "SPD
-XXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Box_ALT" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = 300.0
-margin_bottom = 14.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "ALT
-XXXXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Box_HDG" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = -30.0
-margin_top = -158.0
-margin_right = 30.0
-margin_bottom = -109.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "HDG
-XXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Box_FLAPS" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = -160.0
-margin_top = 339.0
-margin_right = -100.0
-margin_bottom = 25.5
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "FLAPS
-X"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Box_TRIM" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = 413.0
-margin_top = 339.0
-margin_right = -100.0
-margin_bottom = 25.5
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "TRIM
-X.X"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AP" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = -18.7627
-margin_top = -248.485
-margin_right = 22.2373
-margin_bottom = 0.515259
-custom_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
-custom_fonts/font = ExtResource( 14 )
-text = "CWS"
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Line2D_1" type="Line2D" parent="PFD"]
-light_mask = 2
-position = Vector2( -203.848, -180.246 )
-points = PoolVector2Array( 0, 0, 450, 0 )
-width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
-
-[node name="Line2D_2" type="Line2D" parent="PFD"]
-light_mask = 2
-position = Vector2( -206.848, 137.754 )
-points = PoolVector2Array( 0, 0, 450, 0 )
-width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
-
-[node name="Gear_Indicator" type="Line2D" parent="PFD"]
-light_mask = 4
-position = Vector2( 3.17479, 188.494 )
-points = PoolVector2Array( -25, 0, 25, 0, 0, 25, -25, 0 )
-width = 5.0
-default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-
-[node name="Gear_Status" type="Label" parent="PFD"]
-light_mask = 2
-margin_left = -58.7338
-margin_top = 149.612
-margin_right = 73.2662
-margin_bottom = 172.612
-custom_fonts/font = ExtResource( 14 )
-text = "gear dn"
-align = 1
-uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -701,3 +517,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MFD_V3_L" parent="." instance=ExtResource( 4 )]
+position = Vector2( 0, 400 )
+scale = Vector2( 0.6, 0.6 )

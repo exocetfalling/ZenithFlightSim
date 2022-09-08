@@ -130,20 +130,20 @@ func _physics_process(delta):
 #	vel_angular_local = (angular_velocity)
 
 	# Panel updates
-	Panel_Node.display_active = Main_Panel_active
-	Panel_Node.display_pitch = adc_pitch
-	Panel_Node.display_roll = adc_roll
-	Panel_Node.display_spd = adc_spd
-	Panel_Node.display_hdg = adc_hdg
-	Panel_Node.display_alt = adc_alt
-	Panel_Node.display_flaps = input_flaps * 4
-	Panel_Node.display_trim = output_elevator_trim
-	Panel_Node.display_gear = gear_current
-	Panel_Node.display_throttle = input_throttle
-	Panel_Node.display_ap = autopilot_on
+	Panel_Node.panel_active = Main_Panel_active
+	Panel_Node.panel_pitch = adc_pitch
+	Panel_Node.panel_roll = adc_roll
+	Panel_Node.panel_spd = adc_spd
+	Panel_Node.panel_hdg = adc_hdg
+	Panel_Node.panel_alt = adc_alt
+	Panel_Node.panel_flaps = input_flaps * 4
+	Panel_Node.panel_trim = output_elevator_trim
+	Panel_Node.panel_gear = gear_current
+	Panel_Node.panel_throttle = input_throttle
+	Panel_Node.panel_ap = autopilot_on
 	
-	Panel_Node.display_nav_brg = waypoint_data.x
-	Panel_Node.display_nav_range = waypoint_data.y
+	Panel_Node.panel_nav_brg = waypoint_data.x
+	Panel_Node.panel_nav_range = waypoint_data.y
 	
 	
 	# HUD updates
@@ -221,7 +221,7 @@ func _physics_process(delta):
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
 	waypoint_data_3d = find_angles_and_distance_to_target(wpt_current_coordinates)
-#	get_node('3D_GCS/Viewport/Main_Panel').display_nav_waypoint = wpt_current
+#	get_node('3D_GCS/Viewport/Main_Panel').panel_nav_waypoint = wpt_current
 #	if(get_node("3D_GCS/Viewport/Main_Panel/MFD/Page_NAV/Waypoint_ID").text == 'WPT 01'):
 #		wpt_current = 'WPT 01'
 #		wpt_current_coordinates = WPT_01_coodinates

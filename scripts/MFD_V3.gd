@@ -32,3 +32,6 @@ func _process(delta):
 	get_node("PFD/EADI/ALT").text = ("BALT\n%05d" % [display_alt])
 	get_node("PFD/EADI/HDG").text = ("HDG\n%03d" % [display_hdg])
 	
+	get_node("PFD/EADI/Viewport/XForm_Roll").rotation_degrees = -display_roll
+	get_node("PFD/EADI/Viewport/XForm_Roll/XForm_Pitch").position.y = display_pitch * 20
+	
