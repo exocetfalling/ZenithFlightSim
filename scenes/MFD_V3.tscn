@@ -18,7 +18,7 @@ size_flags_vertical = 0
 tab_align = 0
 script = ExtResource( 7 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_lock_": true
 }
 
 [node name="PFD" type="MarginContainer" parent="Display"]
@@ -179,7 +179,7 @@ grow_vertical = 2
 size_flags_horizontal = 5
 custom_fonts/font = ExtResource( 2 )
 text = "GEAR
-XX"
+XX-XX"
 align = 1
 valign = 2
 uppercase = true

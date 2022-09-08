@@ -8,8 +8,10 @@ extends TabContainer
 var display_active = true
 var display_pitch = 0
 var display_roll = 0
-var display_spd = 0
-var display_alt = 0
+var display_spd_indicated = 0
+var display_spd_true = 0
+var display_alt_barometric = 0
+var display_alt_radio = 0
 var display_hdg = 0
 var display_flaps = 0
 var display_trim = 0
@@ -28,8 +30,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	get_node("PFD/EADI/SPD").text = ("IAS\n%03d" % [display_spd])
-	get_node("PFD/EADI/ALT").text = ("BALT\n%05d" % [display_alt])
+	get_node("PFD/EADI/SPD").text = ("IAS\n%03d\n" % [display_spd_indicated] \
+		+ "TAS\n%03d" % [display_spd_true])
+	get_node("PFD/EADI/ALT").text = ("BALT\n%05d\n" % [display_alt_barometric] \
+		+ "RALT\n%05d" % [display_alt_radio])
 	get_node("PFD/EADI/HDG").text = ("HDG\n%03d" % [display_hdg])
 	
 	get_node("PFD/EADI/Viewport/XForm_Roll").rotation_degrees = -display_roll
