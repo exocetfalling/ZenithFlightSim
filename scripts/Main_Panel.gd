@@ -121,8 +121,8 @@ func _process(_delta):
 	get_node("MFD_V3_L/Display").display_roll = panel_roll
 	get_node("MFD_V3_L/Display").display_pitch = panel_pitch
 	
-	get_node("MFD_V3_L/Display").display_spd = panel_spd
-	get_node("MFD_V3_L/Display").display_alt = panel_alt
+	get_node("MFD_V3_L/Display").display_spd_indicated = panel_spd
+	get_node("MFD_V3_L/Display").display_alt_barometric = panel_alt
 	get_node("MFD_V3_L/Display").display_hdg = panel_hdg
 	
 	# MFD
