@@ -215,7 +215,7 @@ margin_top = 61.0
 margin_right = -8.0
 margin_bottom = -8.0
 
-[node name="ENG" type="MarginContainer" parent="Display"]
+[node name="SYS" type="MarginContainer" parent="Display"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -223,6 +223,49 @@ margin_left = 8.0
 margin_top = 61.0
 margin_right = -8.0
 margin_bottom = -8.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Display/SYS"]
+margin_right = 1084.0
+margin_bottom = 1031.0
+
+[node name="ENG" type="Label" parent="Display/SYS/VBoxContainer"]
+margin_right = 1084.0
+margin_bottom = 159.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "THR: XX.X %
+EGT: XXX C
+FF: XXX KG/H"
+
+[node name="WARN" type="Label" parent="Display/SYS/VBoxContainer"]
+margin_top = 167.0
+margin_right = 1084.0
+margin_bottom = 326.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "WARN 1
+WARN 2
+WARN 3"
+
+[node name="CAUT" type="Label" parent="Display/SYS/VBoxContainer"]
+margin_top = 334.0
+margin_right = 1084.0
+margin_bottom = 493.0
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "CAUT 1
+CAUT 2
+CAUT 3"
+
+[node name="MEMO" type="Label" parent="Display/SYS/VBoxContainer"]
+margin_top = 501.0
+margin_right = 1084.0
+margin_bottom = 660.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "MEMO 1
+MEMO 2
+MEMO 3"
 
 [node name="WPN" type="MarginContainer" parent="Display"]
 visible = false
@@ -324,3 +367,67 @@ margin_top = 168.0
 margin_right = 1068.0
 margin_bottom = 216.0
 text = "MEMO - REVIEW"
+
+[node name="CLIMB" type="VBoxContainer" parent="Display/CHK/Checklist_Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 61.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="CheckBox_1" type="CheckBox" parent="Display/CHK/Checklist_Tabs/CLIMB"]
+margin_right = 1068.0
+margin_bottom = 48.0
+text = "GEAR - UP"
+
+[node name="CheckBox_2" type="CheckBox" parent="Display/CHK/Checklist_Tabs/CLIMB"]
+margin_top = 56.0
+margin_right = 1068.0
+margin_bottom = 104.0
+text = "FLAPS - UP"
+
+[node name="CheckBox_3" type="CheckBox" parent="Display/CHK/Checklist_Tabs/CLIMB"]
+margin_top = 112.0
+margin_right = 1068.0
+margin_bottom = 160.0
+text = "THRUST - SET"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox_4" type="CheckBox" parent="Display/CHK/Checklist_Tabs/CLIMB"]
+margin_top = 168.0
+margin_right = 1068.0
+margin_bottom = 216.0
+text = "A/P - AS REQ"
+
+[node name="ENROUTE" type="VBoxContainer" parent="Display/CHK/Checklist_Tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 61.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="CheckBox_1" type="CheckBox" parent="Display/CHK/Checklist_Tabs/ENROUTE"]
+margin_right = 1068.0
+margin_bottom = 48.0
+text = "FLIGHT PATH - MONITOR"
+
+[node name="CheckBox_2" type="CheckBox" parent="Display/CHK/Checklist_Tabs/ENROUTE"]
+margin_top = 56.0
+margin_right = 1068.0
+margin_bottom = 104.0
+text = "FUEL - CHECK"
+
+[node name="CheckBox_3" type="CheckBox" parent="Display/CHK/Checklist_Tabs/ENROUTE"]
+margin_top = 112.0
+margin_right = 1068.0
+margin_bottom = 160.0
+text = "ROUTE - MONITOR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
