@@ -55,8 +55,7 @@ onready var Panel_Trim_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sl
 
 onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
 
-var vel_local_wing_l = Vector3.ZERO
-var vel_local_wing_r = Vector3.ZERO
+var vel_local_test = Vector3.ZERO
 
 var angle_alpha_test = 0
 var angle_alpha_test_deg = 0
@@ -85,9 +84,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
-	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_local_wing_l", "round")
-	DebugOverlay.stats.add_property(self, "vel_local_wing_r", "round")
+#	DebugOverlay.stats.add_property(self, "vel_local", "round")
+#	DebugOverlay.stats.add_property(self, "vel_local_test", "")
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "fbw_output", "")
@@ -244,21 +242,15 @@ func _physics_process(delta):
 	angle_alpha_test = 0
 	angle_alpha_test_deg = rad2deg(angle_alpha_test)
 	
-	vel_local_wing_l = $AeroSurface_Wing_L.vel_body
-	vel_local_wing_r = $AeroSurface_Wing_R.vel_body
 	
 	# Aero forces
-	$AeroSurface_Wing_L.vel_body = \
-		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * pos_wing_l.x), 0)
+	$AeroSurface_Wing_L.vel_body = vel_airspeed_true
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
 			$AeroSurface_Wing_L.rotation \
 			)
-	$AeroSurface_Wing_R.vel_body = \
-		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * pos_wing_r.x), 0)
+	$AeroSurface_Wing_R.vel_body = vel_airspeed_true
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
@@ -292,17 +284,13 @@ func _physics_process(delta):
 			$AeroSurface_Flap_R.rotation \
 		)
 	
-	$AeroSurface_Ruddervator_L.vel_body = \
-		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * (pos_ruddervator_l.x * 1.4)), 0)
+	$AeroSurface_Ruddervator_L.vel_body = vel_airspeed_true
 	force_ruddervator_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
 			$AeroSurface_Ruddervator_L.rotation \
 			)
-	$AeroSurface_Ruddervator_R.vel_body = \
-		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * (pos_ruddervator_r.x * 1.4)), 0)
+	$AeroSurface_Ruddervator_R.vel_body = vel_airspeed_true
 	force_ruddervator_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
