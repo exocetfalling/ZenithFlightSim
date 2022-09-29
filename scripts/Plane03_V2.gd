@@ -250,7 +250,8 @@ func _physics_process(delta):
 	# Aero forces
 	$AeroSurface_Wing_L.vel_body = \
 		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * pos_wing_l.x), 0)
+		Vector3(0, (angular_velocity.z * pos_wing_l.x), 0) + \
+		Vector3(0, 0, (angular_velocity.y * pos_wing_l.x))
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
@@ -258,7 +259,8 @@ func _physics_process(delta):
 			)
 	$AeroSurface_Wing_R.vel_body = \
 		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * pos_wing_r.x), 0)
+		Vector3(0, (angular_velocity.z * pos_wing_r.x), 0) + \
+		Vector3(0, 0, (angular_velocity.y * pos_wing_r.x))
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
@@ -294,7 +296,8 @@ func _physics_process(delta):
 	
 	$AeroSurface_Ruddervator_L.vel_body = \
 		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * (pos_ruddervator_l.x * 1.4)), 0)
+		Vector3(0, (angular_velocity.z * pos_ruddervator_l.x * 1.4), 0) + \
+		Vector3(0, 0, (angular_velocity.y * pos_ruddervator_l.x * 1.4))
 	force_ruddervator_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
@@ -302,7 +305,8 @@ func _physics_process(delta):
 			)
 	$AeroSurface_Ruddervator_R.vel_body = \
 		vel_airspeed_true + \
-		Vector3(0, (angular_velocity.z * (pos_ruddervator_r.x * 1.4)), 0)
+		Vector3(0, (angular_velocity.z * pos_ruddervator_r.x * 1.4), 0) + \
+		Vector3(0, 0, (angular_velocity.y * pos_ruddervator_r.x * 1.4))
 	force_ruddervator_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
