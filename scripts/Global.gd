@@ -5,7 +5,11 @@ extends Node
 # var a = 2
 # var b = "text"
 
-var setting_units : int = 0
+
+# Units of measure
+# Metric = 0
+# Aviation = 1
+var setting_units : int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

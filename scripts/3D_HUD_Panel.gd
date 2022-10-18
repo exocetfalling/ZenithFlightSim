@@ -95,8 +95,13 @@ func _process(_delta):
 	get_node('HUD/HUD_Ladder').position.y = (display_pitch / 90 * 3200) * cos(deg2rad(display_roll))
 	get_node('HUD/HUD_Ladder').position.x = get_node('HUD/HUD_Ladder').position.y * tan(deg2rad(display_roll))
 	
-	get_node("Speed_Data").text = ("SPD\n%03d" % [display_spd])
-	get_node("Alt_Data").text = ("ALT\n%05d" % [display_alt])
+	if (Global.setting_units == 0):
+		get_node("Speed_Data").text = ("SPD\n%03d" % [display_spd])
+		get_node("Alt_Data").text = ("ALT\n%05d" % [display_alt])
+	if (Global.setting_units == 1):
+		get_node("Speed_Data").text = ("SPD\n%03d" % [display_spd * 2])
+		get_node("Alt_Data").text = ("ALT\n%05d" % [display_alt * 3.2808])
+	
 	get_node("Heading_Data").text = ("HDG\n%03d" % [display_hdg])
 	
 
