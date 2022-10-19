@@ -5,6 +5,7 @@ var panel_pitch = 0
 var panel_roll = 0
 var panel_spd = 0
 var panel_alt = 0
+var panel_alt_radio = 0
 var panel_hdg = 0
 var panel_flaps = 0
 var panel_trim = 0

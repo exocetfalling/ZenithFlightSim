@@ -36,6 +36,11 @@ func _process(delta):
 		+ "RALT\n%05d" % [display_alt_radio])
 	get_node("PFD/EADI/HDG").text = ("HDG\n%03d" % [display_hdg])
 	
+	get_node("PFD/EADI/FLAP").text = ("FLAP\n%01d" % [display_flaps])
+	
+	if (display_ap == 0): 
+		pass
+	
 	get_node("PFD/EADI/Viewport/XForm_Roll").rotation_degrees = -display_roll
 	get_node("PFD/EADI/Viewport/XForm_Roll/XForm_Pitch").position.y = display_pitch * 20
 	
