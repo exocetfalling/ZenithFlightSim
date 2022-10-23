@@ -136,6 +136,7 @@ config/icon="res://resources/icon.png"
 
 Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
+FlightData="*res://scripts/FlightData.gd"
 
 [display]
 

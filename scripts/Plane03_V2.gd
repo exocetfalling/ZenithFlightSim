@@ -46,15 +46,6 @@ var cmd_vector = Vector3.ZERO
 
 var panel_throttle = 0
 
-onready var Panel_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel")
-
-onready var Panel_Throttle_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Throttle")
-onready var Panel_Flaps_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Flaps")
-onready var Panel_Gear_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Gear")
-onready var Panel_Trim_Node = get_node("3D_GCS/GUIPanel3D/Viewport/Main_Panel/Sliders/Trim")
-
-onready var HUD_Node = get_node("3D_HUD_V2/GUIPanelHUD/Viewport/3D_HUD_Panel")
-
 var vel_local_test = Vector3.ZERO
 
 var angle_alpha_test = 0
@@ -66,7 +57,9 @@ var camera_mode = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	add_child(LineDrawer)
+	control_type = 1
+	
+#	add_child(LineDrawer)
 
 #	DebugOverlay.stats.add_property(self, "adc_spd", "round")
 #	DebugOverlay.stats.add_property(self, "adc_hdg", "round")
@@ -128,43 +121,32 @@ func _physics_process(delta):
 	global_rotation_deg = Vector3(rad2deg(global_rotation.x), rad2deg(global_rotation.y), rad2deg(global_rotation.z))
 
 #	vel_angular_local = (angular_velocity)
-
-	# Panel updates
-	Panel_Node.panel_active = Main_Panel_active
-	Panel_Node.panel_pitch = adc_pitch
-	Panel_Node.panel_roll = adc_roll
-	Panel_Node.panel_spd = adc_spd
-	Panel_Node.panel_hdg = adc_hdg
-	Panel_Node.panel_alt = adc_alt
-	Panel_Node.panel_flaps = input_flaps * 4
-	Panel_Node.panel_trim = output_elevator_trim
-	Panel_Node.panel_gear = gear_current
-	Panel_Node.panel_throttle = input_throttle
-	Panel_Node.panel_ap = autopilot_on
-	
-	Panel_Node.panel_nav_brg = waypoint_data.x
-	Panel_Node.panel_nav_range = waypoint_data.y
-	
-	
-	# HUD updates
-	HUD_Node.display_pitch = adc_pitch
-	HUD_Node.display_roll = adc_roll
-	HUD_Node.display_spd = adc_spd
-	HUD_Node.display_hdg = adc_hdg
-	HUD_Node.display_alt = adc_alt
-	
-	HUD_Node.display_alpha = adc_alpha
-	HUD_Node.display_beta = adc_beta
-	
-	HUD_Node.display_flaps = input_flaps * 4
-	HUD_Node.display_trim = output_elevator_trim
-	HUD_Node.display_gear = gear_current
-	HUD_Node.display_throttle = input_throttle
-	HUD_Node.display_ap = autopilot_on
-	
-	HUD_Node.display_nav_brg = waypoint_data.x
-	HUD_Node.display_nav_range = waypoint_data.y
-	HUD_Node.display_FD_commands = adc_fd_commands
+	if (control_type == 1):
+		# Panel updates
+		FlightData.aircraft_active = Main_Panel_active
+		FlightData.aircraft_pitch = adc_pitch
+		FlightData.aircraft_roll = adc_roll
+		FlightData.aircraft_alpha = adc_alpha
+		FlightData.aircraft_beta = adc_beta
+		
+		if (Global.setting_units == 0):
+			FlightData.aircraft_spd_indicated = adc_spd_indicated
+			FlightData.aircraft_spd_true = adc_spd_true
+			FlightData.aircraft_alt_barometric = adc_alt_barometric
+		if (Global.setting_units == 1):
+			FlightData.aircraft_spd_indicated = adc_spd_indicated * 2
+			FlightData.aircraft_spd_true = adc_spd_true * 2
+			FlightData.aircraft_alt_barometric = adc_alt_barometric * 3.2809
+		
+		FlightData.aircraft_hdg = adc_hdg
+		FlightData.aircraft_flaps = input_flaps * 4
+		FlightData.aircraft_trim = output_elevator_trim
+		FlightData.aircraft_gear = gear_current
+		FlightData.aircraft_throttle = input_throttle
+		FlightData.aircraft_ap = autopilot_on
+		
+		FlightData.aircraft_nav_brg = waypoint_data.x
+		FlightData.aircraft_nav_range = waypoint_data.y
 	
 	if (angle_alpha_deg > 15):
 		adc_stall = true
@@ -331,71 +313,72 @@ func _physics_process(delta):
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
-		# Throttle input
-	
-	if (Input.is_action_pressed("throttle_up")):
-		if (input_throttle < throttle_max):
-			input_throttle += 0.5 * delta 
-	if (Input.is_action_pressed("throttle_down")):
-		if (input_throttle > throttle_min):
-			input_throttle -= 0.5 * delta
+	# Check if aircraft is under player control
+	if (control_type == 1):
+			# Throttle input
+		if (Input.is_action_pressed("throttle_up")):
+			if (input_throttle < throttle_max):
+				input_throttle += 0.5 * delta 
+		if (Input.is_action_pressed("throttle_down")):
+			if (input_throttle > throttle_min):
+				input_throttle -= 0.5 * delta
 
-	# Joystick input (as vector) 
-	input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
-	
-	# Yaw input
-	input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
-	
-	# Flaps input
-	if (Input.is_action_just_pressed("flaps_down")):
-		input_flaps += 0.25 
-	if (Input.is_action_just_pressed("flaps_up")):
-		input_flaps -= 0.25
+		# Joystick input (as vector) 
+		input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
+		
+		# Yaw input
+		input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
+		
+		# Flaps input
+		if (Input.is_action_just_pressed("flaps_down")):
+			input_flaps += 0.25 
+		if (Input.is_action_just_pressed("flaps_up")):
+			input_flaps -= 0.25
 
-	# Trim input
-	
-	if (Input.is_action_pressed("trim_pitch_up")):
-		input_elevator_trim += 0.1 * delta 
-	if (Input.is_action_pressed("trim_pitch_down")):
-		input_elevator_trim -= 0.1 * delta 
+		# Trim input
+		
+		if (Input.is_action_pressed("trim_pitch_up")):
+			input_elevator_trim += 0.1 * delta 
+		if (Input.is_action_pressed("trim_pitch_down")):
+			input_elevator_trim -= 0.1 * delta 
 
-#	# Gear input
-#	if (Input.is_action_just_pressed("gear_toggle")):
-#
-#		if (gear_input == 0):
-#			gear_input = -1
-#		else:
-#			gear_input = 0
-	
-	# AP input
-	if (Input.is_action_just_pressed("autopilot_toggle")):
-		if (autopilot_on == 0):
-			autopilot_on = 1
-			tgt_fpa = adc_fpa
-			output_yaw_damper = 0
+	#	# Gear input
+	#	if (Input.is_action_just_pressed("gear_toggle")):
+	#
+	#		if (gear_input == 0):
+	#			gear_input = -1
+	#		else:
+	#			gear_input = 0
+		
+		# AP input
+		if (Input.is_action_just_pressed("autopilot_toggle")):
+			if (autopilot_on == 0):
+				autopilot_on = 1
+				tgt_fpa = adc_fpa
+				output_yaw_damper = 0
+			else:
+				autopilot_on = 0
+				output_yaw_damper = 0
+
+		# Braking input
+		input_braking = Input.get_action_strength("braking")
+		brake = input_braking * 5
+		
+		# NWS input
+		if (abs(vel_total) < 10):
+			steering = -0.5 * output_rudder
 		else:
-			autopilot_on = 0
-			output_yaw_damper = 0
-
-	# Braking input
-	input_braking = Input.get_action_strength("braking")
-	brake = input_braking * 5
-	
-	# NWS input
-	if (abs(vel_total) < 10):
-		steering = -0.5 * output_rudder
-	else:
-		steering = 0
-	
-	# Cameras
-	if (Input.is_action_just_pressed("camera_toggle")):
-		camera_mode = camera_mode + 1
-	if (camera_mode == 0):
-		$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
-	if (camera_mode == 1):
-		$Camera_Ext.current = true
-	if (camera_mode > 1):
-		camera_mode = 0
+			steering = 0
+		
+		# Cameras
+		if (Input.is_action_just_pressed("camera_toggle")):
+			camera_mode = camera_mode + 1
+		if (camera_mode == 0):
+			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
+		if (camera_mode == 1):
+			$Camera_Ext.current = true
+		if (camera_mode > 1):
+			camera_mode = 0
 
 func _integrate_forces(_state):
 	# Gravity

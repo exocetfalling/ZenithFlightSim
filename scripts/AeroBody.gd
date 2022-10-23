@@ -37,8 +37,13 @@ var vel_total = 0
 var vel_angular_local = Vector3.ZERO
 var vel_angular_local_deg = Vector3.ZERO
 
-var adc_spd = 0
-var adc_alt = 0
+var adc_spd_indicated = 0
+var adc_spd_true = 0
+var adc_spd_ground = 0
+
+var adc_alt_barometric = 0
+var adc_alt_radio = 0
+
 var adc_hdg = 0
 
 var adc_pitch = 0
@@ -311,9 +316,12 @@ func _physics_process(delta):
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
-	adc_spd = sqrt(2 * air_pressure_dynamic / 1.225)
+	adc_spd_indicated = sqrt(2 * air_pressure_dynamic / 1.225)
+	adc_spd_true = vel_airspeed_true.length()
+	adc_spd_ground = vel_total
+	
 	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
-	adc_alt = global_transform.origin.y
+	adc_alt_barometric = global_transform.origin.y
 	
 	adc_pitch = rotation_degrees.x
 	adc_roll = -rotation_degrees.z
@@ -322,7 +330,7 @@ func _physics_process(delta):
 	adc_beta = angle_beta_deg
 	
 	adc_fpa = adc_pitch - adc_alpha
-	adc_trk = adc_hdg - adc_beta
+	adc_trk = fmod((adc_hdg - adc_beta) + 360, 360)
 
 	# FBW
 	adc_rates.x = -vel_angular_local_deg.x
