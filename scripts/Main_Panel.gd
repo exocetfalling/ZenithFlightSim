@@ -29,6 +29,8 @@ var current_centre_position = get_viewport_rect().size/2
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	DebugOverlay.stats.add_property(self, "FlightData.aircraft_MFD_mode", "")
+	$MFD_V3_L/Display.current_tab = 0
+	$MFD_V3_R/Display.current_tab = 2
 	pass # Replace with function body.
 
 	
