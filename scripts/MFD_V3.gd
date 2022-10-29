@@ -83,12 +83,16 @@ func _process(delta):
 	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
 	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
 	
-	$PFD/EADI/Tape_HDG/REF.text = ("%03d\n|" % [tape_hdg_ref])
-	$PFD/EADI/Tape_HDG/ABV.text = ("%03d\n|" % [tape_hdg_abv])
-	$PFD/EADI/Tape_HDG/BLW.text = ("%03d\n|" % [tape_hdg_blw])
+	$PFD/EADI/Tape_HDG/REF.text = ("%03d" % [tape_hdg_ref])
+	$PFD/EADI/Tape_HDG/ABV.text = ("%03d" % [tape_hdg_abv])
+	$PFD/EADI/Tape_HDG/BLW.text = ("%03d" % [tape_hdg_blw])
 	
 	$PFD/EADI/Tape_HDG.position.x = 500 - \
 		(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
+	
+	$PFD/EADI/Box_SPD/Value.text = ("%03d" % [FlightData.aircraft_spd_indicated])
+	$PFD/EADI/Box_ALT/Value.text = ("%05d" % [FlightData.aircraft_alt_barometric])
+	$PFD/EADI/Box_HDG/Value.text = ("%03d" % [FlightData.aircraft_hdg])
 	
 	get_node("PFD/EADI/Viewport/XForm_Roll").rotation_degrees = -FlightData.aircraft_roll
 	get_node("PFD/EADI/Viewport/XForm_Roll/XForm_Pitch").position.y = FlightData.aircraft_pitch * 20

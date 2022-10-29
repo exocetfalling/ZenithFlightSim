@@ -190,18 +190,6 @@ align = 2
 valign = 2
 uppercase = true
 
-[node name="Needle_SPD" type="Line2D" parent="Display/PFD/EADI"]
-position = Vector2( 80, 500 )
-points = PoolVector2Array( 0, 0, 40, 0 )
-width = 5.0
-default_color = Color( 1, 1, 0, 1 )
-
-[node name="Needle_ALT" type="Line2D" parent="Display/PFD/EADI"]
-position = Vector2( 845, 500 )
-points = PoolVector2Array( 0, 0, 40, 0 )
-width = 5.0
-default_color = Color( 1, 1, 0, 1 )
-
 [node name="Tape_SPD" type="Node2D" parent="Display/PFD/EADI"]
 position = Vector2( 50, 500 )
 
@@ -266,7 +254,7 @@ __meta__ = {
 }
 
 [node name="Tape_HDG" type="Node2D" parent="Display/PFD/EADI"]
-position = Vector2( 500, 150 )
+position = Vector2( 500, 180 )
 
 [node name="ABV" type="Label" parent="Display/PFD/EADI/Tape_HDG"]
 anchor_top = 0.15
@@ -280,8 +268,7 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "XXX
-|"
+text = "XXX"
 align = 1
 valign = 1
 uppercase = true
@@ -301,8 +288,7 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "XXX
-|"
+text = "XXX"
 align = 1
 valign = 1
 uppercase = true
@@ -322,8 +308,7 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "XXX
-|"
+text = "XXX"
 align = 1
 valign = 1
 uppercase = true
@@ -390,6 +375,65 @@ text = "- XXXXX"
 align = 1
 valign = 1
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_SPD" type="ColorRect" parent="Display/PFD/EADI"]
+margin_top = 480.0
+margin_right = 80.0
+margin_bottom = 520.0
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+
+[node name="Value" type="Label" parent="Display/PFD/EADI/Box_SPD"]
+margin_left = 1.0
+margin_top = -2.0
+margin_right = 79.0
+margin_bottom = 47.0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_ALT" type="ColorRect" parent="Display/PFD/EADI"]
+margin_left = 870.0
+margin_top = 480.0
+margin_right = 1000.0
+margin_bottom = 520.0
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+
+[node name="Value" type="Label" parent="Display/PFD/EADI/Box_ALT"]
+margin_left = -1.0
+margin_top = -3.0
+margin_right = 129.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 2 )
+text = "XXXXX"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Box_HDG" type="ColorRect" parent="Display/PFD/EADI"]
+margin_left = 460.0
+margin_top = 150.0
+margin_right = 540.0
+margin_bottom = 190.0
+color = Color( 0.25098, 0.25098, 0.25098, 1 )
+
+[node name="Value" type="Label" parent="Display/PFD/EADI/Box_HDG"]
+margin_left = 1.0
+margin_top = -3.0
+margin_right = 79.0
+margin_bottom = 46.0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
