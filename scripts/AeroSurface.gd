@@ -11,6 +11,15 @@ export var length_chord_tip : float = 1.00
 export var length_span : float = 1.00
 export var angle_sweep : float = 0.00
 
+# Position of centre of pressure
+export var pos_COP : Vector3 = Vector3.ZERO
+
+# Relative force position given control deflection
+var pos_force_rel : Vector3 = Vector3.ZERO
+
+# Surface translaion relative to body CG
+var pos_body_rel : Vector3 = Vector3.ZERO
+
 # Lift effeciency, varies by planform
 # 0.7 for rectangular wings
 export var surface_lift_effeciency : float = 0.7
@@ -161,6 +170,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
+	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -206,7 +216,14 @@ func _physics_process(delta):
 			)
 	
 	force_total_surface_vector = \
-		force_lift_surface_vector + force_drag_surface_vector
+		(force_lift_surface_vector + force_drag_surface_vector)
+	
+	force_drag_surface_vector = force_lift_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
+	
+	pos_force_rel.x = translation.x
+	pos_force_rel.y = translation.y + sin(-rotation.x) * pos_COP.z
+	pos_force_rel.z = translation.z + cos(-rotation.x) * pos_COP.z
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass

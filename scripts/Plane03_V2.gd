@@ -100,17 +100,7 @@ func _ready():
 	
 	vel_wind = Vector3(0, 0, 5)
 	
-	pos_wing_l = $AeroSurface_Wing_L.translation
-	pos_wing_r = $AeroSurface_Wing_R.translation
-	
-	pos_aileron_l = $AeroSurface_Aileron_L.translation
-	pos_aileron_r = $AeroSurface_Aileron_R.translation
-	
-	pos_flap_l = $AeroSurface_Flap_L.translation
-	pos_flap_r = $AeroSurface_Flap_R.translation
-	
-	pos_ruddervator_l = $AeroSurface_Ruddervator_L.translation
-	pos_ruddervator_r = $AeroSurface_Ruddervator_R.translation
+
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -302,6 +292,18 @@ func _physics_process(delta):
 			)\
 			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Ruddervator_R.rotation.z)
+	
+	pos_wing_l = $AeroSurface_Wing_L.pos_force_rel
+	pos_wing_r = $AeroSurface_Wing_R.pos_force_rel
+
+	pos_aileron_l = $AeroSurface_Aileron_L.pos_force_rel
+	pos_aileron_r = $AeroSurface_Aileron_R.pos_force_rel
+
+	pos_flap_l = $AeroSurface_Flap_L.pos_force_rel
+	pos_flap_r = $AeroSurface_Flap_R.pos_force_rel
+
+	pos_ruddervator_l = $AeroSurface_Ruddervator_L.pos_force_rel
+	pos_ruddervator_r = $AeroSurface_Ruddervator_R.pos_force_rel
 	
 	# HMD 
 	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
