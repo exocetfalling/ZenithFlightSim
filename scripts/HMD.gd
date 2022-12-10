@@ -56,33 +56,7 @@ func _process(delta):
 	
 	position = viewport_centre
 	
-	$Horizon.rotation_degrees = \
-		-1 * rad2deg(body_angles.z) \
-		- (sin(HMD_angles.y) * rad2deg(HMD_angles.x))
-	$Horizon.position.y = \
-		(body_angles.x + HMD_angles.x) \
-		* hmd_scale_factor * 30000 * cos(HMD_angles.z + body_angles.z) \
-		+ 500 * ((body_angles.x + HMD_angles.x) * abs(sin(HMD_angles.y + body_angles.y))) \
-		+ 250 * abs(sin(body_angles.z))
-	$Horizon.position.x = \
-		($Horizon.position.y - viewport_centre.y) * hmd_scale_factor * sin(body_angles.z) \
-		- (hmd_scale_factor * 30000 * (HMD_angles.y + body_angles.y)) 
-	
-	# HMD power/blanking
-	if (hmd_power == true):
-		if (hmd_blanked == false):
-			self.visible = true
-		else:
-			self.visible = false
-	else:
-		self.visible = false
-	
-	# Blanking conditions
-	if ((HMD_angles_deg.x < 15) && (abs(HMD_angles_deg.y) < 30)):
-		hmd_blanked = true
-	else:
-		hmd_blanked = false
-	
-	pass
+	$EADI/XForm_Roll.rotation_degrees = -FlightData.aircraft_roll
+	$EADI/XForm_Roll/XForm_Pitch.position.y = FlightData.aircraft_pitch * 1080/70
 
 
