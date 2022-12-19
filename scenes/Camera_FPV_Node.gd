@@ -41,7 +41,7 @@ func get_input_keyboard(delta):
 		$Gimbal_X/Gimbal_Y.rotation.y += 0.01
 	if Input.is_action_pressed("cam_left"):
 		$Gimbal_X/Gimbal_Y.rotation.y -= 0.01
-		
+
 	# Rotate inner gimbal around local x axis
 	if Input.is_action_pressed("cam_up"):
 		$Gimbal_X.rotation.x += 0.01
@@ -59,7 +59,7 @@ func _process(delta):
 	$Gimbal_X/Gimbal_Y/Camera_FPV.fov = 70 / zoom
 	if target:
 		global_transform.origin = get_node(target).global_transform.origin
-	
+
 	$HMD.HMD_angles.x = $Gimbal_X.rotation.x
 	$HMD.HMD_angles.y = -$Gimbal_X/Gimbal_Y.rotation.y
 	$HMD.cam_fov = $Gimbal_X/Gimbal_Y/Camera_FPV.fov

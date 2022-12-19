@@ -305,9 +305,9 @@ func _physics_process(delta):
 	pos_ruddervator_l = $AeroSurface_Ruddervator_L.pos_force_rel
 	pos_ruddervator_r = $AeroSurface_Ruddervator_R.pos_force_rel
 	
-	# HMD 
-	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
-	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
+#	# HMD 
+#	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
+#	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
 
 	$CSGCylinder_Axle_MLG_L.translation.y = $VehicleWheel_MLG_L.translation.y
 	$CSGCylinder_Axle_MLG_R.translation.y = $VehicleWheel_MLG_R.translation.y
@@ -376,7 +376,7 @@ func get_input(delta):
 		if (Input.is_action_just_pressed("camera_toggle")):
 			camera_mode = camera_mode + 1
 		if (camera_mode == 0):
-			$Camera_FPV_Node/Gimbal_X/Gimbal_Y/Camera_FPV.current = true
+			$Camera_FPV.current = true
 		if (camera_mode == 1):
 			$Camera_Ext.current = true
 		if (camera_mode > 1):
