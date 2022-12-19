@@ -189,7 +189,8 @@ func _physics_process(delta):
 	if (output_rudder < -1):
 		output_rudder = -1
 	
-
+	$Camera_FPV/FPV_HUD.cam_fov = $Camera_FPV.fov
+	
 	# Waypoints
 	waypoint_data = find_bearing_and_range_to(self.global_transform.origin, wpt_current_coordinates)
 	waypoint_data_3d = find_angles_and_distance_to_target(wpt_current_coordinates)
@@ -381,6 +382,11 @@ func get_input(delta):
 			$Camera_Ext.current = true
 		if (camera_mode > 1):
 			camera_mode = 0
+		
+		if (Input.is_action_pressed("cam_zoom_in")):
+			$Camera_FPV.fov -= 10 * delta 
+		if (Input.is_action_pressed("cam_zoom_out")):
+			$Camera_FPV.fov += 10 * delta
 
 func _integrate_forces(_state):
 	# Gravity
