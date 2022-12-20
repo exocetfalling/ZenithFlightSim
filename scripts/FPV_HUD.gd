@@ -17,19 +17,46 @@ var hmd_scale_factor : float = 1.00
 # Viewport centre 
 var viewport_centre : Vector2 = Vector2(960, 540)
 
+var tape_spd_ref = 0
+var tape_spd_step = 10
+var tape_spd_spacing = 200
+
+var tape_alt_ref = 0
+var tape_alt_step = 100
+var tape_alt_spacing = 200
+
+var tape_hdg_ref = 0
+var tape_hdg_abv = 0
+var tape_hdg_blw = 0
+var tape_hdg_step = 10
+var tape_hdg_spacing = 200
+
 export var hmd_power : bool = true
 var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$Tape_SPD/ABV.rect_position.y = \
+		$Tape_SPD/REF.rect_position.y - tape_spd_spacing
+	$Tape_SPD/BLW.rect_position.y = \
+		$Tape_SPD/REF.rect_position.y + tape_spd_spacing
+	
+	$Tape_ALT/ABV.rect_position.y = \
+		$Tape_ALT/REF.rect_position.y - tape_alt_spacing
+	$Tape_ALT/BLW.rect_position.y = \
+		$Tape_ALT/REF.rect_position.y + tape_alt_spacing
+	
+	$Tape_HDG/ABV.rect_position.x = \
+		$Tape_HDG/REF.rect_position.x + tape_hdg_spacing
+	$Tape_HDG/BLW.rect_position.x = \
+		$Tape_HDG/REF.rect_position.x - tape_hdg_spacing
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	viewport_centre = get_viewport_rect().size/2
 
-	position = viewport_centre
+	$EADI.position = viewport_centre
 	
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
 	
@@ -42,10 +69,54 @@ func _process(delta):
 		-10 * get_viewport_rect().size.y/cam_fov
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10.position.y = \
 		10 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20.position.y = \
+		-20 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20.position.y = \
+		20 * get_viewport_rect().size.y/cam_fov
 	
 	$EADI/FPM.position.x = \
 		display_distance * tan(deg2rad(-FlightData.aircraft_beta))
 	$EADI/FPM.position.y = \
 		display_distance * tan(deg2rad(FlightData.aircraft_alpha))
+	
+	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
+	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
+	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
 
-
+	tape_spd_ref = stepify(FlightData.aircraft_spd_indicated, tape_spd_step)
+	$Tape_SPD/REF.text = ("%03d -" % [tape_spd_ref])
+	$Tape_SPD/ABV.text = ("%03d -" % [tape_spd_ref + tape_spd_step])
+	$Tape_SPD/BLW.text = ("%03d -" % [tape_spd_ref - tape_spd_step])
+	
+	if(tape_spd_ref <= 0): 
+		$Tape_SPD/BLW.visible = false
+	else:
+		$Tape_SPD/BLW.visible = true
+	
+	$Tape_SPD.position.y = 540 + \
+		(FlightData.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
+	
+	tape_alt_ref = stepify(FlightData.aircraft_alt_barometric, tape_alt_step)
+	$Tape_ALT/REF.text = ("- %05d" % [tape_alt_ref])
+	$Tape_ALT/ABV.text = ("- %05d" % [tape_alt_ref + tape_alt_step])
+	$Tape_ALT/BLW.text = ("- %05d" % [tape_alt_ref - tape_alt_step])
+	
+	if(tape_alt_ref <= 0): 
+		$Tape_ALT/BLW.visible = false
+	else:
+		$Tape_ALT/BLW.visible = true
+	
+	$Tape_ALT.position.y = 540 + \
+		(FlightData.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
+	
+	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
+	
+	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
+	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
+	
+	$Tape_HDG/REF.text = ("%03d" % [tape_hdg_ref])
+	$Tape_HDG/ABV.text = ("%03d" % [tape_hdg_abv])
+	$Tape_HDG/BLW.text = ("%03d" % [tape_hdg_blw])
+	
+	$Tape_HDG.position.x = 960 - \
+		(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)

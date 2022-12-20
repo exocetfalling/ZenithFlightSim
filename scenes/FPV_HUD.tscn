@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/FPV_HUD.gd" type="Script" id=1]
 [ext_resource path="res://resources/MFD_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/FPV_HUD/FPV_HUD_Mask.bmp" type="Texture" id=3]
 
 [node name="FPV_HUD" type="Node2D"]
-position = Vector2( 960, 540 )
 script = ExtResource( 1 )
 
-[node name="EADI" type="Node2D" parent="."]
+[node name="EADI" type="Light2D" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 3 )
+mode = 3
+range_z_min = 0
+range_z_max = 0
 
 [node name="Boresight" type="Line2D" parent="EADI"]
 points = PoolVector2Array( -50, 25, 0, 0, 50, 25 )
@@ -15,6 +20,7 @@ width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="XForm_Roll" type="Node2D" parent="EADI"]
+light_mask = 0
 
 [node name="XForm_Pitch" type="Node2D" parent="EADI/XForm_Roll"]
 
@@ -65,6 +71,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Ladder_P20" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, -360 )
+points = PoolVector2Array( -250, 0, 250, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20"]
+margin_left = 260.0
+margin_top = -25.0
+margin_right = 312.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "20"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20"]
+margin_left = -310.0
+margin_top = -25.0
+margin_right = -258.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "20"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Ladder_N10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, 180 )
 points = PoolVector2Array( -250, 0, 250, 0 )
@@ -107,6 +155,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Ladder_N20" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, 360 )
+points = PoolVector2Array( -250, 0, 250, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20"]
+margin_left = 260.0
+margin_top = -25.0
+margin_right = 312.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "20"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20"]
+margin_left = -310.0
+margin_top = -25.0
+margin_right = -258.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "20"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FPM" type="Line2D" parent="EADI"]
 points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
 width = 3.0
@@ -121,3 +211,251 @@ width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 begin_cap_mode = 1
 end_cap_mode = 1
+
+[node name="Speed_Data" type="Label" parent="."]
+visible = false
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "SPEED
+XXX"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heading_Data" type="Label" parent="."]
+visible = false
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "HDG
+XXX"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Alt_Data" type="Label" parent="."]
+visible = false
+light_mask = 8
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "ALT
+XXXXX"
+align = 2
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tape_SPD" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 200, 540 )
+z_index = 1
+
+[node name="ABV" type="Label" parent="Tape_SPD"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -325.0
+margin_right = 39.0
+margin_bottom = -276.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX -"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="REF" type="Label" parent="Tape_SPD"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -25.0
+margin_right = 39.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX -"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BLW" type="Label" parent="Tape_SPD"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = 275.0
+margin_right = 39.0
+margin_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX -"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tape_HDG" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 960, 100 )
+z_index = 1
+
+[node name="ABV" type="Label" parent="Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -35.5
+margin_right = 39.0
+margin_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="REF" type="Label" parent="Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -25.0
+margin_right = 39.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BLW" type="Label" parent="Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -35.5
+margin_right = 39.0
+margin_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tape_ALT" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 1700, 540 )
+z_index = 1
+
+[node name="ABV" type="Label" parent="Tape_ALT"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -325.0
+margin_right = 39.0
+margin_bottom = -276.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "- XXXXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="REF" type="Label" parent="Tape_ALT"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -25.0
+margin_right = 39.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "- XXXXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BLW" type="Label" parent="Tape_ALT"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = 275.0
+margin_right = 39.0
+margin_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
+text = "- XXXXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
