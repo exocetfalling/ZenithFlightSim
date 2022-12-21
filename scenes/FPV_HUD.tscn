@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/FPV_HUD.gd" type="Script" id=1]
 [ext_resource path="res://resources/MFD_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/FPV_HUD/FPV_HUD_Mask.bmp" type="Texture" id=3]
+[ext_resource path="res://resources/MFD_Font_Small.tres" type="DynamicFont" id=4]
 
 [node name="FPV_HUD" type="Node2D"]
 script = ExtResource( 1 )
@@ -197,6 +198,74 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 0, 20 )
+z_index = 1
+
+[node name="ABV" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -35.5
+margin_right = 39.0
+margin_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "|
+XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="REF" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -25.0
+margin_right = 39.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "|
+XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BLW" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
+anchor_top = 0.15
+anchor_bottom = 0.35
+margin_left = -39.0
+margin_top = -35.5
+margin_right = 39.0
+margin_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 5
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "|
+XXX"
+align = 1
+valign = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FPM" type="Line2D" parent="EADI"]
 points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
 width = 3.0
@@ -330,71 +399,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tape_HDG" type="Node2D" parent="."]
-modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 960, 100 )
-z_index = 1
-
-[node name="ABV" type="Label" parent="Tape_HDG"]
-anchor_top = 0.15
-anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 5
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-text = "XXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="REF" type="Label" parent="Tape_HDG"]
-anchor_top = 0.15
-anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -25.0
-margin_right = 39.0
-margin_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 5
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-text = "XXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BLW" type="Label" parent="Tape_HDG"]
-anchor_top = 0.15
-anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 5
-size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
-text = "XXX"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Tape_ALT" type="Node2D" parent="."]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 1700, 540 )
@@ -459,3 +463,27 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Div_SPD" type="Line2D" parent="."]
+position = Vector2( 400, 540 )
+points = PoolVector2Array( 0, -400, 0, 400 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Div_aLT" type="Line2D" parent="."]
+position = Vector2( 1520, 540 )
+points = PoolVector2Array( 0, -400, 0, 400 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Needle_SPD" type="Line2D" parent="."]
+position = Vector2( 375, 540 )
+points = PoolVector2Array( -25, 0, 25, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Needle_ALT" type="Line2D" parent="."]
+position = Vector2( 1545, 540 )
+points = PoolVector2Array( -25, 0, 25, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )

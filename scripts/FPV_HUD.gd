@@ -45,11 +45,7 @@ func _ready():
 		$Tape_ALT/REF.rect_position.y - tape_alt_spacing
 	$Tape_ALT/BLW.rect_position.y = \
 		$Tape_ALT/REF.rect_position.y + tape_alt_spacing
-	
-	$Tape_HDG/ABV.rect_position.x = \
-		$Tape_HDG/REF.rect_position.x + tape_hdg_spacing
-	$Tape_HDG/BLW.rect_position.x = \
-		$Tape_HDG/REF.rect_position.x - tape_hdg_spacing
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -114,9 +110,16 @@ func _process(delta):
 	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
 	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
 	
-	$Tape_HDG/REF.text = ("%03d" % [tape_hdg_ref])
-	$Tape_HDG/ABV.text = ("%03d" % [tape_hdg_abv])
-	$Tape_HDG/BLW.text = ("%03d" % [tape_hdg_blw])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.text = ("|\n%03d" % [tape_hdg_ref])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.text = ("|\n%03d" % [tape_hdg_abv])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.text = ("|\n%03d" % [tape_hdg_blw])
 	
-	$Tape_HDG.position.x = 960 - \
-		(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG.position.x = \
+		-(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
+	
+	tape_hdg_spacing = 10 * get_viewport_rect().size.y/cam_fov
+	
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x + tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x - tape_hdg_spacing
