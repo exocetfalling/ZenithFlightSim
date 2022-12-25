@@ -60,7 +60,15 @@ func _process(delta):
 	$EADI/XForm_Roll/XForm_Pitch.position.y = \
 		FlightData.aircraft_pitch * get_viewport_rect().size.y/cam_fov
 #		display_distance * tan(deg2rad(FlightData.aircraft_pitch))
-	
+
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P02.position.y = \
+		-2.5 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N02.position.y = \
+		2.5 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05.position.y = \
+		-5 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05.position.y = \
+		5 * get_viewport_rect().size.y/cam_fov
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10.position.y = \
 		-10 * get_viewport_rect().size.y/cam_fov
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10.position.y = \

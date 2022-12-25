@@ -1,11 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/FPV_HUD.gd" type="Script" id=1]
 [ext_resource path="res://resources/MFD_Font.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/FPV_HUD/FPV_HUD_Mask.bmp" type="Texture" id=3]
 [ext_resource path="res://resources/MFD_Font_Small.tres" type="DynamicFont" id=4]
 
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0.482353, 0, 0.27451 )
+border_width_right = 2
+border_color = Color( 0, 0.494118, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 1, 0, 1 )
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0, 1, 0, 1 )
+
 [node name="FPV_HUD" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.894118 )
 script = ExtResource( 1 )
 
 [node name="EADI" type="Light2D" parent="."]
@@ -30,16 +45,55 @@ points = PoolVector2Array( -500, 0, 500, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
+[node name="Ladder_P05" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, -90 )
+points = PoolVector2Array( -50, 0, 50, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Ladder_N05" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, 90 )
+points = PoolVector2Array( -50, 0, 50, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Ladder_P02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, -45 )
+points = PoolVector2Array( -25, 0, 25, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Ladder_N02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, 45 )
+points = PoolVector2Array( -25, 0, 25, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
 [node name="Ladder_P10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, -180 )
-points = PoolVector2Array( -250, 0, 250, 0 )
+points = PoolVector2Array( -100, 0, 100, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10"]
-margin_left = 260.0
+margin_left = 110.0
 margin_top = -25.0
-margin_right = 312.0
+margin_right = 162.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "10"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10"]
+margin_left = -160.0
+margin_top = -25.0
+margin_right = -108.0
 margin_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -54,10 +108,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10"]
-margin_left = -310.0
+[node name="Ladder_N10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, 180 )
+points = PoolVector2Array( -100, 0, 100, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
+margin_left = 110.0
 margin_top = -25.0
-margin_right = -258.0
+margin_right = 162.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "10"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
+margin_left = -160.0
+margin_top = -25.0
+margin_right = -108.0
 margin_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -107,48 +182,6 @@ custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "20"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Ladder_N10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
-position = Vector2( 0, 180 )
-points = PoolVector2Array( -250, 0, 250, 0 )
-width = 3.0
-default_color = Color( 0, 1, 0, 1 )
-
-[node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
-margin_left = 260.0
-margin_top = -25.0
-margin_right = 312.0
-margin_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "10"
-align = 1
-valign = 1
-uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
-margin_left = -310.0
-margin_top = -25.0
-margin_right = -258.0
-margin_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "10"
 align = 1
 valign = 1
 uppercase = true
@@ -517,3 +550,13 @@ uppercase = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+show_behind_parent = true
+light_mask = 2
+margin_right = 200.0
+margin_bottom = 50.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+value = 50.0
