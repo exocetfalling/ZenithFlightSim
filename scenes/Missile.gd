@@ -27,6 +27,7 @@ var pos_fin_r4 : Vector3 = Vector3.ZERO
 
 var cmd_vector : Vector3 = Vector3.ZERO
 var tgt_data : Vector3 = Vector3.ZERO
+var tgt_data_deriv : Vector3 = Vector3.ZERO
 
 var output_joystick : Vector2 = Vector2.ZERO
 
@@ -35,8 +36,8 @@ func _ready():
 	pass # Replace with function body.
 	control_type = 1
 	DebugOverlay.stats.add_property(self, "tgt_data", "")
-
-
+	DebugOverlay.stats.add_property(self, "tgt_data_deriv", "")
+	DebugOverlay.stats.add_property(self, "cmd_vector", "")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -103,9 +104,7 @@ func _physics_process(delta):
 	pos_fin_r2 = $AeroSurface_Fin_R2.pos_force_rel
 	pos_fin_r3 = $AeroSurface_Fin_R3.pos_force_rel
 	pos_fin_r4 = $AeroSurface_Fin_R4.pos_force_rel
-	
-	cmd_vector.z = -0.1 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
-	
+
 	$AeroSurface_Fin_F1.rotation = \
 		Vector3( \
 			(0.1 * (output_joystick.y - output_joystick.x)), \
@@ -178,8 +177,11 @@ func _physics_process(delta):
 			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R4.rotation.z)
 	
-	output_joystick.x = lerp(input_joystick.x, output_joystick.x, 0.25)
-	output_joystick.y = lerp(input_joystick.y, output_joystick.y, 0.25)
+	# X, Y, Z axes differ from Vec2 and Vec3
+	# Hence X axis for joystick is mapped to Y axis for cmd vec
+#	output_joystick.x = lerp(cmd_vector.y, output_joystick.x, 0.25)
+	output_joystick.x = lerp(input_joystick.x, output_joystick.x, 0.50)
+	output_joystick.y = lerp(input_joystick.y, output_joystick.y, 0.50)
 	
 	if (control_type == 1):
 		# Panel updates
@@ -201,6 +203,11 @@ func _physics_process(delta):
 		FlightData.aircraft_throttle = input_throttle
 	
 	tgt_data = find_angles_and_distance_to_target(Vector3(0, 5, 0))
+	tgt_data_deriv.x = $Derivative_Calc_Pitch.calc_derivative(tgt_data.x, delta)
+	tgt_data_deriv.y = $Derivative_Calc_Yaw.calc_derivative(tgt_data.y, delta)
+	
+	cmd_vector.y = 0.3 * tgt_data_deriv.x * calc_autopilot_factor(air_pressure_dynamic)
+	cmd_vector.z = -0.1 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
 	
 func _integrate_forces(_state):
 	# Gravity

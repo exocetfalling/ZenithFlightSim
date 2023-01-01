@@ -20,7 +20,7 @@ size = Vector3( 10, 100, 10 )
 [node name="WeaponTestRange" type="Spatial"]
 
 [node name="Missile" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3000, 3000 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2000, 3000 )
 linear_velocity = Vector3( 0, 0, -80 )
 
 [node name="HTerrain" type="Spatial" parent="."]

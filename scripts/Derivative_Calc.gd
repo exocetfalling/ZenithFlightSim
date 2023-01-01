@@ -11,12 +11,12 @@ var x_delta = 0
 var time_delta
 var derivative
 
-func calc_derivative(value_current, dt):
+func calc_derivative(value_current, delta):
 	x_previous = x_current
 	x_current = value_current
 	
 	x_delta = (x_current - x_previous)
-	time_delta = dt
+	time_delta = delta
 	if (time_delta == 0):
 		time_delta = 0.0167
 	derivative = x_delta / time_delta
