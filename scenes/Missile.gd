@@ -100,7 +100,7 @@ func _physics_process(delta):
 	pos_fin_r3 = $AeroSurface_Fin_R3.pos_force_rel
 	pos_fin_r4 = $AeroSurface_Fin_R4.pos_force_rel
 	
-	cmd_vector.z = -0.1 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
+	cmd_vector.z = -0.01 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
 	
 	$AeroSurface_Fin_F1.rotation = \
 		Vector3( \
