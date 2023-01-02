@@ -26,6 +26,9 @@ var pos_fin_r3 : Vector3 = Vector3.ZERO
 var pos_fin_r4 : Vector3 = Vector3.ZERO
 
 var cmd_vector : Vector3 = Vector3.ZERO
+var tgt_data : Vector3 = Vector3.ZERO
+
+var output_joystick : Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -104,7 +107,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F1.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator - output_rudder)), \
+			(0.1 * (output_joystick.y - output_joystick.x)), \
 			0, \
 			($AeroSurface_Fin_F1.rotation.z) \
 			)\
@@ -113,7 +116,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F2.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator + output_rudder)), \
+			(0.1 * (output_joystick.y + output_joystick.x)), \
 			0, \
 			($AeroSurface_Fin_F2.rotation.z) \
 			)\
@@ -122,7 +125,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F3.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator + output_rudder)), \
+			(0.1 * (output_joystick.y + output_joystick.x)), \
 			0, \
 			($AeroSurface_Fin_F3.rotation.z) \
 			)\
@@ -131,7 +134,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F4.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator - output_rudder)), \
+			(0.1 * (output_joystick.y - output_joystick.x)), \
 			0, \
 			($AeroSurface_Fin_F4.rotation.z) \
 			)\
@@ -174,6 +177,9 @@ func _physics_process(delta):
 			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R4.rotation.z)
 	
+	output_joystick.x = lerp(input_joystick.x, output_joystick.x, 0.25)
+	output_joystick.y = lerp(input_joystick.y, output_joystick.y, 0.25)
+	
 	if (control_type == 1):
 		# Panel updates
 		FlightData.aircraft_pitch = adc_pitch
@@ -191,11 +197,9 @@ func _physics_process(delta):
 			FlightData.aircraft_alt_barometric = adc_alt_barometric * 3.2809
 		
 		FlightData.aircraft_hdg = adc_hdg
-		FlightData.aircraft_flaps = input_flaps * 4
-		FlightData.aircraft_trim = output_elevator_trim
-		FlightData.aircraft_gear = gear_current
 		FlightData.aircraft_throttle = input_throttle
-		FlightData.aircraft_ap = autopilot_on
+	
+	tgt_data = find_angles_and_distance_to_target(Vector3(0, 5, 0))
 	
 func _integrate_forces(_state):
 	# Gravity
@@ -228,7 +232,3 @@ func get_input(delta):
 
 		# Joystick input (as vector) 
 		input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
-		
-		# Yaw input
-		input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
-		
