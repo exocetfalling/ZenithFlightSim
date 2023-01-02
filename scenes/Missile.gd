@@ -25,6 +25,7 @@ var pos_fin_r2 : Vector3 = Vector3.ZERO
 var pos_fin_r3 : Vector3 = Vector3.ZERO
 var pos_fin_r4 : Vector3 = Vector3.ZERO
 
+var cmd_vector : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -99,6 +100,8 @@ func _physics_process(delta):
 	pos_fin_r3 = $AeroSurface_Fin_R3.pos_force_rel
 	pos_fin_r4 = $AeroSurface_Fin_R4.pos_force_rel
 	
+	cmd_vector.z = -0.01 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
+	
 	$AeroSurface_Fin_F1.rotation = \
 		Vector3( \
 			(0.1 * (output_elevator - output_rudder)), \
@@ -137,7 +140,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R1.rotation = \
 		Vector3( \
-			(-0.1 * (output_aileron)), \
+			(-0.1 * (cmd_vector.z)), \
 			0, \
 			($AeroSurface_Fin_R1.rotation.z) \
 			)\
@@ -146,7 +149,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R2.rotation = \
 		Vector3( \
-			(+0.1 * (output_aileron)), \
+			(+0.1 * (cmd_vector.z)), \
 			0, \
 			($AeroSurface_Fin_R2.rotation.z) \
 			)\
@@ -155,7 +158,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R3.rotation = \
 		Vector3( \
-			(-0.1 * (output_aileron)), \
+			(-0.1 * (cmd_vector.z)), \
 			0, \
 			($AeroSurface_Fin_R3.rotation.z) \
 			)\
@@ -164,7 +167,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R4.rotation = \
 		Vector3( \
-			(+0.1 * (output_aileron)), \
+			(+0.001 * (cmd_vector.z)), \
 			0, \
 			($AeroSurface_Fin_R4.rotation.z) \
 			)\
