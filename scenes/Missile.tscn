@@ -10,9 +10,8 @@ radius = 0.1
 height = 1.5
 
 [node name="Missile" type="VehicleBody"]
-continuous_cd = true
 can_sleep = false
-angular_damp = 20.0
+angular_damp = 15.0
 script = ExtResource( 2 )
 
 [node name="AeroSurface_Fuse" type="Spatial" parent="."]
@@ -110,7 +109,6 @@ shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85 )
-far = 50000.0
 
 [node name="FPV_HUD" parent="Camera" instance=ExtResource( 4 )]
 

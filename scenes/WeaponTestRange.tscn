@@ -17,9 +17,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3000, 3000 )
 linear_velocity = Vector3( 0, 0, -80 )
 
 [node name="HTerrain" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2500, 0, -2500 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2500, 0, -2000 )
 script = ExtResource( 3 )
-lod_scale = 2.0
 map_scale = Vector3( 10, 10, 10 )
 _terrain_data = ExtResource( 2 )
 chunk_size = 32
