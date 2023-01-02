@@ -108,7 +108,7 @@ material = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.835079 )
 
 [node name="FPV_HUD" parent="Camera" instance=ExtResource( 4 )]
 
