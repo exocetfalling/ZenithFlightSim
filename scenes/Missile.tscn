@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Missile.gd" type="Script" id=2]
@@ -8,6 +8,9 @@
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.1
 height = 1.5
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.1, 0.001, 0.1 )
 
 [node name="Missile" type="VehicleBody"]
 continuous_cd = true
@@ -108,12 +111,6 @@ material = ExtResource( 3 )
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85 )
-far = 50000.0
-
-[node name="FPV_HUD" parent="Camera" instance=ExtResource( 4 )]
-
 [node name="AeroSurface_Fin_R1" type="Spatial" parent="."]
 transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.14, 0.14, 0.6 )
 script = ExtResource( 1 )
@@ -173,3 +170,41 @@ height = 0.2
 sides = 32
 smooth_faces = false
 material = ExtResource( 3 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.85 )
+far = 50000.0
+
+[node name="FPV_HUD" parent="Camera" instance=ExtResource( 4 )]
+
+[node name="CollisionShape_Fin_F1" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, -0.4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F2" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.138, 0.138, -0.4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F3" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.138, -0.138, -0.4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F4" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, -0.4 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R1" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, 0.6 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R2" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.138, 0.138, 0.6 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R3" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.138, -0.138, 0.6 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R4" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, 0.6 )
+shape = SubResource( 2 )
