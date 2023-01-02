@@ -1,11 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Missile.gd" type="Script" id=2]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=3]
 [ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scripts/Derivative_Calc.gd" type="Script" id=5]
-[ext_resource path="res://scripts/PID_Calc.gd" type="Script" id=6]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.1
@@ -210,16 +208,3 @@ shape = SubResource( 2 )
 [node name="CollisionShape_Fin_R4" type="CollisionShape" parent="."]
 transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, 0.6 )
 shape = SubResource( 2 )
-
-[node name="Derivative_Calc_Pitch" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="Derivative_Calc_Yaw" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="PID_Calc_Pitch" type="Node" parent="."]
-script = ExtResource( 6 )
-term_P = 0.2
-term_I = 0.2
-term_D = 0.1
-param_tuning_active = false
