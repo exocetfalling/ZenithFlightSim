@@ -34,7 +34,6 @@ var output_joystick : Vector2 = Vector2.ZERO
 func _ready():
 	pass # Replace with function body.
 	control_type = 1
-	DebugOverlay.stats.add_property(self, "tgt_data", "")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
