@@ -101,7 +101,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F1.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator + output_rudder)), \
+			(0.1 * (output_elevator - output_rudder)), \
 			0, \
 			($AeroSurface_Fin_F1.rotation.z) \
 			)\
@@ -110,7 +110,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_F2.rotation = \
 		Vector3( \
-			(0.1 * (output_elevator - output_rudder)), \
+			(0.1 * (output_elevator + output_rudder)), \
 			0, \
 			($AeroSurface_Fin_F2.rotation.z) \
 			)\
@@ -134,6 +134,42 @@ func _physics_process(delta):
 			)\
 			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F4.rotation.z)
+	
+	$AeroSurface_Fin_R1.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator - output_rudder)), \
+			0, \
+			($AeroSurface_Fin_R1.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$AeroSurface_Fin_F1.rotation.z)
+	
+	$AeroSurface_Fin_R2.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator + output_rudder)), \
+			0, \
+			($AeroSurface_Fin_R2.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$AeroSurface_Fin_R2.rotation.z)
+	
+	$AeroSurface_Fin_R3.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator + output_rudder)), \
+			0, \
+			($AeroSurface_Fin_R3.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$AeroSurface_Fin_R3.rotation.z)
+	
+	$AeroSurface_Fin_R4.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator - output_rudder)), \
+			0, \
+			($AeroSurface_Fin_R4.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$AeroSurface_Fin_R4.rotation.z)
 	
 	if (control_type == 1):
 		# Panel updates
