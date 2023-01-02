@@ -218,7 +218,7 @@ func _physics_process(delta):
 	force_total_surface_vector = \
 		(force_lift_surface_vector + force_drag_surface_vector)
 	
-	force_drag_surface_vector = force_lift_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
+	force_drag_surface_vector = force_drag_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
 	
 	pos_force_rel.x = translation.x
 	pos_force_rel.y = translation.y + sin(-rotation.x) * pos_COP.z
