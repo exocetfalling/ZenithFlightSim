@@ -131,3 +131,5 @@ func _process(delta):
 		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x + tape_hdg_spacing
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.rect_position.x = \
 		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x - tape_hdg_spacing
+	
+	$Indicantor_THR.value = FlightData.aircraft_throttle * 100

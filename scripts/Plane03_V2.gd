@@ -37,7 +37,7 @@ var WPT_02_coodinates = Vector3.ZERO
 var WPT_03_coodinates = Vector3.ZERO
 
 var waypoint_data_3d = Vector3.ZERO
-var global_rotation = Vector3.ZERO
+#var global_rotation = Vector3.ZERO
 var global_rotation_deg = Vector3.ZERO
 
 var adc_fd_commands = Vector3.ZERO
@@ -64,7 +64,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_spd", "round")
 #	DebugOverlay.stats.add_property(self, "adc_hdg", "round")
 #	DebugOverlay.stats.add_property(self, "adc_alt", "round")
-#	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
+	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "adc_trk", "round")
 #	DebugOverlay.stats.add_property(self, "adc_stall", "")
 #	DebugOverlay.stats.add_property(self, "input_elevator", "round")
@@ -75,13 +75,13 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
-#	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
+	DebugOverlay.stats.add_property(self, "adc_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
-#	DebugOverlay.stats.add_property(self, "vel_local", "round")
-#	DebugOverlay.stats.add_property(self, "vel_local_test", "")
+	DebugOverlay.stats.add_property(self, "vel_local", "round")
+	DebugOverlay.stats.add_property(self, "vel_total", "")
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
-#	DebugOverlay.stats.add_property(self, "fbw_output", "")
+	DebugOverlay.stats.add_property(self, "global_rotation", "")
 #	DebugOverlay.stats.add_property(self, "autopilot_on", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_test_deg", "round")
@@ -98,7 +98,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 	
-	vel_wind = Vector3(0, 0, 5)
+#	vel_wind = Vector3(0, 0, 5)
 	
 
 	pass

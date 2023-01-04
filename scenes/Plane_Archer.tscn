@@ -1,29 +1,34 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scripts/AeroBody.gd" type="Script" id=1]
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=2]
-[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=3]
-[ext_resource path="res://assets/aircraft_parts/ZFS_WING_DELTA.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Plane_Archer.gd" type="Script" id=1]
+[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=2]
+[ext_resource path="res://assets/aircraft_parts/ZFS_WING_DELTA.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=4]
+[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape" id=1]
 points = PoolVector3Array( 0, 0, -4, 0, 0.00978857, -3.9906, 8, 0.0194988, 2.4072, 8, 0.00978857, 2.40172, 8, 0, 2.39937, 8, -0.00980815, 2.40172, 8, -0.0195184, 2.4072, 0, -0.00980815, -3.9906, -8, -0.0195184, 2.4072, -8, -0.00980815, 2.40172, -8, 0, 2.39937, -8, 0.00978857, 2.40172, -8, 0.0194988, 2.4072, 0, 0.0194988, -3.96163, 8, 0.0555599, 2.46672, 8, 0.0471222, 2.44714, 8, 0.0382537, 2.42991, 8, 0.0290133, 2.4166, -8, 0.0290133, 2.4166, -8, 0.0382537, 2.42991, -8, 0.0471222, 2.44714, -8, 0.0555599, 2.46672, 8, -0.0290329, 2.4166, 8, -0.0382733, 2.42991, 8, -0.0471417, 2.44714, 8, -0.0555795, 2.46672, 0, -0.0195184, -3.96163, -8, -0.0555795, 2.46672, -8, -0.0471417, 2.44714, -8, -0.0382733, 2.42991, -8, -0.0290329, 2.4166, 0, 0.0290133, -3.91464, 8, 0.0772905, 2.54581, 8, 0.070693, 2.51684, 8, 0.0634299, 2.49021, -8, 0.0634299, 2.49021, -8, 0.070693, 2.51684, -8, 0.0772905, 2.54581, 8, -0.0634495, 2.49021, 8, -0.0707126, 2.51684, 8, -0.0773101, 2.54581, 0, -0.0290329, -3.91464, -8, -0.0773101, 2.54581, -8, -0.0707126, 2.51684, -8, -0.0634495, 2.49021, 0, 0.0382537, -3.84808, 8, 0.0881754, 2.61081, 8, 0.0831441, 2.57713, -8, 0.0831441, 2.57713, -8, 0.0881754, 2.61081, 8, -0.0831637, 2.57713, 8, -0.088195, 2.61081, 0, -0.0382733, -3.84808, -8, -0.088195, 2.61081, -8, -0.0831637, 2.57713, 0, 0.0471222, -3.76429, 8, 0.0923845, 2.64683, -8, 0.0923845, 2.64683, 8, -0.0924041, 2.64683, 0, -0.0471417, -3.76429, -8, -0.0924041, 2.64683, 0, 0.0555599, -3.66327, 8, 0.0956734, 2.68363, -8, 0.0956734, 2.68363, 8, -0.095693, 2.68363, 0, -0.0555795, -3.66327, -8, -0.095693, 2.68363, 0, 0.0634299, -3.54659, 8, 0.0980619, 2.72122, -8, 0.0980619, 2.72122, 8, -0.0980814, 2.72122, 0, -0.0634495, -3.54659, -8, -0.0980814, 2.72122, 0, 0.070693, -3.41425, 8, 0.0995106, 2.76038, 0, 0.0772905, -3.26938, 0, 0.0831441, -3.1112, -8, 0.0995106, 2.76038, 8, -0.0995302, 2.76038, 0, -0.0831637, -3.1112, 0, -0.0773101, -3.26938, 0, -0.0707126, -3.41425, -8, -0.0995302, 2.76038, 8, 0.1, 2.79953, 0, 0.0881754, -2.94283, 0, 0.0923845, -2.76586, 0, 0.0956734, -2.58105, 0, 0.0980619, -2.39076, -8, 0.1, 2.79953, 8, -0.1, 2.79953, 0, -0.0980814, -2.39076, 0, -0.095693, -2.58105, 0, -0.0924041, -2.76586, 0, -0.088195, -2.94283, -8, -0.1, 2.79953, 8, 0.0995106, 2.91699, 0, 0.0995106, -2.19655, 0, 0.1, -2, -8, 0.0995106, 2.91699, 8, -0.0995302, 2.91699, 0, -0.1, -2, 0, -0.0995302, -2.19655, -8, -0.0995302, 2.91699, 8, 0.0980619, 3.03367, -8, 0.0980619, 3.03367, 8, -0.0980814, 3.03367, -8, -0.0980814, 3.03367, 8, 0.0956734, 3.148, -8, 0.0956734, 3.148, 8, -0.095693, 3.148, -8, -0.095693, 3.148, 8, 0.0923845, 3.2592, -8, 0.0923845, 3.2592, 8, -0.0924041, 3.2592, -8, -0.0924041, 3.2592, 8, 0.0881754, 3.36492, -8, 0.0881754, 3.36492, 8, -0.088195, 3.36492, -8, -0.088195, 3.36492, 8, 0.0831441, 3.46594, -8, 0.0831441, 3.46594, 8, -0.0831637, 3.46594, -8, -0.0831637, 3.46594, 8, 0.0772905, 3.56069, -8, 0.0772905, 3.56069, 8, -0.0773101, 3.56069, -8, -0.0773101, 3.56069, 8, 0.070693, 3.64839, -8, 0.070693, 3.64839, 8, -0.0707126, 3.64839, -8, -0.0707126, 3.64839, 8, 0.0634299, 3.72749, -8, 0.0634299, 3.72749, 8, -0.0634495, 3.72749, -8, -0.0634495, 3.72749, 8, 0.0555599, 3.79718, -8, 0.0555599, 3.79718, 8, -0.0555795, 3.79718, -8, -0.0555795, 3.79718, 8, 0.0471222, 3.85826, -8, 0.0471222, 3.85826, 8, -0.0471417, 3.85826, -8, -0.0471417, 3.85826, 8, 0.0382537, 3.90838, -8, 0.0382537, 3.90838, 8, -0.0382733, 3.90838, -8, -0.0382733, 3.90838, 8, 0.0290133, 3.94832, -8, 0.0290133, 3.94832, 8, -0.0290329, 3.94832, -8, -0.0290329, 3.94832, 8, 0.0194988, 3.97651, -8, 0.0194988, 3.97651, 8, -0.0195184, 3.97651, -8, -0.0195184, 3.97651, 8, 0.00978857, 3.99374, -8, 0.00978857, 3.99374, 8, -0.00980815, 3.99374, -8, -0.00980815, 3.99374, 8, 0, 4, -8, 0, 4 )
 
-[node name="Plane_V3" type="VehicleBody"]
-mass = 200.0
+[node name="Plane_Archer" type="VehicleBody"]
+mass = 15000.0
 continuous_cd = true
 can_sleep = false
+linear_damp = 0.0
+angular_damp = 3.0
 script = ExtResource( 1 )
 
 [node name="Camera_FPV" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
-far = 100000.0
-
-[node name="Camera_Ext" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 12 )
 current = true
 far = 100000.0
 
-[node name="Mesh_Wing" parent="." instance=ExtResource( 4 )]
+[node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 5 )]
+
+[node name="Camera_Ext" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 12 )
+far = 100000.0
+
+[node name="Mesh_Wing" parent="." instance=ExtResource( 3 )]
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 shape = SubResource( 1 )
@@ -35,6 +40,7 @@ wheel_radius = 0.2
 wheel_friction_slip = 1.0
 suspension_travel = 0.1
 suspension_stiffness = 150.0
+suspension_max_force = 500000.0
 damping_compression = 0.99
 damping_relaxation = 0.995
 
@@ -43,7 +49,7 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0
 radius = 0.2
 height = 0.01
 sides = 32
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="VehicleWheel_MLG_L" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, 1 )
@@ -52,7 +58,7 @@ wheel_radius = 0.2
 wheel_friction_slip = 1.0
 suspension_travel = 0.1
 suspension_stiffness = 150.0
-suspension_max_force = 15000.0
+suspension_max_force = 500000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
@@ -61,7 +67,7 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0
 radius = 0.2
 height = 0.01
 sides = 32
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="VehicleWheel_MLG_R" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.5, 1 )
@@ -70,7 +76,7 @@ wheel_radius = 0.2
 wheel_friction_slip = 1.0
 suspension_travel = 0.1
 suspension_stiffness = 150.0
-suspension_max_force = 15000.0
+suspension_max_force = 500000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
@@ -79,11 +85,11 @@ transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0
 radius = 0.2
 height = 0.01
 sides = 32
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="AeroSurface_Wing_L" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_chord_root = 8.0
 length_chord_tip = 1.6
 length_span = 8.0
@@ -91,7 +97,7 @@ angle_sweep = 30.0
 
 [node name="AeroSurface_Wing_R" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_chord_root = 8.0
 length_chord_tip = 1.6
 length_span = 8.0
@@ -99,7 +105,7 @@ angle_sweep = 30.0
 
 [node name="AeroSurface_Control_L1" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.05, 3.925 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_span = 6.0
 pos_COP = Vector3( 0, 0, 0.5 )
 
@@ -109,11 +115,11 @@ radius = 0.5
 height = 6.0
 sides = 32
 smooth_faces = false
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="AeroSurface_Control_L2" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.05, 3.925 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_span = 6.0
 pos_COP = Vector3( 0, 0, 0.5 )
 
@@ -123,11 +129,11 @@ radius = 0.5
 height = 6.0
 sides = 32
 smooth_faces = false
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="AeroSurface_Control_R1" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.05, 3.925 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_span = 6.0
 pos_COP = Vector3( 0, 0, 0.5 )
 
@@ -137,11 +143,11 @@ radius = 0.5
 height = 6.0
 sides = 32
 smooth_faces = false
-material = ExtResource( 2 )
+material = ExtResource( 4 )
 
 [node name="AeroSurface_Control_R2" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.05, 3.925 )
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 length_span = 6.0
 pos_COP = Vector3( 0, 0, 0.5 )
 
@@ -151,4 +157,4 @@ radius = 0.5
 height = 6.0
 sides = 32
 smooth_faces = false
-material = ExtResource( 2 )
+material = ExtResource( 4 )

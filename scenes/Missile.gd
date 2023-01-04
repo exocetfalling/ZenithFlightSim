@@ -211,10 +211,10 @@ func _physics_process(delta):
 	
 func _integrate_forces(_state):
 	# Gravity
-	add_central_force(Vector3(0, -weight, 0))
+#	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/3 * input_throttle), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -weight/2 * input_throttle), Vector3(0, 0, 0))
 	
 	# Forces from surfaces 
 	add_force_local(force_fin_f1, pos_fin_f1)

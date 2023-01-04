@@ -118,7 +118,11 @@ func _calc_lift_coeff(angle_alpha_rad):
 		return 0
 
 func _calc_drag_coeff(lift_coeff, drag_coeff_zero_lift, wing_span, wing_area, wing_effeciency):
-	return (drag_coeff_zero_lift + (pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)))
+	return \
+		( \
+			drag_coeff_zero_lift + (pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)) + \
+			abs(0.2 * sin(angle_alpha))
+		)
 	
 func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coeff):
 	return 0.5 * air_density_current * pow(airspeed_true, 2) * surface_area * lift_coeff
@@ -165,8 +169,10 @@ func _calc_atmo_properties(height_metres):
 func _ready():
 	surface_area = (length_chord_root + length_chord_tip) / 2 * length_span
 	
-#	DebugOverlay.stats.add_property(self, "vel_surface", "round")
+#	DebugOverlay.stats.add_property(self, "surface_area", "round")
 #	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+#	DebugOverlay.stats.add_property(self, "coeffecient_lift", "round")
+	DebugOverlay.stats.add_property(self, "coeffecient_drag", "round")
 #	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")

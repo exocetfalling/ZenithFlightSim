@@ -12,7 +12,7 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=10]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=11]
 [ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=12]
-[ext_resource path="res://scenes/Plane.tscn" type="PackedScene" id=13]
+[ext_resource path="res://scenes/Plane_Archer.tscn" type="PackedScene" id=13]
 [ext_resource path="res://scenes/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=14]
 [ext_resource path="res://scenes/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=15]
 [ext_resource path="res://scenes/slot1_normal_roughness.packed_tex" type="Texture" id=16]
@@ -30,9 +30,6 @@ mode = 0
 textures = [ [ ExtResource( 7 ), ExtResource( 9 ) ], [ ExtResource( 5 ), ExtResource( 16 ) ] ]
 
 [node name="TestScene_V2" type="Spatial"]
-
-[node name="Plane" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200.451, 1990 )
 
 [node name="XForm_Island" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
@@ -90,3 +87,6 @@ axis = 1
 transparent = false
 shaded = true
 texture = ExtResource( 12 )
+
+[node name="Plane_Archer" parent="." instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 201.702, 0 )
