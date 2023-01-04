@@ -6,7 +6,7 @@ class_name AeroBody
 # 0 - none
 # 1 - player
 # 2 - AI
-var control_type : int = 0
+export var control_type : int = 0
 
 # Air temperature, K
 var air_temperature : float = 288.0

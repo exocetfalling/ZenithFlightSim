@@ -90,3 +90,4 @@ texture = ExtResource( 12 )
 
 [node name="Plane_Archer" parent="." instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 201.702, 0 )
+control_type = 1

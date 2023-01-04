@@ -25,7 +25,7 @@ var output_rudder_r : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	control_type = 1
+#	control_type = 1
 	DebugOverlay.stats.add_property(self, "vel_local", "round")
 	DebugOverlay.stats.add_property(self, "force_wing_l", "round")
 	DebugOverlay.stats.add_property(self, "force_wing_r", "round")
@@ -124,10 +124,10 @@ func _physics_process(delta):
 		output_rudder_l = 0
 		output_rudder_r = 0
 	
-	$AeroSurface_Control_L1.rotation.x = 0.2 * (+output_aileron -output_elevator -5 * output_rudder_l)
-	$AeroSurface_Control_L2.rotation.x = 0.2 * (+output_aileron -output_elevator +5 * output_rudder_l)
-	$AeroSurface_Control_R1.rotation.x = 0.2 * (-output_aileron -output_elevator -5 * output_rudder_r)
-	$AeroSurface_Control_R2.rotation.x = 0.2 * (-output_aileron -output_elevator +5 * output_rudder_r)
+	$AeroSurface_Control_L1.rotation.x = 0.2 * (+output_aileron -output_elevator -3 * output_rudder_l)
+	$AeroSurface_Control_L2.rotation.x = 0.2 * (+output_aileron -output_elevator +3 * output_rudder_l)
+	$AeroSurface_Control_R1.rotation.x = 0.2 * (-output_aileron -output_elevator -3 * output_rudder_r)
+	$AeroSurface_Control_R2.rotation.x = 0.2 * (-output_aileron -output_elevator +3 * output_rudder_r)
 
 func get_input(delta):
 	# Check if aircraft is under player control

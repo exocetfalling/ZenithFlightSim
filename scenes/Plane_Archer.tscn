@@ -19,13 +19,13 @@ script = ExtResource( 1 )
 
 [node name="Camera_FPV" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4 )
-current = true
 far = 100000.0
 
 [node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 5 )]
 
 [node name="Camera_Ext" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 12 )
+current = true
 far = 100000.0
 
 [node name="Mesh_Wing" parent="." instance=ExtResource( 3 )]
