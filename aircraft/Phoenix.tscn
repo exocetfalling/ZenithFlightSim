@@ -1,0 +1,282 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://aircraft/Phoenix.gd" type="Script" id=1]
+[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=2]
+[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=3]
+[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=5]
+[ext_resource path="res://scripts/PID_Calc.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape" id=1]
+radius = 0.5
+height = 8.0
+
+[sub_resource type="BoxShape" id=2]
+margin = 0.001
+extents = Vector3( 5.5, 0.05, 0.5 )
+
+[sub_resource type="BoxShape" id=4]
+margin = 0.001
+extents = Vector3( 1, 0.05, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=3]
+albedo_color = Color( 0.0784314, 0.0705882, 0.0745098, 1 )
+
+[node name="Phoenix" type="VehicleBody"]
+mass = 2000.0
+continuous_cd = true
+can_sleep = false
+angular_damp = 1.0
+script = ExtResource( 1 )
+
+[node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape_Wing" type="CollisionShape" parent="."]
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Tail_L" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.057, 1.032, 5 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape_Tail_R" type="CollisionShape" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.057, 1.032, 5 )
+shape = SubResource( 4 )
+
+[node name="VehicleWheel_NLG" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -2.8 )
+use_as_steering = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 100000.0
+damping_compression = 0.99
+damping_relaxation = 0.995
+
+[node name="CSGCylinder" type="CSGCylinder" parent="VehicleWheel_NLG"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 3 )
+
+[node name="VehicleWheel_MLG_L" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1.5, 0.35 )
+use_as_traction = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 100000.0
+damping_compression = 0.95
+damping_relaxation = 0.98
+
+[node name="CSGCylinder" type="CSGCylinder" parent="VehicleWheel_MLG_L"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 3 )
+
+[node name="VehicleWheel_MLG_R" type="VehicleWheel" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1.5, 0.35 )
+use_as_traction = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 100000.0
+damping_compression = 0.95
+damping_relaxation = 0.98
+
+[node name="CSGCylinder" type="CSGCylinder" parent="VehicleWheel_MLG_R"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Fuse" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+script = ExtResource( 2 )
+length_chord_root = 0.001
+length_chord_tip = 0.001
+length_span = 0.001
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fuse"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+radius = 0.5
+height = 8.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="CSGSphere_Nose" type="CSGSphere" parent="AeroSurface_Fuse/CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 4, 0 )
+radius = 0.5
+radial_segments = 32
+rings = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="CSGSphere_Tail" type="CSGSphere" parent="AeroSurface_Fuse/CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4, 0 )
+radius = 0.5
+radial_segments = 32
+rings = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fuse/CSGCylinder/CSGSphere_Tail"]
+operation = 2
+radius = 0.2
+sides = 32
+cone = true
+material = SubResource( 3 )
+
+[node name="AeroSurface_Wing_L" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -3, 0, 0 )
+script = ExtResource( 2 )
+length_span = 5.0
+pos_COP = Vector3( 0, 0, -0.25 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Wing_L"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.5
+height = 5.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Wing_R" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 3, 0, 0 )
+script = ExtResource( 2 )
+length_span = 5.0
+pos_COP = Vector3( 0, 0, -0.25 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Wing_R"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.5
+height = 5.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Aileron_L" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, 0.5 )
+script = ExtResource( 2 )
+length_chord_root = 0.25
+length_chord_tip = 0.25
+length_span = 2.4
+pos_COP = Vector3( 0, 0, 0.125 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Aileron_L"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125 )
+radius = 0.125
+height = 2.4
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Aileron_R" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, 0.5 )
+script = ExtResource( 2 )
+length_chord_root = 0.25
+length_chord_tip = 0.25
+length_span = 2.4
+pos_COP = Vector3( 0, 0, 0.125 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Aileron_R"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125 )
+radius = 0.125
+height = 2.4
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Flap_L" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, 0.5 )
+script = ExtResource( 2 )
+length_chord_root = 0.25
+length_chord_tip = 0.25
+length_span = 2.4
+pos_COP = Vector3( 0, 0, 0.125 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Flap_L"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125 )
+radius = 0.125
+height = 2.4
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Flap_R" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, 0.5 )
+script = ExtResource( 2 )
+length_chord_root = 0.25
+length_chord_tip = 0.25
+length_span = 2.4
+pos_COP = Vector3( 0, 0, 0.125 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Flap_R"]
+transform = Transform( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125 )
+radius = 0.125
+height = 2.4
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Ruddervator_L" type="Spatial" parent="."]
+transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.075, 1.05, 5 )
+script = ExtResource( 2 )
+length_chord_root = 0.8
+length_chord_tip = 0.8
+length_span = 2.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Ruddervator_L"]
+transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.4
+height = 2.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="AeroSurface_Ruddervator_R" type="Spatial" parent="."]
+transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.075, 1.05, 5 )
+script = ExtResource( 2 )
+length_chord_root = 0.8
+length_chord_tip = 0.8
+length_span = 2.0
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Ruddervator_R"]
+transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.4
+height = 2.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 3 )
+
+[node name="Camera_FPV" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
+environment = ExtResource( 5 )
+fov = 60.0
+far = 1e+06
+
+[node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 4 )]
+
+[node name="Camera_Ext" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )
+cull_mask = 1048557
+environment = ExtResource( 5 )
+current = true
+fov = 60.0
+far = 100000.0
+
+[node name="PID_Calc_Pitch" type="Node" parent="."]
+script = ExtResource( 6 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.1
+param_tuning_active = false

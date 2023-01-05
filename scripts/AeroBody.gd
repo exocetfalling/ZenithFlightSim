@@ -133,8 +133,8 @@ var fbw_output = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_total", "")
+#	DebugOverlay.stats.add_property(self, "vel_local", "round")
+#	DebugOverlay.stats.add_property(self, "vel_total", "")
 	pass
 
 # Lift coeffecient calculation function
