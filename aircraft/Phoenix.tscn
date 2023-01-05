@@ -261,6 +261,7 @@ material = ExtResource( 3 )
 [node name="Camera_FPV" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
 environment = ExtResource( 5 )
+current = true
 fov = 60.0
 far = 1e+06
 
@@ -270,7 +271,6 @@ far = 1e+06
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )
 cull_mask = 1048557
 environment = ExtResource( 5 )
-current = true
 fov = 60.0
 far = 100000.0
 

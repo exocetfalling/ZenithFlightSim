@@ -22,7 +22,7 @@ var pos_flap_r : Vector3 = Vector3.ZERO
 var pos_ruddervator_l : Vector3 = Vector3.ZERO
 var pos_ruddervator_r : Vector3 = Vector3.ZERO
 
-var camera_mode : int = 1
+var camera_mode : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -92,7 +92,7 @@ func _physics_process(delta):
 			FlightData.aircraft_alt_barometric = adc_alt_barometric * 3.2809
 		
 		FlightData.aircraft_hdg = adc_hdg
-		FlightData.aircraft_flaps = input_flaps * 4
+		FlightData.aircraft_flaps = input_flaps
 		FlightData.aircraft_trim = output_elevator_trim
 		FlightData.aircraft_gear = gear_current
 		FlightData.aircraft_throttle = input_throttle

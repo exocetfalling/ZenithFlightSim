@@ -551,7 +551,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Indicantor_THR" type="ProgressBar" parent="."]
+[node name="Indicator_THR" type="ProgressBar" parent="."]
 show_behind_parent = true
 light_mask = 2
 margin_left = 100.0
@@ -563,7 +563,7 @@ custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 value = 50.0
 
-[node name="Label" type="Label" parent="Indicantor_THR"]
+[node name="Label" type="Label" parent="Indicator_THR"]
 light_mask = 2
 margin_left = -60.0
 margin_top = 8.0
@@ -574,3 +574,27 @@ custom_fonts/font = ExtResource( 4 )
 text = "THR"
 align = 1
 valign = 1
+
+[node name="Indicator_FLAPS" type="ProgressBar" parent="."]
+show_behind_parent = true
+light_mask = 2
+margin_left = 100.0
+margin_top = 900.0
+margin_right = 300.0
+margin_bottom = 950.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+max_value = 1.0
+
+[node name="Label" type="Label" parent="Indicator_FLAPS"]
+light_mask = 2
+margin_left = -91.0
+margin_top = 8.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "FLAP"
+align = 1
+valign = 1
+uppercase = true
