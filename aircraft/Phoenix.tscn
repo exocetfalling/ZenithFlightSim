@@ -259,7 +259,7 @@ smooth_faces = false
 material = ExtResource( 3 )
 
 [node name="Camera_FPV" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
 environment = ExtResource( 5 )
 current = true
 fov = 60.0
