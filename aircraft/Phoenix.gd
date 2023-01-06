@@ -248,7 +248,7 @@ func _physics_process(delta):
 #	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
 #	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
 	
-	# Sync camera FOV
+	# Sync camera FOV with HUD
 	$Camera_FPV/FPV_HUD.cam_fov = $Camera_FPV.fov
 	
 	# Clamping
