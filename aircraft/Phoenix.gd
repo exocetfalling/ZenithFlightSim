@@ -58,7 +58,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
-	DebugOverlay.stats.add_property(self, "input_flaps", "round")
+#	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
 #	DebugOverlay.stats.add_property(self, "value_current", "round")
 #	DebugOverlay.stats.add_property(self, "output_P", "round")
