@@ -305,7 +305,7 @@ func get_input(delta):
 
 		# Braking input
 		input_braking = Input.get_action_strength("braking")
-		brake = input_braking * 5
+		brake = input_braking * 50
 		
 		# NWS input
 		if (abs(vel_total) < 10):
