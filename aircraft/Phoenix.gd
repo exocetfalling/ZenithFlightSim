@@ -58,7 +58,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
-#	DebugOverlay.stats.add_property(self, "adc_stall", "round")
+	DebugOverlay.stats.add_property(self, "input_flaps", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
 #	DebugOverlay.stats.add_property(self, "value_current", "round")
 #	DebugOverlay.stats.add_property(self, "output_P", "round")
@@ -247,7 +247,11 @@ func _physics_process(delta):
 #	# HMD 
 #	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
 #	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
-
+	
+	
+	# Clamping
+	input_flaps = clamp(input_flaps, flaps_min, flaps_max)
+	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
 	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
@@ -256,11 +260,9 @@ func get_input(delta):
 	if (control_type == 1):
 			# Throttle input
 		if (Input.is_action_pressed("throttle_up")):
-			if (input_throttle < throttle_max):
-				input_throttle += 0.5 * delta 
+			input_throttle += 0.5 * delta 
 		if (Input.is_action_pressed("throttle_down")):
-			if (input_throttle > throttle_min):
-				input_throttle -= 0.5 * delta
+			input_throttle -= 0.5 * delta
 
 		# Joystick input (as vector) 
 		input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")

@@ -99,7 +99,7 @@ var current_flaps = 0
 var input_flaps = 0
 var output_flaps = 0
 var flaps_max = 1
-var flaps_min = -1
+var flaps_min = 0
 
 var current_elevator_trim = 0
 var input_elevator_trim = 0
