@@ -248,6 +248,8 @@ func _physics_process(delta):
 #	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
 #	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
 	
+	# Sync camera FOV
+	$Camera_FPV/FPV_HUD.cam_fov = $Camera_FPV.fov
 	
 	# Clamping
 	input_flaps = clamp(input_flaps, flaps_min, flaps_max)
