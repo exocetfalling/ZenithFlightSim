@@ -11,8 +11,8 @@ var cam_fov : float = 60.0
 # Distance of imaginary display
 var display_distance : float
 
-# Scaling factor for spacing between adjacent markings, using FOV
-var hmd_scale_factor : float = 1.00
+# Scaling factors for spacing between elements
+var hud_scale_factor : Vector2 = Vector2.ONE
 
 # Viewport centre 
 var viewport_centre : Vector2 = Vector2(960, 540)
@@ -36,15 +36,15 @@ var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Tape_SPD/ABV.rect_position.y = \
-		$Tape_SPD/REF.rect_position.y - tape_spd_spacing
-	$Tape_SPD/BLW.rect_position.y = \
-		$Tape_SPD/REF.rect_position.y + tape_spd_spacing
+	$HUD_Centre/Tape_SPD/ABV.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF.rect_position.y - tape_spd_spacing
+	$HUD_Centre/Tape_SPD/BLW.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF.rect_position.y + tape_spd_spacing
 	
-	$Tape_ALT/ABV.rect_position.y = \
-		$Tape_ALT/REF.rect_position.y - tape_alt_spacing
-	$Tape_ALT/BLW.rect_position.y = \
-		$Tape_ALT/REF.rect_position.y + tape_alt_spacing
+	$HUD_Centre/Tape_ALT/ABV.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF.rect_position.y - tape_alt_spacing
+	$HUD_Centre/Tape_ALT/BLW.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF.rect_position.y + tape_alt_spacing
 
 
 
@@ -53,6 +53,11 @@ func _process(delta):
 	viewport_centre = get_viewport_rect().size/2
 
 	$EADI.position = viewport_centre
+	$HUD_Centre.position = viewport_centre
+	
+	hud_scale_factor = get_viewport_rect().size / Vector2(1920, 1080)
+	
+	$HUD_Centre.scale = hud_scale_factor
 	
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
 	
@@ -83,34 +88,34 @@ func _process(delta):
 	$EADI/FPM.position.y = \
 		display_distance * tan(deg2rad(FlightData.aircraft_alpha))
 	
-	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
-	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
-	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
+#	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
+#	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
+#	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
 
 	tape_spd_ref = stepify(FlightData.aircraft_spd_indicated, tape_spd_step)
-	$Tape_SPD/REF.text = ("%03d -" % [tape_spd_ref])
-	$Tape_SPD/ABV.text = ("%03d -" % [tape_spd_ref + tape_spd_step])
-	$Tape_SPD/BLW.text = ("%03d -" % [tape_spd_ref - tape_spd_step])
+	$HUD_Centre/Tape_SPD/REF.text = ("%03d -" % [tape_spd_ref])
+	$HUD_Centre/Tape_SPD/ABV.text = ("%03d -" % [tape_spd_ref + tape_spd_step])
+	$HUD_Centre/Tape_SPD/BLW.text = ("%03d -" % [tape_spd_ref - tape_spd_step])
 	
 	if(tape_spd_ref <= 0): 
-		$Tape_SPD/BLW.visible = false
+		$HUD_Centre/Tape_SPD/BLW.visible = false
 	else:
-		$Tape_SPD/BLW.visible = true
+		$HUD_Centre/Tape_SPD/BLW.visible = true
 	
-	$Tape_SPD.position.y = 540 + \
+	$HUD_Centre/Tape_SPD.position.y = \
 		(FlightData.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
 	
 	tape_alt_ref = stepify(FlightData.aircraft_alt_barometric, tape_alt_step)
-	$Tape_ALT/REF.text = ("- %05d" % [tape_alt_ref])
-	$Tape_ALT/ABV.text = ("- %05d" % [tape_alt_ref + tape_alt_step])
-	$Tape_ALT/BLW.text = ("- %05d" % [tape_alt_ref - tape_alt_step])
+	$HUD_Centre/Tape_ALT/REF.text = ("- %05d" % [tape_alt_ref])
+	$HUD_Centre/Tape_ALT/ABV.text = ("- %05d" % [tape_alt_ref + tape_alt_step])
+	$HUD_Centre/Tape_ALT/BLW.text = ("- %05d" % [tape_alt_ref - tape_alt_step])
 	
 	if(tape_alt_ref <= 0): 
-		$Tape_ALT/BLW.visible = false
+		$HUD_Centre/Tape_ALT/BLW.visible = false
 	else:
-		$Tape_ALT/BLW.visible = true
+		$HUD_Centre/Tape_ALT/BLW.visible = true
 	
-	$Tape_ALT.position.y = 540 + \
+	$HUD_Centre/Tape_ALT.position.y = \
 		(FlightData.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
 	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
@@ -132,8 +137,8 @@ func _process(delta):
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.rect_position.x = \
 		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x - tape_hdg_spacing
 	
-	$Indicator_THR.value = FlightData.aircraft_throttle * 100
-	$Indicator_FLAPS.value = FlightData.aircraft_flaps
+	$HUD_Centre/Indicator_THR.value = FlightData.aircraft_throttle * 100
+	$HUD_Centre/Indicator_FLAPS.value = FlightData.aircraft_flaps
 	
-	$Indicator_TRIM/Caret.position.y = FlightData.aircraft_trim * 50
-	$Indicator_TRIM/Label.text = ("%+0.1f" % [FlightData.aircraft_trim])
+	$HUD_Centre/Indicator_TRIM/Caret.position.y = FlightData.aircraft_trim * 50
+	$HUD_Centre/Indicator_TRIM/Label.text = ("TRIM %+0.1f" % [FlightData.aircraft_trim])

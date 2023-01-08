@@ -314,13 +314,16 @@ default_color = Color( 0, 1, 0, 1 )
 begin_cap_mode = 1
 end_cap_mode = 1
 
-[node name="Speed_Data" type="Label" parent="."]
+[node name="HUD_Centre" type="Node2D" parent="."]
+position = Vector2( 960, 540 )
+
+[node name="Speed_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_left = -940.0
+margin_top = -520.0
+margin_right = 940.0
+margin_bottom = 520.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -331,13 +334,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Heading_Data" type="Label" parent="."]
+[node name="Heading_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_left = -940.0
+margin_top = -520.0
+margin_right = 940.0
+margin_bottom = 520.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -349,13 +352,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Alt_Data" type="Label" parent="."]
+[node name="Alt_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 1060.0
+margin_left = -940.0
+margin_top = -520.0
+margin_right = 940.0
+margin_bottom = 520.0
 size_flags_vertical = 1
 custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -367,12 +370,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tape_SPD" type="Node2D" parent="."]
+[node name="Tape_SPD" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 200, 540 )
+position = Vector2( -760, 0 )
 z_index = 1
 
-[node name="ABV" type="Label" parent="Tape_SPD"]
+[node name="ABV" type="Label" parent="HUD_Centre/Tape_SPD"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -392,7 +395,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="REF" type="Label" parent="Tape_SPD"]
+[node name="REF" type="Label" parent="HUD_Centre/Tape_SPD"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -412,7 +415,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BLW" type="Label" parent="Tape_SPD"]
+[node name="BLW" type="Label" parent="HUD_Centre/Tape_SPD"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -432,12 +435,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Tape_ALT" type="Node2D" parent="."]
+[node name="Tape_ALT" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 1700, 540 )
+position = Vector2( 740, 0 )
 z_index = 1
 
-[node name="ABV" type="Label" parent="Tape_ALT"]
+[node name="ABV" type="Label" parent="HUD_Centre/Tape_ALT"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -457,7 +460,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="REF" type="Label" parent="Tape_ALT"]
+[node name="REF" type="Label" parent="HUD_Centre/Tape_ALT"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -477,7 +480,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BLW" type="Label" parent="Tape_ALT"]
+[node name="BLW" type="Label" parent="HUD_Centre/Tape_ALT"]
 anchor_top = 0.15
 anchor_bottom = 0.35
 margin_left = -39.0
@@ -497,73 +500,67 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Div_SPD" type="Line2D" parent="."]
-position = Vector2( 400, 540 )
+[node name="Div_SPD" type="Line2D" parent="HUD_Centre"]
+position = Vector2( -560, 0 )
 points = PoolVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Div_aLT" type="Line2D" parent="."]
-position = Vector2( 1520, 540 )
+[node name="Div_aLT" type="Line2D" parent="HUD_Centre"]
+position = Vector2( 560, 0 )
 points = PoolVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Needle_SPD" type="Line2D" parent="."]
-position = Vector2( 375, 540 )
+[node name="Needle_SPD" type="Line2D" parent="HUD_Centre"]
+position = Vector2( -585, 0 )
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Needle_ALT" type="Line2D" parent="."]
-position = Vector2( 1545, 540 )
+[node name="Needle_ALT" type="Line2D" parent="HUD_Centre"]
+position = Vector2( 585, 0 )
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Label_SPD" type="Label" parent="."]
+[node name="Label_SPD" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = 125.0
-margin_top = 130.0
-margin_right = 253.0
-margin_bottom = 162.0
+margin_left = -835.0
+margin_top = -410.0
+margin_right = -707.0
+margin_bottom = -378.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "SPD / KN"
 align = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Label_ALT" type="Label" parent="."]
+[node name="Label_ALT" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = 1630.0
-margin_top = 130.0
-margin_right = 1758.0
-margin_bottom = 162.0
+margin_left = 670.0
+margin_top = -410.0
+margin_right = 798.0
+margin_bottom = -378.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
 text = "ALT / FT"
 align = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Indicator_THR" type="ProgressBar" parent="."]
+[node name="Indicator_THR" type="ProgressBar" parent="HUD_Centre"]
 show_behind_parent = true
 light_mask = 2
-margin_left = 100.0
-margin_top = 1000.0
-margin_right = 300.0
-margin_bottom = 1050.0
+margin_left = -860.0
+margin_top = 460.0
+margin_right = -660.0
+margin_bottom = 510.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 value = 50.0
 
-[node name="Label" type="Label" parent="Indicator_THR"]
+[node name="Label" type="Label" parent="HUD_Centre/Indicator_THR"]
 light_mask = 2
 margin_left = -60.0
 margin_top = 8.0
@@ -575,19 +572,19 @@ text = "THR"
 align = 1
 valign = 1
 
-[node name="Indicator_FLAPS" type="ProgressBar" parent="."]
+[node name="Indicator_FLAPS" type="ProgressBar" parent="HUD_Centre"]
 show_behind_parent = true
 light_mask = 2
-margin_left = 100.0
-margin_top = 900.0
-margin_right = 300.0
-margin_bottom = 950.0
+margin_left = -860.0
+margin_top = 360.0
+margin_right = -660.0
+margin_bottom = 410.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 max_value = 1.0
 
-[node name="Label" type="Label" parent="Indicator_FLAPS"]
+[node name="Label" type="Label" parent="HUD_Centre/Indicator_FLAPS"]
 light_mask = 2
 margin_left = -91.0
 margin_top = 8.0
@@ -599,19 +596,19 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="Indicator_TRIM" type="Line2D" parent="."]
+[node name="Indicator_TRIM" type="Line2D" parent="HUD_Centre"]
 light_mask = 2
-position = Vector2( 1860, 950 )
+position = Vector2( 900, 410 )
 points = PoolVector2Array( -20, -50, 0, -50, 0, 0, -10, 0, 0, 0, 0, 50, -20, 50 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Caret" type="Polygon2D" parent="Indicator_TRIM"]
+[node name="Caret" type="Polygon2D" parent="HUD_Centre/Indicator_TRIM"]
 light_mask = 2
 color = Color( 0, 1, 0, 1 )
 polygon = PoolVector2Array( 0, 0, -10, 5, -10, -5 )
 
-[node name="Label" type="Label" parent="Indicator_TRIM"]
+[node name="Label" type="Label" parent="HUD_Centre/Indicator_TRIM"]
 light_mask = 2
 margin_left = -200.0
 margin_top = -16.0
@@ -619,4 +616,4 @@ margin_right = -40.0
 margin_bottom = 16.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
-text = "TRIM X X.X"
+text = "TRIM +X.X"
