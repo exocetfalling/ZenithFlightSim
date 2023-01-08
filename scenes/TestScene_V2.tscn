@@ -17,7 +17,7 @@
 [ext_resource path="res://scenes/slot1_normal_roughness.packed_tex" type="Texture" id=16]
 [ext_resource path="res://scenes/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture" id=17]
 [ext_resource path="res://assets/Terrain_PBR/terrain_ocean/data.hterrain" type="Resource" id=18]
-[ext_resource path="res://aircraft/Phoenix.tscn" type="PackedScene" id=19]
+[ext_resource path="res://aircraft/Phoenix/Phoenix.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 11 )

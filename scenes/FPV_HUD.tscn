@@ -598,3 +598,25 @@ text = "FLAP"
 align = 1
 valign = 1
 uppercase = true
+
+[node name="Indicator_TRIM" type="Line2D" parent="."]
+light_mask = 2
+position = Vector2( 1860, 950 )
+points = PoolVector2Array( -20, -50, 0, -50, 0, 0, -10, 0, 0, 0, 0, 50, -20, 50 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Caret" type="Polygon2D" parent="Indicator_TRIM"]
+light_mask = 2
+color = Color( 0, 1, 0, 1 )
+polygon = PoolVector2Array( 0, 0, -10, 5, -10, -5 )
+
+[node name="Label" type="Label" parent="Indicator_TRIM"]
+light_mask = 2
+margin_left = -200.0
+margin_top = -16.0
+margin_right = -40.0
+margin_bottom = 16.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "TRIM X X.X"

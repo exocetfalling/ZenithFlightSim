@@ -134,3 +134,6 @@ func _process(delta):
 	
 	$Indicator_THR.value = FlightData.aircraft_throttle * 100
 	$Indicator_FLAPS.value = FlightData.aircraft_flaps
+	
+	$Indicator_TRIM/Caret.position.y = FlightData.aircraft_trim * 50
+	$Indicator_TRIM/Label.text = ("%+0.1f" % [FlightData.aircraft_trim])
