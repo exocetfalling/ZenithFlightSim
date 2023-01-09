@@ -206,8 +206,8 @@ func _physics_process(delta):
 	tgt_data_deriv.x = $Derivative_Calc_Pitch.calc_derivative(tgt_data.x, delta)
 	tgt_data_deriv.y = $Derivative_Calc_Yaw.calc_derivative(tgt_data.y, delta)
 	
-	cmd_vector.y = 0.3 * tgt_data_deriv.x * calc_autopilot_factor(air_pressure_dynamic)
-	cmd_vector.z = -0.1 * calc_autopilot_factor(air_pressure_dynamic) * adc_roll
+	cmd_vector.y = 0.3 * tgt_data_deriv.x * calc_fcs_gains(air_pressure_dynamic)
+	cmd_vector.z = -0.1 * calc_fcs_gains(air_pressure_dynamic) * adc_roll
 	
 func _integrate_forces(_state):
 	# Gravity

@@ -268,7 +268,7 @@ func find_angles_and_distance_to_target(vec_pos_target):
 	var range_to = vec_delta_local.length()
 	return Vector3(yaw_to, pitch_to, range_to)
 
-func calc_autopilot_factor(dyn_press):
+func calc_fcs_gains(dyn_press):
 	if (dyn_press > 0):
 		return 1 / dyn_press * 500
 	else:

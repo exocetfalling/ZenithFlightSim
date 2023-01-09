@@ -163,7 +163,7 @@ func _physics_process(delta):
 		if (abs(input_joystick.y) < 0.1):
 			$PID_Calc_Pitch.reset_integral = false
 			input_elevator_trim = \
-			calc_autopilot_factor(air_pressure_dynamic) * \
+			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
 			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
 			) \
@@ -176,7 +176,7 @@ func _physics_process(delta):
 #				Panel_Trim_Node.value = \
 #				-1 * fbw_output.x
 	
-#		output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
+#		output_yaw_damper = calc_fcs_gains(vel_total) * -0.1 * angle_beta_deg
 #				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, adc_pitch, delta)
 
 	if (input_elevator_trim > input_trim_pitch_max):

@@ -327,7 +327,7 @@ func find_angles_and_distance_to_target(vec_pos_target):
 	var range_to = vec_delta_local.length()
 	return Vector3(yaw_to, pitch_to, range_to)
 
-func calc_autopilot_factor(velocity_aircraft):	
+func calc_fcs_gains(velocity_aircraft):	
 	var x1 = 0
 	var y1 = 1
 	var x2 = 60
@@ -470,7 +470,7 @@ func _physics_process(delta):
 			):
 				Panel_Trim_Node.value = \
 				-1 * \
-				calc_autopilot_factor(vel_total) * \
+				calc_fcs_gains(vel_total) * \
 				( \
 				$PID_Calc_Pitch.calc_PID_output(tgt_fpa, pfd_fpa, delta)
 				) \
@@ -478,7 +478,7 @@ func _physics_process(delta):
 #				Panel_Trim_Node.value = \
 #				-1 * fbw_output.x
 				
-				output_yaw_damper = calc_autopilot_factor(vel_total) * -0.1 * angle_beta_deg
+				output_yaw_damper = calc_fcs_gains(vel_total) * -0.1 * angle_beta_deg
 #				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, pfd_pitch, delta)
 			else:
 				tgt_fpa = pfd_fpa
