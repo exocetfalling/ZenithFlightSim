@@ -73,8 +73,7 @@ sides = 32
 material = ExtResource( 3 )
 
 [node name="VehicleWheel_MLG_L" type="VehicleWheel" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, -1.2, 0.25 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55, -1.2, 0.35 )
 use_as_traction = true
 wheel_radius = 0.2
 wheel_friction_slip = 1.0
@@ -92,8 +91,7 @@ sides = 32
 material = ExtResource( 3 )
 
 [node name="VehicleWheel_MLG_R" type="VehicleWheel" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05, -1.2, 0.25 )
-visible = false
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55, -1.2, 0.35 )
 use_as_traction = true
 wheel_radius = 0.2
 wheel_friction_slip = 1.0
@@ -336,7 +334,7 @@ sides = 32
 material = ExtResource( 3 )
 
 [node name="LG_Point_MLG_L" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.35 )
 
 [node name="Strut_Upper" type="CSGCylinder" parent="LG_Point_MLG_L"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
@@ -360,13 +358,14 @@ material = ExtResource( 3 )
 
 [node name="Wheel_Dummy" type="CSGCylinder" parent="LG_Point_MLG_L/Strut_Lower/Axle"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0578818, 0 )
+visible = false
 radius = 0.2
 height = 0.05
 sides = 32
 material = ExtResource( 3 )
 
 [node name="LG_Point_MLG_R" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0.25 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.35 )
 
 [node name="Strut_Upper" type="CSGCylinder" parent="LG_Point_MLG_R"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
@@ -390,6 +389,7 @@ material = ExtResource( 3 )
 
 [node name="Wheel_Dummy" type="CSGCylinder" parent="LG_Point_MLG_R/Strut_Lower/Axle"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.058, 0 )
+visible = false
 radius = 0.2
 height = 0.05
 sides = 32

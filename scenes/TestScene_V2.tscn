@@ -89,4 +89,4 @@ shaded = true
 texture = ExtResource( 12 )
 
 [node name="Phoenix" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 201.686, 1740 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200.895, 1740 )
