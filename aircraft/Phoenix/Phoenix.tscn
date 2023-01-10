@@ -6,6 +6,7 @@
 [ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=5]
 [ext_resource path="res://scripts/PID_Calc.gd" type="Script" id=6]
+[ext_resource path="res://assets/shared/wheel_small/Wheel_Medium.tscn" type="PackedScene" id=7]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
@@ -21,9 +22,6 @@ extents = Vector3( 1, 0.05, 0.4 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0.0784314, 0.0705882, 0.0745098, 1 )
-
-[sub_resource type="Animation" id=5]
-resource_name = "gear_anim"
 
 [node name="Phoenix" type="VehicleBody"]
 mass = 2000.0
@@ -58,20 +56,6 @@ suspension_max_force = 100000.0
 damping_compression = 0.99
 damping_relaxation = 0.995
 
-[node name="CSGCylinder_L" type="CSGCylinder" parent="VehicleWheel_NLG"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.05, 0, 0 )
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
-
-[node name="CSGCylinder_R" type="CSGCylinder" parent="VehicleWheel_NLG"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.05, 0, 0 )
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
-
 [node name="VehicleWheel_MLG_L" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55, -1.2, 0.35 )
 use_as_traction = true
@@ -83,13 +67,6 @@ suspension_max_force = 100000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="CSGCylinder" type="CSGCylinder" parent="VehicleWheel_MLG_L"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
-
 [node name="VehicleWheel_MLG_R" type="VehicleWheel" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55, -1.2, 0.35 )
 use_as_traction = true
@@ -100,13 +77,6 @@ suspension_stiffness = 150.0
 suspension_max_force = 100000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
-
-[node name="CSGCylinder" type="CSGCylinder" parent="VehicleWheel_MLG_R"]
-transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
 
 [node name="AeroSurface_Fuse" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
@@ -291,9 +261,6 @@ term_I = 0.2
 term_D = 0.1
 param_tuning_active = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/gear_anim = SubResource( 5 )
-
 [node name="LG_Point_NLG" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -2.8 )
 
@@ -305,7 +272,7 @@ sides = 32
 material = ExtResource( 3 )
 
 [node name="Strut_Lower" type="CSGCylinder" parent="LG_Point_NLG"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0 )
 radius = 0.015
 sides = 32
 material = ExtResource( 3 )
@@ -317,21 +284,14 @@ height = 0.08
 sides = 32
 material = ExtResource( 3 )
 
-[node name="Wheel_Dummy_L" type="CSGCylinder" parent="LG_Point_NLG/Strut_Lower/Axle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0 )
-visible = false
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
+[node name="Wheels" type="Spatial" parent="LG_Point_NLG/Strut_Lower/Axle"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
 
-[node name="Wheel_Dummy_R" type="CSGCylinder" parent="LG_Point_NLG/Strut_Lower/Axle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0 )
-visible = false
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
+[node name="Wheel_Medium_L" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels" instance=ExtResource( 7 )]
+transform = Transform( -2, 1.74846e-07, 0, -1.74846e-07, -2, 0, 0, 0, 2, -0.08, 0, 0 )
+
+[node name="Wheel_Medium_R" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels" instance=ExtResource( 7 )]
+transform = Transform( -2, 1.74846e-07, 0, -1.74846e-07, -2, 0, 0, 0, 2, 0.08, 0, 0 )
 
 [node name="LG_Point_MLG_L" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.35 )
@@ -356,13 +316,11 @@ height = 0.08
 sides = 32
 material = ExtResource( 3 )
 
-[node name="Wheel_Dummy" type="CSGCylinder" parent="LG_Point_MLG_L/Strut_Lower/Axle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0578818, 0 )
-visible = false
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
+[node name="Wheels" type="Spatial" parent="LG_Point_MLG_L/Strut_Lower/Axle"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Wheel_Medium" parent="LG_Point_MLG_L/Strut_Lower/Axle/Wheels" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -0.08, 0, 0 )
 
 [node name="LG_Point_MLG_R" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.35 )
@@ -387,10 +345,8 @@ height = 0.08
 sides = 32
 material = ExtResource( 3 )
 
-[node name="Wheel_Dummy" type="CSGCylinder" parent="LG_Point_MLG_R/Strut_Lower/Axle"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.058, 0 )
-visible = false
-radius = 0.2
-height = 0.05
-sides = 32
-material = ExtResource( 3 )
+[node name="Wheels" type="Spatial" parent="LG_Point_MLG_R/Strut_Lower/Axle"]
+transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Wheel_Medium" parent="LG_Point_MLG_R/Strut_Lower/Axle/Wheels" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.08, 0, 0 )

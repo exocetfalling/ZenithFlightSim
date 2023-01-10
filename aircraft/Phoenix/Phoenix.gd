@@ -69,7 +69,6 @@ func _ready():
 	
 #	vel_wind = Vector3(0, 0, 5)
 	
-
 	pass
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
@@ -256,9 +255,14 @@ func _physics_process(delta):
 	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
 	
 	# Gear animations
-	$LG_Point_NLG/Strut_Lower.translation.y = $VehicleWheel_NLG.translation.y + 0.8
+	$LG_Point_NLG/Strut_Lower.translation.y = $VehicleWheel_NLG.translation.y + 0.85
 	$LG_Point_MLG_L/Strut_Lower.translation.y = $VehicleWheel_MLG_L.translation.y + 0.5
 	$LG_Point_MLG_R/Strut_Lower.translation.y = $VehicleWheel_MLG_R.translation.y + 0.5
+	
+	$LG_Point_NLG.rotation.x   = (1 - gear_current) * (-PI/2)
+	$LG_Point_MLG_L.rotation.z = (1 - gear_current) * (+PI/2)
+	$LG_Point_MLG_R.rotation.z = (1 - gear_current) * (-PI/2)
+
 	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
@@ -290,13 +294,13 @@ func get_input(delta):
 		if (Input.is_action_pressed("trim_pitch_down")):
 			input_elevator_trim -= 0.1 * delta 
 
-	#	# Gear input
-	#	if (Input.is_action_just_pressed("gear_toggle")):
-	#
-	#		if (gear_input == 0):
-	#			gear_input = -1
-	#		else:
-	#			gear_input = 0
+		# Gear input
+		if (Input.is_action_just_pressed("gear_toggle")):
+		
+			if (gear_input == 0):
+				gear_input = 1
+			else:
+				gear_input = 0
 		
 		# AP input
 		if (Input.is_action_just_pressed("autopilot_toggle")):
