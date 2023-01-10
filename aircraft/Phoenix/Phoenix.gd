@@ -255,6 +255,11 @@ func _physics_process(delta):
 	input_flaps = clamp(input_flaps, flaps_min, flaps_max)
 	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
 	
+	# Gear animations
+	$LG_Point_NLG/Strut_Lower.translation.y = $VehicleWheel_NLG.translation.y + 0.8
+	$LG_Point_MLG_L/Strut_Lower.translation.y = $VehicleWheel_MLG_L.translation.y + 0.5
+	$LG_Point_MLG_R/Strut_Lower.translation.y = $VehicleWheel_MLG_R.translation.y + 0.5
+	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
