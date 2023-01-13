@@ -63,12 +63,14 @@ func _physics_process(delta):
 		FlightData.aircraft_ap = autopilot_on
 	
 	# Aero forces
+	$AeroSurface_Wing_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_L.vel_body = vel_airspeed_true
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
 			$AeroSurface_Wing_L.rotation \
 			)
+	$AeroSurface_Wing_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_R.vel_body = vel_airspeed_true
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
@@ -76,24 +78,28 @@ func _physics_process(delta):
 			$AeroSurface_Wing_R.rotation \
 			)
 	
+	$AeroSurface_Control_L1.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Control_L1.vel_body = vel_airspeed_true
 	force_control_L1 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Control_L1.force_total_surface_vector, \
 			$AeroSurface_Control_L1.rotation \
 			)
+	$AeroSurface_Control_L2.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Control_L2.vel_body = vel_airspeed_true
 	force_control_L2 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Control_L2.force_total_surface_vector, \
 			$AeroSurface_Control_L2.rotation \
 			)
+	$AeroSurface_Control_R1.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Control_R1.vel_body = vel_airspeed_true
 	force_control_R1 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Control_R1.force_total_surface_vector, \
 			$AeroSurface_Control_R1.rotation \
 			)
+	$AeroSurface_Control_R2.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Control_R2.vel_body = vel_airspeed_true
 	force_control_R2 = \
 		calc_force_rotated_from_surface( \

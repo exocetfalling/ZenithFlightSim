@@ -197,7 +197,7 @@ func add_force_local(force: Vector3, pos: Vector3):
 	force_local = self.transform.basis.xform(force)
 	self.add_force(force_local, pos_local)
 
-func _calc_atmo_properties(height_metres):
+func calc_atmo_properties(height_metres):
 	# Store atmospheric properties as Vector3
 	# X value is air temperature, deg C
 	# Y value is air pressure, kPa
@@ -205,7 +205,7 @@ func _calc_atmo_properties(height_metres):
 	
 	# From https://en.wikipedia.org/wiki/Density_of_air#Variation_with_altitude
 	
-	var atmo_properties : Vector3
+	var atmo_properties : Vector3 = Vector3(288.15, 101325, 1.20)
 	
 	var p_0 = 101325 # Sea level standard atmospheric pressure, Pa
 	var T_0 = 288.15 # Sea level standard temperature, K
@@ -298,9 +298,9 @@ func _physics_process(delta):
 	vel_angular_local = global_transform.basis.z * (angular_velocity)
 	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
 	
-	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
-	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
-	air_density = _calc_atmo_properties(global_transform.origin.y).z
+	air_temperature = calc_atmo_properties(global_transform.origin.y).x
+	air_pressure = calc_atmo_properties(global_transform.origin.y).y
+	air_density = calc_atmo_properties(global_transform.origin.y).z
 	
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_airspeed_true_total, 2)
 

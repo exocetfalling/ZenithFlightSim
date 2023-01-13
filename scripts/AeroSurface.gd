@@ -46,6 +46,8 @@ var angle_alpha_deg = 0
 var angle_beta = 0
 var angle_beta_deg = 0
 
+var atmo_data : Vector3 = Vector3(288, 101325, 1.2)
+
 # Air temperature, K
 var air_temperature : float = 288.0
 
@@ -136,35 +138,6 @@ func _calc_alpha(vel_up, vel_fwd):
 func _calc_beta(vel_right, vel_fwd):
 	return atan2(-vel_right, vel_fwd)
 
-func _calc_atmo_properties(height_metres):
-	# Store atmospheric properties as Vector3
-	# X value is air temperature, deg C
-	# Y value is air pressure, kPa
-	# Z value is air density, kg m^-3
-	
-	# From https://en.wikipedia.org/wiki/Density_of_air#Variation_with_altitude
-	
-	var atmo_properties : Vector3 = Vector3(288.15, 101325, 1.20)
-	
-	var p_0 = 101325 # Sea level standard atmospheric pressure, Pa
-	var T_0 = 288.15 # Sea level standard temperature, K
-	var g = 9.80665 # Earth-surface gravitational acceleration, m s^-2
-	var L = 0.0065 # Temperature lapse rate, K m^-1
-	var R = 8.31446 # Ideal (universal) gas constant, J K^-1 mol^-1
-	var M = 0.0289652 # molar mass of dry air, kg mol^-1
-	
-	
-	atmo_properties.x = \
-		T_0 - L * height_metres
-	
-	atmo_properties.y = \
-		p_0 * pow((1 - (L * height_metres / T_0)), (g * M / R / L))
-	
-	atmo_properties.z = \
-		(atmo_properties.y * M) / (R * atmo_properties.x)
-	
-	return atmo_properties
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	surface_area = (length_chord_root + length_chord_tip) / 2 * length_span
@@ -177,12 +150,13 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
+	DebugOverlay.stats.add_property(self, "atmo_data", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):
-	air_temperature = _calc_atmo_properties(global_transform.origin.y).x
-	air_pressure = _calc_atmo_properties(global_transform.origin.y).y
-	air_density = _calc_atmo_properties(global_transform.origin.y).z
+	air_temperature = atmo_data.x
+	air_pressure = atmo_data.y
+	air_density = atmo_data.z
 	
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
 	
