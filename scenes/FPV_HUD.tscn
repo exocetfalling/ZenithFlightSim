@@ -51,19 +51,73 @@ points = PoolVector2Array( -50, 0, 50, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
+[node name="Ref_L" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05"]
+position = Vector2( -70, 0 )
+
+[node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05/Ref_L"]
+margin_left = -39.0
+margin_top = -21.0
+margin_right = 40.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+align = 1
+
+[node name="Ref_R" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05"]
+position = Vector2( 70, 0 )
+
+[node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05/Ref_R"]
+margin_left = -39.0
+margin_top = -21.0
+margin_right = 40.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+align = 1
+
 [node name="Ladder_N05" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, 90 )
 points = PoolVector2Array( -50, 0, 50, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
+[node name="Ref_L" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05"]
+position = Vector2( -70, 0 )
+
+[node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05/Ref_L"]
+margin_left = -39.0
+margin_top = -21.0
+margin_right = 40.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+align = 1
+
+[node name="Ref_R" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05"]
+position = Vector2( 70, 0 )
+
+[node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05/Ref_R"]
+margin_left = -39.0
+margin_top = -21.0
+margin_right = 40.0
+margin_bottom = 49.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "5"
+align = 1
+
 [node name="Ladder_P02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+visible = false
 position = Vector2( 0, -45 )
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Ladder_N02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+visible = false
 position = Vector2( 0, 45 )
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0

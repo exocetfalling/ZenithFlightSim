@@ -345,6 +345,15 @@ func get_input(delta):
 			$Camera_FPV.fov -= 10 * delta 
 		if (Input.is_action_pressed("cam_zoom_out")):
 			$Camera_FPV.fov += 10 * delta
+		
+		if (Input.is_action_pressed("ui_left")):
+			$Camera_FPV.rotation_degrees.y += 20 * delta
+		if (Input.is_action_pressed("ui_right")):
+			$Camera_FPV.rotation_degrees.y -= 20 * delta
+		if (Input.is_action_pressed("ui_up")):
+			$Camera_FPV.rotation_degrees.x += 20 * delta
+		if (Input.is_action_pressed("ui_down")):
+			$Camera_FPV.rotation_degrees.x -= 20 * delta
 
 func _integrate_forces(_state):
 	# Thrust forces
