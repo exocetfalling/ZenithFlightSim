@@ -150,7 +150,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
 #	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
-	DebugOverlay.stats.add_property(self, "atmo_data", "round")
+#	DebugOverlay.stats.add_property(self, "atmo_data", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):
