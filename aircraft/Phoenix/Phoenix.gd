@@ -24,7 +24,6 @@ var pos_ruddervator_r : Vector3 = Vector3.ZERO
 
 var camera_mode : int = 0
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	control_type = 1
@@ -108,6 +107,7 @@ func _physics_process(delta):
 	else:
 		adc_stall = false
 	
+	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
 	if (gear_current > gear_input):
@@ -124,8 +124,8 @@ func _physics_process(delta):
 
 
 	
-	if (autopilot_on == 1):
-		if (abs(input_joystick.y) < 0.1):
+	if ((autopilot_on == 1) && (vel_total > 65)):
+		if (abs(input_joystick.y) < 0.02):
 			$PID_Calc_Pitch.reset_integral = false
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
@@ -133,17 +133,11 @@ func _physics_process(delta):
 			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
 			) \
 			
+			output_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
+		
 		else: 
-			$PID_Calc_Pitch.integral = 0
-			$PID_Calc_Pitch.output_I = 0
 			tgt_pitch = adc_pitch
-#
-#				Panel_Trim_Node.value = \
-#				-1 * fbw_output.x
 	
-#		output_yaw_damper = calc_fcs_gains(vel_total) * -0.1 * angle_beta_deg
-#				input_elevator_trim = PID_Trim.calc_PID(tgt_pitch, adc_pitch, delta)
-
 	if (input_elevator_trim > input_trim_pitch_max):
 		input_elevator_trim = input_trim_pitch_max
 	if (input_elevator_trim < input_trim_pitch_min):

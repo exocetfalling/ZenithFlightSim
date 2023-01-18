@@ -256,9 +256,9 @@ far = 100000.0
 
 [node name="PID_Calc_Pitch" type="Node" parent="."]
 script = ExtResource( 6 )
-term_P = 0.2
-term_I = 0.2
-term_D = 0.1
+term_P = 0.8
+term_I = 0.6
+term_D = 0.4
 param_tuning_active = false
 
 [node name="LG_Point_NLG" type="Spatial" parent="."]
