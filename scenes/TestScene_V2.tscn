@@ -11,7 +11,7 @@
 [ext_resource path="res://resources/slot1_albedo_bump.packed_tex" type="Texture" id=9]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=10]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=11]
-[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=12]
+[ext_resource path="res://scenes/Runway.tscn" type="PackedScene" id=12]
 [ext_resource path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=14]
 [ext_resource path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=15]
 [ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture" id=16]
@@ -79,14 +79,8 @@ shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
-[node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0 )
-visible = false
-pixel_size = 1.0
-axis = 1
-transparent = false
-shaded = true
-texture = ExtResource( 12 )
-
 [node name="Phoenix" parent="." instance=ExtResource( 19 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200.895, 1740 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 205.88, 1479.52 )
+
+[node name="Runway" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 199.353, 0 )
