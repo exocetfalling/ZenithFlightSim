@@ -285,9 +285,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Waterline" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
+position = Vector2( 0, 54 )
+
+[node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline"]
+margin_left = -56.0
+margin_top = -18.0
+margin_right = 56.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
+text = "-------"
+align = 1
+valign = 1
+uppercase = true
+
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 0, 20 )
+position = Vector2( 0, -20 )
 z_index = 1
 
 [node name="ABV" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
@@ -302,14 +317,11 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "|
-XXX"
+text = "XXX
+|"
 align = 1
 valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="REF" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
@@ -323,8 +335,8 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "|
-XXX"
+text = "XXX
+|"
 align = 1
 valign = 1
 uppercase = true
@@ -344,8 +356,8 @@ grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 4 )
-text = "|
-XXX"
+text = "XXX
+|"
 align = 1
 valign = 1
 uppercase = true

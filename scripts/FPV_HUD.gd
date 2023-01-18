@@ -82,6 +82,13 @@ func _process(delta):
 		-20 * get_viewport_rect().size.y/cam_fov
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20.position.y = \
 		20 * get_viewport_rect().size.y/cam_fov
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.position.y = \
+		3 * get_viewport_rect().size.y/cam_fov
+	
+	if (FlightData.aircraft_gear == 0):
+		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = false
+	else:
+		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = true
 	
 	$EADI/FPM.position.x = \
 		display_distance * tan(deg2rad(-FlightData.aircraft_beta))
@@ -123,9 +130,9 @@ func _process(delta):
 	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
 	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
 	
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.text = ("|\n%03d" % [tape_hdg_ref])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.text = ("|\n%03d" % [tape_hdg_abv])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.text = ("|\n%03d" % [tape_hdg_blw])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.text = ("%03d\n|" % [tape_hdg_ref])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.text = ("%03d\n|" % [tape_hdg_abv])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.text = ("%03d\n|" % [tape_hdg_blw])
 	
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG.position.x = \
 		-(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
