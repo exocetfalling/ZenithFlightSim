@@ -365,8 +365,88 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Indicator_Roll" type="Node2D" parent="EADI/XForm_Roll"]
+position = Vector2( 0, -350 )
+
+[node name="Line2D" type="Line2D" parent="EADI/XForm_Roll/Indicator_Roll"]
+z_index = 1
+points = PoolVector2Array( 0, 0, 20, 20, -20, 20, 0, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
 [node name="FPM" type="Line2D" parent="EADI"]
 points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Mark_Angles" type="Node2D" parent="EADI"]
+
+[node name="Zero" type="Node2D" parent="EADI/Mark_Angles"]
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/Zero"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 20, -20, -20, -20, 0, 0 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="P10" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = 0.174533
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P10"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="N10" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = -0.174533
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N10"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="P20" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = 0.349066
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P20"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="N20" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = -0.349066
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N20"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="P30" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = 0.523599
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P30"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
+width = 3.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="N30" type="Node2D" parent="EADI/Mark_Angles"]
+rotation = -0.523599
+
+[node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N30"]
+position = Vector2( 0, -350 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
