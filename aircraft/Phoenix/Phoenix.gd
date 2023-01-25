@@ -24,6 +24,8 @@ var pos_ruddervator_r : Vector3 = Vector3.ZERO
 
 var camera_mode : int = 0
 
+var ground_contact : bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	control_type = 1
@@ -124,20 +126,19 @@ func _physics_process(delta):
 
 
 	
-	if ((autopilot_on == 1) && (vel_total > 65)):
-		if (abs(input_joystick.y) < 0.02):
-			$PID_Calc_Pitch.reset_integral = false
+	if ((autopilot_on == 1) && (ground_contact == false)):
+		if (abs(input_joystick.y) < 0.01):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
 			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
-			) \
+			)
+		else:
+			tgt_pitch = adc_pitch
 			
 			output_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
+			
 		
-		else: 
-			tgt_pitch = adc_pitch
-	
 	if (input_elevator_trim > input_trim_pitch_max):
 		input_elevator_trim = input_trim_pitch_max
 	if (input_elevator_trim < input_trim_pitch_min):
@@ -266,6 +267,16 @@ func _physics_process(delta):
 	$LG_Point_MLG_L.rotation.z = (1 - gear_current) * (+PI/2)
 	$LG_Point_MLG_R.rotation.z = (1 - gear_current) * (-PI/2)
 
+	# Detect ground contact
+	if (\
+	$VehicleWheel_NLG.is_in_contact() == true || \
+	$VehicleWheel_MLG_L.is_in_contact() == true || \
+	$VehicleWheel_MLG_R.is_in_contact() == true
+	):
+		ground_contact = true
+	
+	else:
+		ground_contact = false
 	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
@@ -309,7 +320,7 @@ func get_input(delta):
 		if (Input.is_action_just_pressed("autopilot_toggle")):
 			if (autopilot_on == 0):
 				autopilot_on = 1
-				tgt_fpa = adc_fpa
+				tgt_pitch = adc_pitch
 				output_yaw_damper = 0
 			else:
 				autopilot_on = 0
