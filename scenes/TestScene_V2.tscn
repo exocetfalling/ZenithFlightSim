@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/Terrain_PBR/terrain_island/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
-[ext_resource path="res://resources/TestScene_V2_slot2_albedo_bump.packed_tex" type="Texture" id=3]
+[ext_resource path="res://assets/Terrain_PBR/materials/concrete/concrete_albedo.png" type="Texture" id=3]
 [ext_resource path="res://resources/TestScene_V2_slot1_albedo_bump.packed_tex" type="Texture" id=4]
 [ext_resource path="res://resources/slot0_normal_roughness.packed_tex" type="Texture" id=5]
 [ext_resource path="res://resources/TestScene_V2_slot3_normal_roughness.packed_tex" type="Texture" id=6]
