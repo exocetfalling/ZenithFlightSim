@@ -122,8 +122,7 @@ func _calc_lift_coeff(angle_alpha_rad):
 func _calc_drag_coeff(lift_coeff, drag_coeff_zero_lift, wing_span, wing_area, wing_effeciency):
 	return \
 		( \
-			drag_coeff_zero_lift + (pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency)) + \
-			abs(0.1 * sin(angle_alpha))
+			drag_coeff_zero_lift + (pow(lift_coeff, 2) / (PI * (pow(wing_span, 2) / wing_area) * wing_effeciency))
 		)
 	
 func _calc_lift_force(air_density_current, airspeed_true, surface_area, lift_coeff):
