@@ -20,6 +20,7 @@ var aircraft_trim : float = 0
 var aircraft_gear : float = 0
 var aircraft_throttle : float = 0
 var aircraft_ap : int = 0
+var aircraft_cws : int = 0
 var aircraft_MFD_mode : int = 0
 var aircraft_nav_brg : int = 0
 var aircraft_nav_range : int = 0

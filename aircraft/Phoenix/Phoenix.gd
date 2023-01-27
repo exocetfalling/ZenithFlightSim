@@ -97,7 +97,7 @@ func _physics_process(delta):
 		FlightData.aircraft_trim = output_elevator_trim
 		FlightData.aircraft_gear = gear_current
 		FlightData.aircraft_throttle = input_throttle
-		FlightData.aircraft_ap = autopilot_on
+		FlightData.aircraft_cws = autopilot_on
 		
 	if (camera_mode == 0):
 		$Camera_FPV/FPV_HUD.visible = true

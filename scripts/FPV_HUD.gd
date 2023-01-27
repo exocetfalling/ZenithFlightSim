@@ -149,3 +149,8 @@ func _process(delta):
 	
 	$HUD_Centre/Indicator_TRIM/Caret.position.y = FlightData.aircraft_trim * 50
 	$HUD_Centre/Indicator_TRIM/Label.text = ("TRIM %+0.1f" % [FlightData.aircraft_trim])
+	
+	if (FlightData.aircraft_cws == 0):
+		$HUD_Centre/Status_CWS.visible = false
+	if (FlightData.aircraft_cws == 1):
+		$HUD_Centre/Status_CWS.visible = true
