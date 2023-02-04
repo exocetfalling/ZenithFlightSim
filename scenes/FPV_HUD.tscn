@@ -302,8 +302,8 @@ uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
 modulate = Color( 0, 1, 0, 1 )
+light_mask = 0
 position = Vector2( 0, -20 )
-z_index = 1
 
 [node name="ABV2" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
