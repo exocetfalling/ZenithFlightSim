@@ -18,16 +18,19 @@ var hud_scale_factor : Vector2 = Vector2.ONE
 var viewport_centre : Vector2 = Vector2(960, 540)
 
 var tape_spd_ref = 0
-var tape_spd_step = 10
-var tape_spd_spacing = 200
+var tape_spd_step = 5
+var tape_spd_spacing = 100
 
 var tape_alt_ref = 0
-var tape_alt_step = 100
-var tape_alt_spacing = 200
+var tape_alt_step = 50
+var tape_alt_spacing = 100
 
 var tape_hdg_ref = 0
-var tape_hdg_abv = 0
-var tape_hdg_blw = 0
+var tape_hdg_abv1 = 0
+var tape_hdg_abv2 = 0
+var tape_hdg_blw1 = 0
+var tape_hdg_blw2 = 0
+
 var tape_hdg_step = 10
 var tape_hdg_spacing = 200
 
@@ -36,15 +39,24 @@ var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$HUD_Centre/Tape_SPD/ABV.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF.rect_position.y - tape_spd_spacing
-	$HUD_Centre/Tape_SPD/BLW.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF.rect_position.y + tape_spd_spacing
+	$HUD_Centre/Tape_SPD/ABV1.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF0.rect_position.y - 1 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/ABV2.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF0.rect_position.y - 2 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/BLW1.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF0.rect_position.y + 1 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/BLW2.rect_position.y = \
+		$HUD_Centre/Tape_SPD/REF0.rect_position.y + 2 * tape_spd_spacing
+
 	
-	$HUD_Centre/Tape_ALT/ABV.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF.rect_position.y - tape_alt_spacing
-	$HUD_Centre/Tape_ALT/BLW.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF.rect_position.y + tape_alt_spacing
+	$HUD_Centre/Tape_ALT/ABV1.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF0.rect_position.y - 1 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/ABV2.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF0.rect_position.y - 2 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/BLW1.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 1 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/BLW2.rect_position.y = \
+		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 2 * tape_alt_spacing
 
 
 
@@ -100,49 +112,66 @@ func _process(delta):
 #	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
 
 	tape_spd_ref = stepify(FlightData.aircraft_spd_indicated, tape_spd_step)
-	$HUD_Centre/Tape_SPD/REF.text = ("%03d -" % [tape_spd_ref])
-	$HUD_Centre/Tape_SPD/ABV.text = ("%03d -" % [tape_spd_ref + tape_spd_step])
-	$HUD_Centre/Tape_SPD/BLW.text = ("%03d -" % [tape_spd_ref - tape_spd_step])
+	$HUD_Centre/Tape_SPD/REF0.text = ("%03d -" % [tape_spd_ref])
+	$HUD_Centre/Tape_SPD/ABV1.text = ("%03d -" % [tape_spd_ref + 1 * tape_spd_step])
+	$HUD_Centre/Tape_SPD/ABV2.text = ("%03d -" % [tape_spd_ref + 2 * tape_spd_step])
+	$HUD_Centre/Tape_SPD/BLW1.text = ("%03d -" % [tape_spd_ref - 1 * tape_spd_step])
+	$HUD_Centre/Tape_SPD/BLW2.text = ("%03d -" % [tape_spd_ref - 2 * tape_spd_step])
 	
-	if(tape_spd_ref <= 0): 
-		$HUD_Centre/Tape_SPD/BLW.visible = false
+	if(tape_spd_ref <= 5): 
+		$HUD_Centre/Tape_SPD/BLW1.visible = false
+		$HUD_Centre/Tape_SPD/BLW2.visible = false
 	else:
-		$HUD_Centre/Tape_SPD/BLW.visible = true
+		$HUD_Centre/Tape_SPD/BLW1.visible = true
+		$HUD_Centre/Tape_SPD/BLW2.visible = true
 	
 	$HUD_Centre/Tape_SPD.position.y = \
 		(FlightData.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
 	
 	tape_alt_ref = stepify(FlightData.aircraft_alt_barometric, tape_alt_step)
-	$HUD_Centre/Tape_ALT/REF.text = ("- %05d" % [tape_alt_ref])
-	$HUD_Centre/Tape_ALT/ABV.text = ("- %05d" % [tape_alt_ref + tape_alt_step])
-	$HUD_Centre/Tape_ALT/BLW.text = ("- %05d" % [tape_alt_ref - tape_alt_step])
+	$HUD_Centre/Tape_ALT/REF0.text = ("- %05d" % [tape_alt_ref])
+	$HUD_Centre/Tape_ALT/ABV1.text = ("- %05d" % [tape_alt_ref + 1 * tape_alt_step])
+	$HUD_Centre/Tape_ALT/ABV2.text = ("- %05d" % [tape_alt_ref + 2 * tape_alt_step])
+	$HUD_Centre/Tape_ALT/BLW1.text = ("- %05d" % [tape_alt_ref - 1 * tape_alt_step])
+	$HUD_Centre/Tape_ALT/BLW2.text = ("- %05d" % [tape_alt_ref - 2 * tape_alt_step])
 	
 	if(tape_alt_ref <= 0): 
-		$HUD_Centre/Tape_ALT/BLW.visible = false
+		$HUD_Centre/Tape_ALT/BLW1.visible = false
+		$HUD_Centre/Tape_ALT/BLW2.visible = false
 	else:
-		$HUD_Centre/Tape_ALT/BLW.visible = true
+		$HUD_Centre/Tape_ALT/BLW1.visible = true
+		$HUD_Centre/Tape_ALT/BLW2.visible = true
 	
 	$HUD_Centre/Tape_ALT.position.y = \
 		(FlightData.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
+
+	
 	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
+	tape_hdg_abv1 = fmod(tape_hdg_ref + 1 * tape_hdg_step + 360, 360)
+	tape_hdg_abv2 = fmod(tape_hdg_ref + 2 * tape_hdg_step + 360, 360)
+	tape_hdg_blw1 = fmod(tape_hdg_ref - 1 * tape_hdg_step + 360, 360)
+	tape_hdg_blw2 = fmod(tape_hdg_ref - 2 * tape_hdg_step + 360, 360)
 	
-	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
-	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
-	
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.text = ("%03d\n|" % [tape_hdg_ref])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.text = ("%03d\n|" % [tape_hdg_abv])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.text = ("%03d\n|" % [tape_hdg_blw])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.text = ("%03d\n|" % [tape_hdg_ref])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.text = ("%03d\n|" % [tape_hdg_abv1])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.text = ("%03d\n|" % [tape_hdg_abv2])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.text = ("%03d\n|" % [tape_hdg_blw1])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.text = ("%03d\n|" % [tape_hdg_blw2])
 	
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG.position.x = \
 		-(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
 	
 	tape_hdg_spacing = 10 * get_viewport_rect().size.y/cam_fov
 	
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x + tape_hdg_spacing
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF.rect_position.x - tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x + 1 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x + 2 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x - 1 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.rect_position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x - 2 * tape_hdg_spacing
 	
 	$HUD_Centre/Indicator_THR.value = FlightData.aircraft_throttle * 100
 	$HUD_Centre/Indicator_FLAPS.value = FlightData.aircraft_flaps
