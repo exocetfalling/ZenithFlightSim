@@ -152,6 +152,10 @@ func _physics_process(delta):
 	# Aero forces
 	$AeroSurface_Wing_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_L.vel_body = vel_airspeed_true
+	$AeroSurface_Wing_L.vel_body.y += \
+		+ pos_wing_l.x * vel_angular_local.z
+	$AeroSurface_Wing_L.vel_body.z += \
+		+ pos_wing_l.x * vel_angular_local.y
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
@@ -159,6 +163,10 @@ func _physics_process(delta):
 			)
 	$AeroSurface_Wing_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_R.vel_body = vel_airspeed_true
+	$AeroSurface_Wing_R.vel_body.y += \
+		+ pos_wing_r.x * vel_angular_local.z
+	$AeroSurface_Wing_R.vel_body.z += \
+	+ pos_wing_r.x * vel_angular_local.y
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
