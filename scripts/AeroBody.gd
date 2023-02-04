@@ -322,7 +322,12 @@ func _physics_process(delta):
 	adc_spd_true = vel_airspeed_true.length()
 	adc_spd_ground = vel_total
 	
-	adc_hdg = fmod(-rotation_degrees.y + 360, 360)
+
+	if (fmod(-rotation_degrees.y + 360, 360) <= 0):
+		adc_hdg = 360
+	else:
+		adc_hdg = fmod(-rotation_degrees.y + 360, 360)
+		
 	adc_alt_barometric = global_transform.origin.y
 	
 	adc_pitch = rotation_degrees.x

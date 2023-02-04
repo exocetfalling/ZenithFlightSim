@@ -146,7 +146,6 @@ func _process(delta):
 		(FlightData.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
 
-	
 	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
 	tape_hdg_abv1 = fmod(tape_hdg_ref + 1 * tape_hdg_step + 360, 360)
 	tape_hdg_abv2 = fmod(tape_hdg_ref + 2 * tape_hdg_step + 360, 360)
