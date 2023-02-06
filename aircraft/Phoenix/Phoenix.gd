@@ -99,6 +99,8 @@ func _physics_process(delta):
 		FlightData.aircraft_throttle = input_throttle
 		FlightData.aircraft_cws = autopilot_on
 		
+		FlightData.aircraft_nav_waypoint_data = find_angles_and_distance_to_target(Vector3(0, 200, 0))
+		
 	if (camera_mode == 0):
 		$Camera_FPV/FPV_HUD.visible = true
 	if (camera_mode == 1):
@@ -367,6 +369,13 @@ func get_input(delta):
 			$Camera_FPV.rotation_degrees.x += 20 * delta
 		if (Input.is_action_pressed("ui_down")):
 			$Camera_FPV.rotation_degrees.x -= 20 * delta
+		
+		if (Input.is_action_just_pressed("nav_mode_toggle")):
+			if (FlightData.aircraft_nav_active == false): 
+				FlightData.aircraft_nav_active = true
+			else:
+				FlightData.aircraft_nav_active = false
+		
 
 func _integrate_forces(_state):
 	# Thrust forces

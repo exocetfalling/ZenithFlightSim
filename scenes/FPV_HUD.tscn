@@ -35,6 +35,12 @@ points = PoolVector2Array( -50, 25, 0, 0, 50, 25 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
+[node name="Marker_WPT" type="Line2D" parent="EADI/Boresight"]
+visible = false
+points = PoolVector2Array( 0, -30, 30, -30, 30, 30, -30, 30, -30, -30, 0, -30 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+
 [node name="XForm_Roll" type="Node2D" parent="EADI"]
 light_mask = 0
 
@@ -301,6 +307,7 @@ valign = 1
 uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 light_mask = 0
 position = Vector2( 0, -20 )
@@ -848,3 +855,212 @@ margin_bottom = 25.0
 custom_fonts/font = ExtResource( 2 )
 text = "CWS"
 align = 1
+
+[node name="Compass" type="Node2D" parent="HUD_Centre"]
+position = Vector2( 0, 425 )
+scale = Vector2( 0.7, 0.7 )
+z_index = 1
+
+[node name="Rose" type="Node2D" parent="HUD_Centre/Compass"]
+
+[node name="36" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/36"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/36/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "36"
+align = 1
+valign = 1
+
+[node name="03" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = 0.523599
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/03"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/03/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "03"
+align = 1
+valign = 1
+
+[node name="06" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = 1.0472
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/06"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/06/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "06"
+align = 1
+valign = 1
+
+[node name="09" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = 1.5708
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/09"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/09/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "09"
+align = 1
+valign = 1
+
+[node name="12" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = 2.0944
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/12"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/12/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "12"
+align = 1
+valign = 1
+
+[node name="15" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = 2.61799
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/15"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/15/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "15"
+align = 1
+valign = 1
+
+[node name="18" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -3.14159
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/18"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/18/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "18"
+align = 1
+valign = 1
+
+[node name="21" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -2.61799
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/21"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/21/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "21"
+align = 1
+valign = 1
+
+[node name="24" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -2.09439
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/24"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/24/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "24"
+align = 1
+valign = 1
+
+[node name="27" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -1.5708
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/27"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/27/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "27"
+align = 1
+valign = 1
+
+[node name="30" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -1.0472
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/30"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/30/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "30"
+align = 1
+valign = 1
+
+[node name="33" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+rotation = -0.523599
+
+[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/33"]
+position = Vector2( 0, -100 )
+
+[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/33/Offset"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 4 )
+text = "33"
+align = 1
+valign = 1
+
+[node name="Datum" type="Line2D" parent="HUD_Centre/Compass"]
+position = Vector2( 0, -150 )
+points = PoolVector2Array( 0, 0, 10, 0, 0, 20, -10, 0, 0, 0 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Needle" type="Line2D" parent="HUD_Centre/Compass"]
+points = PoolVector2Array( 0, 60, 0, -45, 5, -45, 0, -60, -5, -45, 0, -45 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )

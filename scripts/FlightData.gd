@@ -22,9 +22,11 @@ var aircraft_throttle : float = 0
 var aircraft_ap : int = 0
 var aircraft_cws : int = 0
 var aircraft_MFD_mode : int = 0
+var aircraft_nav_active : bool = false
 var aircraft_nav_brg : int = 0
 var aircraft_nav_range : int = 0
 var aircraft_nav_waypoint : int = 0
+var aircraft_nav_waypoint_data : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

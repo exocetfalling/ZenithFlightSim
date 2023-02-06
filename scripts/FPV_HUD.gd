@@ -107,6 +107,26 @@ func _process(delta):
 	$EADI/FPM.position.y = \
 		display_distance * tan(deg2rad(FlightData.aircraft_alpha))
 	
+	# Waypoint indications
+	if (\
+	(FlightData.aircraft_nav_active == true) && \
+	(abs(FlightData.aircraft_nav_waypoint_data.x) <= 90) && \
+	(abs(FlightData.aircraft_nav_waypoint_data.y) <= 90) \
+		):
+		$EADI/Boresight/Marker_WPT.visible = true
+		$EADI/Boresight/Marker_WPT.position.x = \
+			display_distance * tan(deg2rad(FlightData.aircraft_nav_waypoint_data.x))
+		$EADI/Boresight/Marker_WPT.position.y = \
+			display_distance * tan(deg2rad(-FlightData.aircraft_nav_waypoint_data.y))
+		$EADI/Boresight/Marker_WPT.rotation_degrees = -FlightData.aircraft_roll
+	else:
+		$EADI/Boresight/Marker_WPT.visible = false
+		$EADI/Boresight/Marker_WPT.position = Vector2.ZERO
+		$EADI/Boresight/Marker_WPT.rotation = 0
+	
+	$HUD_Centre/Compass/Rose.rotation_degrees = -FlightData.aircraft_hdg
+	$HUD_Centre/Compass/Needle.rotation_degrees = FlightData.aircraft_nav_waypoint_data.x
+	
 #	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
 #	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
 #	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
