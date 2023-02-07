@@ -29,7 +29,7 @@ var ground_contact : bool = true
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	control_type = 1
-	
+	deflection_rate = 1/(PI/3)
 #	add_child(LineDrawer)
 
 #	DebugOverlay.stats.add_property(self, "adc_spd", "round")
