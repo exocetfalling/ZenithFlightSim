@@ -54,8 +54,3 @@ func _process(_delta):
 
 	get_node("Boresight").position = current_centre_position
 	
-	# UFC Buttons
-	
-	if (get_node("UpFrontControls/Modes_Main/FBW").pressed == true):
-		button_FBW = 1
-	

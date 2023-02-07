@@ -2,10 +2,10 @@
 
 [ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
 [ext_resource path="res://resources/HUD_Font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/MCP.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/MFD_V3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/Display_Font.tres" type="DynamicFont" id=14]
 [ext_resource path="res://assets/Panels/DU_Background.bmp" type="Texture" id=15]
-[ext_resource path="res://scenes/UpFrontControls.tscn" type="PackedScene" id=16]
 
 [node name="Main_Panel" type="MarginContainer"]
 anchor_right = 1.0
@@ -15,9 +15,6 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Boresight" type="Line2D" parent="."]
 visible = false
@@ -82,14 +79,6 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-
-[node name="UpFrontControls" parent="." instance=ExtResource( 16 )]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 1900.0
-margin_bottom = 288.0
-size_flags_horizontal = 1
-alignment = 1
 
 [node name="Sliders" type="HBoxContainer" parent="."]
 margin_left = 748.0
@@ -208,3 +197,10 @@ scale = Vector2( 0.6, 0.6 )
 [node name="MFD_V3_R" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1255, 400 )
 scale = Vector2( 0.6, 0.6 )
+
+[node name="MCP" parent="." instance=ExtResource( 3 )]
+anchor_right = 0.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1900.0
+margin_bottom = 1060.0
