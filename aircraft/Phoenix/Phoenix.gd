@@ -23,6 +23,7 @@ var pos_ruddervator_l : Vector3 = Vector3.ZERO
 var pos_ruddervator_r : Vector3 = Vector3.ZERO
 
 var camera_mode : int = 0
+var camera_mouse_delta = 0
 
 var ground_contact : bool = true
 
@@ -356,19 +357,6 @@ func get_input(delta):
 		if (camera_mode > 1):
 			camera_mode = 0
 		
-		if (Input.is_action_pressed("cam_zoom_in")):
-			$Camera_FPV.fov -= 10 * delta 
-		if (Input.is_action_pressed("cam_zoom_out")):
-			$Camera_FPV.fov += 10 * delta
-		
-		if (Input.is_action_pressed("ui_left")):
-			$Camera_FPV.rotation_degrees.y += 20 * delta
-		if (Input.is_action_pressed("ui_right")):
-			$Camera_FPV.rotation_degrees.y -= 20 * delta
-		if (Input.is_action_pressed("ui_up")):
-			$Camera_FPV.rotation_degrees.x += 20 * delta
-		if (Input.is_action_pressed("ui_down")):
-			$Camera_FPV.rotation_degrees.x -= 20 * delta
 		
 		if (Input.is_action_just_pressed("nav_mode_toggle")):
 			if (FlightData.aircraft_nav_active == false): 
