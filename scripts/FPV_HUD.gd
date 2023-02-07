@@ -133,8 +133,10 @@ func _process(delta):
 		$EADI/Boresight/Marker_WPT.position = Vector2.ZERO
 		$EADI/Boresight/Marker_WPT.rotation = 0
 	
-	$HUD_Centre/Compass/Rose.rotation_degrees = -FlightData.aircraft_hdg
-	$HUD_Centre/Compass/Needle.rotation_degrees = FlightData.aircraft_nav_waypoint_data.x
+	$Compass.position.x = viewport_centre.x
+	$Compass.position.y = viewport_centre.y + 400 * (get_viewport_rect().size.y / 1080)
+	$Compass/Rose.rotation_degrees = -FlightData.aircraft_hdg
+	$Compass/Needle.rotation_degrees = FlightData.aircraft_nav_waypoint_data.x
 	
 #	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
 #	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])

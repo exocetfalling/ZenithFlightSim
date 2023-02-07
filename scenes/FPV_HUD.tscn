@@ -855,19 +855,20 @@ custom_fonts/font = ExtResource( 2 )
 text = "CWS"
 align = 1
 
-[node name="Compass" type="Node2D" parent="HUD_Centre"]
-position = Vector2( 0, 425 )
+[node name="Compass" type="Node2D" parent="."]
+modulate = Color( 0, 1, 0, 1 )
+position = Vector2( 960, 965 )
 scale = Vector2( 0.7, 0.7 )
 z_index = 1
 
-[node name="Rose" type="Node2D" parent="HUD_Centre/Compass"]
+[node name="Rose" type="Node2D" parent="Compass"]
 
-[node name="36" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="36" type="Node2D" parent="Compass/Rose"]
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/36"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/36"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/36/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/36/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -877,13 +878,13 @@ text = "36"
 align = 1
 valign = 1
 
-[node name="03" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="03" type="Node2D" parent="Compass/Rose"]
 rotation = 0.523599
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/03"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/03"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/03/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/03/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -893,13 +894,13 @@ text = "03"
 align = 1
 valign = 1
 
-[node name="06" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="06" type="Node2D" parent="Compass/Rose"]
 rotation = 1.0472
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/06"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/06"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/06/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/06/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -909,13 +910,13 @@ text = "06"
 align = 1
 valign = 1
 
-[node name="09" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="09" type="Node2D" parent="Compass/Rose"]
 rotation = 1.5708
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/09"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/09"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/09/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/09/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -925,13 +926,13 @@ text = "09"
 align = 1
 valign = 1
 
-[node name="12" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="12" type="Node2D" parent="Compass/Rose"]
 rotation = 2.0944
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/12"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/12"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/12/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/12/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -941,13 +942,13 @@ text = "12"
 align = 1
 valign = 1
 
-[node name="15" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="15" type="Node2D" parent="Compass/Rose"]
 rotation = 2.61799
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/15"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/15"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/15/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/15/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -957,13 +958,13 @@ text = "15"
 align = 1
 valign = 1
 
-[node name="18" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="18" type="Node2D" parent="Compass/Rose"]
 rotation = -3.14159
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/18"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/18"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/18/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/18/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -973,13 +974,13 @@ text = "18"
 align = 1
 valign = 1
 
-[node name="21" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="21" type="Node2D" parent="Compass/Rose"]
 rotation = -2.61799
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/21"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/21"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/21/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/21/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -989,13 +990,13 @@ text = "21"
 align = 1
 valign = 1
 
-[node name="24" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="24" type="Node2D" parent="Compass/Rose"]
 rotation = -2.09439
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/24"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/24"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/24/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/24/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -1005,13 +1006,13 @@ text = "24"
 align = 1
 valign = 1
 
-[node name="27" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="27" type="Node2D" parent="Compass/Rose"]
 rotation = -1.5708
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/27"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/27"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/27/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/27/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -1021,13 +1022,13 @@ text = "27"
 align = 1
 valign = 1
 
-[node name="30" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="30" type="Node2D" parent="Compass/Rose"]
 rotation = -1.0472
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/30"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/30"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/30/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/30/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -1037,13 +1038,13 @@ text = "30"
 align = 1
 valign = 1
 
-[node name="33" type="Node2D" parent="HUD_Centre/Compass/Rose"]
+[node name="33" type="Node2D" parent="Compass/Rose"]
 rotation = -0.523599
 
-[node name="Offset" type="Node2D" parent="HUD_Centre/Compass/Rose/33"]
+[node name="Offset" type="Node2D" parent="Compass/Rose/33"]
 position = Vector2( 0, -100 )
 
-[node name="Label" type="Label" parent="HUD_Centre/Compass/Rose/33/Offset"]
+[node name="Label" type="Label" parent="Compass/Rose/33/Offset"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -1053,13 +1054,13 @@ text = "33"
 align = 1
 valign = 1
 
-[node name="Datum" type="Line2D" parent="HUD_Centre/Compass"]
+[node name="Datum" type="Line2D" parent="Compass"]
 position = Vector2( 0, -150 )
 points = PoolVector2Array( 0, 0, 10, 0, 0, 20, -10, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Needle" type="Line2D" parent="HUD_Centre/Compass"]
+[node name="Needle" type="Line2D" parent="Compass"]
 points = PoolVector2Array( 0, 60, 0, -45, 5, -45, 0, -60, -5, -45, 0, -45 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
