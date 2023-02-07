@@ -37,6 +37,15 @@ var tape_hdg_spacing = 200
 export var hmd_power : bool = true
 var hmd_blanked : bool = false
 
+func _format_hdg(heading):
+	if (heading  <= 0):
+		heading += 360
+	if (heading > 360):
+		heading -= 360
+	
+	return heading
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$HUD_Centre/Tape_SPD/ABV1.rect_position.y = \
@@ -167,12 +176,12 @@ func _process(delta):
 	
 
 	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
-	tape_hdg_abv1 = fmod(tape_hdg_ref + 1 * tape_hdg_step + 360, 360)
-	tape_hdg_abv2 = fmod(tape_hdg_ref + 2 * tape_hdg_step + 360, 360)
-	tape_hdg_blw1 = fmod(tape_hdg_ref - 1 * tape_hdg_step + 360, 360)
-	tape_hdg_blw2 = fmod(tape_hdg_ref - 2 * tape_hdg_step + 360, 360)
+	tape_hdg_abv1 = _format_hdg(tape_hdg_ref + 1 * tape_hdg_step)
+	tape_hdg_abv2 = _format_hdg(tape_hdg_ref + 2 * tape_hdg_step)
+	tape_hdg_blw1 = _format_hdg(tape_hdg_ref - 1 * tape_hdg_step)
+	tape_hdg_blw2 = _format_hdg(tape_hdg_ref - 2 * tape_hdg_step)
 	
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.text = ("%03d\n|" % [tape_hdg_ref])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.text = ("%03d\n|" % [_format_hdg(tape_hdg_ref)])
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.text = ("%03d\n|" % [tape_hdg_abv1])
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.text = ("%03d\n|" % [tape_hdg_abv2])
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.text = ("%03d\n|" % [tape_hdg_blw1])
