@@ -37,6 +37,8 @@ var tape_hdg_spacing = 200
 export var hmd_power : bool = true
 var hmd_blanked : bool = false
 
+var fpv_angles : Vector3 = Vector3.ZERO
+
 func _format_hdg(heading):
 	if (heading  <= 0):
 		heading += 360
@@ -75,17 +77,23 @@ func _process(delta):
 
 	$EADI.position = viewport_centre
 	$HUD_Centre.position = viewport_centre
+	$Boresight.position = \
+		viewport_centre - 5 * hud_scale_factor * Vector2(-fpv_angles.y, -fpv_angles.x)
 	
 	hud_scale_factor = get_viewport_rect().size / Vector2(1920, 1080)
 	
 	$HUD_Centre.scale = hud_scale_factor
 	
+	fpv_angles = FlightData.aircraft_cam_rotation_deg
+	
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
 	
 	if (FlightData.aircraft_cam_rotation_deg.length() <= 5):
 		$EADI.visible = true
+		$Boresight.visible = false
 	else:
 		$EADI.visible = false
+		$Boresight.visible = true
 	
 	$EADI/XForm_Roll.rotation_degrees = -FlightData.aircraft_roll
 	$EADI/XForm_Roll/XForm_Pitch.position.y = \
@@ -127,16 +135,16 @@ func _process(delta):
 	(abs(FlightData.aircraft_nav_waypoint_data.x) <= 90) && \
 	(abs(FlightData.aircraft_nav_waypoint_data.y) <= 90) \
 		):
-		$EADI/Boresight/Marker_WPT.visible = true
-		$EADI/Boresight/Marker_WPT.position.x = \
+		$EADI/Aircraft/Marker_WPT.visible = true
+		$EADI/Aircraft/Marker_WPT.position.x = \
 			display_distance * tan(deg2rad(FlightData.aircraft_nav_waypoint_data.x))
-		$EADI/Boresight/Marker_WPT.position.y = \
+		$EADI/Aircraft/Marker_WPT.position.y = \
 			display_distance * tan(deg2rad(-FlightData.aircraft_nav_waypoint_data.y))
-		$EADI/Boresight/Marker_WPT.rotation_degrees = -FlightData.aircraft_roll
+		$EADI/Aircraft/Marker_WPT.rotation_degrees = -FlightData.aircraft_roll
 	else:
-		$EADI/Boresight/Marker_WPT.visible = false
-		$EADI/Boresight/Marker_WPT.position = Vector2.ZERO
-		$EADI/Boresight/Marker_WPT.rotation = 0
+		$EADI/Aircraft/Marker_WPT.visible = false
+		$EADI/Aircraft/Marker_WPT.position = Vector2.ZERO
+		$EADI/Aircraft/Marker_WPT.rotation = 0
 	
 	$Compass.position.x = viewport_centre.x
 	$Compass.position.y = viewport_centre.y + 400 * (get_viewport_rect().size.y / 1080)

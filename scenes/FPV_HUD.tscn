@@ -30,12 +30,12 @@ mode = 3
 range_z_min = 0
 range_z_max = 0
 
-[node name="Boresight" type="Line2D" parent="EADI"]
+[node name="Aircraft" type="Line2D" parent="EADI"]
 points = PoolVector2Array( -50, 25, 0, 0, 50, 25 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
-[node name="Marker_WPT" type="Line2D" parent="EADI/Boresight"]
+[node name="Marker_WPT" type="Line2D" parent="EADI/Aircraft"]
 visible = false
 points = PoolVector2Array( 0, -30, 30, -30, 30, 30, -30, 30, -30, -30, 0, -30 )
 width = 2.0
@@ -1062,5 +1062,14 @@ default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle" type="Line2D" parent="Compass"]
 points = PoolVector2Array( 0, 60, 0, -45, 5, -45, 0, -60, -5, -45, 0, -45 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Boresight" type="Node2D" parent="."]
+visible = false
+position = Vector2( 960, 540 )
+
+[node name="Line2D" type="Line2D" parent="Boresight"]
+points = PoolVector2Array( 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, 0, 100, 0, 0, -100, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
