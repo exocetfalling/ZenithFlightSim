@@ -82,6 +82,11 @@ func _process(delta):
 	
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
 	
+	if (FlightData.aircraft_cam_rotation_deg.length() <= 5):
+		$EADI.visible = true
+	else:
+		$EADI.visible = false
+	
 	$EADI/XForm_Roll.rotation_degrees = -FlightData.aircraft_roll
 	$EADI/XForm_Roll/XForm_Pitch.position.y = \
 		FlightData.aircraft_pitch * get_viewport_rect().size.y/cam_fov
