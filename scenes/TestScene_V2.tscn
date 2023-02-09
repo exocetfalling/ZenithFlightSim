@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Terrain_PBR/terrain_island/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=10]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=11]
 [ext_resource path="res://scenes/Runway.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/virtual-joystick/joystick/virtual_joystick.tscn" type="PackedScene" id=13]
 [ext_resource path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=14]
 [ext_resource path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=15]
 [ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture" id=16]
@@ -84,3 +85,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 205.88, 1479.52 )
 
 [node name="Runway" parent="." instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 199.353, 0 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VJoy1" parent="UI" instance=ExtResource( 13 )]
+action_left = "yaw_left"
+action_right = "yaw_right"
+action_up = "throttle_up"
+action_down = "throttle_down"
+
+[node name="VJoy2" parent="UI" instance=ExtResource( 13 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -250.0
+margin_right = -50.0
+action_left = "roll_left"
+action_right = "roll_right"
+action_up = "pitch_down"
+action_down = "pitch_up"

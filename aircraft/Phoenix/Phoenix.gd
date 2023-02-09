@@ -300,11 +300,12 @@ func get_input(delta):
 		if (Input.is_action_pressed("throttle_down")):
 			input_throttle -= 0.5 * delta
 
-		# Joystick input (as vector) 
-		input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
+		# Joystick input as axes
+		input_joystick.x = Input.get_axis("roll_left", "roll_right")
+		input_joystick.y = Input.get_axis("pitch_down", "pitch_up")
 		
 		# Yaw input
-		input_rudder = -Input.get_action_strength("yaw_left") + Input.get_action_strength("yaw_right")
+		input_rudder = Input.get_axis("yaw_left", "yaw_right")
 		
 		# Flaps input
 		if (Input.is_action_just_pressed("flaps_down")):

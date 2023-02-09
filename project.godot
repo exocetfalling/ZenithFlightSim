@@ -103,6 +103,11 @@ _global_script_classes=[ {
 "class": "RepositoryItem",
 "language": "GDScript",
 "path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+}, {
+"base": "Control",
+"class": "VirtualJoystick",
+"language": "GDScript",
+"path": "res://addons/virtual-joystick/joystick/virtual_joystick.gd"
 } ]
 _global_script_class_icons={
 "AeroBody": "",
@@ -123,7 +128,8 @@ _global_script_class_icons={
 "PID_Calc": "",
 "PID_Controller": "",
 "PID_Loop": "",
-"RepositoryItem": ""
+"RepositoryItem": "",
+"VirtualJoystick": ""
 }
 
 [application]
