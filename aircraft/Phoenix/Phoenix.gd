@@ -69,7 +69,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_D", "round")
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
-	
+	DebugOverlay.stats.add_property(self, "adc_alt_radio", "round")
 #	vel_wind = Vector3(0, 0, 5)
 	
 	pass
@@ -88,10 +88,12 @@ func _physics_process(delta):
 			FlightData.aircraft_spd_indicated = adc_spd_indicated
 			FlightData.aircraft_spd_true = adc_spd_true
 			FlightData.aircraft_alt_barometric = adc_alt_barometric
+			FlightData.aircraft_alt_radio = adc_alt_radio
 		if (Global.setting_units == 1):
 			FlightData.aircraft_spd_indicated = adc_spd_indicated * 2
 			FlightData.aircraft_spd_true = adc_spd_true * 2
 			FlightData.aircraft_alt_barometric = adc_alt_barometric * 3.2809
+			FlightData.aircraft_alt_radio = adc_alt_radio * 3.2809
 		
 		FlightData.aircraft_hdg = adc_hdg
 		FlightData.aircraft_flaps = input_flaps
@@ -126,21 +128,32 @@ func _physics_process(delta):
 #		fbw_output.x += 0.1
 #	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
 #		fbw_output.x -= 0.1
-
+	$RadioAltimeter.rotation_degrees.x = clamp(-adc_pitch, -30, +30)
+	$RadioAltimeter.rotation_degrees.z = clamp(+adc_roll, -30, +30)
+	
+	
+	if ($RadioAltimeter.is_colliding() == true):
+		adc_alt_radio = (global_translation - $RadioAltimeter.get_collision_point()).length()
+	else:
+		# Set value to show sensor is out of range
+		adc_alt_radio = 9999
 
 	
-	if ((autopilot_on == 1) && (ground_contact == false)):
+	if ((autopilot_on == 1) && (adc_alt_radio >= 15) && (abs(adc_roll) < 30) && (abs(adc_pitch) < 15)):
 		if (abs(input_joystick.y) < 0.01):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
 			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
 			)
-		else:
-			tgt_pitch = adc_pitch
-			
 			output_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
 			
+		
+		else:
+			tgt_pitch = adc_pitch
+	
+	else:
+		tgt_pitch = adc_pitch
 		
 	if (input_elevator_trim > input_trim_pitch_max):
 		input_elevator_trim = input_trim_pitch_max

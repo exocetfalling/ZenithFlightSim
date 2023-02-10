@@ -259,8 +259,9 @@ far = 100000.0
 [node name="PID_Calc_Pitch" type="Node" parent="."]
 script = ExtResource( 6 )
 term_P = 0.8
-term_I = 0.6
+term_I = 0.8
 term_D = 0.4
+integral_max = 0.8
 param_tuning_active = false
 
 [node name="LG_Point_NLG" type="Spatial" parent="."]
@@ -352,3 +353,7 @@ transform = Transform( -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0
 
 [node name="Wheel_Medium" parent="LG_Point_MLG_R/Strut_Lower/Axle/Wheels" instance=ExtResource( 7 )]
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.08, 0, 0 )
+
+[node name="RadioAltimeter" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -1000, 0 )

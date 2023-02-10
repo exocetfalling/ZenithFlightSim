@@ -21,8 +21,8 @@ export var term_P = 0.00
 export var term_I = 0.00
 export var term_D = 0.00
 
-# Maximum integral value, after which it'll reset 
-export var term_I_max = 200
+# Maximum integral value, beyond whick clamping occurs
+export var integral_max = 1.00
 
 var output_P = 0.00
 var output_I = 0.00
@@ -98,11 +98,9 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 	time_delta = 0.0167
 	
 	# Output for integral term 
-	integral += value_error_current * time_delta	
+	integral += value_error_current * time_delta
+	integral = clamp(integral, -integral_max, integral_max)
 	output_I = term_I * integral
-	
-	if (abs(output_I) > term_I_max):
-		integral = 0
 
 	# Output for derivative term 
 
