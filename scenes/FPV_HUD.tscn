@@ -855,6 +855,20 @@ custom_fonts/font = ExtResource( 2 )
 text = "CWS"
 align = 1
 
+[node name="RadioAlt" type="Node2D" parent="HUD_Centre"]
+position = Vector2( 0, 250 )
+
+[node name="Label" type="Label" parent="HUD_Centre/RadioAlt"]
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RA
+XXXX"
+align = 1
+valign = 1
+
 [node name="Compass" type="Node2D" parent="."]
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 960, 965 )

@@ -226,3 +226,10 @@ func _process(delta):
 		$HUD_Centre/Status_CWS.visible = false
 	if (FlightData.aircraft_cws == 1):
 		$HUD_Centre/Status_CWS.visible = true
+	
+	if (FlightData.aircraft_alt_radio < 2500):
+		$HUD_Centre/RadioAlt.visible = true
+	else:
+		$HUD_Centre/RadioAlt.visible = false
+	
+	$HUD_Centre/RadioAlt/Label.text = ("RA\n%d" % [FlightData.aircraft_alt_radio])
