@@ -261,7 +261,6 @@ script = ExtResource( 6 )
 term_P = 0.8
 term_I = 0.8
 term_D = 0.4
-integral_max = 0.8
 param_tuning_active = false
 
 [node name="LG_Point_NLG" type="Spatial" parent="."]

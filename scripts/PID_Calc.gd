@@ -22,7 +22,7 @@ export var term_I = 0.00
 export var term_D = 0.00
 
 # Maximum integral value, beyond whick clamping occurs
-export var integral_max = 1.00
+export var integral_max = 100.00
 
 var output_P = 0.00
 var output_I = 0.00
