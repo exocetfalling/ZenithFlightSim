@@ -89,12 +89,14 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 199.353, 0 )
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="VJoy1" parent="UI" instance=ExtResource( 13 )]
+modulate = Color( 1, 1, 1, 0.12549 )
 action_left = "yaw_left"
 action_right = "yaw_right"
 action_up = "throttle_up"
 action_down = "throttle_down"
 
 [node name="VJoy2" parent="UI" instance=ExtResource( 13 )]
+modulate = Color( 1, 1, 1, 0.12549 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -250.0
