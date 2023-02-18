@@ -50,6 +50,7 @@ func _format_hdg(heading):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Position and space elements that don't change size du8ring runtime
 	$HUD_Centre/Tape_SPD/ABV1.rect_position.y = \
 		$HUD_Centre/Tape_SPD/REF0.rect_position.y - 1 * tape_spd_spacing
 	$HUD_Centre/Tape_SPD/ABV2.rect_position.y = \
@@ -68,36 +69,51 @@ func _ready():
 		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 1 * tape_alt_spacing
 	$HUD_Centre/Tape_ALT/BLW2.rect_position.y = \
 		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 2 * tape_alt_spacing
+	
+#	DebugOverlay.stats.add_property(self, "fpv_angles", "round")
 
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	# Find viewport centre
 	viewport_centre = get_viewport_rect().size/2
 
 	$EADI.position = viewport_centre
+	
+	$EADI.position.x = viewport_centre.x
+	$EADI.position.y = viewport_centre.y
+	
 	$HUD_Centre.position = viewport_centre
+	
+	# Position boresight indicator
 	$Boresight.position = \
 		viewport_centre - 5 * hud_scale_factor * Vector2(-fpv_angles.y, -fpv_angles.x)
 	
+	# Keep aircraft symbol pointing at boresight
+	$EADI/Aircraft.position.x = \
+		display_distance * tan(deg2rad(fpv_angles.y))
+	$EADI/Aircraft.position.y = \
+		display_distance * tan(deg2rad(fpv_angles.x))
+	
+	# HUD scaling
 	hud_scale_factor = get_viewport_rect().size / Vector2(1920, 1080)
 	
 	$HUD_Centre.scale = hud_scale_factor
 	
-	fpv_angles = FlightData.aircraft_cam_rotation_deg
-	
+	# Calculate the virtual distance the HUD is positioned for
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
-	
+#	
 	if (FlightData.aircraft_cam_rotation_deg.length() <= 5):
-		$EADI.visible = true
 		$Boresight.visible = false
 	else:
-		$EADI.visible = false
 		$Boresight.visible = true
 	
-	$EADI/XForm_Roll.rotation_degrees = -FlightData.aircraft_roll
+	fpv_angles = FlightData.aircraft_cam_rotation_deg
+	
+	$EADI/XForm_Roll.rotation_degrees = FlightData.aircraft_cam_global_rotation_deg.z
 	$EADI/XForm_Roll/XForm_Pitch.position.y = \
-		FlightData.aircraft_pitch * get_viewport_rect().size.y/cam_fov
+		FlightData.aircraft_cam_global_rotation_deg.x * get_viewport_rect().size.y/cam_fov
 #		display_distance * tan(deg2rad(FlightData.aircraft_pitch))
 
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P02.position.y = \

@@ -307,6 +307,7 @@ valign = 1
 uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 light_mask = 0
 position = Vector2( 0, -20 )
@@ -1084,6 +1085,6 @@ visible = false
 position = Vector2( 960, 540 )
 
 [node name="Line2D" type="Line2D" parent="Boresight"]
-points = PoolVector2Array( 0, 0, 0, -100, 0, 0, 100, 0, 0, 0, 0, 100, 0, 0, -100, 0, 0, 0 )
+points = PoolVector2Array( 0, 0, 0, -50, 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )

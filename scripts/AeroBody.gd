@@ -323,10 +323,10 @@ func _physics_process(delta):
 	adc_spd_ground = vel_total
 	
 
-	if (fmod(-rotation_degrees.y + 360, 360) <= 0):
-		adc_hdg = 360
+	if ((rotation_degrees.y) >= 0):
+		adc_hdg = -rotation_degrees.y + 360
 	else:
-		adc_hdg = fmod(-rotation_degrees.y + 360, 360)
+		adc_hdg = -rotation_degrees.y
 		
 	adc_alt_barometric = global_transform.origin.y
 	

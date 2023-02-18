@@ -12,11 +12,15 @@ var mouse_delta : Vector2 = Vector2(960, 540)
 var timer_elapsed : float = 0
 var timer_running : bool = false
 
+var fpv_angles : Vector3 = Vector3.ZERO
+var fpv_angles_deg : Vector3 = Vector3.ZERO
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 #	DebugOverlay.stats.add_property(self, "mouse_delta", "round")
 #	DebugOverlay.stats.add_property(self, "timer_running", "")
 #	DebugOverlay.stats.add_property(self, "timer_elapsed", "round")
+#	DebugOverlay.stats.add_property(self, "fpv_angles_deg", "round")
 	pass # Replace with function body.
 
 
@@ -26,6 +30,18 @@ func _process(delta):
 	viewport_centre = get_viewport().size / 2
 	
 	FlightData.aircraft_cam_rotation_deg = rotation_degrees
+	fpv_angles = global_transform.basis.get_euler()
+	
+	if (fpv_angles.y >= 0):
+		fpv_angles.y = -fpv_angles.y + 2 * PI
+	else:
+		fpv_angles.y = -fpv_angles.y
+	
+	fpv_angles_deg.x = rad2deg(fpv_angles.x)
+	fpv_angles_deg.y = rad2deg(fpv_angles.y)
+	fpv_angles_deg.z = rad2deg(fpv_angles.z)
+	
+	FlightData.aircraft_cam_global_rotation_deg = fpv_angles_deg
 	
 	if (timer_running == true):
 		timer_elapsed += delta
