@@ -70,10 +70,25 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 #	DebugOverlay.stats.add_property(self, "adc_alt_radio", "round")
-#	vel_wind = Vector3(5, 0, 0)
+	vel_wind = Vector3(5, 0, 0)
 	
 	pass
 
+# NWS gains
+func _nosewheel_gains(speed):
+	var speed_1 = 5
+	var speed_2 = 40
+	
+	var gain_1 = 1
+	var gain_2 = 0
+	
+	if (speed < speed_1):
+		return gain_1
+	elif ((speed > speed_1) && (speed < speed_2)):
+		return ((gain_2 - gain_1) / (speed_2 - speed_1)) * (speed - speed_1) + gain_1
+	else:
+		return 0
+	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
 #	vel_angular_local = (angular_velocity)
@@ -359,10 +374,7 @@ func get_input(delta):
 		brake = input_braking * 50
 		
 		# NWS input
-		if (abs(vel_total) < 10):
-			steering = -0.5 * output_rudder
-		else:
-			steering = 0
+		steering = -0.5 * _nosewheel_gains(vel_total) * output_rudder
 		
 		# Cameras
 		if (Input.is_action_just_pressed("camera_toggle")):
