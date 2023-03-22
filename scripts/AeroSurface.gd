@@ -70,48 +70,29 @@ var force_total_surface_vector : Vector3 = Vector3.ZERO
 
 # Lift coeffecient calculation function
 func _calc_lift_coeff(angle_alpha_rad):
-#	var x1 = -PI
-#	var y1 = 0
-#	var x2 = -PI/12
-#	var y2 = -1.5
-#	var x3 = PI/12
-#	var y3 = 1.5
-#	var x4 = PI
-#	var y4 = 0
-#
-#	var a = (y2 - y1) / (x2 - x1)
-#	var b = (y3 - y2) / (x3 - x2)
-#	var c = (y4 - y3) / (x4 - x3)
-#
-#	if (angle_alpha_rad < x1):
-#		return (a * (angle_alpha_rad + 2 * PI - x1) + y1)
-#
-#	elif ((angle_alpha_rad > x1) and (angle_alpha_rad <= x2)):
-#		return (a * (angle_alpha_rad - x1) + y1)
-#
-#	elif ((angle_alpha_rad > x2) and (angle_alpha_rad <= x3)):
-#		return (b * (angle_alpha_rad - x2) + y2)
-#
-#	elif ((angle_alpha_rad > x3) and (angle_alpha_rad <= x4)):
-#		return (c * (angle_alpha_rad - x3) + y3)
-#
-#	elif (angle_alpha_rad > x4):
-#		return (a * (angle_alpha_rad - 2 * PI - x1) + y1)
-#
-#	else:
-#		return 0
-
+	
+	# Piecewise sine functions for smoothness
+	# From - PI to + PI
+	# Cl_max is 1.5, at 15 deg. (PI/12) AOA
+	# Symmetric aerofoil
+	
 	if (angle_alpha_rad <= -PI):
 		return 0
 	
-	elif ((angle_alpha_rad > -PI) && (angle_alpha_rad <= -PI/12)):
-		return -3/2 * cos(6/11 * (angle_alpha_rad + PI/12))
+	elif ((angle_alpha_rad > -PI) && (angle_alpha_rad <= -11 * PI/12)):
+		return -1.5 * sin(6 * angle_alpha_rad + PI)
+	
+	elif ((angle_alpha_rad > -11 * PI/12) && (angle_alpha_rad <= -PI/12)):
+		return -1.5 * sin(1.2 * (angle_alpha_rad + PI/2))
 	
 	elif ((angle_alpha_rad > -PI/12) && (angle_alpha_rad <= PI/12)):
-		return 3/2 * sin(6 * angle_alpha_rad)
+		return 1.5 * sin(6 * angle_alpha_rad)
 	
-	elif ((angle_alpha_rad > PI/12) && (angle_alpha_rad <= PI)):
-		return 3/2 * cos(6/11 * (angle_alpha_rad - PI/12))
+	elif ((angle_alpha_rad > PI/12) && (angle_alpha_rad <= 11 * PI/12)):
+		return -1.5 * sin(1.2 * (angle_alpha_rad - PI/2))
+	
+	elif ((angle_alpha_rad > 11 * PI/12) && (angle_alpha_rad <= PI)):
+		return -1.5 * sin(6 * angle_alpha_rad - PI)
 	
 	elif (angle_alpha_rad > PI):
 		return 0

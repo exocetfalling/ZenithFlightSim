@@ -70,7 +70,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 #	DebugOverlay.stats.add_property(self, "adc_alt_radio", "round")
-	vel_wind = Vector3(5, 0, 0)
+#	vel_wind = Vector3(5, 0, 0)
 	
 	pass
 
