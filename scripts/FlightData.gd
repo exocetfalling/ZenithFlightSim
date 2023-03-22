@@ -10,6 +10,8 @@ var aircraft_pitch : float = 0
 var aircraft_roll : float = 0
 var aircraft_alpha : float = 0
 var aircraft_beta : float = 0
+var aircraft_mu : float = 0
+var aircraft_nu : float = 0
 var aircraft_spd_indicated : float = 0
 var aircraft_spd_true : float = 0
 var aircraft_alt_barometric : float = 0
@@ -29,8 +31,15 @@ var aircraft_nav_waypoint : int = 0
 var aircraft_nav_waypoint_data : Vector3 = Vector3.ZERO
 var aircraft_cam_rotation_deg : Vector3 = Vector3.ZERO
 var aircraft_cam_global_rotation_deg : Vector3 = Vector3.ZERO
+
+
 # Called when the node enters the scene tree for the first time.
+
 func _ready():
+#	DebugOverlay.stats.add_property(self, "aircraft_alpha", "round")
+#	DebugOverlay.stats.add_property(self, "aircraft_beta", "round")
+#	DebugOverlay.stats.add_property(self, "aircraft_mu", "round")
+#	DebugOverlay.stats.add_property(self, "aircraft_nu", "round")
 	pass # Replace with function body.
 
 

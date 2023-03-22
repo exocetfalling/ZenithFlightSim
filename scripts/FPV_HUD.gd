@@ -141,9 +141,9 @@ func _process(delta):
 		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = true
 	
 	$EADI/FPM.position.x = \
-		display_distance * tan(deg2rad(-FlightData.aircraft_beta))
+		display_distance * tan(deg2rad(-FlightData.aircraft_nu))
 	$EADI/FPM.position.y = \
-		display_distance * tan(deg2rad(FlightData.aircraft_alpha))
+		display_distance * tan(deg2rad(FlightData.aircraft_mu))
 	
 	# Waypoint indications
 	if (\

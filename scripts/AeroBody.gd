@@ -52,6 +52,9 @@ var adc_roll = 0
 var adc_alpha = 0
 var adc_beta = 0
 
+var adc_mu = 0
+var adc_nu = 0
+
 var adc_fpa = 0
 var tgt_fpa = 0
 var adc_trk = 0
@@ -75,7 +78,13 @@ var sta_4_rdy = 1
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
-var angle_beta_deg = 0
+var angle_beta_deg = 0 
+
+# Inertial-derived angles to calculate trajectory offset by wind
+var angle_mu = 0
+var angle_mu_deg = 0
+var angle_nu = 0
+var angle_nu_deg = 0 
 
 # Deflection in radians
 var deflection_control_max = PI/12
@@ -311,13 +320,21 @@ func _physics_process(delta):
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
 	output_elevator_trim = input_elevator_trim
-
-	angle_alpha = _calc_alpha(vel_local.y, -vel_local.z)
-	angle_beta = _calc_beta(vel_local.x, -vel_local.z)
+	
+	# Key angles
+	angle_alpha = atan2(-vel_airspeed_true.y, -vel_airspeed_true.z)
+	angle_beta = atan2(-vel_airspeed_true.x, -vel_airspeed_true.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
+	angle_mu = atan2(-vel_local.y, -vel_local.z)
+	angle_nu = atan2(-vel_local.x, -vel_local.z)
+	
+	angle_mu_deg = rad2deg(angle_mu)
+	angle_nu_deg = rad2deg(angle_nu)
+	
+	# KTAS to KIAS 
 	adc_spd_indicated = sqrt(2 * air_pressure_dynamic / 1.225)
 	adc_spd_true = vel_airspeed_true.length()
 	adc_spd_ground = vel_total
@@ -335,6 +352,9 @@ func _physics_process(delta):
 	
 	adc_alpha = angle_alpha_deg
 	adc_beta = angle_beta_deg
+	
+	adc_mu = angle_mu_deg
+	adc_nu = angle_nu_deg
 	
 	adc_fpa = adc_pitch - adc_alpha
 	adc_trk = fmod((adc_hdg - adc_beta) + 360, 360)

@@ -16,7 +16,7 @@ var pos_wing_r : Vector3 = Vector3.ZERO
 
 var pos_aileron_l : Vector3 = Vector3.ZERO
 var pos_aileron_r : Vector3 = Vector3.ZERO
-var pos_flap_l: Vector3 = Vector3.ZERO
+var pos_flap_l : Vector3 = Vector3.ZERO
 var pos_flap_r : Vector3 = Vector3.ZERO
 
 var pos_ruddervator_l : Vector3 = Vector3.ZERO
@@ -70,7 +70,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 #	DebugOverlay.stats.add_property(self, "adc_alt_radio", "round")
-#	vel_wind = Vector3(0, 0, 5)
+#	vel_wind = Vector3(5, 0, 0)
 	
 	pass
 
@@ -83,6 +83,9 @@ func _physics_process(delta):
 		FlightData.aircraft_roll = adc_roll
 		FlightData.aircraft_alpha = adc_alpha
 		FlightData.aircraft_beta = adc_beta
+		
+		FlightData.aircraft_mu = adc_mu
+		FlightData.aircraft_nu = adc_nu
 		
 		if (Global.setting_units == 0):
 			FlightData.aircraft_spd_indicated = adc_spd_indicated
