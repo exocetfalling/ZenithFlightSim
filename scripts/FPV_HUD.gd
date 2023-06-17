@@ -18,12 +18,12 @@ var hud_scale_factor : Vector2 = Vector2.ONE
 var viewport_centre : Vector2 = Vector2(960, 540)
 
 var tape_spd_ref = 0
-var tape_spd_step = 5
-var tape_spd_spacing = 100
+var tape_spd_step = 10
+var tape_spd_spacing = 80
 
 var tape_alt_ref = 0
-var tape_alt_step = 50
-var tape_alt_spacing = 100
+var tape_alt_step = 100
+var tape_alt_spacing = 80
 
 var tape_hdg_ref = 0
 var tape_hdg_abv1 = 0
@@ -249,3 +249,15 @@ func _process(delta):
 		$HUD_Centre/RadioAlt.visible = false
 	
 	$HUD_Centre/RadioAlt/Label.text = ("RA\n%d" % [FlightData.aircraft_alt_radio])
+	
+	# Scale symbols
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20.scale = Vector2.ONE * hud_scale_factor
+	$EADI/FPM.scale = Vector2.ONE * hud_scale_factor
+	$EADI/Mark_Angles.scale = Vector2.ONE * hud_scale_factor
+	$EADI/XForm_Roll/Indicator_Roll.scale = Vector2.ONE * hud_scale_factor
+	$HUD_Centre/RadioAlt.scale = Vector2.ONE * hud_scale_factor

@@ -858,6 +858,7 @@ align = 1
 
 [node name="RadioAlt" type="Node2D" parent="HUD_Centre"]
 position = Vector2( 0, 250 )
+z_index = 1
 
 [node name="Label" type="Label" parent="HUD_Centre/RadioAlt"]
 anchor_left = 0.5
