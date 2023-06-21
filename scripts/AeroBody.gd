@@ -206,6 +206,12 @@ func add_force_local(force: Vector3, pos: Vector3):
 	force_local = self.transform.basis.xform(force)
 	self.add_force(force_local, pos_local)
 
+func add_torque_local(torque: Vector3, pos: Vector3):
+	var torque_local
+
+	torque_local = self.transform.basis.xform(torque)
+	self.add_torque(torque_local)
+
 func calc_atmo_properties(height_metres):
 	# Store atmospheric properties as Vector3
 	# X value is air temperature, deg C
