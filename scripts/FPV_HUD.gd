@@ -19,11 +19,11 @@ var viewport_centre : Vector2 = Vector2(960, 540)
 
 var tape_spd_ref = 0
 var tape_spd_step = 10
-var tape_spd_spacing = 80
+var tape_spd_spacing = 100
 
 var tape_alt_ref = 0
 var tape_alt_step = 100
-var tape_alt_spacing = 80
+var tape_alt_spacing = 100
 
 var tape_hdg_ref = 0
 var tape_hdg_abv1 = 0
