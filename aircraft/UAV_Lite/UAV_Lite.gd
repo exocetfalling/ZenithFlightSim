@@ -46,10 +46,7 @@ func _physics_process(delta):
 		
 		add_force_local(Vector3(0, 400 * input_throttle, 0), Vector3.ZERO)
 		
-		if (input_joystick.y > 0):
-			add_force_local(Vector3(0, 10 * abs(input_joystick.y), 0), Vector3(0, 0, -1))
-		if (input_joystick.y < 0):
-			add_force_local(Vector3(0, 10 * abs(input_joystick.y), 0), Vector3(0, 0, 1))
+		add_torque_local(Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
 		
 func get_input(delta):
 	# Check if aircraft is under player control
