@@ -7,7 +7,7 @@ class_name PID_Calc
 
 var value_previous = 0.00
 var value_delta = 0.00
-var time_delta = 0.00
+var time_delta = 0.0167
 
 var proportional = 0.00
 var integral = 0.00

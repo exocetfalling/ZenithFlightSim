@@ -5,6 +5,7 @@ extends AeroBody
 # var a = 2
 # var b = "text"
 var cmd_sas : Vector3 = Vector3.ZERO
+var thrust_rated : float = 500
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -58,11 +59,13 @@ func _physics_process(delta):
 		tgt_pitch = 20 * input_joystick.y
 		tgt_roll = 20 * input_joystick.x
 		
-		cmd_sas.x = tgt_pitch - adc_pitch
-		cmd_sas.y = input_rudder
-		cmd_sas.z = tgt_roll - adc_roll
+		clamp(input_throttle, 0, 1)
 		
-		add_force_local(Vector3(0, 400 * input_throttle, 0), Vector3.ZERO)
+		cmd_sas.x = $PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch)
+		cmd_sas.y = input_rudder
+		cmd_sas.z = $PID_Calc_Roll.calc_PID_output(tgt_roll, adc_roll)
+		
+		add_force_local(Vector3(0, thrust_rated * input_throttle, 0), Vector3.ZERO)
 		
 #		add_torque_local(20 * Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
