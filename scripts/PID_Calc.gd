@@ -80,7 +80,7 @@ var reset_integral : bool = false
 #	output_D = term_D * derivative
 #	return output_D
 
-func calc_PID_output(value_setpoint, value_current, time_delta):
+func calc_PID_output(value_setpoint, value_current):
 	
 	# Output for proportional term 
 	value_error_current = value_setpoint - value_current
@@ -94,8 +94,6 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 	
 #	if (time_delta == 0):
 #		time_delta = 0.0167
-	
-	time_delta = 0.0167
 	
 	# Output for integral term 
 	integral += value_error_current * time_delta
@@ -171,3 +169,7 @@ func get_input_keyboard(delta):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	get_input_keyboard(delta)
+
+# Called every physics frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta): 
+	time_delta = delta

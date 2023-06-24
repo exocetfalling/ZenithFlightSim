@@ -162,7 +162,7 @@ func _physics_process(delta):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
-			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch, delta)
+			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch)
 			)
 			output_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
 			
