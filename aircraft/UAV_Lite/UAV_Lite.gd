@@ -4,10 +4,15 @@ extends AeroBody
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var cmd_sas : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	DebugOverlay.stats.add_property(self, "adc_rates", "round")
+	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
+	DebugOverlay.stats.add_property(self, "tgt_pitch", "round")
+	DebugOverlay.stats.add_property(self, "tgt_roll", "round")
+	DebugOverlay.stats.add_property(self, "cmd_sas", "round")
 	pass # Replace with function body.
 
 
@@ -44,9 +49,23 @@ func _physics_process(delta):
 		
 		FlightData.aircraft_nav_waypoint_data = find_angles_and_distance_to_target(Vector3(0, 200, 0))
 		
+		tgt_rates.x = deg2rad(input_joystick.y * 10)
+		tgt_rates.y = deg2rad(input_rudder * 10)
+		tgt_rates.z = deg2rad(input_joystick.x * 10)
+		
+#		cmd_sas = 5 * (tgt_rates - adc_rates)
+		
+		tgt_pitch = 20 * input_joystick.y
+		tgt_roll = 20 * input_joystick.x
+		
+		cmd_sas.x = tgt_pitch - adc_pitch
+		cmd_sas.y = input_rudder
+		cmd_sas.z = tgt_roll - adc_roll
+		
 		add_force_local(Vector3(0, 400 * input_throttle, 0), Vector3.ZERO)
 		
-		add_torque_local(Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
+#		add_torque_local(20 * Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
+		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
 		
 func get_input(delta):
 	# Check if aircraft is under player control

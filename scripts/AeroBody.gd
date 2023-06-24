@@ -370,10 +370,6 @@ func _physics_process(delta):
 	adc_rates.y = vel_angular_local_deg.y
 	adc_rates.z = -vel_angular_local_deg.z
 	
-	tgt_rates.x = input_elevator * 5
-	tgt_rates.y = 0
-	tgt_rates.z = input_aileron * 10
-	
 	if (angle_alpha_deg > 15):
 		adc_stall = true
 	else:
