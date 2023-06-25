@@ -110,9 +110,6 @@ func _physics_process(delta):
 		
 		add_force_local(Vector3(0, thrust_rated * output_throttle, 0), Vector3.ZERO)
 		
-		# Basic drag
-		add_central_force(0.1 * linear_velocity)
-		
 #		add_torque_local(20 * Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
 		
