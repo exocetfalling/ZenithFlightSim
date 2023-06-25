@@ -64,3 +64,17 @@ term_P = 0.2
 term_I = 0.2
 term_D = 0.05
 param_tuning_active = false
+
+[node name="PID_Calc_Velocity_X" type="Node" parent="."]
+script = ExtResource( 6 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.05
+param_tuning_active = false
+
+[node name="PID_Calc_Velocity_Y" type="Node" parent="."]
+script = ExtResource( 6 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.05
+param_tuning_active = false

@@ -5,11 +5,19 @@ extends AeroBody
 # var a = 2
 # var b = "text"
 var cmd_sas : Vector3 = Vector3.ZERO
+
+var rotation_target : Vector3 = Vector3.ZERO
+
 var thrust_rated : float = 500
 
 var output_throttle : float = 0
 
-var tgt_vs : float = 0
+var linear_velocity_target : Vector3 = Vector3.ZERO
+
+var linear_velocity_rotated : Vector3 = Vector3.ZERO
+
+var camera_mode : int = 0
+var camera_mouse_delta = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +29,7 @@ func _ready():
 	
 	DebugOverlay.stats.add_property(self, "tgt_vs", "round")
 	DebugOverlay.stats.add_property(self, "linear_velocity", "round")
+	DebugOverlay.stats.add_property(self, "linear_velocity_rotated", "round")
 	DebugOverlay.stats.add_property(self, "output_throttle", "round")
 	pass # Replace with function body.
 
@@ -70,24 +79,32 @@ func _physics_process(delta):
 		FlightData.aircraft_cws = autopilot_on
 		
 		FlightData.aircraft_nav_waypoint_data = find_angles_and_distance_to_target(Vector3(0, 200, 0))
-		
+	
+	if (camera_mode == 0):
+		$Camera_FPV/FPV_HUD.visible = true
+	if (camera_mode == 1):
+		$Camera_FPV/FPV_HUD.visible = false
 		tgt_rates.x = deg2rad(input_joystick.y * 10)
 		tgt_rates.y = deg2rad(input_rudder * 10)
 		tgt_rates.z = deg2rad(input_joystick.x * 10)
 		
 #		cmd_sas = 5 * (tgt_rates - adc_rates)
 		
+		linear_velocity_rotated = linear_velocity.rotated(Vector3.UP, -global_rotation.y)
+		
 		tgt_pitch = 20 * input_joystick.y
 		tgt_roll = 20 * input_joystick.x
 		
-		tgt_vs = 10 * (input_throttle - 0.5)
+		linear_velocity_target.x = 20 * input_joystick.x
+		linear_velocity_target.y = 10 * (input_throttle - 0.5)
+		linear_velocity_target.z = 20 * input_joystick.x
 		
 		input_throttle = clamp(input_throttle, 0, 1)
 		
-		output_throttle = clamp($PID_Calc_Thrust.calc_PID_output(tgt_vs, linear_velocity.y), 0, 1)
+		output_throttle = clamp($PID_Calc_Thrust.calc_PID_output(linear_velocity_target.y, linear_velocity.y), 0, 1)
 		
 		cmd_sas.x = $PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch)
-		cmd_sas.y = input_rudder
+		cmd_sas.y = input_rudder * 20
 		cmd_sas.z = $PID_Calc_Roll.calc_PID_output(tgt_roll, adc_roll)
 		
 		add_force_local(Vector3(0, thrust_rated * output_throttle, 0), Vector3.ZERO)
@@ -110,3 +127,13 @@ func get_input(delta):
 		
 		# Yaw input
 		input_rudder = Input.get_axis("yaw_left", "yaw_right")
+
+		# Cameras
+		if (Input.is_action_just_pressed("camera_toggle")):
+			camera_mode = camera_mode + 1
+		if (camera_mode == 0):
+			$Camera_FPV.current = true
+		if (camera_mode == 1):
+			$Camera_Ext.current = true
+		if (camera_mode > 1):
+			camera_mode = 0
