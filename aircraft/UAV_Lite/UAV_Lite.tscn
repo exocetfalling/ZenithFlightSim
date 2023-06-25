@@ -13,7 +13,7 @@ points = PoolVector3Array( -3.58002, -3.38777, -0.0736919, -3.4889, -3.39058, -0
 [node name="UAV_Lite" type="VehicleBody"]
 continuous_cd = true
 can_sleep = false
-linear_damp = 0.5
+linear_damp = 0.1
 angular_damp = 1.0
 script = ExtResource( 1 )
 control_type = 1
@@ -68,14 +68,22 @@ param_tuning_active = false
 
 [node name="PID_Calc_Velocity_X" type="Node" parent="."]
 script = ExtResource( 6 )
-term_P = 0.2
-term_I = 0.2
-term_D = 0.05
+term_P = 2.0
+term_D = 1.0
 param_tuning_active = false
 
 [node name="PID_Calc_Velocity_Y" type="Node" parent="."]
 script = ExtResource( 6 )
-term_P = 0.2
-term_I = 0.2
-term_D = 0.05
+term_P = 2.0
+term_D = 1.0
 param_tuning_active = false
+
+[node name="PID_Calc_Velocity_Z" type="Node" parent="."]
+script = ExtResource( 6 )
+term_P = 2.0
+term_D = 1.0
+param_tuning_active = false
+
+[node name="RadioAltimeter" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -1000, 0 )
