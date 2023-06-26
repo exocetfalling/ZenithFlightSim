@@ -124,7 +124,7 @@ func _physics_process(delta):
 		output_throttle = clamp($PID_Calc_Thrust.calc_PID_output(linear_velocity_target.y, linear_velocity.y), 0, 1)
 		
 		cmd_sas.x = $PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch)
-		cmd_sas.y = input_rudder * 20
+		cmd_sas.y = input_rudder * 50
 		cmd_sas.z = $PID_Calc_Roll.calc_PID_output(tgt_roll, adc_roll)
 		
 		add_force_local(Vector3(0, thrust_rated * output_throttle, 0), Vector3.ZERO)
