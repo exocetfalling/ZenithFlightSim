@@ -13,7 +13,7 @@ points = PoolVector3Array( -3.58002, -3.38777, -0.0736919, -3.4889, -3.39058, -0
 [node name="UAV_Lite" type="VehicleBody"]
 continuous_cd = true
 can_sleep = false
-linear_damp = 0.1
+linear_damp = 0.0
 angular_damp = 1.0
 script = ExtResource( 1 )
 control_type = 1

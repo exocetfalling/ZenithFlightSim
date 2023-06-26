@@ -113,9 +113,9 @@ func _physics_process(delta):
 			tgt_pitch = $PID_Calc_Velocity_Z.calc_PID_output(linear_velocity_target.z, linear_velocity_rotated.z)
 			tgt_roll = $PID_Calc_Velocity_X.calc_PID_output(linear_velocity_target.x, linear_velocity_rotated.x)
 		
-		linear_velocity_target.x = 20 * input_joystick.x
+		linear_velocity_target.x = 15 * input_joystick.x
 		linear_velocity_target.y = 10 * (input_throttle - 0.5)
-		linear_velocity_target.z = 20 * input_joystick.y
+		linear_velocity_target.z = 15 * input_joystick.y
 		
 		input_throttle = clamp(input_throttle, 0, 1)
 		
@@ -129,6 +129,9 @@ func _physics_process(delta):
 		
 #		add_torque_local(20 * Vector3(input_joystick.y, -input_rudder, -input_joystick.x))
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
+		
+		# Basic drag
+		add_central_force(-0.1 * air_density * linear_velocity.length_squared() * linear_velocity.normalized())
 		
 		# Simplistic camera motion
 		$Camera_Ext.translation.x = - 0.2 * vel_local.x
