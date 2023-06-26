@@ -33,6 +33,8 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "linear_velocity_rotated", "round")
 	DebugOverlay.stats.add_property(self, "linear_velocity_target", "round")
 	DebugOverlay.stats.add_property(self, "output_throttle", "round")
+	
+	vel_wind = Vector3(10, 0, 0)
 	pass # Replace with function body.
 
 func throttle_map(input_throttle):
@@ -131,7 +133,7 @@ func _physics_process(delta):
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
 		
 		# Basic drag
-		add_central_force(-0.1 * air_density * linear_velocity.length_squared() * linear_velocity.normalized())
+		add_central_force(-0.2 * air_density * (linear_velocity + vel_wind).length_squared() * (linear_velocity + vel_wind).normalized())
 		
 		# Simplistic camera motion
 		$Camera_Ext.translation.x = - 0.2 * vel_local.x

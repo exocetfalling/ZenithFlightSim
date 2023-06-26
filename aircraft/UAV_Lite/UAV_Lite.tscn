@@ -69,18 +69,21 @@ param_tuning_active = false
 [node name="PID_Calc_Velocity_X" type="Node" parent="."]
 script = ExtResource( 6 )
 term_P = 2.0
+term_I = 1.0
 term_D = 1.0
 param_tuning_active = false
 
 [node name="PID_Calc_Velocity_Y" type="Node" parent="."]
 script = ExtResource( 6 )
 term_P = 2.0
+term_I = 1.0
 term_D = 1.0
 param_tuning_active = false
 
 [node name="PID_Calc_Velocity_Z" type="Node" parent="."]
 script = ExtResource( 6 )
 term_P = 2.0
+term_I = 1.0
 term_D = 1.0
 param_tuning_active = false
 
