@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=2]
+[ext_resource path="res://addons/aero_tools/aero_surface.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Plane_Archer.gd" type="Script" id=3]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=4]
 [ext_resource path="res://assets/aircraft_parts/ZFS_WING_DELTA.tscn" type="PackedScene" id=5]

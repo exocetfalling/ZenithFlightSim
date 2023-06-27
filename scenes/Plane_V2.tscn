@@ -2,9 +2,9 @@
 
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=1]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=2]
-[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=3]
+[ext_resource path="res://addons/aero_tools/aero_surface.gd" type="Script" id=3]
 [ext_resource path="res://scripts/Plane03_V2.gd" type="Script" id=4]
-[ext_resource path="res://scripts/PID_Calc.gd" type="Script" id=5]
+[ext_resource path="res://addons/aero_tools/aero_pid_calc.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Camera_FPV_Node.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/3D_GCS.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/3D_HUD_V2.tscn" type="PackedScene" id=8]

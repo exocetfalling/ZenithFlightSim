@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "VehicleBody",
 "class": "AeroBody",
 "language": "GDScript",
-"path": "res://scripts/AeroBody.gd"
+"path": "res://addons/aero_tools/aero_body.gd"
 }, {
 "base": "RigidBody",
 "class": "AeroElement",
 "language": "GDScript",
-"path": "res://scripts/AeroElement.gd"
+"path": "res://addons/aero_tools/aero_element.gd"
 }, {
 "base": "Spatial",
 "class": "AeroEngine",
 "language": "GDScript",
-"path": "res://scripts/AeroEngine.gd"
+"path": "res://addons/aero_tools/aero_engine.gd"
 }, {
 "base": "Generic6DOFJoint",
 "class": "AeroJoint",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "AeroSurface",
 "language": "GDScript",
-"path": "res://scripts/AeroSurface.gd"
+"path": "res://addons/aero_tools/aero_surface.gd"
 }, {
 "base": "Control",
 "class": "CSVEditor",
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PID_Calc",
 "language": "GDScript",
-"path": "res://scripts/PID_Calc.gd"
+"path": "res://addons/aero_tools/aero_pid_calc.gd"
 }, {
 "base": "Node",
 "class": "PID_Controller",
@@ -142,7 +142,7 @@ config/icon="res://resources/icon.png"
 
 Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
-FlightData="*res://scripts/FlightData.gd"
+FlightData="*res://addons/aero_tools/aero_data_singleton.gd"
 
 [display]
 

@@ -1,8 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scripts/AeroBody.gd" type="Script" id=1]
-[ext_resource path="res://scripts/AeroSurface.gd" type="Script" id=2]
+[ext_resource path="res://addons/aero_tools/aero_body.gd" type="Script" id=1]
+[ext_resource path="res://addons/aero_tools/aero_surface.gd" type="Script" id=2]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=3]
+
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.1
