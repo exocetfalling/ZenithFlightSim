@@ -10,8 +10,8 @@ extends AeroElement
 func _ready():
 	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
 	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
-	DebugOverlay.stats.add_property(self, "vel_local", "round")
-	DebugOverlay.stats.add_property(self, "vel_total", "round")
+	DebugOverlay.stats.add_property(self, "linear_velocity_local", "round")
+	DebugOverlay.stats.add_property(self, "linear_velocity_total", "round")
 	DebugOverlay.stats.add_property(self, "force_lift_element_vector", "round")
 	DebugOverlay.stats.add_property(self, "force_drag_element_vector", "round")
 	pass # Replace with function body.

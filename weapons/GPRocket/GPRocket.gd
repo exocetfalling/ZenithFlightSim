@@ -30,11 +30,11 @@ var pos_v_tail = Vector3(0, 1.5, 10)
 var pos_fuse = Vector3(0, 0, 1)
 
 
-var corr_velocity = Vector3.ZERO
+var linear_velocity_corrected = Vector3.ZERO
 
 var vel_local_intermediate = Vector3.ZERO
-var vel_local = Vector3.ZERO
-var vel_total = 0
+var linear_velocity_local = Vector3.ZERO
+var linear_velocity_total = 0
 
 var angle_incidence = 0
 
@@ -155,8 +155,8 @@ func _on_body_entered(_body):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	angle_alpha = _calc_alpha(vel_local.y, vel_local.z)
-	angle_beta = _calc_beta(vel_local.x, vel_local.z)
+	angle_alpha = _calc_alpha(linear_velocity_local.y, linear_velocity_local.z)
+	angle_beta = _calc_beta(linear_velocity_local.x, linear_velocity_local.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
@@ -164,18 +164,18 @@ func _process(delta):
 	# Lift/drag calculations (helpers for add_force_local)
 	
 	#Static, non-moving elements
-	force_lift_wing = Vector3(0, _calc_lift_force(air_density, vel_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
+	force_lift_wing = Vector3(0, _calc_lift_force(air_density, linear_velocity_total, area_wing, _calc_lift_coeff(angle_alpha + angle_incidence)), 0)
 
-	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, vel_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
-	force_lift_v_tail = Vector3(_calc_lift_force(air_density, vel_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
+	force_lift_h_tail = Vector3(0, _calc_lift_force(air_density, linear_velocity_total, area_h_tail, _calc_lift_coeff(angle_alpha)), 0)
+	force_lift_v_tail = Vector3(_calc_lift_force(air_density, linear_velocity_total, area_v_tail, _calc_lift_coeff(angle_beta)), 0, 0)
 
 
-	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
+	force_drag_wing = Vector3(0, 0, _calc_drag_force(air_density, linear_velocity_total, area_wing, _calc_drag_induced_coeff(angle_alpha + angle_incidence)))
 
-	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
-	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
+	force_drag_h_tail = Vector3(0, 0, _calc_drag_force(air_density, linear_velocity_total, area_h_tail, _calc_drag_induced_coeff(angle_alpha)))
+	force_drag_v_tail = Vector3(0, 0, _calc_drag_force(air_density, linear_velocity_total, area_v_tail, _calc_drag_induced_coeff(angle_beta)))
 
-	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, vel_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
+	force_drag_fuse = Vector3(0, 0, _calc_drag_force(air_density, linear_velocity_total, area_fuse, _calc_drag_parasite_coeff(angle_alpha)))
 	if (launched == true):
 		tgt_vector = find_angles_and_distance_to_target(tgt_coordinates)
 		if ((abs(tgt_vector.x) < 45) && (abs(tgt_vector.y) < 45)):

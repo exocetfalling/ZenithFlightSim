@@ -46,28 +46,28 @@ func _ready():
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
 	$AeroSurface_Fin_F1.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F1.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_F1.vel_body = airspeed_true_vector
 	force_fin_f1 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_F1.force_total_surface_vector, \
 			$AeroSurface_Fin_F1.rotation \
 			)
 	$AeroSurface_Fin_F2.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F2.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_F2.vel_body = airspeed_true_vector
 	force_fin_f2 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_F2.force_total_surface_vector, \
 			$AeroSurface_Fin_F2.rotation \
 			)
 	$AeroSurface_Fin_F3.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F3.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_F3.vel_body = airspeed_true_vector
 	force_fin_f3 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_F3.force_total_surface_vector, \
 			$AeroSurface_Fin_F3.rotation \
 			)
 	$AeroSurface_Fin_F4.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F4.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_F4.vel_body = airspeed_true_vector
 	force_fin_f4 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_F4.force_total_surface_vector, \
@@ -75,28 +75,28 @@ func _physics_process(delta):
 			)
 	
 	$AeroSurface_Fin_R1.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_R1.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_R1.vel_body = airspeed_true_vector
 	force_fin_r1 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_R1.force_total_surface_vector, \
 			$AeroSurface_Fin_R1.rotation \
 			)
 	$AeroSurface_Fin_R2.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_R2.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_R2.vel_body = airspeed_true_vector
 	force_fin_r2 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_R2.force_total_surface_vector, \
 			$AeroSurface_Fin_R2.rotation \
 			)
 	$AeroSurface_Fin_R3.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_R3.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_R3.vel_body = airspeed_true_vector
 	force_fin_r3 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_R3.force_total_surface_vector, \
 			$AeroSurface_Fin_R3.rotation \
 			)
 	$AeroSurface_Fin_R4.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_R4.vel_body = vel_airspeed_true
+	$AeroSurface_Fin_R4.vel_body = airspeed_true_vector
 	force_fin_r4 = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Fin_R4.force_total_surface_vector, \

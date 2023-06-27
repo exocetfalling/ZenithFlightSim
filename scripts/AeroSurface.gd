@@ -37,7 +37,7 @@ var coeffecient_drag_zero_lift : float = 0.005
 
 var vel_body : Vector3 = Vector3.ZERO
 var vel_surface : Vector3 = Vector3.ZERO
-var vel_total : float = 0.00
+var linear_velocity_total : float = 0.00
 
 var vel_delta = Vector3.ZERO
 
@@ -138,10 +138,10 @@ func _physics_process(delta):
 	air_pressure = atmo_data.y
 	air_density = atmo_data.z
 	
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
+	air_pressure_dynamic = 0.5 * air_density * pow(linear_velocity_total, 2)
 	
 	vel_surface = (self.transform.basis.xform_inv(vel_body))
-	vel_total = vel_surface.length()
+	linear_velocity_total = vel_surface.length()
 	
 	vel_delta = vel_surface - vel_body
 	
@@ -161,9 +161,9 @@ func _physics_process(delta):
 			surface_lift_effeciency)
 	
 	force_lift_surface_magnitude = \
-		_calc_lift_force(air_density, vel_total, surface_area, coeffecient_lift)
+		_calc_lift_force(air_density, linear_velocity_total, surface_area, coeffecient_lift)
 	force_drag_surface_magnitude = \
-		_calc_drag_force(air_density, vel_total, surface_area, coeffecient_drag) 
+		_calc_drag_force(air_density, linear_velocity_total, surface_area, coeffecient_drag) 
 	
 	force_lift_surface_vector = \
 		Vector3(0, force_lift_surface_magnitude, 0)

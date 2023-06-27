@@ -34,7 +34,7 @@ func _ready():
 	DebugOverlay.stats.add_property(self, "linear_velocity_target", "round")
 	DebugOverlay.stats.add_property(self, "output_throttle", "round")
 	
-	vel_wind = Vector3(10, 0, 0)
+	linear_velocity_wind = Vector3(10, 0, 0)
 	pass # Replace with function body.
 
 func throttle_map(input_throttle):
@@ -53,7 +53,7 @@ func throttle_map(input_throttle):
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
-#	vel_angular_local = (angular_velocity)
+#	angular_velocity_local = (angular_velocity)
 	if (control_type == 1):
 		# Panel updates
 		FlightData.aircraft_pitch = adc_pitch
@@ -133,12 +133,12 @@ func _physics_process(delta):
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
 		
 		# Basic drag
-		add_central_force(-0.2 * air_density * (linear_velocity + vel_wind).length_squared() * (linear_velocity + vel_wind).normalized())
+		add_central_force(-0.2 * air_density * (linear_velocity + linear_velocity_wind).length_squared() * (linear_velocity + linear_velocity_wind).normalized())
 		
 		# Simplistic camera motion
-		$Camera_Ext.translation.x = - 0.2 * vel_local.x
-		$Camera_Ext.translation.y = 2 - 0.2 * vel_local.y
-		$Camera_Ext.translation.z = 10 - 0.2 * vel_local.z
+		$Camera_Ext.translation.x = - 0.2 * linear_velocity_local.x
+		$Camera_Ext.translation.y = 2 - 0.2 * linear_velocity_local.y
+		$Camera_Ext.translation.z = 10 - 0.2 * linear_velocity_local.z
 		
 func get_input(delta):
 	# Check if aircraft is under player control

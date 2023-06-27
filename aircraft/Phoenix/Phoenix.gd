@@ -49,8 +49,8 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_rudder", "round")
 #	DebugOverlay.stats.add_property(self, "adc_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
-#	DebugOverlay.stats.add_property(self, "vel_local", "round")
-#	DebugOverlay.stats.add_property(self, "vel_total", "")
+#	DebugOverlay.stats.add_property(self, "linear_velocity_local", "round")
+#	DebugOverlay.stats.add_property(self, "linear_velocity_total", "")
 #	DebugOverlay.stats.add_property(self, "adc_rates", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_rates", "round")
 #	DebugOverlay.stats.add_property(self, "global_rotation", "")
@@ -70,7 +70,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "output_total", "round")
 #	DebugOverlay.stats.add_property(self, "air_density", "round")
 #	DebugOverlay.stats.add_property(self, "adc_alt_radio", "round")
-#	vel_wind = Vector3(5, 0, 0)
+#	linear_velocity_wind = Vector3(5, 0, 0)
 	
 	pass
 
@@ -91,7 +91,7 @@ func _nosewheel_gains(speed):
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
-#	vel_angular_local = (angular_velocity)
+#	angular_velocity_local = (angular_velocity)
 	if (control_type == 1):
 		# Panel updates
 		FlightData.aircraft_pitch = adc_pitch
@@ -185,22 +185,22 @@ func _physics_process(delta):
 	
 	# Aero forces
 	$AeroSurface_Wing_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Wing_L.vel_body = vel_airspeed_true
+	$AeroSurface_Wing_L.vel_body = airspeed_true_vector
 	$AeroSurface_Wing_L.vel_body.y += \
-		+ pos_wing_l.x * vel_angular_local.z
+		+ pos_wing_l.x * angular_velocity_local.z
 	$AeroSurface_Wing_L.vel_body.z += \
-		+ pos_wing_l.x * vel_angular_local.y
+		+ pos_wing_l.x * angular_velocity_local.y
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
 			$AeroSurface_Wing_L.rotation \
 			)
 	$AeroSurface_Wing_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Wing_R.vel_body = vel_airspeed_true
+	$AeroSurface_Wing_R.vel_body = airspeed_true_vector
 	$AeroSurface_Wing_R.vel_body.y += \
-		+ pos_wing_r.x * vel_angular_local.z
+		+ pos_wing_r.x * angular_velocity_local.z
 	$AeroSurface_Wing_R.vel_body.z += \
-	+ pos_wing_r.x * vel_angular_local.y
+	+ pos_wing_r.x * angular_velocity_local.y
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
@@ -208,7 +208,7 @@ func _physics_process(delta):
 			)
 	
 	$AeroSurface_Aileron_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Aileron_L.vel_body = vel_airspeed_true
+	$AeroSurface_Aileron_L.vel_body = airspeed_true_vector
 	force_aileron_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Aileron_L.force_total_surface_vector, \
@@ -216,7 +216,7 @@ func _physics_process(delta):
 			)
 	
 	$AeroSurface_Aileron_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Aileron_R.vel_body = vel_airspeed_true
+	$AeroSurface_Aileron_R.vel_body = airspeed_true_vector
 	force_aileron_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Aileron_R.force_total_surface_vector, \
@@ -224,14 +224,14 @@ func _physics_process(delta):
 			)
 	
 	$AeroSurface_Flap_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Flap_L.vel_body = vel_airspeed_true
+	$AeroSurface_Flap_L.vel_body = airspeed_true_vector
 	force_flap_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Flap_L.force_total_surface_vector, \
 			$AeroSurface_Flap_L.rotation \
 		)
 	$AeroSurface_Flap_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Flap_R.vel_body = vel_airspeed_true
+	$AeroSurface_Flap_R.vel_body = airspeed_true_vector
 	force_flap_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Flap_R.force_total_surface_vector, \
@@ -239,14 +239,14 @@ func _physics_process(delta):
 		)
 	
 	$AeroSurface_Ruddervator_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Ruddervator_L.vel_body = vel_airspeed_true
+	$AeroSurface_Ruddervator_L.vel_body = airspeed_true_vector
 	force_ruddervator_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
 			$AeroSurface_Ruddervator_L.rotation \
 			)
 	$AeroSurface_Ruddervator_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Ruddervator_R.vel_body = vel_airspeed_true
+	$AeroSurface_Ruddervator_R.vel_body = airspeed_true_vector
 	force_ruddervator_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
@@ -374,7 +374,7 @@ func get_input(delta):
 		brake = input_braking * 50
 		
 		# NWS input
-		steering = -0.5 * _nosewheel_gains(vel_total) * output_rudder
+		steering = -0.5 * _nosewheel_gains(linear_velocity_total) * output_rudder
 		
 		# Cameras
 		if (Input.is_action_just_pressed("camera_toggle")):

@@ -26,7 +26,7 @@ var coeffecient_drag : float = 0.00
 
 var vel_body : Vector3 = Vector3.ZERO
 var vel_surface : Vector3 = Vector3.ZERO
-var vel_total : float = 0.00
+var linear_velocity_total : float = 0.00
 
 var vel_delta = Vector3.ZERO
 
@@ -83,10 +83,10 @@ func _ready():
 	pass # Replace with function body.
 
 func _physics_process(delta):	
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
+	air_pressure_dynamic = 0.5 * air_density * pow(linear_velocity_total, 2)
 	
 	vel_surface = (self.transform.basis.xform_inv(vel_body))
-	vel_total = vel_surface.length()
+	linear_velocity_total = vel_surface.length()
 	
 	vel_delta = vel_surface - vel_body
 	
@@ -100,7 +100,7 @@ func _physics_process(delta):
 		_calc_drag_coeff(angle_alpha, angle_beta)
 	
 	force_drag_element_magnitude = \
-		_calc_drag_force(air_density, vel_total, element_ref_area, coeffecient_drag) 
+		_calc_drag_force(air_density, linear_velocity_total, element_ref_area, coeffecient_drag) 
 	
 	force_drag_element_vector = \
 		Vector3(\

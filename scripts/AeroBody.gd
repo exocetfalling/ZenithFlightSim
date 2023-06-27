@@ -24,18 +24,18 @@ var ground_contact_NLG = false
 var ground_contact_MLG_L = false
 var ground_contact_MLG_R = false
 
-var corr_velocity = Vector3.ZERO
+var linear_velocity_corrected = Vector3.ZERO
 
-var vel_local = Vector3.ZERO
-var vel_airspeed_true : Vector3 = Vector3.ZERO
-var vel_airspeed_true_total : float = 0.00
+var linear_velocity_local = Vector3.ZERO
+var airspeed_true_vector : Vector3 = Vector3.ZERO
+var airspeed_true_total : float = 0.00
 
-var vel_wind : Vector3 = Vector3.ZERO
+var linear_velocity_wind : Vector3 = Vector3.ZERO
 
-var vel_total = 0
+var linear_velocity_total = 0
 
-var vel_angular_local = Vector3.ZERO
-var vel_angular_local_deg = Vector3.ZERO
+var angular_velocity_local = Vector3.ZERO
+var angular_velocity_local_deg = Vector3.ZERO
 
 var adc_spd_indicated = 0
 var adc_spd_true = 0
@@ -142,8 +142,8 @@ var fbw_output = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	DebugOverlay.stats.add_property(self, "vel_local", "round")
-#	DebugOverlay.stats.add_property(self, "vel_total", "")
+#	DebugOverlay.stats.add_property(self, "linear_velocity_local", "round")
+#	DebugOverlay.stats.add_property(self, "linear_velocity_total", "")
 	pass
 
 # Lift coeffecient calculation function
@@ -289,11 +289,11 @@ func calc_fcs_gains(dyn_press):
 	else:
 		return 1
 
-func calc_vel_local_with_offset(vel_linear_local, vel_angular_local, pos_offset):
+func calc_vel_local_with_offset(vel_linear_local, angular_velocity_local, pos_offset):
 	var vel_local_with_offset : Vector3
-	vel_local_with_offset.x = vel_linear_local.x + vel_angular_local.x * pos_offset.x
-	vel_local_with_offset.y = vel_linear_local.y + vel_angular_local.y * pos_offset.y
-	vel_local_with_offset.z = vel_linear_local.z + vel_angular_local.z * pos_offset.z
+	vel_local_with_offset.x = vel_linear_local.x + angular_velocity_local.x * pos_offset.x
+	vel_local_with_offset.y = vel_linear_local.y + angular_velocity_local.y * pos_offset.y
+	vel_local_with_offset.z = vel_linear_local.z + angular_velocity_local.z * pos_offset.z
 	
 	return vel_local_with_offset
 
@@ -304,20 +304,20 @@ func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
 func _physics_process(delta):
 	get_input(delta)
 	
-	vel_total = self.linear_velocity.length()
-	vel_local = (self.transform.basis.xform_inv(linear_velocity))
+	linear_velocity_total = self.linear_velocity.length()
+	linear_velocity_local = (self.transform.basis.xform_inv(linear_velocity))
 	
-	vel_airspeed_true = vel_local + self.transform.basis.xform_inv(vel_wind)
-	vel_airspeed_true_total = vel_airspeed_true.length()
+	airspeed_true_vector = linear_velocity_local + self.transform.basis.xform_inv(linear_velocity_wind)
+	airspeed_true_total = airspeed_true_vector.length()
 	
-	vel_angular_local = global_transform.basis.z * (angular_velocity)
-	vel_angular_local_deg = Vector3(rad2deg(vel_angular_local.x), rad2deg(vel_angular_local.y), rad2deg(vel_angular_local.z))
+	angular_velocity_local = global_transform.basis.z * (angular_velocity)
+	angular_velocity_local_deg = Vector3(rad2deg(angular_velocity_local.x), rad2deg(angular_velocity_local.y), rad2deg(angular_velocity_local.z))
 	
 	air_temperature = calc_atmo_properties(global_transform.origin.y).x
 	air_pressure = calc_atmo_properties(global_transform.origin.y).y
 	air_density = calc_atmo_properties(global_transform.origin.y).z
 	
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_airspeed_true_total, 2)
+	air_pressure_dynamic = 0.5 * air_density * pow(airspeed_true_total, 2)
 
 	# Output delays
 	output_aileron = interpolate_linear(output_aileron, input_joystick.x, deflection_rate, delta)
@@ -328,22 +328,22 @@ func _physics_process(delta):
 	output_elevator_trim = input_elevator_trim
 	
 	# Key angles
-	angle_alpha = atan2(-vel_airspeed_true.y, -vel_airspeed_true.z)
-	angle_beta = atan2(-vel_airspeed_true.x, -vel_airspeed_true.z)
+	angle_alpha = atan2(-airspeed_true_vector.y, -airspeed_true_vector.z)
+	angle_beta = atan2(-airspeed_true_vector.x, -airspeed_true_vector.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
-	angle_mu = atan2(-vel_local.y, -vel_local.z)
-	angle_nu = atan2(-vel_local.x, -vel_local.z)
+	angle_mu = atan2(-linear_velocity_local.y, -linear_velocity_local.z)
+	angle_nu = atan2(-linear_velocity_local.x, -linear_velocity_local.z)
 	
 	angle_mu_deg = rad2deg(angle_mu)
 	angle_nu_deg = rad2deg(angle_nu)
 	
 	# KTAS to KIAS 
 	adc_spd_indicated = sqrt(2 * air_pressure_dynamic / 1.225)
-	adc_spd_true = vel_airspeed_true.length()
-	adc_spd_ground = vel_total
+	adc_spd_true = airspeed_true_vector.length()
+	adc_spd_ground = linear_velocity_total
 	
 
 	if ((rotation_degrees.y) >= 0):
@@ -366,9 +366,9 @@ func _physics_process(delta):
 	adc_trk = fmod((adc_hdg - adc_beta) + 360, 360)
 
 	# FBW
-	adc_rates.x = -vel_angular_local_deg.x
-	adc_rates.y = vel_angular_local_deg.y
-	adc_rates.z = -vel_angular_local_deg.z
+	adc_rates.x = -angular_velocity_local_deg.x
+	adc_rates.y = angular_velocity_local_deg.y
+	adc_rates.z = -angular_velocity_local_deg.z
 	
 	if (angle_alpha_deg > 15):
 		adc_stall = true
