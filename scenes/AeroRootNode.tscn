@@ -1,0 +1,227 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/AeroElement.gd" type="Script" id=1]
+[ext_resource path="res://scripts/AeroRootNode.gd" type="Script" id=2]
+[ext_resource path="res://scripts/AeroJoint.gd" type="Script" id=3]
+[ext_resource path="res://resources/Glider_Metal.tres" type="Material" id=4]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 8.0
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 3, 0.05, 0.8 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 1.25, 0.05, 0.4 )
+
+[node name="AeroRootNode" type="Node"]
+script = ExtResource( 2 )
+
+[node name="AeroElement_Fuselage" type="RigidBody" parent="."]
+mass = 100.0
+script = ExtResource( 1 )
+element_area_side = 8.0
+element_area_top = 8.0
+element_area_front = 3.14
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Fuselage"]
+shape = SubResource( 1 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroElement_Fuselage"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+height = 8.0
+sides = 64
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="CSGSphere" type="CSGSphere" parent="AeroElement_Fuselage/CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0 )
+radial_segments = 64
+rings = 64
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="CSGSphere2" type="CSGSphere" parent="AeroElement_Fuselage/CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+radial_segments = 64
+rings = 64
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="AeroElement_Wing_L" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1 )
+mass = 40.0
+script = ExtResource( 1 )
+element_span = 6.0
+element_area_side = 0.04
+element_area_top = 4.8
+element_area_front = 0.3
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Wing_L"]
+shape = SubResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroElement_Wing_L"]
+transform = Transform( -2.18557e-09, 1, 0, -0.05, -4.37114e-08, 0, 0, 0, 0.8, 0, 0, 0 )
+height = 6.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="AeroElement_Wing_R" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -1 )
+mass = 40.0
+script = ExtResource( 1 )
+element_span = 6.0
+element_area_side = 0.04
+element_area_top = 4.8
+element_area_front = 0.3
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Wing_R"]
+shape = SubResource( 2 )
+
+[node name="CSGCylinder" type="CSGCylinder" parent="AeroElement_Wing_R"]
+transform = Transform( -2.18557e-09, 1, 0, -0.05, -4.37114e-08, 0, 0, 0, 0.8, 0, 0, 0 )
+height = 6.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 4 )
+
+[node name="AeroElement_Aileron_L" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.75, 0, 0.2 )
+script = ExtResource( 1 )
+element_span = 2.5
+element_area_side = 0.013
+element_area_top = 0.5
+element_area_front = 0.063
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Aileron_L"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="AeroElement_Aileron_L"]
+width = 2.5
+height = 0.05
+depth = 0.8
+material = ExtResource( 4 )
+
+[node name="AeroElement_Aileron_R" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.75, 0, 0.2 )
+script = ExtResource( 1 )
+element_span = 2.5
+element_area_side = 0.013
+element_area_top = 0.5
+element_area_front = 0.063
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Aileron_R"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="AeroElement_Aileron_R"]
+width = 2.5
+height = 0.05
+depth = 0.8
+material = ExtResource( 4 )
+
+[node name="AeroElement_Flap_L" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0.2 )
+script = ExtResource( 1 )
+element_span = 2.5
+element_area_side = 0.013
+element_area_top = 0.5
+element_area_front = 0.063
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Flap_L"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="AeroElement_Flap_L"]
+width = 2.5
+height = 0.05
+depth = 0.8
+material = ExtResource( 4 )
+
+[node name="AeroElement_Flap_R" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0.2 )
+script = ExtResource( 1 )
+element_span = 2.5
+element_area_side = 0.013
+element_area_top = 0.5
+element_area_front = 0.063
+
+[node name="CollisionShape" type="CollisionShape" parent="AeroElement_Flap_R"]
+shape = SubResource( 3 )
+
+[node name="CSGBox" type="CSGBox" parent="AeroElement_Flap_R"]
+width = 2.5
+height = 0.05
+depth = 0.8
+material = ExtResource( 4 )
+
+[node name="AeroJoint_Wing_L_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.8 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Wing_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Wing_L_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -0.2 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Wing_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Wing_R_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1.8 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Wing_R")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Wing_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -0.2 )
+nodes/node_a = NodePath("../AeroElement_Fuselage")
+nodes/node_b = NodePath("../AeroElement_Wing_R")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Aileron_L_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Aileron_L_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Aileron_R_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_R")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Aileron_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_R")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Flap_L_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.25, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Flap_L_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Aileron_L")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Flap_R_1" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Flap_R")
+script = ExtResource( 3 )
+
+[node name="AeroJoint_Flap_R_2" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 0, -0.175 )
+nodes/node_a = NodePath("../AeroElement_Wing_L")
+nodes/node_b = NodePath("../AeroElement_Flap_R")
+script = ExtResource( 3 )

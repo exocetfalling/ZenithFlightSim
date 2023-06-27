@@ -1,23 +1,24 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Terrain_PBR/terrain_island/data.hterrain" type="Resource" id=1]
-[ext_resource path="res://scenes/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
-[ext_resource path="res://scenes/TestScene_V2_slot2_albedo_bump.packed_tex" type="Texture" id=3]
-[ext_resource path="res://scenes/TestScene_V2_slot1_albedo_bump.packed_tex" type="Texture" id=4]
-[ext_resource path="res://scenes/slot0_normal_roughness.packed_tex" type="Texture" id=5]
-[ext_resource path="res://scenes/TestScene_V2_slot3_normal_roughness.packed_tex" type="Texture" id=6]
-[ext_resource path="res://scenes/slot0_albedo_bump.packed_tex" type="Texture" id=7]
-[ext_resource path="res://scenes/TestScene_V2_slot3_albedo_bump.packed_tex" type="Texture" id=8]
-[ext_resource path="res://scenes/slot1_albedo_bump.packed_tex" type="Texture" id=9]
+[ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
+[ext_resource path="res://assets/Terrain_PBR/materials/concrete/concrete_albedo.png" type="Texture" id=3]
+[ext_resource path="res://resources/TestScene_V2_slot1_albedo_bump.packed_tex" type="Texture" id=4]
+[ext_resource path="res://resources/slot0_normal_roughness.packed_tex" type="Texture" id=5]
+[ext_resource path="res://resources/TestScene_V2_slot3_normal_roughness.packed_tex" type="Texture" id=6]
+[ext_resource path="res://resources/slot0_albedo_bump.packed_tex" type="Texture" id=7]
+[ext_resource path="res://resources/TestScene_V2_slot3_albedo_bump.packed_tex" type="Texture" id=8]
+[ext_resource path="res://resources/slot1_albedo_bump.packed_tex" type="Texture" id=9]
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=10]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=11]
-[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=12]
-[ext_resource path="res://scenes/Plane.tscn" type="PackedScene" id=13]
-[ext_resource path="res://scenes/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=14]
-[ext_resource path="res://scenes/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=15]
-[ext_resource path="res://scenes/slot1_normal_roughness.packed_tex" type="Texture" id=16]
-[ext_resource path="res://scenes/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture" id=17]
+[ext_resource path="res://scenes/Runway.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/virtual-joystick/joystick/virtual_joystick.tscn" type="PackedScene" id=13]
+[ext_resource path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=14]
+[ext_resource path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=15]
+[ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture" id=16]
+[ext_resource path="res://resources/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture" id=17]
 [ext_resource path="res://assets/Terrain_PBR/terrain_ocean/data.hterrain" type="Resource" id=18]
+[ext_resource path="res://aircraft/Phoenix/Phoenix.tscn" type="PackedScene" id=19]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 11 )
@@ -31,14 +32,12 @@ textures = [ [ ExtResource( 7 ), ExtResource( 9 ) ], [ ExtResource( 5 ), ExtReso
 
 [node name="TestScene_V2" type="Spatial"]
 
-[node name="Plane" parent="." instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 203.5, 1990 )
-
 [node name="XForm_Island" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
 
 [node name="Terrain_Island" type="Spatial" parent="XForm_Island"]
 script = ExtResource( 10 )
+lod_scale = 2.0
 map_scale = Vector3( 100, 100, 100 )
 _terrain_data = ExtResource( 1 )
 chunk_size = 32
@@ -62,6 +61,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500000, 0, -500000 )
 
 [node name="HTerrain" type="Spatial" parent="XForm_Ocean"]
 script = ExtResource( 10 )
+lod_scale = 2.0
 map_scale = Vector3( 2000, 2000, 2000 )
 _terrain_data = ExtResource( 18 )
 chunk_size = 32
@@ -80,10 +80,28 @@ shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
-[node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0 )
-pixel_size = 1.0
-axis = 1
-transparent = false
-shaded = true
-texture = ExtResource( 12 )
+[node name="Phoenix" parent="." instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 205.88, 1479.52 )
+
+[node name="Runway" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 199.353, 0 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VJoy1" parent="UI" instance=ExtResource( 13 )]
+modulate = Color( 1, 1, 1, 0.12549 )
+action_left = "yaw_left"
+action_right = "yaw_right"
+action_up = "throttle_up"
+action_down = "throttle_down"
+
+[node name="VJoy2" parent="UI" instance=ExtResource( 13 )]
+modulate = Color( 1, 1, 1, 0.12549 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -250.0
+margin_right = -50.0
+action_left = "roll_left"
+action_right = "roll_right"
+action_up = "pitch_down"
+action_down = "pitch_up"

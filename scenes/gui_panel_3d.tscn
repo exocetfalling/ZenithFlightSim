@@ -32,6 +32,7 @@ render_target_update_mode = 3
 [node name="Main_Panel" parent="Viewport" instance=ExtResource( 2 )]
 
 [node name="Quad" type="MeshInstance" parent="."]
+layers = 2
 mesh = SubResource( 1 )
 material/0 = SubResource( 3 )
 

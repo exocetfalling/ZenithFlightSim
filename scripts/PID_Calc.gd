@@ -7,7 +7,7 @@ class_name PID_Calc
 
 var value_previous = 0.00
 var value_delta = 0.00
-var time_delta = 0.00
+var time_delta = 0.0167
 
 var proportional = 0.00
 var integral = 0.00
@@ -21,8 +21,8 @@ export var term_P = 0.00
 export var term_I = 0.00
 export var term_D = 0.00
 
-# Maximum integral value, after which it'll reset 
-export var term_I_max = 0.50
+# Maximum integral value, beyond whick clamping occurs
+export var integral_max = 100.00
 
 var output_P = 0.00
 var output_I = 0.00
@@ -43,6 +43,12 @@ var param_select = 0
 var param_value = 0
 var param_delta_step = 0.001
 var param_default = 0
+
+var param_default_p : float = 0.00
+var param_default_i : float = 0.00
+var param_default_d : float = 0.00
+
+var reset_integral : bool = false
 
 #func calc_proportional_output(value_setpoint, value_current, time_delta):
 #	value_error = value_setpoint - value_current
@@ -74,7 +80,7 @@ var param_default = 0
 #	output_D = term_D * derivative
 #	return output_D
 
-func calc_PID_output(value_setpoint, value_current, time_delta):
+func calc_PID_output(value_setpoint, value_current):
 	
 	# Output for proportional term 
 	value_error_current = value_setpoint - value_current
@@ -89,15 +95,11 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 #	if (time_delta == 0):
 #		time_delta = 0.0167
 	
-	time_delta = 0.0167
-	
 	# Output for integral term 
-	integral += value_error_current * time_delta	
+	integral += value_error_current * time_delta
+	integral = clamp(integral, -integral_max, integral_max)
 	output_I = term_I * integral
-	
-	if (abs(output_I) > term_I_max):
-		integral = 0
-	
+
 	# Output for derivative term 
 
 	value_error_delta = (value_error_current - value_error_previous)
@@ -113,6 +115,10 @@ func calc_PID_output(value_setpoint, value_current, time_delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	param_default_p = term_P
+	param_default_i = term_I
+	param_default_d = term_D
+	
 	if (param_tuning_active == true):
 		DebugOverlay.stats.add_property(self, "output_P", "round")
 		DebugOverlay.stats.add_property(self, "output_I", "round")
@@ -122,7 +128,8 @@ func _ready() -> void:
 		DebugOverlay.stats.add_property(self, "term_D", "round")
 		DebugOverlay.stats.add_property(self, "output_total", "round")
 		DebugOverlay.stats.add_property(self, "param_select", "")
-	#	DebugOverlay.stats.add_property(self, "time_delta", "")
+		DebugOverlay.stats.add_property(self, "time_delta", "")
+		DebugOverlay.stats.add_property(self, "reset_integral", "")
 		pass # Replace with function body.
 	
 
@@ -132,10 +139,10 @@ func get_input_keyboard(delta):
 		# Select and loop params using events
 		if Input.is_action_just_pressed("PID_term_next"):
 			param_select += 1
-			param_value = 0
+			param_value = param_default
 		if Input.is_action_just_pressed("PID_term_prev"):
 			param_select -= 1
-			param_value = 0
+			param_value = param_default
 			
 		if (param_select > 2):
 			param_select = 0
@@ -151,11 +158,18 @@ func get_input_keyboard(delta):
 		# Set the parameter according to selection 
 		if (param_select == 0):
 			term_P = param_value
+			param_default_p = term_P
 		if (param_select == 1):
 			term_I = param_value
+			param_default_i = term_I
 		if (param_select == 2):
 			term_D = param_value
+			param_default_d = term_D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	get_input_keyboard(delta)
+
+# Called every physics frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta): 
+	time_delta = delta
