@@ -1,5 +1,8 @@
 extends Spatial
 
+# Class for aerodynamic surfaces
+# Be sure to set vel_body variable using parent velocity data
+# Also provide atmospheric data by setting atmo_data variable
 class_name AeroSurface
 
 # Declare member variables here. Examples:

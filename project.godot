@@ -142,7 +142,7 @@ config/icon="res://resources/icon.png"
 
 Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
-FlightData="*res://addons/aero_tools/aero_data_singleton.gd"
+FlightData="*res://addons/aero_tools/aero_data_bus.gd"
 
 [display]
 

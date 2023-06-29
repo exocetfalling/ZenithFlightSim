@@ -1,5 +1,8 @@
 extends VehicleBody
 
+# Class for aircraft
+# For different atmospheres override calc_atmo_properties()
+# Mars, Titan etc.
 class_name AeroBody
 
 # Type of control
@@ -70,11 +73,6 @@ var autopilot_on = 0
 var tgt_pitch = 0
 var tgt_roll = 0
 
-var sta_1_rdy = 1
-var sta_2_rdy = 1
-var sta_3_rdy = 1
-var sta_4_rdy = 1
-
 var angle_alpha = 0
 var angle_alpha_deg = 0
 var angle_beta = 0
@@ -131,7 +129,8 @@ var deflection_rate_flaps = 1/(2 * PI)
 
 # FBW variables
 
-# Pitch, yaw, roll, roll inverted from Godot convention
+# Pitch, yaw, roll
+# Roll inverted from Godot convention
 # So roll rate is +ve for roll right
 
 var adc_rates = Vector3.ZERO
@@ -142,8 +141,6 @@ var fbw_output = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	DebugOverlay.stats.add_property(self, "linear_velocity_local", "round")
-#	DebugOverlay.stats.add_property(self, "linear_velocity_total", "")
 	pass
 
 # Lift coeffecient calculation function
@@ -382,22 +379,9 @@ func _physics_process(delta):
 	if (abs(gear_current - gear_input) < 0.01):
 		gear_current = gear_input
 	
-#	fbw_output.x = clamp(($PID_Calc_Pitch.calc_PID_output(tgt_rates.x, adc_rates.x, delta)), -1, 1)
+	input_elevator_trim = clamp(input_elevator_trim, input_trim_pitch_min, input_trim_pitch_max)
 	
-#	if ((adc_rates.x < tgt_rates.x) && (fbw_output.x < 1)):
-#		fbw_output.x += 0.1
-#	if ((adc_rates.x > tgt_rates.x) && (fbw_output.x > -1)):
-#		fbw_output.x -= 0.1
-
-	if (input_elevator_trim > input_trim_pitch_max):
-		input_elevator_trim = input_trim_pitch_max
-	if (input_elevator_trim < input_trim_pitch_min):
-		input_elevator_trim = input_trim_pitch_min
-	
-	if (output_rudder > 1):
-		output_rudder = 1
-	if (output_rudder < -1):
-		output_rudder = -1
+	output_rudder = clamp(output_rudder, -1, 1)
 
 func get_input(delta):
 	pass
