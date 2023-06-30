@@ -104,17 +104,17 @@ func _process(delta):
 	# Calculate the virtual distance the HUD is positioned for
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
 #	
-	if (FlightData.aircraft_cam_rotation_deg.length() <= 5):
+	if (AeroDataBus.aircraft_cam_rotation_deg.length() <= 5):
 		$Boresight.visible = false
 	else:
 		$Boresight.visible = true
 	
-	fpv_angles = FlightData.aircraft_cam_rotation_deg
+	fpv_angles = AeroDataBus.aircraft_cam_rotation_deg
 	
-	$EADI/XForm_Roll.rotation_degrees = FlightData.aircraft_cam_global_rotation_deg.z
+	$EADI/XForm_Roll.rotation_degrees = AeroDataBus.aircraft_cam_global_rotation_deg.z
 	$EADI/XForm_Roll/XForm_Pitch.position.y = \
-		FlightData.aircraft_cam_global_rotation_deg.x * get_viewport_rect().size.y/cam_fov
-#		display_distance * tan(deg2rad(FlightData.aircraft_pitch))
+		AeroDataBus.aircraft_cam_global_rotation_deg.x * get_viewport_rect().size.y/cam_fov
+#		display_distance * tan(deg2rad(AeroDataBus.aircraft_pitch))
 
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P02.position.y = \
 		-2.5 * get_viewport_rect().size.y/cam_fov
@@ -135,28 +135,28 @@ func _process(delta):
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.position.y = \
 		3 * get_viewport_rect().size.y/cam_fov
 	
-	if (FlightData.aircraft_gear == 0):
+	if (AeroDataBus.aircraft_gear == 0):
 		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = false
 	else:
 		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = true
 	
 	$EADI/FPM.position.x = \
-		display_distance * tan(deg2rad(-FlightData.aircraft_nu))
+		display_distance * tan(deg2rad(-AeroDataBus.aircraft_nu))
 	$EADI/FPM.position.y = \
-		display_distance * tan(deg2rad(FlightData.aircraft_mu))
+		display_distance * tan(deg2rad(AeroDataBus.aircraft_mu))
 	
 	# Waypoint indications
 	if (\
-	(FlightData.aircraft_nav_active == true) && \
-	(abs(FlightData.aircraft_nav_waypoint_data.x) <= 90) && \
-	(abs(FlightData.aircraft_nav_waypoint_data.y) <= 90) \
+	(AeroDataBus.aircraft_nav_active == true) && \
+	(abs(AeroDataBus.aircraft_nav_waypoint_data.x) <= 90) && \
+	(abs(AeroDataBus.aircraft_nav_waypoint_data.y) <= 90) \
 		):
 		$EADI/Aircraft/Marker_WPT.visible = true
 		$EADI/Aircraft/Marker_WPT.position.x = \
-			display_distance * tan(deg2rad(FlightData.aircraft_nav_waypoint_data.x))
+			display_distance * tan(deg2rad(AeroDataBus.aircraft_nav_waypoint_data.x))
 		$EADI/Aircraft/Marker_WPT.position.y = \
-			display_distance * tan(deg2rad(-FlightData.aircraft_nav_waypoint_data.y))
-		$EADI/Aircraft/Marker_WPT.rotation_degrees = -FlightData.aircraft_roll
+			display_distance * tan(deg2rad(-AeroDataBus.aircraft_nav_waypoint_data.y))
+		$EADI/Aircraft/Marker_WPT.rotation_degrees = -AeroDataBus.aircraft_roll
 	else:
 		$EADI/Aircraft/Marker_WPT.visible = false
 		$EADI/Aircraft/Marker_WPT.position = Vector2.ZERO
@@ -164,14 +164,14 @@ func _process(delta):
 	
 	$Compass.position.x = viewport_centre.x
 	$Compass.position.y = viewport_centre.y + 400 * (get_viewport_rect().size.y / 1080)
-	$Compass/Rose.rotation_degrees = -FlightData.aircraft_hdg
-	$Compass/Needle.rotation_degrees = FlightData.aircraft_nav_waypoint_data.x
+	$Compass/Rose.rotation_degrees = -AeroDataBus.aircraft_hdg
+	$Compass/Needle.rotation_degrees = AeroDataBus.aircraft_nav_waypoint_data.x
 	
-#	get_node("Speed_Data").text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
-#	get_node("Alt_Data").text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
-#	get_node("Heading_Data").text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
+#	get_node("Speed_Data").text = ("SPD\n%03d" % [AeroDataBus.aircraft_spd_indicated])
+#	get_node("Alt_Data").text = ("ALT\n%05d" % [AeroDataBus.aircraft_alt_barometric])
+#	get_node("Heading_Data").text = ("HDG\n%03d" % [AeroDataBus.aircraft_hdg])
 
-	tape_spd_ref = stepify(FlightData.aircraft_spd_indicated, tape_spd_step)
+	tape_spd_ref = stepify(AeroDataBus.aircraft_spd_indicated, tape_spd_step)
 	$HUD_Centre/Tape_SPD/REF0.text = ("%03d -" % [tape_spd_ref])
 	$HUD_Centre/Tape_SPD/ABV1.text = ("%03d -" % [tape_spd_ref + 1 * tape_spd_step])
 	$HUD_Centre/Tape_SPD/ABV2.text = ("%03d -" % [tape_spd_ref + 2 * tape_spd_step])
@@ -186,9 +186,9 @@ func _process(delta):
 		$HUD_Centre/Tape_SPD/BLW2.visible = true
 	
 	$HUD_Centre/Tape_SPD.position.y = \
-		(FlightData.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
+		(AeroDataBus.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
 	
-	tape_alt_ref = stepify(FlightData.aircraft_alt_barometric, tape_alt_step)
+	tape_alt_ref = stepify(AeroDataBus.aircraft_alt_barometric, tape_alt_step)
 	$HUD_Centre/Tape_ALT/REF0.text = ("- %05d" % [tape_alt_ref])
 	$HUD_Centre/Tape_ALT/ABV1.text = ("- %05d" % [tape_alt_ref + 1 * tape_alt_step])
 	$HUD_Centre/Tape_ALT/ABV2.text = ("- %05d" % [tape_alt_ref + 2 * tape_alt_step])
@@ -203,10 +203,10 @@ func _process(delta):
 		$HUD_Centre/Tape_ALT/BLW2.visible = true
 	
 	$HUD_Centre/Tape_ALT.position.y = \
-		(FlightData.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
+		(AeroDataBus.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
 
-	tape_hdg_ref = stepify(FlightData.aircraft_hdg, tape_hdg_step)
+	tape_hdg_ref = stepify(AeroDataBus.aircraft_hdg, tape_hdg_step)
 	tape_hdg_abv1 = _format_hdg(tape_hdg_ref + 1 * tape_hdg_step)
 	tape_hdg_abv2 = _format_hdg(tape_hdg_ref + 2 * tape_hdg_step)
 	tape_hdg_blw1 = _format_hdg(tape_hdg_ref - 1 * tape_hdg_step)
@@ -219,7 +219,7 @@ func _process(delta):
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.text = ("%03d\n|" % [tape_hdg_blw2])
 	
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG.position.x = \
-		-(FlightData.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
+		-(AeroDataBus.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
 	
 	tape_hdg_spacing = 10 * get_viewport_rect().size.y/cam_fov
 	
@@ -232,23 +232,23 @@ func _process(delta):
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.rect_position.x = \
 		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x - 2 * tape_hdg_spacing
 	
-	$HUD_Centre/Indicator_THR.value = FlightData.aircraft_throttle * 100
-	$HUD_Centre/Indicator_FLAPS.value = FlightData.aircraft_flaps
+	$HUD_Centre/Indicator_THR.value = AeroDataBus.aircraft_throttle * 100
+	$HUD_Centre/Indicator_FLAPS.value = AeroDataBus.aircraft_flaps
 	
-	$HUD_Centre/Indicator_TRIM/Caret.position.y = FlightData.aircraft_trim * 50
-	$HUD_Centre/Indicator_TRIM/Label.text = ("TRIM %+0.1f" % [FlightData.aircraft_trim])
+	$HUD_Centre/Indicator_TRIM/Caret.position.y = AeroDataBus.aircraft_trim * 50
+	$HUD_Centre/Indicator_TRIM/Label.text = ("TRIM %+0.1f" % [AeroDataBus.aircraft_trim])
 	
-	if (FlightData.aircraft_cws == 0):
+	if (AeroDataBus.aircraft_cws == 0):
 		$HUD_Centre/Status_CWS.visible = false
-	if (FlightData.aircraft_cws == 1):
+	if (AeroDataBus.aircraft_cws == 1):
 		$HUD_Centre/Status_CWS.visible = true
 	
-	if (FlightData.aircraft_alt_radio < 2500):
+	if (AeroDataBus.aircraft_alt_radio < 2500):
 		$HUD_Centre/RadioAlt.visible = true
 	else:
 		$HUD_Centre/RadioAlt.visible = false
 	
-	$HUD_Centre/RadioAlt/Label.text = ("RA\n%d" % [FlightData.aircraft_alt_radio])
+	$HUD_Centre/RadioAlt/Label.text = ("RA\n%d" % [AeroDataBus.aircraft_alt_radio])
 	
 	# Scale symbols
 	$EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05.scale = Vector2.ONE * hud_scale_factor

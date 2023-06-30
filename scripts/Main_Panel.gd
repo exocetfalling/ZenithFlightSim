@@ -28,7 +28,7 @@ var current_centre_position = get_viewport_rect().size/2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	DebugOverlay.stats.add_property(self, "FlightData.aircraft_MFD_mode", "")
+#	DebugOverlay.stats.add_property(self, "AeroDataBus.aircraft_MFD_mode", "")
 	$MFD_V3_L/Display.current_tab = 0
 	$MFD_V3_R/Display.current_tab = 2
 	pass # Replace with function body.
@@ -37,7 +37,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	# Visibility
-	if (FlightData.aircraft_active == true):
+	if (AeroDataBus.aircraft_active == true):
 		visible = true
 	else:
 		visible = false
@@ -45,12 +45,12 @@ func _process(_delta):
 	current_viewport_size = get_viewport_rect().size
 	current_centre_position = get_viewport_rect().size/2
 #
-#	FlightData.aircraft_MFD_mode = $MFD/MFD_Mode.item_pressed
-#	FlightData.aircraft_nav_waypoint = $MFD/Page_NAV/Waypoint_Select.item_pressed
+#	AeroDataBus.aircraft_MFD_mode = $MFD/MFD_Mode.item_pressed
+#	AeroDataBus.aircraft_nav_waypoint = $MFD/Page_NAV/Waypoint_Select.item_pressed
 #
-	$Speed_Data.text = ("SPD\n%03d" % [FlightData.aircraft_spd_indicated])
-	$Alt_Data.text = ("ALT\n%05d" % [FlightData.aircraft_alt_barometric])
-	$Heading_Data.text = ("HDG\n%03d" % [FlightData.aircraft_hdg])
+	$Speed_Data.text = ("SPD\n%03d" % [AeroDataBus.aircraft_spd_indicated])
+	$Alt_Data.text = ("ALT\n%05d" % [AeroDataBus.aircraft_alt_barometric])
+	$Heading_Data.text = ("HDG\n%03d" % [AeroDataBus.aircraft_hdg])
 
 	get_node("Boresight").position = current_centre_position
 	

@@ -1,0 +1,45 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/aero_tools/fonts/B612Mono-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://addons/aero_tools/scripts/aero_hud.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 45
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
+
+[node name="AeroHUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+theme = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="DataSPD" type="Label" parent="."]
+anchor_right = 0.1
+text = "SPD
+XXX"
+uppercase = true
+
+[node name="DataHDG" type="Label" parent="."]
+anchor_left = 0.45
+anchor_right = 0.55
+text = "HDG
+XXX"
+align = 1
+uppercase = true
+
+[node name="DataALT" type="Label" parent="."]
+anchor_left = 0.9
+anchor_right = 1.0
+text = "ALT
+XXXXX"
+align = 2
+uppercase = true

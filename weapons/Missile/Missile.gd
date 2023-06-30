@@ -193,22 +193,22 @@ func _physics_process(delta):
 	
 	if (control_type == 1):
 		# Panel updates
-		FlightData.aircraft_pitch = adc_pitch
-		FlightData.aircraft_roll = adc_roll
-		FlightData.aircraft_alpha = adc_alpha
-		FlightData.aircraft_beta = adc_beta
+		AeroDataBus.aircraft_pitch = adc_pitch
+		AeroDataBus.aircraft_roll = adc_roll
+		AeroDataBus.aircraft_alpha = adc_alpha
+		AeroDataBus.aircraft_beta = adc_beta
 		
 		if (Global.setting_units == 0):
-			FlightData.aircraft_spd_indicated = adc_spd_indicated
-			FlightData.aircraft_spd_true = adc_spd_true
-			FlightData.aircraft_alt_barometric = adc_alt_barometric
+			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated
+			AeroDataBus.aircraft_spd_true = adc_spd_true
+			AeroDataBus.aircraft_alt_barometric = adc_alt_barometric
 		if (Global.setting_units == 1):
-			FlightData.aircraft_spd_indicated = adc_spd_indicated * 2
-			FlightData.aircraft_spd_true = adc_spd_true * 2
-			FlightData.aircraft_alt_barometric = adc_alt_barometric * 3.2809
+			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated * 2
+			AeroDataBus.aircraft_spd_true = adc_spd_true * 2
+			AeroDataBus.aircraft_alt_barometric = adc_alt_barometric * 3.2809
 		
-		FlightData.aircraft_hdg = adc_hdg
-		FlightData.aircraft_throttle = input_throttle
+		AeroDataBus.aircraft_hdg = adc_hdg
+		AeroDataBus.aircraft_throttle = input_throttle
 	
 	tgt_data = find_angles_and_distance_to_target(Vector3(0, 5, 0))
 	tgt_data_deriv.x = $Derivative_Calc_Pitch.calc_derivative(tgt_data.x, delta)

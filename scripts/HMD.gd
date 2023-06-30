@@ -56,7 +56,7 @@ func _process(delta):
 	
 	position = viewport_centre
 	
-	$EADI/XForm_Roll.rotation_degrees = -FlightData.aircraft_roll
-	$EADI/XForm_Roll/XForm_Pitch.position.y = FlightData.aircraft_pitch * 1080/70
+	$EADI/XForm_Roll.rotation_degrees = -AeroDataBus.aircraft_roll
+	$EADI/XForm_Roll/XForm_Pitch.position.y = AeroDataBus.aircraft_pitch * 1080/70
 
 

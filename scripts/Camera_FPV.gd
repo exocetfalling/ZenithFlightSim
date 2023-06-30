@@ -29,7 +29,7 @@ func _process(delta):
 	get_input(delta)
 	viewport_centre = get_viewport().size / 2
 	
-	FlightData.aircraft_cam_rotation_deg = rotation_degrees
+	AeroDataBus.aircraft_cam_rotation_deg = rotation_degrees
 	fpv_angles = global_transform.basis.get_euler()
 	
 	if (fpv_angles.y >= 0):
@@ -41,7 +41,7 @@ func _process(delta):
 	fpv_angles_deg.y = rad2deg(fpv_angles.y)
 	fpv_angles_deg.z = rad2deg(fpv_angles.z)
 	
-	FlightData.aircraft_cam_global_rotation_deg = fpv_angles_deg
+	AeroDataBus.aircraft_cam_global_rotation_deg = fpv_angles_deg
 	
 	if (timer_running == true):
 		timer_elapsed += delta

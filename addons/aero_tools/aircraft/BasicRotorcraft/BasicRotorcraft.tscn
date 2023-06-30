@@ -1,0 +1,82 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=2]
+[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=3]
+[ext_resource path="res://aircraft/UAV_Lite/UAV_Lite.gd" type="Script" id=4]
+
+[sub_resource type="BoxShape" id=1]
+
+[node name="BasicRotorcraft" type="VehicleBody"]
+continuous_cd = true
+can_sleep = false
+linear_damp = 0.0
+angular_damp = 1.0
+script = ExtResource( 4 )
+control_type = 1
+
+[node name="Camera_FPV" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
+environment = ExtResource( 2 )
+current = true
+fov = 60.0
+far = 1e+06
+
+[node name="Camera_Ext" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )
+cull_mask = 1048557
+environment = ExtResource( 2 )
+fov = 60.0
+far = 100000.0
+
+[node name="PIDCalcPitch" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 0.8
+term_D = 0.4
+param_tuning_active = false
+
+[node name="PIDCalcRoll" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 0.8
+term_D = 0.4
+param_tuning_active = false
+
+[node name="PIDCalcYaw" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 0.8
+term_D = 0.4
+param_tuning_active = false
+
+[node name="PIDCalcThrust" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.05
+param_tuning_active = false
+
+[node name="PIDCalcVelocityX" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 2.0
+term_I = 1.0
+term_D = 1.0
+param_tuning_active = false
+
+[node name="PIDCalcVelocityY" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 2.0
+term_I = 1.0
+term_D = 1.0
+param_tuning_active = false
+
+[node name="PIDCalcVelocityZ" type="Node" parent="."]
+script = ExtResource( 3 )
+term_P = 2.0
+term_I = 1.0
+term_D = 1.0
+param_tuning_active = false
+
+[node name="RadioAltimeter" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, -1000, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 1 )

@@ -12,17 +12,17 @@ _global_script_classes=[ {
 "base": "VehicleBody",
 "class": "AeroBody",
 "language": "GDScript",
-"path": "res://addons/aero_tools/aero_body.gd"
+"path": "res://addons/aero_tools/scripts/aero_body.gd"
 }, {
 "base": "RigidBody",
 "class": "AeroElement",
 "language": "GDScript",
-"path": "res://addons/aero_tools/aero_element.gd"
+"path": "res://addons/aero_tools/scripts/aero_element.gd"
 }, {
 "base": "Spatial",
 "class": "AeroEngine",
 "language": "GDScript",
-"path": "res://addons/aero_tools/aero_engine.gd"
+"path": "res://addons/aero_tools/scripts/aero_engine.gd"
 }, {
 "base": "Generic6DOFJoint",
 "class": "AeroJoint",
@@ -37,7 +37,7 @@ _global_script_classes=[ {
 "base": "Spatial",
 "class": "AeroSurface",
 "language": "GDScript",
-"path": "res://addons/aero_tools/aero_surface.gd"
+"path": "res://addons/aero_tools/scripts/aero_surface.gd"
 }, {
 "base": "Control",
 "class": "CSVEditor",
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "PID_Calc",
 "language": "GDScript",
-"path": "res://addons/aero_tools/aero_pid_calc.gd"
+"path": "res://addons/aero_tools/scripts/aero_pid_calc.gd"
 }, {
 "base": "Node",
 "class": "PID_Controller",
@@ -142,7 +142,8 @@ config/icon="res://resources/icon.png"
 
 Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
-FlightData="*res://addons/aero_tools/aero_data_bus.gd"
+AeroHelper="*res://addons/aero_tools/scripts/aero_helper.gd"
+AeroDataBus="*res://addons/aero_tools/scripts/aero_data_bus.gd"
 
 [display]
 
@@ -153,7 +154,7 @@ window/dpi/allow_hidpi=true
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/waterways/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/aero_tools/plugin.cfg", "res://addons/waterways/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg" )
 
 [gui]
 
