@@ -1,6 +1,5 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://resources/camera_env.tres" type="Environment" id=2]
 [ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=3]
 [ext_resource path="res://aircraft/UAV_Lite/UAV_Lite.gd" type="Script" id=4]
 
@@ -13,20 +12,6 @@ linear_damp = 0.0
 angular_damp = 1.0
 script = ExtResource( 4 )
 control_type = 1
-
-[node name="Camera_FPV" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
-environment = ExtResource( 2 )
-current = true
-fov = 60.0
-far = 1e+06
-
-[node name="Camera_Ext" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )
-cull_mask = 1048557
-environment = ExtResource( 2 )
-fov = 60.0
-far = 100000.0
 
 [node name="PIDCalcPitch" type="Node" parent="."]
 script = ExtResource( 3 )
