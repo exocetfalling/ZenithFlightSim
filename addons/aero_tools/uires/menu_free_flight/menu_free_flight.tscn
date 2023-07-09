@@ -1,0 +1,125 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/aero_tools/uires/menu_shared/menu_shared_theme.tres" type="Theme" id=1]
+[ext_resource path="res://addons/aero_tools/uires/menu_free_flight/menu_free_flight.gd" type="Script" id=2]
+
+[node name="MenuFreeFlight" type="Control"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Options" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+
+[node name="Label1" type="Label" parent="Options"]
+margin_right = 1728.0
+margin_bottom = 73.0
+text = "Location"
+align = 1
+
+[node name="Button1" type="Button" parent="Options"]
+margin_top = 77.0
+margin_right = 1728.0
+margin_bottom = 156.0
+text = "Central Crater"
+
+[node name="Button2" type="Button" parent="Options"]
+margin_top = 160.0
+margin_right = 1728.0
+margin_bottom = 239.0
+disabled = true
+text = "Northeast Dunes"
+
+[node name="Button3" type="Button" parent="Options"]
+margin_top = 243.0
+margin_right = 1728.0
+margin_bottom = 322.0
+disabled = true
+text = "Tall Plateau"
+
+[node name="Button4" type="Button" parent="Options"]
+margin_top = 326.0
+margin_right = 1728.0
+margin_bottom = 405.0
+disabled = true
+text = "Sandy Flats"
+
+[node name="Label2" type="Label" parent="Options"]
+margin_top = 409.0
+margin_right = 1728.0
+margin_bottom = 482.0
+text = "Coordinates"
+align = 1
+
+[node name="GridContainer" type="GridContainer" parent="Options"]
+margin_top = 486.0
+margin_right = 1728.0
+margin_bottom = 646.0
+columns = 3
+
+[node name="Label1" type="Label" parent="Options/GridContainer"]
+margin_right = 574.0
+margin_bottom = 73.0
+text = "X"
+align = 1
+
+[node name="Label2" type="Label" parent="Options/GridContainer"]
+margin_left = 578.0
+margin_right = 1151.0
+margin_bottom = 73.0
+text = "Y"
+align = 1
+
+[node name="Label3" type="Label" parent="Options/GridContainer"]
+margin_left = 1155.0
+margin_right = 1728.0
+margin_bottom = 73.0
+text = "Z"
+align = 1
+
+[node name="SpinBox1" type="SpinBox" parent="Options/GridContainer"]
+margin_top = 77.0
+margin_right = 574.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+min_value = -4000.0
+max_value = 4000.0
+align = 2
+
+[node name="SpinBox2" type="SpinBox" parent="Options/GridContainer"]
+margin_left = 578.0
+margin_top = 77.0
+margin_right = 1151.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+min_value = -4000.0
+max_value = 4000.0
+align = 2
+
+[node name="SpinBox3" type="SpinBox" parent="Options/GridContainer"]
+margin_left = 1155.0
+margin_top = 77.0
+margin_right = 1728.0
+margin_bottom = 160.0
+size_flags_horizontal = 3
+min_value = -4000.0
+max_value = 4000.0
+align = 2
+
+[node name="ButtonConfirm" type="Button" parent="."]
+anchor_left = 0.8
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Confirm"
+
+[node name="ButtonBack" type="Button" parent="."]
+anchor_top = 0.9
+anchor_right = 0.2
+anchor_bottom = 1.0
+text = "Back"

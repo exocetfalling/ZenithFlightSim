@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/aero_tools/uires/hud_attitude/hud_pitch_mark.gd" type="Script" id=1]
+[ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" type="Theme" id=2]
+
+[node name="HUDPitchMark" type="Control"]
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+mark_pitch_value = 0.0
+
+[node name="MarkLine" type="Line2D" parent="."]
+points = PoolVector2Array( -500, 0, 500, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="LabelNode1" type="Node2D" parent="."]
+position = Vector2( -550, 0 )
+
+[node name="Label" type="Label" parent="LabelNode1"]
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+text = "00"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="LabelNode2" type="Node2D" parent="."]
+position = Vector2( 550, 0 )
+
+[node name="Label" type="Label" parent="LabelNode2"]
+margin_left = -40.0
+margin_top = -40.0
+margin_right = 40.0
+margin_bottom = 40.0
+text = "00"
+align = 1
+valign = 1
+uppercase = true

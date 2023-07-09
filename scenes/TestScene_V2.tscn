@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Terrain_PBR/terrain_island/data.hterrain" type="Resource" id=1]
 [ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://resources/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture" id=17]
 [ext_resource path="res://assets/Terrain_PBR/terrain_ocean/data.hterrain" type="Resource" id=18]
 [ext_resource path="res://aircraft/Phoenix/Phoenix.tscn" type="PackedScene" id=19]
+[ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 11 )
@@ -105,3 +106,5 @@ action_left = "roll_left"
 action_right = "roll_right"
 action_up = "pitch_down"
 action_down = "pitch_up"
+
+[node name="HUDShared" parent="." instance=ExtResource( 20 )]
