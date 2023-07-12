@@ -32,4 +32,4 @@ func _process(delta):
 		camera_rotation_degrees.x = rad2deg(camera_rotation.x)
 		camera_rotation_degrees.y = rad2deg(camera_rotation.y)
 		camera_rotation_degrees.z = rad2deg(camera_rotation.z)
-
+		

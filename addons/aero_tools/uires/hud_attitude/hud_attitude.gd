@@ -29,8 +29,12 @@ func _process(delta):
 		# Code to execute in game.
 
 	# Code to execute both in editor and in game.
-	camera_fov = get_viewport().get_camera().fov
-	display_distance = get_viewport().size.y / 2 / tan(deg2rad(camera_fov) / 2)
+	if (get_viewport().get_camera() != null):
+		camera_fov = get_viewport().get_camera().fov
+		display_distance = get_viewport().size.y / 2 / tan(deg2rad(camera_fov) / 2)
+	else:
+		camera_fov = 60
+		display_distance = 500
 	
 	$MarkP10.position.y = -hud_scale_vertical * +10
 	$MarkN10.position.y = -hud_scale_vertical * -10
