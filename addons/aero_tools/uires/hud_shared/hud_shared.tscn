@@ -6,10 +6,8 @@
 [ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" type="Texture" id=4]
 
 [node name="HUDShared" type="Control"]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 2 )
 
 [node name="GaugeSPD" parent="." instance=ExtResource( 1 )]
@@ -53,14 +51,7 @@ range_z_min = 1
 range_z_max = 2
 
 [node name="HUDNode" type="Node2D" parent="."]
+position = Vector2( 960, 540 )
 z_index = 1
 
 [node name="HUDAttitude" parent="HUDNode" instance=ExtResource( 3 )]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 864.0
-margin_top = 486.0
-margin_right = 864.0
-margin_bottom = 486.0

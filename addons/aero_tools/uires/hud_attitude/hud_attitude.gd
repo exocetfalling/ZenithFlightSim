@@ -36,8 +36,8 @@ func _process(delta):
 		camera_fov = 60
 		display_distance = 500
 	
-	$MarkP10.position.y = -hud_scale_vertical * +10
-	$MarkN10.position.y = -hud_scale_vertical * -10
+	$MarkP10.rect_position.y = -hud_scale_vertical * +10
+	$MarkN10.rect_position.y = -hud_scale_vertical * -10
 	
-	$MarkP20.position.y = -hud_scale_vertical * +20
-	$MarkN20.position.y = -hud_scale_vertical * -20
+	$MarkP20.rect_position.y = -hud_scale_vertical * +20
+	$MarkN20.rect_position.y = -hud_scale_vertical * -20

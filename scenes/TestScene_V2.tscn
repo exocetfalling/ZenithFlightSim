@@ -108,3 +108,4 @@ action_up = "pitch_down"
 action_down = "pitch_up"
 
 [node name="HUDShared" parent="." instance=ExtResource( 20 )]
+visible = false
