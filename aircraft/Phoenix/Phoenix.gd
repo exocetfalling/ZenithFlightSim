@@ -157,21 +157,18 @@ func _physics_process(delta):
 		adc_alt_radio = 9999
 
 	
-	if ((autopilot_on == 1) && (adc_alt_radio >= 15) && (abs(adc_roll) < 30) && (abs(adc_pitch) < 15)):
-		if (abs(input_joystick.y) < 0.01):
+	if ((autopilot_on == 1) && (adc_alt_radio >= 15)):
+		if ((abs(adc_roll) < 30) && (abs(adc_pitch) < 15)):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
-			$PID_Calc_Pitch.calc_PID_output(tgt_pitch, adc_pitch)
+			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 15, rad2deg(adc_rates.x))
 			)
-			output_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
-			
-		
+			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
 		else:
-			tgt_pitch = adc_pitch
-	
-	else:
-		tgt_pitch = adc_pitch
+			input_elevator_trim = 0
+			$PIDCalcPitchRate.integral = 0
+		
 		
 	if (input_elevator_trim > input_trim_pitch_max):
 		input_elevator_trim = input_trim_pitch_max

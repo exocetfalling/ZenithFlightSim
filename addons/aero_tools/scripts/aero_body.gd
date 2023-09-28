@@ -307,7 +307,7 @@ func _physics_process(delta):
 	airspeed_true_vector = linear_velocity_local + self.transform.basis.xform_inv(linear_velocity_wind)
 	airspeed_true_total = airspeed_true_vector.length()
 	
-	angular_velocity_local = global_transform.basis.z * (angular_velocity)
+	angular_velocity_local = angular_velocity
 	angular_velocity_local_deg = Vector3(rad2deg(angular_velocity_local.x), rad2deg(angular_velocity_local.y), rad2deg(angular_velocity_local.z))
 	
 	air_temperature = calc_atmo_properties(global_transform.origin.y).x
@@ -322,7 +322,7 @@ func _physics_process(delta):
 	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
-	output_elevator_trim = input_elevator_trim
+	output_elevator_trim = interpolate_linear(output_elevator_trim, input_elevator_trim, deflection_rate, delta)
 	
 	# Key angles
 	angle_alpha = atan2(-airspeed_true_vector.y, -airspeed_true_vector.z)
@@ -363,9 +363,10 @@ func _physics_process(delta):
 	adc_trk = fmod((adc_hdg - adc_beta) + 360, 360)
 
 	# FBW
-	adc_rates.x = -angular_velocity_local_deg.x
+	adc_rates.x = angular_velocity_local_deg.x
 	adc_rates.y = angular_velocity_local_deg.y
-	adc_rates.z = -angular_velocity_local_deg.z
+	adc_rates.z = angular_velocity_local_deg.z
+	
 	
 	if (angle_alpha_deg > 15):
 		adc_stall = true

@@ -11,7 +11,7 @@ var camera_rotation_degrees : Vector3 = Vector3.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	DebugOverlay.stats.add_property(self, "camera_rotation_degrees", "round")
+#	DebugOverlay.stats.add_property(self, "camera_rotation_degrees", "round")
 	pass # Replace with function body.
 
 
