@@ -336,9 +336,9 @@ func get_input(delta):
 		# Trim input
 		
 		if (Input.is_action_pressed("trim_pitch_up")):
-			input_elevator_trim += 0.1 * delta 
+			input_elevator_trim += 0.2 * delta 
 		if (Input.is_action_pressed("trim_pitch_down")):
-			input_elevator_trim -= 0.1 * delta 
+			input_elevator_trim -= 0.2 * delta 
 
 		# Gear input
 		if (Input.is_action_just_pressed("gear_toggle")):
