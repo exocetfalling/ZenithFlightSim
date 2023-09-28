@@ -162,7 +162,7 @@ func _physics_process(delta):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
-			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 15, rad2deg(adc_rates.x))
+			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 150, rad2deg(adc_rates.x))
 			)
 			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
 		else:
@@ -183,10 +183,6 @@ func _physics_process(delta):
 	# Aero forces
 	$AeroSurface_Wing_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_L.vel_body = airspeed_true_vector
-	$AeroSurface_Wing_L.vel_body.y += \
-		+ pos_wing_l.x * angular_velocity_local.z
-	$AeroSurface_Wing_L.vel_body.z += \
-		+ pos_wing_l.x * angular_velocity_local.y
 	force_wing_l = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_L.force_total_surface_vector, \
@@ -194,10 +190,6 @@ func _physics_process(delta):
 			)
 	$AeroSurface_Wing_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Wing_R.vel_body = airspeed_true_vector
-	$AeroSurface_Wing_R.vel_body.y += \
-		+ pos_wing_r.x * angular_velocity_local.z
-	$AeroSurface_Wing_R.vel_body.z += \
-	+ pos_wing_r.x * angular_velocity_local.y
 	force_wing_r = \
 		calc_force_rotated_from_surface( \
 			$AeroSurface_Wing_R.force_total_surface_vector, \
