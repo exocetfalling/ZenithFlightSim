@@ -61,7 +61,7 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "force_tail_v", "round")
 #	DebugOverlay.stats.add_property(self, "force_tail_h", "round")
 #	DebugOverlay.stats.add_property(self, "cmd_vector", "round")
-#	DebugOverlay.stats.add_property(self, "input_flaps", "round")
+#	DebugOverlay.stats.add_property(self, "input_joystick", "round")
 #	DebugOverlay.stats.add_property(self, "value_setpoint", "round")
 #	DebugOverlay.stats.add_property(self, "value_current", "round")
 #	DebugOverlay.stats.add_property(self, "output_P", "round")
@@ -162,7 +162,7 @@ func _physics_process(delta):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
-			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 150, rad2deg(adc_rates.x))
+			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 15, adc_rates.x)
 			)
 			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
 		else:
