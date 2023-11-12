@@ -21,6 +21,7 @@ __meta__ = {
 }
 
 [node name="PFD" type="MarginContainer" parent="Display"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
@@ -43,7 +44,7 @@ handle_input_locally = false
 hdr = false
 disable_3d = true
 usage = 0
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="XForm_Roll" type="Node2D" parent="Display/PFD/EADI/Viewport"]
 position = Vector2( 500, 500 )
@@ -446,6 +447,82 @@ margin_left = 8.0
 margin_top = 61.0
 margin_right = -8.0
 margin_bottom = -8.0
+
+[node name="FCR" type="MarginContainer" parent="Display"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 61.0
+margin_right = -8.0
+margin_bottom = -8.0
+
+[node name="Scope" type="Node2D" parent="Display/FCR"]
+position = Vector2( 550, 525 )
+
+[node name="Border" type="Line2D" parent="Display/FCR/Scope"]
+points = PoolVector2Array( 0, -500, 500, -500, 500, 500, -500, 500, -500, -500, 0, -500 )
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Cursor" type="Node2D" parent="Display/FCR/Scope"]
+
+[node name="EdgeL" type="Line2D" parent="Display/FCR/Scope/Cursor"]
+position = Vector2( -20, 0 )
+points = PoolVector2Array( 0, -20, 0, 20 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="EdgeR" type="Line2D" parent="Display/FCR/Scope/Cursor"]
+position = Vector2( 20, 0 )
+points = PoolVector2Array( 0, -20, 0, 20 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Horizon" type="Node2D" parent="Display/FCR/Scope"]
+
+[node name="DatumL" type="Line2D" parent="Display/FCR/Scope/Horizon"]
+points = PoolVector2Array( -100, 0, -300, 0, -300, 20 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="DatumR" type="Line2D" parent="Display/FCR/Scope/Horizon"]
+points = PoolVector2Array( 100, 0, 300, 0, 300, 20 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="Range" type="Node2D" parent="Display/FCR/Scope"]
+position = Vector2( -400, -400 )
+
+[node name="Value" type="Label" parent="Display/FCR/Scope/Range"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -15.0
+margin_right = 20.0
+margin_bottom = 15.0
+text = "XXX"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="RangeUp" type="Button" parent="Display/FCR/Scope/Range"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -21.0
+margin_top = -49.0
+margin_right = 21.0
+margin_bottom = -12.0
+text = "/\\"
+flat = true
+
+[node name="RangeDn" type="Button" parent="Display/FCR/Scope/Range"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -21.0
+margin_top = 10.0
+margin_right = 21.0
+margin_bottom = 47.0
+text = "\\/"
+flat = true
 
 [node name="SYS" type="MarginContainer" parent="Display"]
 visible = false
