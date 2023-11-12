@@ -100,6 +100,8 @@ func _process(delta):
 	hud_scale_factor = get_viewport_rect().size / Vector2(1920, 1080)
 	
 	$HUD_Centre.scale = hud_scale_factor
+	$EADI.texture_scale = hud_scale_factor.y
+	$Compass.scale = Vector2(hud_scale_factor.y, hud_scale_factor.y)
 	
 	# Calculate the virtual distance the HUD is positioned for
 	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
@@ -213,10 +215,10 @@ func _process(delta):
 	tape_hdg_blw2 = _format_hdg(tape_hdg_ref - 2 * tape_hdg_step)
 	
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.text = ("%03d\n|" % [_format_hdg(tape_hdg_ref)])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.text = ("%03d\n|" % [tape_hdg_abv1])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.text = ("%03d\n|" % [tape_hdg_abv2])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.text = ("%03d\n|" % [tape_hdg_blw1])
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.text = ("%03d\n|" % [tape_hdg_blw2])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.text = ("%03d\n|" % [_format_hdg(tape_hdg_abv1)])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.text = ("%03d\n|" % [_format_hdg(tape_hdg_abv2)])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.text = ("%03d\n|" % [_format_hdg(tape_hdg_blw1)])
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.text = ("%03d\n|" % [_format_hdg(tape_hdg_blw2)])
 	
 	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG.position.x = \
 		-(AeroDataBus.aircraft_hdg - tape_hdg_ref) * (tape_hdg_spacing / tape_hdg_step)
@@ -261,3 +263,5 @@ func _process(delta):
 	$EADI/Mark_Angles.scale = Vector2.ONE * hud_scale_factor
 	$EADI/XForm_Roll/Indicator_Roll.scale = Vector2.ONE * hud_scale_factor
 	$HUD_Centre/RadioAlt.scale = Vector2.ONE * hud_scale_factor
+	
+	#$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_scale = Vector2.ONE * hud_scale_factor

@@ -307,7 +307,6 @@ valign = 1
 uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
-visible = false
 modulate = Color( 0, 1, 0, 1 )
 light_mask = 0
 position = Vector2( 0, -20 )
@@ -350,11 +349,12 @@ uppercase = true
 
 [node name="REF0" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
+anchor_right = 1.0
 anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -25.0
-margin_right = 39.0
-margin_bottom = 24.0
+margin_left = -24.0
+margin_top = -35.0
+margin_right = 24.0
+margin_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
@@ -365,9 +365,6 @@ text = "XXX
 align = 1
 valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="BLW1" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
@@ -872,6 +869,7 @@ align = 1
 valign = 1
 
 [node name="Compass" type="Node2D" parent="."]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 position = Vector2( 960, 965 )
 scale = Vector2( 0.7, 0.7 )
