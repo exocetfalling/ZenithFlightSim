@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=2]
 [ext_resource path="res://scripts/Derivative_Calc.gd" type="Script" id=3]
 [ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=4]
-[ext_resource path="res://weapons/Missile/Missile.gd" type="Script" id=5]
+[ext_resource path="res://weapons/bomb_glide/bomb_glide.gd" type="Script" id=5]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=6]
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=7]
 [ext_resource path="res://scripts/Camera_FPV.gd" type="Script" id=8]
@@ -13,10 +13,14 @@
 radius = 0.1
 height = 1.5
 
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.9, 0.001, 0.05 )
+
 [sub_resource type="BoxShape" id=2]
 extents = Vector3( 0.1, 0.001, 0.1 )
 
-[node name="Missile" type="VehicleBody"]
+[node name="BombGlide" type="VehicleBody"]
+mass = 25.0
 continuous_cd = true
 can_sleep = false
 angular_damp = 20.0
@@ -60,62 +64,41 @@ radius = 0.05
 sides = 16
 smooth_faces = false
 
+[node name="CSGBox" type="CSGBox" parent="AeroSurface_Fuse/CSGCylinder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0 )
+operation = 2
+width = 0.2
+height = 0.8
+depth = 0.01
+
 [node name="AeroSurface_Fin_F1" type="Spatial" parent="."]
-transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.14, 0.14, -0.400237 )
+transform = Transform( 1, 0, 0, 0, 0.999903, -0.0139622, 0, 0.0139622, 0.999903, 0.1, 0, -0.3 )
 script = ExtResource( 4 )
-length_chord_root = 0.2
-length_chord_tip = 0.2
-length_span = 0.2
+length_chord_root = 0.1
+length_chord_tip = 0.1
+length_span = 0.8
+pos_COP = Vector3( 0.4, 0, 0.05 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fin_F1"]
-transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.1
-height = 0.2
+transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0.4, 0, 0.05 )
+radius = 0.05
+height = 0.8
 sides = 32
 smooth_faces = false
 material = ExtResource( 6 )
 
 [node name="AeroSurface_Fin_F2" type="Spatial" parent="."]
-transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.14, 0.14, -0.400237 )
+transform = Transform( 1, 0, 0, 0, 0.999903, -0.0139622, 0, 0.0139622, 0.999903, -0.1, 0, -0.3 )
 script = ExtResource( 4 )
-length_chord_root = 0.2
-length_chord_tip = 0.2
-length_span = 0.2
+length_chord_root = 0.1
+length_chord_tip = 0.1
+length_span = 0.8
+pos_COP = Vector3( -0.4, 0, 0.05 )
 
 [node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fin_F2"]
-transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.1
-height = 0.2
-sides = 32
-smooth_faces = false
-material = ExtResource( 6 )
-
-[node name="AeroSurface_Fin_F3" type="Spatial" parent="."]
-transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.14, -0.14, -0.400237 )
-script = ExtResource( 4 )
-length_chord_root = 0.2
-length_chord_tip = 0.2
-length_span = 0.2
-
-[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fin_F3"]
-transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.1
-height = 0.2
-sides = 32
-smooth_faces = false
-material = ExtResource( 6 )
-
-[node name="AeroSurface_Fin_F4" type="Spatial" parent="."]
-transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.14, -0.14, -0.400237 )
-script = ExtResource( 4 )
-length_chord_root = 0.2
-length_chord_tip = 0.2
-length_span = 0.2
-
-[node name="CSGCylinder" type="CSGCylinder" parent="AeroSurface_Fin_F4"]
-transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
-radius = 0.1
-height = 0.2
+transform = Transform( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, -0.4, 0, 0.05 )
+radius = 0.05
+height = 0.8
 sides = 32
 smooth_faces = false
 material = ExtResource( 6 )
@@ -184,21 +167,9 @@ material = ExtResource( 6 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000237241 )
 shape = SubResource( 1 )
 
-[node name="CollisionShape_Fin_F1" type="CollisionShape" parent="."]
-transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, -0.400237 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape_Fin_F2" type="CollisionShape" parent="."]
-transform = Transform( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.138, 0.138, -0.400237 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape_Fin_F3" type="CollisionShape" parent="."]
-transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.138, -0.138, -0.400237 )
-shape = SubResource( 2 )
-
-[node name="CollisionShape_Fin_F4" type="CollisionShape" parent="."]
-transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, -0.400237 )
-shape = SubResource( 2 )
+[node name="CollisionShape_Fin_F" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25 )
+shape = SubResource( 3 )
 
 [node name="CollisionShape_Fin_R1" type="CollisionShape" parent="."]
 transform = Transform( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, 0.599763 )
@@ -230,7 +201,7 @@ term_D = 0.1
 param_tuning_active = false
 
 [node name="Camera_FPV" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
 environment = ExtResource( 7 )
 current = true
 fov = 60.0

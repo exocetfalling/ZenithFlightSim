@@ -10,6 +10,7 @@ script = ExtResource( 2 )
 
 [node name="MarkH00" parent="." instance=ExtResource( 1 )]
 mark_pitch_value_visible = false
+mark_line_gap = 0.0
 
 [node name="MarkP10" parent="." instance=ExtResource( 1 )]
 margin_top = -200.0

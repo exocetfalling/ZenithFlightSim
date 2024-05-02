@@ -29,13 +29,16 @@ label_displayed = "ALT"
 value_digits = 5
 
 [node name="GaugeFOV" parent="." instance=ExtResource( 1 )]
-anchor_left = 0.45
-anchor_top = 0.9
-anchor_right = 0.55
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -960.0
+margin_top = -150.0
+margin_right = 960.0
 label_displayed = "FOV"
 
-[node name="Control" type="Control" parent="."]
+[node name="Centre" type="Control" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -43,12 +46,19 @@ anchor_bottom = 0.5
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="Light2D" type="Light2D" parent="Control"]
+[node name="Mask" type="Light2D" parent="Centre"]
 z_index = 1
 texture = ExtResource( 4 )
 mode = 3
 range_z_min = 1
 range_z_max = 2
+
+[node name="Wings" type="Node2D" parent="Centre"]
+
+[node name="Line2D" type="Line2D" parent="Centre/Wings"]
+points = PoolVector2Array( -150, 0, -50, 0, 0, 50, 50, 0, 150, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
 
 [node name="HUDNode" type="Node2D" parent="."]
 position = Vector2( 960, 540 )

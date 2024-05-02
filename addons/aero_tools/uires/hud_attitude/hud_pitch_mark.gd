@@ -9,7 +9,7 @@ export var mark_line_length : float = 1000
 export var mark_line_width : float = 5
 export var mark_pitch_value : float = 10
 export var mark_pitch_value_visible : bool = true
-
+export var mark_line_gap : float = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,9 +27,13 @@ func _process(delta):
 		# Code to execute in game.
 
 	# Code to execute both in editor and in game.
-	$MarkLine.width = mark_line_width
-	$MarkLine.points[0].x = -mark_line_length/2
-	$MarkLine.points[1].x = +mark_line_length/2
+	$MarkLineL.width = mark_line_width
+	$MarkLineL.points[0].x = -mark_line_length / 2
+	$MarkLineL.points[1].x = -mark_line_length / 2 + (mark_line_length - mark_line_gap) / 2
+	
+	$MarkLineR.width = mark_line_width
+	$MarkLineR.points[0].x = +mark_line_length / 2
+	$MarkLineR.points[1].x = +mark_line_length / 2 - (mark_line_length - mark_line_gap) / 2
 	
 	$LabelNode1.position.x = -(mark_line_length/2 + 50)
 	$LabelNode2.position.x = +(mark_line_length/2 + 50)

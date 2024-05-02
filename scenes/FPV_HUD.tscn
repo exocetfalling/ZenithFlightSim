@@ -47,7 +47,7 @@ light_mask = 0
 [node name="XForm_Pitch" type="Node2D" parent="EADI/XForm_Roll"]
 
 [node name="Horizon" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch"]
-points = PoolVector2Array( -500, 0, 500, 0 )
+points = PoolVector2Array( -600, 0, 600, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -307,6 +307,7 @@ valign = 1
 uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 light_mask = 0
 position = Vector2( 0, -20 )
@@ -562,7 +563,7 @@ __meta__ = {
 
 [node name="Tape_SPD" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( -760, 0 )
+position = Vector2( -850, 0 )
 z_index = 1
 
 [node name="ABV2" type="Label" parent="HUD_Centre/Tape_SPD"]
@@ -638,7 +639,7 @@ __meta__ = {
 
 [node name="Tape_ALT" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 740, 0 )
+position = Vector2( 820, 0 )
 z_index = 1
 
 [node name="ABV2" type="Label" parent="HUD_Centre/Tape_ALT"]
@@ -722,34 +723,37 @@ __meta__ = {
 }
 
 [node name="Div_SPD" type="Line2D" parent="HUD_Centre"]
+visible = false
 position = Vector2( -560, 0 )
 points = PoolVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Div_aLT" type="Line2D" parent="HUD_Centre"]
+visible = false
 position = Vector2( 560, 0 )
 points = PoolVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle_SPD" type="Line2D" parent="HUD_Centre"]
-position = Vector2( -585, 0 )
+position = Vector2( -768, 0 )
+z_index = 1
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle_ALT" type="Line2D" parent="HUD_Centre"]
-position = Vector2( 585, 0 )
+position = Vector2( 711, 0 )
 points = PoolVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_SPD" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = -835.0
+margin_left = -910.0
 margin_top = -410.0
-margin_right = -707.0
+margin_right = -782.0
 margin_bottom = -378.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )
@@ -759,9 +763,9 @@ uppercase = true
 
 [node name="Label_ALT" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = 670.0
+margin_left = 770.0
 margin_top = -410.0
-margin_right = 798.0
+margin_right = 908.0
 margin_bottom = -378.0
 custom_colors/font_color = Color( 0, 1, 0, 1 )
 custom_fonts/font = ExtResource( 4 )

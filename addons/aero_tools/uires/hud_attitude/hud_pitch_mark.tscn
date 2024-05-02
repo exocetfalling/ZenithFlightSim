@@ -8,8 +8,13 @@ theme = ExtResource( 2 )
 script = ExtResource( 1 )
 mark_pitch_value = 0.0
 
-[node name="MarkLine" type="Line2D" parent="."]
-points = PoolVector2Array( -500, 0, 500, 0 )
+[node name="MarkLineL" type="Line2D" parent="."]
+points = PoolVector2Array( -500, 0, -150, 0 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+
+[node name="MarkLineR" type="Line2D" parent="."]
+points = PoolVector2Array( 500, 0, 150, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 1 )
 

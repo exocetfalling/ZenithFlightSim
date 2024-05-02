@@ -26,6 +26,7 @@ func _process(delta):
 	$GaugeALT.value_displayed = AeroDataBus.aircraft_alt_barometric
 	
 	$HUDNode.position = get_viewport_rect().size / 2
+	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
 	
 	if (get_viewport().get_camera() != null):
 		$GaugeFOV.value_displayed = get_viewport().get_camera().fov

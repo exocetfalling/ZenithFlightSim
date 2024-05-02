@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh"
+
+[deps]
+
+files=[ "res://.import/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh" ]
+
+source_file="res://assets/tree/fir_fixed.obj"
+dest_files=[ "res://.import/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh", "res://.import/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

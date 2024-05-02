@@ -25,7 +25,7 @@ extents = Vector3( 1, 0.05, 0.4 )
 albedo_color = Color( 0.0784314, 0.0705882, 0.0745098, 1 )
 
 [node name="Phoenix" type="VehicleBody"]
-mass = 2000.0
+mass = 800.0
 continuous_cd = true
 can_sleep = false
 angular_damp = 1.2
@@ -248,6 +248,7 @@ far = 1e+06
 script = ExtResource( 8 )
 
 [node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 4 )]
+visible = false
 
 [node name="Camera_Ext" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )

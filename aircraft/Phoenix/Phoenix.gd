@@ -122,10 +122,10 @@ func _physics_process(delta):
 		
 		AeroDataBus.aircraft_nav_waypoint_data = find_angles_and_distance_to_target(Vector3(0, 200, 0))
 		
-	if (camera_mode == 0):
-		$Camera_FPV/FPV_HUD.visible = true
-	if (camera_mode == 1):
-		$Camera_FPV/FPV_HUD.visible = false
+#	if (camera_mode == 0):
+#		$Camera_FPV/FPV_HUD.visible = true
+#	if (camera_mode == 1):
+#		$Camera_FPV/FPV_HUD.visible = false
 
 	if (angle_alpha_deg > 15):
 		adc_stall = true

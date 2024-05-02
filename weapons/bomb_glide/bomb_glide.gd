@@ -7,8 +7,6 @@ extends AeroBody
 
 var force_fin_f1 : Vector3 = Vector3.ZERO
 var force_fin_f2 : Vector3 = Vector3.ZERO
-var force_fin_f3 : Vector3 = Vector3.ZERO
-var force_fin_f4 : Vector3 = Vector3.ZERO
 
 var force_fin_r1 : Vector3 = Vector3.ZERO
 var force_fin_r2 : Vector3 = Vector3.ZERO
@@ -17,8 +15,6 @@ var force_fin_r4 : Vector3 = Vector3.ZERO
 
 var pos_fin_f1 : Vector3 = Vector3.ZERO
 var pos_fin_f2 : Vector3 = Vector3.ZERO
-var pos_fin_f3 : Vector3 = Vector3.ZERO
-var pos_fin_f4 : Vector3 = Vector3.ZERO
 
 var pos_fin_r1 : Vector3 = Vector3.ZERO
 var pos_fin_r2 : Vector3 = Vector3.ZERO
@@ -59,20 +55,6 @@ func _physics_process(delta):
 			$AeroSurface_Fin_F2.force_total_surface_vector, \
 			$AeroSurface_Fin_F2.rotation \
 			)
-	$AeroSurface_Fin_F3.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F3.vel_body = airspeed_true_vector
-	force_fin_f3 = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Fin_F3.force_total_surface_vector, \
-			$AeroSurface_Fin_F3.rotation \
-			)
-	$AeroSurface_Fin_F4.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Fin_F4.vel_body = airspeed_true_vector
-	force_fin_f4 = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Fin_F4.force_total_surface_vector, \
-			$AeroSurface_Fin_F4.rotation \
-			)
 	
 	$AeroSurface_Fin_R1.atmo_data = calc_atmo_properties(global_transform.origin.y)
 	$AeroSurface_Fin_R1.vel_body = airspeed_true_vector
@@ -105,53 +87,15 @@ func _physics_process(delta):
 
 	pos_fin_f1 = $AeroSurface_Fin_F1.pos_force_rel
 	pos_fin_f2 = $AeroSurface_Fin_F2.pos_force_rel
-	pos_fin_f3 = $AeroSurface_Fin_F3.pos_force_rel
-	pos_fin_f4 = $AeroSurface_Fin_F4.pos_force_rel
 
 	pos_fin_r1 = $AeroSurface_Fin_R1.pos_force_rel
 	pos_fin_r2 = $AeroSurface_Fin_R2.pos_force_rel
 	pos_fin_r3 = $AeroSurface_Fin_R3.pos_force_rel
 	pos_fin_r4 = $AeroSurface_Fin_R4.pos_force_rel
-
-	$AeroSurface_Fin_F1.rotation = \
-		Vector3( \
-			(0.1 * (output_joystick.y - output_joystick.x)), \
-			0, \
-			($AeroSurface_Fin_F1.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Fin_F1.rotation.z)
-	
-	$AeroSurface_Fin_F2.rotation = \
-		Vector3( \
-			(0.1 * (output_joystick.y + output_joystick.x)), \
-			0, \
-			($AeroSurface_Fin_F2.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Fin_F2.rotation.z)
-	
-	$AeroSurface_Fin_F3.rotation = \
-		Vector3( \
-			(0.1 * (output_joystick.y + output_joystick.x)), \
-			0, \
-			($AeroSurface_Fin_F3.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Fin_F3.rotation.z)
-	
-	$AeroSurface_Fin_F4.rotation = \
-		Vector3( \
-			(0.1 * (output_joystick.y - output_joystick.x)), \
-			0, \
-			($AeroSurface_Fin_F4.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Fin_F4.rotation.z)
 	
 	$AeroSurface_Fin_R1.rotation = \
 		Vector3( \
-			(-0.1 * (cmd_vector.z)), \
+			(+0.1 * (-output_joystick.x - output_joystick.y)), \
 			0, \
 			($AeroSurface_Fin_R1.rotation.z) \
 			)\
@@ -160,7 +104,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R2.rotation = \
 		Vector3( \
-			(+0.1 * (cmd_vector.z)), \
+			(+0.1 * (+output_joystick.x - output_joystick.y)), \
 			0, \
 			($AeroSurface_Fin_R2.rotation.z) \
 			)\
@@ -169,7 +113,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R3.rotation = \
 		Vector3( \
-			(-0.1 * (cmd_vector.z)), \
+			(+0.1 * (-output_joystick.x - output_joystick.y)), \
 			0, \
 			($AeroSurface_Fin_R3.rotation.z) \
 			)\
@@ -178,7 +122,7 @@ func _physics_process(delta):
 	
 	$AeroSurface_Fin_R4.rotation = \
 		Vector3( \
-			(+0.001 * (cmd_vector.z)), \
+			(+0.1 * (+output_joystick.x - output_joystick.y)), \
 			0, \
 			($AeroSurface_Fin_R4.rotation.z) \
 			)\
@@ -230,8 +174,6 @@ func _integrate_forces(_state):
 	# Forces from surfaces 
 	add_force_local(force_fin_f1, pos_fin_f1)
 	add_force_local(force_fin_f2, pos_fin_f2)
-	add_force_local(force_fin_f3, pos_fin_f3)
-	add_force_local(force_fin_f4, pos_fin_f4)
 	
 	add_force_local(force_fin_r1, pos_fin_r1)
 	add_force_local(force_fin_r2, pos_fin_r2)
