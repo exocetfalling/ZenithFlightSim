@@ -25,11 +25,12 @@ func _process(delta):
 	$GaugeHDG.value_displayed = AeroDataBus.aircraft_hdg
 	$GaugeALT.value_displayed = AeroDataBus.aircraft_alt_barometric
 	
+	$GaugeTHR.value_displayed = AeroDataBus.aircraft_throttle * 100
+	
 	$HUDNode.position = get_viewport_rect().size / 2
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
 	
 	if (get_viewport().get_camera() != null):
-		$GaugeFOV.value_displayed = get_viewport().get_camera().fov
 		camera_rotation = get_viewport().get_camera().global_transform.basis.get_euler()
 		
 		camera_rotation_degrees.x = rad2deg(camera_rotation.x)
