@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" type="Script" id=2]
-[ext_resource path="res://addons/aero_tools/uires/hud_attitude/hud_attitude.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" type="PackedScene" id=3]
 [ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" type="Texture" id=4]
 
 [node name="HUDShared" type="Control"]
@@ -40,13 +40,9 @@ margin_top = -150.0
 margin_right = 960.0
 label_displayed = "THR"
 
-[node name="Centre" type="Control" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="Centre" type="Node2D" parent="."]
+position = Vector2( 960, 540 )
+z_index = 1
 
 [node name="Mask" type="Light2D" parent="Centre"]
 z_index = 1
@@ -62,8 +58,9 @@ points = PoolVector2Array( -150, 0, -50, 0, 0, 50, 50, 0, 150, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="HUDNode" type="Node2D" parent="."]
-position = Vector2( 960, 540 )
-z_index = 1
+[node name="HUDLadder" parent="Centre" instance=ExtResource( 3 )]
 
-[node name="HUDAttitude" parent="HUDNode" instance=ExtResource( 3 )]
+[node name="FPM" type="Line2D" parent="Centre"]
+points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
+width = 3.0
+default_color = Color( 1, 1, 1, 1 )

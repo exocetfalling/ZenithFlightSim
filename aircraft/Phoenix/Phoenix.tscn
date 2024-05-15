@@ -28,7 +28,7 @@ albedo_color = Color( 0.0784314, 0.0705882, 0.0745098, 1 )
 mass = 800.0
 continuous_cd = true
 can_sleep = false
-angular_damp = 1.2
+angular_damp = 2.0
 script = ExtResource( 1 )
 
 [node name="CollisionShape_Fuse" type="CollisionShape" parent="."]
