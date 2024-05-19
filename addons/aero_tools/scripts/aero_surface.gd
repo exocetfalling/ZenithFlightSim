@@ -71,6 +71,19 @@ var force_lift_surface_vector : Vector3 = Vector3.ZERO
 var force_drag_surface_vector : Vector3 = Vector3.ZERO
 var force_total_surface_vector : Vector3 = Vector3.ZERO
 
+
+func update_atmo_data():
+	air_temperature = atmo_data.x
+	air_pressure = atmo_data.y
+	air_density = atmo_data.z
+	
+	vel_surface = (self.transform.basis.xform_inv(vel_body))
+	vel_total = vel_surface.length()
+	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
+	
+	vel_delta = vel_surface - vel_body
+
+
 # Lift coeffecient calculation function
 func calc_lift_coeff():
 	
@@ -115,49 +128,16 @@ func calc_drag_magnitude():
 	force_drag_surface_magnitude = \
 		0.5 * air_density * pow(vel_total, 2) * area_surface * coeffecient_drag
 
-func calc_alpha(vel_up, vel_fwd):
-	return atan2(-vel_up, vel_fwd)
 
-func calc_beta(vel_right, vel_fwd):
-	return atan2(-vel_right, vel_fwd)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	area_surface = (length_chord_root + length_chord_tip) / 2 * length_span
-	
-#	DebugOverlay.stats.add_property(self, "surface_area", "round")
-#	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
-#	DebugOverlay.stats.add_property(self, "coeffecient_lift", "round")
-#	DebugOverlay.stats.add_property(self, "coeffecient_drag", "round")
-#	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
-#	DebugOverlay.stats.add_property(self, "atmo_data", "round")
-	pass # Replace with function body.
-
-func _physics_process(delta):
-	air_temperature = atmo_data.x
-	air_pressure = atmo_data.y
-	air_density = atmo_data.z
-	
-	vel_surface = (self.transform.basis.xform_inv(vel_body))
-	vel_total = vel_surface.length()
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
-	
-	vel_delta = vel_surface - vel_body
-	
-	angle_alpha = calc_alpha(vel_surface.y, -vel_surface.z)
-	angle_beta = calc_beta(vel_surface.x, -vel_surface.z)
+func calc_alpha_beta():
+	angle_alpha = atan2(-vel_surface.y, -vel_surface.z)
+	angle_beta = atan2(-vel_surface.x, -vel_surface.z)
 	
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
-	
-	calc_lift_coeff()
-	calc_drag_coeff()
-	calc_lift_magnitude()
-	calc_drag_magnitude()
-	
+
+
+func calc_force_vectors():
 	force_lift_surface_vector = \
 		Vector3(0, force_lift_surface_magnitude, 0)
 	
@@ -176,6 +156,32 @@ func _physics_process(delta):
 	pos_force_rel.x = translation.x
 	pos_force_rel.y = translation.y + sin(-rotation.x) * pos_COP.z
 	pos_force_rel.z = translation.z + cos(-rotation.x) * pos_COP.z
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	area_surface = (length_chord_root + length_chord_tip) / 2 * length_span
+	
+#	DebugOverlay.stats.add_property(self, "surface_area", "round")
+#	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+#	DebugOverlay.stats.add_property(self, "coeffecient_lift", "round")
+#	DebugOverlay.stats.add_property(self, "coeffecient_drag", "round")
+#	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
+#	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
+#	DebugOverlay.stats.add_property(self, "atmo_data", "round")
+	pass # Replace with function body.
+
+func _physics_process(delta):
+	update_atmo_data()
+	calc_alpha_beta()
+	calc_lift_coeff()
+	calc_drag_coeff()
+	calc_lift_magnitude()
+	calc_drag_magnitude()
+	calc_force_vectors()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
