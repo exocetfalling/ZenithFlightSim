@@ -14,20 +14,25 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "camera_rotation_degrees", "round")
 	pass # Replace with function body.
 
+func set_display_spd(value):
+	$GaugeSPD.value_displayed = value
+
+
+func set_display_hdg(value):
+	$GaugeHDG.value_displayed = value
+
+
+func set_display_alt(value):
+	$GaugeALT.value_displayed = value
+
+
+func set_display_thr(value):
+	$GaugeTHR.value_displayed = value
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera().fov
-	
-	if (use_IAS == true):
-		$GaugeSPD.value_displayed = AeroDataBus.aircraft_spd_indicated
-	else:
-		$GaugeSPD.value_displayed = AeroDataBus.aircraft_spd_true
-	
-	$GaugeHDG.value_displayed = AeroDataBus.aircraft_hdg
-	$GaugeALT.value_displayed = AeroDataBus.aircraft_alt_barometric
-	
-	$GaugeTHR.value_displayed = AeroDataBus.aircraft_throttle * 100
 	
 	$Centre.position = get_viewport_rect().size / 2
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE

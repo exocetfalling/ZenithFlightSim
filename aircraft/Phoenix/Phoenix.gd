@@ -26,6 +26,10 @@ var camera_mode : int = 0
 var camera_mouse_delta = 0
 
 var ground_contact : bool = true
+var ground_contact_NLG = false
+var ground_contact_MLG_L = false
+var ground_contact_MLG_R = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -74,6 +78,7 @@ func _ready():
 	
 	pass
 
+
 # NWS gains
 func _nosewheel_gains(speed):
 	var speed_1 = 5
@@ -88,50 +93,20 @@ func _nosewheel_gains(speed):
 		return ((gain_2 - gain_1) / (speed_2 - speed_1)) * (speed - speed_1) + gain_1
 	else:
 		return 0
-	
+
+
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
-#	angular_velocity_local = (angular_velocity)
-	if (control_type == 1):
-		# Panel updates
-		AeroDataBus.aircraft_pitch = adc_pitch
-		AeroDataBus.aircraft_roll = adc_roll
-		AeroDataBus.aircraft_alpha = adc_alpha
-		AeroDataBus.aircraft_beta = adc_beta
-		
-		AeroDataBus.aircraft_mu = adc_mu
-		AeroDataBus.aircraft_nu = adc_nu
-		
-		if (Global.setting_units == 0):
-			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated
-			AeroDataBus.aircraft_spd_true = adc_spd_true
-			AeroDataBus.aircraft_alt_barometric = adc_alt_barometric
-			AeroDataBus.aircraft_alt_radio = adc_alt_radio
-		if (Global.setting_units == 1):
-			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated * 2
-			AeroDataBus.aircraft_spd_true = adc_spd_true * 2
-			AeroDataBus.aircraft_alt_barometric = adc_alt_barometric * 3.2809
-			AeroDataBus.aircraft_alt_radio = adc_alt_radio * 3.2809
-		
-		AeroDataBus.aircraft_hdg = adc_hdg
-		AeroDataBus.aircraft_flaps = input_flaps
-		AeroDataBus.aircraft_trim = output_elevator_trim
-		AeroDataBus.aircraft_gear = gear_current
-		AeroDataBus.aircraft_throttle = input_throttle
-		AeroDataBus.aircraft_cws = autopilot_on
-		
-		AeroDataBus.aircraft_nav_waypoint_data = find_angles_and_distance_to_target(Vector3(0, 200, 0))
-		
-#	if (camera_mode == 0):
-#		$Camera_FPV/FPV_HUD.visible = true
-#	if (camera_mode == 1):
-#		$Camera_FPV/FPV_HUD.visible = false
-
 	if (angle_alpha_deg > 15):
 		adc_stall = true
 	else:
 		adc_stall = false
 	
+	# Panel updates
+	$HUDShared.set_display_spd(adc_spd_indicated)
+	$HUDShared.set_display_hdg(adc_hdg)
+	$HUDShared.set_display_alt(adc_alt_asl)
+	$HUDShared.set_display_thr(adc_throttle)
 	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
@@ -151,13 +126,12 @@ func _physics_process(delta):
 	
 	
 	if ($RadioAltimeter.is_colliding() == true):
-		adc_alt_radio = (global_translation - $RadioAltimeter.get_collision_point()).length()
+		adc_alt_agl = (global_translation - $RadioAltimeter.get_collision_point()).length()
 	else:
 		# Set value to show sensor is out of range
-		adc_alt_radio = 9999
-
+		adc_alt_agl = 9999
 	
-	if ((autopilot_on == 1) && (adc_alt_radio >= 15)):
+	if ((autopilot_on == 1) && (adc_alt_agl >= 15)):
 		if ((abs(adc_roll) < 30) && (abs(adc_pitch) < 15)):
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
@@ -277,13 +251,6 @@ func _physics_process(delta):
 
 	pos_ruddervator_l = $AeroSurface_Ruddervator_L.pos_force_rel
 	pos_ruddervator_r = $AeroSurface_Ruddervator_R.pos_force_rel
-	
-#	# HMD 
-#	get_node("Camera_FPV_Node/HMD").body_angles.x = deg2rad(adc_pitch)
-#	get_node("Camera_FPV_Node/HMD").body_angles.z = deg2rad(adc_roll)
-	
-	# Sync camera FOV with HUD
-	$Camera_FPV/FPV_HUD.cam_fov = $Camera_FPV.fov
 	
 	# Clamping
 	input_flaps = clamp(input_flaps, flaps_min, flaps_max)

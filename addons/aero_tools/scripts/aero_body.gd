@@ -23,10 +23,6 @@ var air_pressure_dynamic : float = 0.00
 # Air density, kg/m^3
 var air_density = 1.2
 
-var ground_contact_NLG = false
-var ground_contact_MLG_L = false
-var ground_contact_MLG_R = false
-
 var linear_velocity_corrected = Vector3.ZERO
 
 var linear_velocity_local = Vector3.ZERO
@@ -44,10 +40,12 @@ var adc_spd_indicated = 0
 var adc_spd_true = 0
 var adc_spd_ground = 0
 
-var adc_alt_barometric = 0
-var adc_alt_radio = 0
+var adc_alt_asl = 0
+var adc_alt_agl = 0
 
 var adc_hdg = 0
+
+var adc_throttle = 0
 
 var adc_pitch = 0
 var adc_roll = 0
@@ -55,8 +53,8 @@ var adc_roll = 0
 var adc_alpha = 0
 var adc_beta = 0
 
-var adc_mu = 0
-var adc_nu = 0
+var adc_angle_inertial_y = 0
+var adc_angle_inertial_x = 0
 
 var adc_fpa = 0
 var tgt_fpa = 0
@@ -79,10 +77,10 @@ var angle_beta = 0
 var angle_beta_deg = 0 
 
 # Inertial-derived angles to calculate trajectory offset by wind
-var angle_mu = 0
-var angle_mu_deg = 0
-var angle_nu = 0
-var angle_nu_deg = 0 
+var angle_inertial_y = 0
+var angle_inertial_y_deg = 0
+var angle_inertial_x = 0
+var angle_inertial_x_deg = 0 
 
 # Deflection in radians
 var deflection_control_max = PI/12
@@ -249,20 +247,20 @@ func interpolate_linear(value_current, value_target, rate, delta_time):
 	else:
 		return value_target
 
-func calc_braking_force(vel_fwd, weight_craft, commanded_braking):
+func calc_braking_force():
 	var braking_coeff
 	var braking_force
 	
-	if (vel_fwd > 0):
+	if (linear_velocity_local.z < 0):
 		braking_coeff = 0.5
 
-	elif (vel_fwd < 0):
+	elif (linear_velocity_local > 0):
 		braking_coeff = -0.5
 	
 	else:
 		braking_coeff = 0
 	
-	braking_force = braking_coeff * weight_craft * input_braking
+	braking_force = braking_coeff * weight * input_braking
 	return braking_force
 
 func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
@@ -331,11 +329,10 @@ func _physics_process(delta):
 	angle_alpha_deg = rad2deg(angle_alpha)
 	angle_beta_deg = rad2deg(angle_beta)
 	
-	angle_mu = atan2(-linear_velocity_local.y, -linear_velocity_local.z)
-	angle_nu = atan2(-linear_velocity_local.x, -linear_velocity_local.z)
-	
-	angle_mu_deg = rad2deg(angle_mu)
-	angle_nu_deg = rad2deg(angle_nu)
+	angle_inertial_y = atan2(-linear_velocity_local.y, -linear_velocity_local.z)
+	angle_inertial_x = atan2(-linear_velocity_local.x, -linear_velocity_local.z)
+	angle_inertial_y_deg = rad2deg(angle_inertial_y)
+	angle_inertial_x_deg = rad2deg(angle_inertial_x)
 	
 	# KTAS to KIAS 
 	adc_spd_indicated = sqrt(2 * air_pressure_dynamic / 1.225)
@@ -348,7 +345,7 @@ func _physics_process(delta):
 	else:
 		adc_hdg = -rotation_degrees.y
 		
-	adc_alt_barometric = global_transform.origin.y
+	adc_alt_asl = global_transform.origin.y
 	
 	adc_pitch = rotation_degrees.x
 	adc_roll = -rotation_degrees.z
@@ -356,12 +353,14 @@ func _physics_process(delta):
 	adc_alpha = angle_alpha_deg
 	adc_beta = angle_beta_deg
 	
-	adc_mu = angle_mu_deg
-	adc_nu = angle_nu_deg
+	adc_angle_inertial_y = angle_inertial_y
+	adc_angle_inertial_x = angle_inertial_x
 	
 	adc_fpa = adc_pitch - adc_alpha
 	adc_trk = fmod((adc_hdg - adc_beta) + 360, 360)
-
+	
+	adc_throttle = 100 * input_throttle
+	
 	# FBW
 	adc_rates.x = angular_velocity_local_deg.x
 	adc_rates.y = angular_velocity_local_deg.y

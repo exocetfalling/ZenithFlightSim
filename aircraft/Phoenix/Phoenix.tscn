@@ -3,7 +3,7 @@
 [ext_resource path="res://aircraft/Phoenix/Phoenix.gd" type="Script" id=1]
 [ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=2]
 [ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=3]
-[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://addons/aero_tools/uires/hud_shared/hud_shared.tscn" type="PackedScene" id=4]
 [ext_resource path="res://resources/camera_env.tres" type="Environment" id=5]
 [ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=6]
 [ext_resource path="res://assets/shared/wheel_small/Wheel_Medium.tscn" type="PackedScene" id=7]
@@ -247,9 +247,6 @@ fov = 60.0
 far = 1e+06
 script = ExtResource( 8 )
 
-[node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 4 )]
-visible = false
-
 [node name="Camera_Ext" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10 )
 cull_mask = 1048557
@@ -358,3 +355,5 @@ transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0.08, 0, 0 )
 [node name="RadioAltimeter" type="RayCast" parent="."]
 enabled = true
 cast_to = Vector3( 0, -1000, 0 )
+
+[node name="HUDShared" parent="." instance=ExtResource( 4 )]
