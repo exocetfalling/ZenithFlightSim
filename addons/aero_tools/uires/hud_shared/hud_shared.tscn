@@ -58,9 +58,9 @@ points = PoolVector2Array( -150, 0, -50, 0, 0, 50, 50, 0, 150, 0 )
 width = 5.0
 default_color = Color( 1, 1, 1, 1 )
 
-[node name="HUDLadder" parent="Centre" instance=ExtResource( 3 )]
-
-[node name="FPM" type="Line2D" parent="Centre"]
+[node name="FPM" type="Line2D" parent="Centre/Wings"]
 points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
 width = 3.0
 default_color = Color( 1, 1, 1, 1 )
+
+[node name="HUDLadder" parent="Centre" instance=ExtResource( 3 )]

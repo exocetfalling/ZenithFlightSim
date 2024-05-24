@@ -330,7 +330,7 @@ func _physics_process(delta):
 	angle_beta_deg = rad2deg(angle_beta)
 	
 	angle_inertial_y = atan2(-linear_velocity_local.y, -linear_velocity_local.z)
-	angle_inertial_x = atan2(-linear_velocity_local.x, -linear_velocity_local.z)
+	angle_inertial_x = atan2(+linear_velocity_local.x, -linear_velocity_local.z)
 	angle_inertial_y_deg = rad2deg(angle_inertial_y)
 	angle_inertial_x_deg = rad2deg(angle_inertial_x)
 	

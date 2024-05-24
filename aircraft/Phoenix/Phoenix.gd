@@ -103,10 +103,16 @@ func _physics_process(delta):
 		adc_stall = false
 	
 	# Panel updates
-	$HUDShared.set_display_spd(adc_spd_indicated)
-	$HUDShared.set_display_hdg(adc_hdg)
-	$HUDShared.set_display_alt(adc_alt_asl)
-	$HUDShared.set_display_thr(adc_throttle)
+	$HUDShared.hud_spd = adc_spd_indicated
+	$HUDShared.hud_hdg = adc_hdg
+	$HUDShared.hud_alt = adc_alt_asl
+	$HUDShared.hud_thr = adc_throttle
+	
+	$HUDShared.hud_pitch = adc_pitch
+	$HUDShared.hud_roll = adc_roll
+	
+	$HUDShared.hud_angle_inertial_x = rad2deg(adc_angle_inertial_x)
+	$HUDShared.hud_angle_inertial_y = rad2deg(adc_angle_inertial_y)
 	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
