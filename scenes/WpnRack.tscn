@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="WpnRack" type="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0 )
+width = 0.1
+height = 0.5
+depth = 1.0

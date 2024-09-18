@@ -1,0 +1,45 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://weapons/bomb_glide/bomb_glide.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/WeaponTestRange/data.hterrain" type="Resource" id=2]
+[ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=3]
+[ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+mode = 0
+textures = [ [  ], [  ] ]
+
+[sub_resource type="StandardMaterial3D" id=2]
+albedo_color = Color( 0.603922, 0.603922, 0.603922, 1 )
+
+[sub_resource type="BoxMesh" id=3]
+material = SubResource( 2 )
+size = Vector3( 2, 2, 4 )
+
+[node name="WeaponTestRange" type="Node3D"]
+
+[node name="HTerrain" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2500, 0, -2500 )
+script = ExtResource( 3 )
+lod_scale = 2.0
+map_scale = Vector3( 10, 10, 10 )
+_terrain_data = ExtResource( 2 )
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "LowPoly"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource( 1 )
+
+[node name="Target" type="MeshInstance3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+mesh = SubResource( 3 )
+
+[node name="BombGlide" parent="." instance=ExtResource( 1 )]
+transform = Transform3D( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1200, 4000 )
+linear_velocity = Vector3( 0, 0, -75 )
+linear_damp = 0.0
+angular_damp = 5.0

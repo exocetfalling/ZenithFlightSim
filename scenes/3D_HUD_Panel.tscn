@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/png_files/HUD/ladder_hud.png" type="Texture2D" id=1]
+[ext_resource path="res://scripts/3D_HUD_Panel.gd" type="Script" id=2]
+[ext_resource path="res://assets/HUD/HUD_V2_Mask.bmp" type="Texture2D" id=3]
+[ext_resource path="res://assets/HUD/FlightPathVector.bmp" type="Texture2D" id=4]
+[ext_resource path="res://assets/HUD/Flight_Director_HUD.bmp" type="Texture2D" id=5]
+[ext_resource path="res://assets/HUD/Wings.bmp" type="Texture2D" id=6]
+[ext_resource path="res://resources/HUD_Font.tres" type="FontFile" id=12]
+
+[node name="3D_HUD_Panel" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Boresight" type="Line2D" parent="."]
+visible = false
+position = Vector2( 960, 540 )
+scale = Vector2( 2, 2 )
+z_index = 1
+points = PackedVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+width = 2.0
+default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
+antialiased = true
+
+[node name="Speed_Data" type="Label" parent="."]
+light_mask = 8
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 12 )
+text = "SPEED
+XXX"
+uppercase = true
+
+[node name="Heading_Data" type="Label" parent="."]
+light_mask = 8
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 12 )
+text = "HDG
+XXX"
+align = 1
+uppercase = true
+
+[node name="Alt_Data" type="Label" parent="."]
+light_mask = 8
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+size_flags_vertical = 1
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 12 )
+text = "ALT
+XXXXX"
+align = 2
+uppercase = true
+
+[node name="HUD" type="PointLight2D" parent="."]
+position = Vector2( 960, 540 )
+texture = ExtResource( 3 )
+mode = 3
+
+[node name="HUD_Ladder" type="Sprite2D" parent="HUD"]
+texture = ExtResource( 1 )
+
+[node name="FlightPathVector" type="Sprite2D" parent="HUD"]
+scale = Vector2( 4, 4 )
+texture = ExtResource( 4 )
+
+[node name="EnergyCaret" type="Line2D" parent="HUD/FlightPathVector"]
+visible = false
+position = Vector2( 20, 0 )
+points = PackedVector2Array( 10, -5, 0, 0, 10, 5 )
+width = 1.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="E_Bracket" type="Line2D" parent="HUD/FlightPathVector"]
+position = Vector2( -25, 0 )
+points = PackedVector2Array( 5, -20, 0, -20, 0, 0, 5, 0, 0, 0, 0, 20, 5, 20 )
+width = 1.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="FlightDirector" type="Sprite2D" parent="HUD"]
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="Wings" type="Sprite2D" parent="HUD"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )

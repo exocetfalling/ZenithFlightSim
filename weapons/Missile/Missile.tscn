@@ -1,0 +1,240 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=2]
+[ext_resource path="res://scripts/Derivative_Calc.gd" type="Script" id=3]
+[ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=4]
+[ext_resource path="res://weapons/Missile/Missile.gd" type="Script" id=5]
+[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=6]
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=7]
+[ext_resource path="res://scripts/Camera_FPV.gd" type="Script" id=8]
+
+[sub_resource type="CapsuleShape3D" id=1]
+radius = 0.1
+height = 1.5
+
+[sub_resource type="BoxShape3D" id=2]
+extents = Vector3( 0.1, 0.001, 0.1 )
+
+[node name="Missile" type="VehicleBody3D"]
+continuous_cd = true
+can_sleep = false
+angular_damp = 20.0
+script = ExtResource( 5 )
+
+[node name="AeroSurface_Fuse" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000237241 )
+script = ExtResource( 4 )
+length_chord_root = 0.001
+length_chord_tip = 0.001
+length_span = 0.001
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fuse"]
+transform = Transform3D( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+radius = 0.1
+height = 1.5
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="AeroSurface_Fuse/CSGCylinder3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
+radius = 0.1
+radial_segments = 32
+rings = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="CSGSphere2" type="CSGSphere3D" parent="AeroSurface_Fuse/CSGCylinder3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0 )
+radius = 0.1
+radial_segments = 32
+rings = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fuse/CSGCylinder3D"]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.368099, -1.60901e-08 )
+operation = 2
+radius = 0.05
+sides = 16
+smooth_faces = false
+
+[node name="AeroSurface_Fin_F1" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.14, 0.14, -0.400237 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_F1"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_F2" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.14, 0.14, -0.400237 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_F2"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_F3" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.14, -0.14, -0.400237 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_F3"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_F4" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.14, -0.14, -0.400237 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_F4"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_R1" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.14, 0.14, 0.599763 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_R1"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_R2" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.14, 0.14, 0.599763 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_R2"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_R3" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.14, -0.14, 0.599763 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_R3"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="AeroSurface_Fin_R4" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.14, -0.14, 0.599763 )
+script = ExtResource( 4 )
+length_chord_root = 0.2
+length_chord_tip = 0.2
+length_span = 0.2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fin_R4"]
+transform = Transform3D( 0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.2
+sides = 32
+smooth_faces = false
+material = ExtResource( 6 )
+
+[node name="CollisionShape_Fuse" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.000237241 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape_Fin_F1" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, -0.400237 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F2" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.138, 0.138, -0.400237 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F3" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.138, -0.138, -0.400237 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_F4" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, -0.400237 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R1" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.138, 0.138, 0.599763 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R2" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.138, 0.138, 0.599763 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R3" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.138, -0.138, 0.599763 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Fin_R4" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, 0.138, -0.138, 0.599763 )
+shape = SubResource( 2 )
+
+[node name="Derivative_Calc_Pitch" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="Derivative_Calc_Yaw" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="PID_Calc_Pitch" type="Node" parent="."]
+script = ExtResource( 2 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.1
+param_tuning_active = false
+
+[node name="Camera_FPV" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
+environment = ExtResource( 7 )
+current = true
+fov = 60.0
+far = 1e+06
+script = ExtResource( 8 )
+
+[node name="FPV_HUD" parent="Camera_FPV" instance=ExtResource( 1 )]

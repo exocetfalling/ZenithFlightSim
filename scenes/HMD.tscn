@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/HMD.gd" type="Script" id=1]
+
+[node name="HMD" type="Node2D"]
+position = Vector2( 960, 540 )
+script = ExtResource( 1 )
+
+[node name="EADI" type="Node2D" parent="."]
+
+[node name="Boresight" type="Line2D" parent="EADI"]
+points = PackedVector2Array( 0, 0, 100, 50, -100, 50, 0, 0 )
+width = 5.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="XForm_Roll" type="Node2D" parent="EADI"]
+
+[node name="XForm_Pitch" type="Node2D" parent="EADI/XForm_Roll"]
+
+[node name="Horizon" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+points = PackedVector2Array( -960, 0, 960, 0 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+
+[node name="Aimpoint" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Aimpoint"]
+points = PackedVector2Array( 0, -20, 20, 0, 0, 20, -20, 0, 0, -20 )
+width = 2.0
+default_color = Color( 0, 1, 0, 1 )
+begin_cap_mode = 1
+end_cap_mode = 1

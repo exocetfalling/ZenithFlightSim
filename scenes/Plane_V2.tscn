@@ -1,0 +1,252 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=1]
+[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=2]
+[ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=3]
+[ext_resource path="res://scripts/Plane03_V2.gd" type="Script" id=4]
+[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=5]
+[ext_resource path="res://scenes/Camera_FPV_Node.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/3D_GCS.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/3D_HUD_V2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/plane_v2/plane_v2_fuse.tscn" type="PackedScene" id=9]
+
+[sub_resource type="PhysicsMaterial" id=1]
+
+[sub_resource type="CapsuleShape3D" id=2]
+margin = 0.001
+radius = 0.25
+height = 6.0
+
+[sub_resource type="BoxShape3D" id=3]
+margin = 0.001
+extents = Vector3( 4, 0.05, 0.4 )
+
+[sub_resource type="BoxShape3D" id=5]
+margin = 0.001
+extents = Vector3( 1, 0.05, 0.25 )
+
+[node name="Plane_V2" type="VehicleBody3D"]
+mass = 500.0
+physics_material_override = SubResource( 1 )
+custom_integrator = true
+continuous_cd = true
+max_contacts_reported = 32
+can_sleep = false
+linear_damp = 0.0
+angular_damp = 1.0
+script = ExtResource( 4 )
+
+[node name="CollisionShape_Fuse" type="CollisionShape3D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape_Wing" type="CollisionShape3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, -0.25 )
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape_Tail_L" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -0.9, 0.875, 2.7 )
+visible = false
+shape = SubResource( 5 )
+
+[node name="CollisionShape_Tail_R" type="CollisionShape3D" parent="."]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 0.9, 0.875, 2.7 )
+visible = false
+shape = SubResource( 5 )
+
+[node name="Camera_FPV_Node" parent="." instance=ExtResource( 6 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.25 )
+
+[node name="HMD" parent="Camera_FPV_Node" index="1"]
+visible = false
+
+[node name="Camera_Ext" type="Camera3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 7 )
+cull_mask = 1048557
+environment = ExtResource( 1 )
+fov = 60.0
+far = 100000.0
+
+[node name="PID_Calc_Pitch" type="Node" parent="."]
+script = ExtResource( 5 )
+term_P = 0.2
+term_I = 0.2
+term_D = 0.1
+param_tuning_active = false
+
+[node name="3D_HUD_V2" parent="." instance=ExtResource( 8 )]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.90929 )
+
+[node name="3D_GCS" parent="." instance=ExtResource( 7 )]
+transform = Transform3D( 1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 2.47844, -6.76695 )
+
+[node name="AeroSurface_Fuse" type="Node3D" parent="."]
+script = ExtResource( 3 )
+length_chord_root = 6.0
+length_chord_tip = 6.0
+length_span = 0.8
+
+[node name="plane_v2_fuse" parent="AeroSurface_Fuse" instance=ExtResource( 9 )]
+
+[node name="AeroSurface_Wing_L" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -5, 0.625, -0.5 )
+script = ExtResource( 3 )
+length_chord_root = 1.6
+length_chord_tip = 1.6
+length_span = 8.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Wing_L"]
+transform = Transform3D( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.8
+height = 8.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="AeroSurface_Aileron_L" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.15, 0.625, 0.5 )
+script = ExtResource( 3 )
+length_chord_root = 0.5
+length_chord_tip = 0.5
+length_span = 3.7
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Aileron_L"]
+transform = Transform3D( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.25
+height = 3.7
+sides = 32
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="AeroSurface_Flap_L" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 0.625, 0.5 )
+script = ExtResource( 3 )
+length_chord_root = 0.5
+length_chord_tip = 0.5
+length_span = 3.7
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Flap_L"]
+transform = Transform3D( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.25
+height = 3.7
+sides = 32
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="AeroSurface_Ruddervator_L" type="Node3D" parent="."]
+transform = Transform3D( 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -2.667, 1.656, 4.5 )
+script = ExtResource( 3 )
+length_span = 4.0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Ruddervator_L"]
+transform = Transform3D( -4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.5
+height = 4.0
+sides = 32
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="VehicleWheel_NLG" type="VehicleWheel3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -2 )
+use_as_steering = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 15000.0
+damping_compression = 0.95
+damping_relaxation = 0.98
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheel_NLG"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 2 )
+
+[node name="VehicleWheel_MLG_L" type="VehicleWheel3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0.5 )
+use_as_traction = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 15000.0
+damping_compression = 0.95
+damping_relaxation = 0.98
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheel_MLG_L"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 2 )
+
+[node name="VehicleWheel_MLG_R" type="VehicleWheel3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0.5 )
+use_as_traction = true
+wheel_radius = 0.1
+wheel_friction_slip = 1.0
+suspension_travel = 0.1
+suspension_stiffness = 150.0
+suspension_max_force = 15000.0
+damping_compression = 0.95
+damping_relaxation = 0.98
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheel_MLG_R"]
+transform = Transform3D( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0 )
+radius = 0.1
+height = 0.01
+sides = 32
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Strut_NLG_L" type="CSGCylinder3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00786392, -0.391195, -2 )
+radius = 0.002
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Strut_NLG_R" type="CSGCylinder3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.008, -0.391, -2 )
+radius = 0.002
+height = 1.2
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Axle_MLG_L" type="CSGCylinder3D" parent="."]
+transform = Transform3D( 0, 1, 0, -1, 0, 0, 0, 0, 1, -0.921859, -1.01606, 0.5 )
+radius = 0.01
+height = 0.15
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Strut_MLG_L" type="CSGCylinder3D" parent="CSGCylinder_Axle_MLG_L"]
+transform = Transform3D( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, -0.416083, 0.467814, 0 )
+radius = 0.01
+height = 1.25
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Axle_MLG_R" type="CSGCylinder3D" parent="."]
+transform = Transform3D( 0, 1, 0, -1, 0, 0, 0, 0, 1, 0.922, -1.016, 0.5 )
+radius = 0.01
+height = 0.15
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[node name="CSGCylinder_Strut_MLG_R" type="CSGCylinder3D" parent="CSGCylinder_Axle_MLG_R"]
+transform = Transform3D( -0.707107, -0.707107, 0, 0.707107, -0.707107, 0, 0, 0, 1, -0.416, -0.468, 0 )
+radius = 0.01
+height = 1.25
+sides = 16
+smooth_faces = false
+material = ExtResource( 2 )
+
+[editable path="Camera_FPV_Node"]

@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="GPRocket_Mesh" type="CSGCylinder3D"]
+transform = Transform3D( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+radius = 0.2
+sides = 16
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -0.5, 0 )
+radius = 0.2
+radial_segments = 16
+rings = 16
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0 )
+radius = 0.2
+height = 0.5
+sides = 16
+cone = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D( 0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0.75, 0 )
+width = 0.01
+height = 0.5
+depth = 1.0
+
+[node name="CSGBox2" type="CSGBox3D" parent="."]
+transform = Transform3D( 0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0.75, -3.55271e-15 )
+width = 0.01
+height = 0.5
+depth = 1.0
+
+[node name="CSGBox3" type="CSGBox3D" parent="."]
+width = 0.01
+height = 0.5

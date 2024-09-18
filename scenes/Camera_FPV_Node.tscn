@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/camera_env.tres" type="Environment" id=1]
+[ext_resource path="res://scripts/Camera_FPV_Node.gd" type="Script" id=2]
+[ext_resource path="res://scenes/HMD.tscn" type="PackedScene" id=3]
+
+
+[node name="Camera_FPV_Node" type="Node3D"]
+script = ExtResource( 2 )
+mouse_control = true
+invert_y = true
+invert_x = true
+min_zoom = 0.5
+
+[node name="Gimbal_X" type="Node3D" parent="."]
+
+[node name="Gimbal_Y" type="Node3D" parent="Gimbal_X"]
+
+[node name="Camera_FPV" type="Camera3D" parent="Gimbal_X/Gimbal_Y"]
+environment = ExtResource( 1 )
+current = true
+far = 100000.0
+
+[node name="HMD" parent="." instance=ExtResource( 3 )]

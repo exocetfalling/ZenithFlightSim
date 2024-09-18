@@ -1,0 +1,37 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/HUD/HUD_Ladder.bmp" type="Texture2D" id=1]
+[ext_resource path="res://assets/HUD/FlightPathVector.bmp" type="Texture2D" id=2]
+[ext_resource path="res://resources/HUD_FPV.tres" type="Material" id=3]
+[ext_resource path="res://resources/HUD_Ladder.tres" type="Material" id=4]
+[ext_resource path="res://resources/HUD_FD.tres" type="Material" id=5]
+[ext_resource path="res://assets/HUD/Flight_Director_HUD.bmp" type="Texture2D" id=6]
+[ext_resource path="res://resources/HUD_Wings.tres" type="Material" id=7]
+[ext_resource path="res://assets/HUD/Wings.bmp" type="Texture2D" id=8]
+
+[node name="HUD_Point" type="Node3D"]
+
+[node name="FlightPathVector" type="Sprite3D" parent="."]
+layers = 2
+material_override = ExtResource( 3 )
+pixel_size = 1.0
+texture = ExtResource( 2 )
+
+[node name="FlightDirector" type="Sprite3D" parent="."]
+layers = 2
+material_override = ExtResource( 5 )
+pixel_size = 1.0
+texture = ExtResource( 6 )
+
+[node name="Wings" type="Sprite3D" parent="."]
+layers = 2
+material_override = ExtResource( 7 )
+pixel_size = 0.35
+texture = ExtResource( 8 )
+
+[node name="HUD_Ladder" type="Sprite3D" parent="."]
+layers = 2
+material_override = ExtResource( 4 )
+cast_shadow = 0
+pixel_size = 1.0
+texture = ExtResource( 1 )
