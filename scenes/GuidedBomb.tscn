@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://addons/aero_tools/scripts/aero_body.gd" type="Script" id=1]
-[ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=2]
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=3]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_body.gd" id="1"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
+[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="3"]
 
 
 [sub_resource type="CapsuleShape3D" id=1]

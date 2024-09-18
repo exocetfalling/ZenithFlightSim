@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bob1s1ap5wd1r"]
+
+[ext_resource type="PackedScene" uid="uid://byjpdsdaxe76y" path="res://addons/aero_tools/shared/runway_v2/zfs_rwy.gltf" id="1"]
+
+[node name="zfs_rwy" instance=ExtResource("1")]

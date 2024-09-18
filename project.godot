@@ -276,7 +276,6 @@ nav_mode_toggle={
 
 [rendering]
 
-environment/defaults/default_environment="res://resources/default_env.tres"
 lights_and_shadows/shadow_atlas/quadrant_0_subdiv=2
 quality/filters/use_nearest_mipmap_filter=true
 quality/filters/msaa=1

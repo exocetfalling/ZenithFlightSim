@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=1]
-[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=2]
-[ext_resource path="res://resources/camera_env.tres" type="Environment" id=3]
-[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=5]
-[ext_resource path="res://scripts/Plane03_V2.gd" type="Script" id=6]
-[ext_resource path="res://scenes/3D_GCS.tscn" type="PackedScene" id=7]
-[ext_resource path="res://scenes/3D_HUD_V2.tscn" type="PackedScene" id=12]
-[ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=14]
+[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/FPV_HUD.tscn" id="2"]
+[ext_resource type="Environment" uid="uid://dawhrmbdg5ggd" path="res://resources/camera_env.tres" id="3"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/Plane03_V2.gd" id="6"]
+[ext_resource type="PackedScene" path="res://scenes/3D_GCS.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/3D_HUD_V2.tscn" id="12"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="14"]
 
 [sub_resource type="PhysicsMaterial" id=1]
 

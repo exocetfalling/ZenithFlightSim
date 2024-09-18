@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=1]
-[ext_resource path="res://assets/plane_v2/plane_v2_fuse.gltf" type="PackedScene" id=2]
+[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="1"]
+[ext_resource type="PackedScene" uid="uid://l2ektiv3dygs" path="res://assets/plane_v2/plane_v2_fuse.gltf" id="2"]
 
 [node name="plane_v2_fuse" instance=ExtResource( 2 )]
 

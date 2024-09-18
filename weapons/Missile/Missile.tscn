@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://scenes/FPV_HUD.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=2]
-[ext_resource path="res://scripts/Derivative_Calc.gd" type="Script" id=3]
-[ext_resource path="res://addons/aero_tools/scripts/aero_surface.gd" type="Script" id=4]
-[ext_resource path="res://weapons/Missile/Missile.gd" type="Script" id=5]
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=6]
-[ext_resource path="res://resources/camera_env.tres" type="Environment" id=7]
-[ext_resource path="res://scripts/Camera_FPV.gd" type="Script" id=8]
+[ext_resource type="PackedScene" path="res://scenes/FPV_HUD.tscn" id="1"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="2"]
+[ext_resource type="Script" path="res://scripts/Derivative_Calc.gd" id="3"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="4"]
+[ext_resource type="Script" path="res://weapons/Missile/Missile.gd" id="5"]
+[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="6"]
+[ext_resource type="Environment" uid="uid://dawhrmbdg5ggd" path="res://resources/camera_env.tres" id="7"]
+[ext_resource type="Script" path="res://addons/aero_tools/cameras/Camera_FPV.gd" id="8"]
 
 [sub_resource type="CapsuleShape3D" id=1]
 radius = 0.1

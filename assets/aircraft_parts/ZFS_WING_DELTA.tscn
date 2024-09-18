@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/aircraft_parts/ZFS_WING_DELTA.gltf" type="PackedScene" id=1]
-[ext_resource path="res://resources/Plane_Metal.tres" type="Material" id=2]
+[ext_resource type="PackedScene" uid="uid://kdv65p3h3dkx" path="res://assets/aircraft_parts/ZFS_WING_DELTA.gltf" id="1"]
+[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="2"]
 
 [node name="ZFS_WING_DELTA" instance=ExtResource( 1 )]
 

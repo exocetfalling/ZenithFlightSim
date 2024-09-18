@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4lctpxogn5m4"]
+
+[ext_resource type="PackedScene" uid="uid://cwbr3cny0enlj" path="res://addons/aero_tools/shared/wheel_small/ZFS_WHEEL_SMALL.gltf" id="1"]
+
+[node name="Wheel_Medium" instance=ExtResource("1")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
