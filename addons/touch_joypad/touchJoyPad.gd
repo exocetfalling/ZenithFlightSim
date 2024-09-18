@@ -1,9 +1,9 @@
 extends Node2D
 
-export(String, "D-Pad", "JoyStick") var leftPadStyle
-export var mapAnalogToDpad = true
-export var visibleOnlyTouchscreen = true
-export var AnalogTapToShow = false
+@export var leftPadStyle # (String, "D-Pad", "JoyStick")
+@export var mapAnalogToDpad = true
+@export var visibleOnlyTouchscreen = true
+@export var AnalogTapToShow = false
 
 func _ready():
 	$"leftPad/JoyStickLeft".mapAnalogToDpad = mapAnalogToDpad

@@ -5,18 +5,18 @@
 [ext_resource path="res://scenes/HMD.tscn" type="PackedScene" id=3]
 
 
-[node name="Camera_FPV_Node" type="Spatial"]
+[node name="Camera_FPV_Node" type="Node3D"]
 script = ExtResource( 2 )
 mouse_control = true
 invert_y = true
 invert_x = true
 min_zoom = 0.5
 
-[node name="Gimbal_X" type="Spatial" parent="."]
+[node name="Gimbal_X" type="Node3D" parent="."]
 
-[node name="Gimbal_Y" type="Spatial" parent="Gimbal_X"]
+[node name="Gimbal_Y" type="Node3D" parent="Gimbal_X"]
 
-[node name="Camera_FPV" type="Camera" parent="Gimbal_X/Gimbal_Y"]
+[node name="Camera_FPV" type="Camera3D" parent="Gimbal_X/Gimbal_Y"]
 environment = ExtResource( 1 )
 current = true
 far = 100000.0

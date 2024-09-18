@@ -15,20 +15,20 @@ __meta__ = {
 
 [node name="DebugStats" type="MarginContainer" parent="."]
 anchor_bottom = 1.0
-margin_right = 395.0
+offset_right = 395.0
 mouse_filter = 2
-custom_constants/margin_right = 20
-custom_constants/margin_top = 20
-custom_constants/margin_left = 20
-custom_constants/margin_bottom = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_bottom = 20
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Column" type="VBoxContainer" parent="DebugStats"]
-margin_left = 20.0
-margin_top = 20.0
-margin_right = 375.0
-margin_bottom = 580.0
-custom_constants/separation = 5
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 375.0
+offset_bottom = 580.0
+theme_override_constants/separation = 5

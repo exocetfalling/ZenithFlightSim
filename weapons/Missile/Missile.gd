@@ -119,7 +119,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F1.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F1.rotation.z)
 	
 	$AeroSurface_Fin_F2.rotation = \
@@ -128,7 +128,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F2.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F2.rotation.z)
 	
 	$AeroSurface_Fin_F3.rotation = \
@@ -137,7 +137,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F3.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F3.rotation.z)
 	
 	$AeroSurface_Fin_F4.rotation = \
@@ -146,7 +146,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F4.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F4.rotation.z)
 	
 	$AeroSurface_Fin_R1.rotation = \
@@ -155,7 +155,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R1.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F1.rotation.z)
 	
 	$AeroSurface_Fin_R2.rotation = \
@@ -164,7 +164,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R2.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R2.rotation.z)
 	
 	$AeroSurface_Fin_R3.rotation = \
@@ -173,7 +173,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R3.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R3.rotation.z)
 	
 	$AeroSurface_Fin_R4.rotation = \
@@ -182,7 +182,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R4.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R4.rotation.z)
 	
 	# X, Y, Z axes differ from Vec2 and Vec3

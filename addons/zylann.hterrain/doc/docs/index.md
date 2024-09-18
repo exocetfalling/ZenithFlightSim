@@ -11,9 +11,20 @@ It is entirely built on top of the `VisualServer` scripting API, which means it 
 ![Screenshot of the editor with the plugin enabled and arrows showing where UIs are](images/overview.png)
 
 
+### Video tutorials
+
+This written doc should be the most up to date and precise information, but video tutorials exist for a quick start.
+
+- [Kasper's tutorial](https://www.youtube.com/watch?v=Af1f2JPvSIs) about version 1.5.2 (16 Jan 2021)
+- [GamesFromScratch presentation](https://www.youtube.com/watch?v=jYVO0-_sXZs), also featuring the [WaterWays](https://github.com/Arnklit/WaterGenGodot) plugin (23 dec 2020)
+- [qubodupDev's Tutorial](https://www.youtube.com/watch?v=k_ISq6JyVSs) about version 1.3.3 (27 aug 2020)
+- [Old tutorial](https://www.youtube.com/watch?v=eZuvfIHDeT4&) about version 0.8 (10 aug 2018! A lot is outdated in it but let's keep it here for the record)
+
 ### How to install
 
-You will need to use Godot 3.1 or later. It is best to use latest stable 3.x version (Godot 4 is not supported yet).
+You will need to use Godot 4.1 or later.
+
+To get the last version that supported Godot 3.x, checkout the `godot3` branch in the Git repository.
 
 #### Automatically
 
@@ -48,7 +59,7 @@ So a cleaner way would be:
 ### Development versions
 
 The latest development version of the plugin can be found on [Github](https://github.com/Zylann/godot_heightmap_plugin).
-It is the most recently developped version, but might also have some bugs.
+It is the most recently developed version, but might also have some bugs.
 
 
 Creating a terrain
@@ -90,7 +101,7 @@ Sculpting
 
 ### Brush types
 
-The default terrain is flat, but you may want to create hills and mountains. Because it uses a heightmap, editing this terrain is equivalent to editing an image. Because of this, the main tool is a brush with a configurable size and shape. You can see which area will be affected inside a 3D red circle appearing under your mouse, and you can choose how strong painting is by changing the `strength` slider.
+The default terrain is flat, but you may want to create hills and mountains. Because it uses a heightmap, editing this terrain is equivalent to editing an image. Because of this, the main tool is a brush with a configurable size and shape. You can see which area will be affected inside a 3D red circle appearing under your mouse, and you can choose how strong painting is by changing the `Brush opacity` slider.
 
 ![Screenshot of the brush widget](images/brush_editor.png)
 
@@ -118,13 +129,14 @@ As you sculpt, the plugin automatically recomputes normals of the terrain, and s
 You can enable or disable collisions by checking the `Collisions enabled` property in the inspector.
 
 Heightmap-based terrains usually implement collisions directly using the heightmap, which saves a lot of computations compared to a classic mesh collider.
-This plugin depends on the **Bullet Physics** integration in Godot, which does have a height-field collider. **Godot Physics** does not support it, so you may want to make sure Bullet is enabled in your project settings:
 
 ![Screenshot of the option to choose physics engines in project settings](images/choose_bullet_physics.png)
 
 Some editor tools rely on colliders to work, such as snapping to ground or plugins like Scatter or other prop placement utilities. To make sure the collider is up to date, you can force it to update after sculpting with the `Terrain -> Update Editor Collider` menu:
 
 ![Screenshot of the menu to update the collider](images/update_editor_collider.png)
+
+Note: if you use Godot 3.3, you need to make sure to use the Bullet physics engine in your project settings.
 
 
 #### Known issues
@@ -180,7 +192,8 @@ This magic is done with a single shader, i.e a single `ShaderMaterial` in Godot'
 There are mainly 3 families of shaders this plugin supports:
 
 - `CLASSIC4`: simple shaders where each texture may be a separate resource. They are limited to 4 textures.
-- `ARRAY`: more modern shader using texture arrays, which comes with a few constraints, but allows to paint a lot more different textures.
+- `MULTISPLAT16`: more advanced shader using more splatmaps and texture arrays. It's expensive but supports up to 16 textures.
+- `ARRAY`: experimental shader also using texture arrays, which comes with constraints, but allows to paint a lot more different textures.
 - Other shaders don't need textures, like `LOW_POLY`, which only uses colors.
 
 On the `HTerrain` node, there is a property called `shader_type`, which lets you choose among built-in shaders. The one you choose will define which workflow to follow: textures, or texture arrays.
@@ -204,6 +217,8 @@ For each texture, you may find the following types of images, common in PBR shad
 ![Screenshot of PBR textures](images/pbr_textures.png)
 
 You can find some of these textures for free at [cc0textures.com](http://cc0textures.com).
+
+!!! note: Some shaders have a `Lite` and non-lite versions. One main difference between them is that `Lite` versions don't require normal maps, but the others require them. If you use a non-lite shader and forget to assign normal maps, shading will look wrong.
 
 It is preferable to place those source images under a specific directory. Also, since the images will only serve as an input to generate the actual game resources, it is better to place a `.gdignore` file inside that directory. This way, Godot will not include those source files in the exported game:
 
@@ -267,7 +282,7 @@ If you use PBR textures, there might be a lot of files to assign. If you use a n
 
 #### Normal maps
 
-As indicated in the [Godot documentation](https://docs.godotengine.org/en/stable/tutorials/3d/spatial_material.html#normal-map), normal maps are expected to use OpenGL convention (X+, Y-, Z+). So it is possible that normalmaps you find online use a different convention.
+As indicated in the [Godot documentation](https://docs.godotengine.org/en/stable/tutorials/3d/spatial_material.html#normal-map), normal maps are expected to use OpenGL convention (X+, Y+, Z+). So it is possible that normalmaps you find online use a different convention.
 
 To help with this, the import tool allows you to flip Y, in case the normalmap uses DirectX convention.
 
@@ -349,7 +364,7 @@ The `CLASSIC4` shader is a simple splatmap technique, where R, G, B, A match the
 
 It comes in two variants:
 
-- `CLASSIC4`: full-featured shader, however it requires your textures to have normal maps.
+- `CLASSIC4`: full-featured shader, however it requires your textures to have normal maps. If you don't assign them, shading will look wrong.
 - `CLASSIC4_LITE`: simpler shader with less features. It only requires albedo textures.
 
 
@@ -362,7 +377,7 @@ It also comes in two variants:
 - `MULTISPLAT16`: full-featured shader, however it requires your texture arrays to have normal maps.
 - `MULTISPLAT16_LITE`: simpler shader with less features. It only requires albedo texture arrays.
 
-It is the recommended choice if you need more than 4 textures, because it is much easier to use than the `ARRAY` shader and has produces less artifacts.
+It is the recommended choice if you need more than 4 textures, because it is much easier to use than the `ARRAY` shader and produces less artifacts.
 
 One downside is performance: it is about twice slower than `CLASSIC4` (on an nVidia 1060, a fullscreen `CLASSIC4` is 0.8 ms, while `MULTISPLAT16` is 1.8 ms).
 Although, considering objects placed on the terrain should usually occlude ground pixels, the cost might be lower in a real game scenario.
@@ -705,7 +720,7 @@ Once you have textured ground, you may want to add small detail objects to it, s
 
 ### Painting details
 
-Grass is supported throught `HTerrainDetailLayer` node. They can be created as children of the `HTerrain` node. Each layer represents one kind of detail, so you may have one layer for grass, and another for flowers, for example.
+Grass is supported through `HTerrainDetailLayer` node. They can be created as children of the `HTerrain` node. Each layer represents one kind of detail, so you may have one layer for grass, and another for flowers, for example.
 
 Detail layers come in two parts:
 
@@ -758,7 +773,7 @@ A list of `uniform` parameters are recognized, some of which are required for he
 
 Parameter name                      | Type             | Format  | Description
 ------------------------------------|------------------|---------|--------------
-`u_terrain_heightmap`               | `sampler2D`      | `RH`    | The heightmap, a half-precision float texture which can be sampled in the red channel. Like the other following maps, you have to access it using cell coordinates, which can be computed as seen in the built-in shader.
+`u_terrain_heightmap`               | `sampler2D`      | `RH`    | The heightmap, a 32-bit float texture which can be sampled in the red channel. Like the other following maps, you have to access it using cell coordinates, which can be computed as seen in the built-in shader.
 `u_terrain_normalmap`               | `sampler2D`      | `RGB8`  | The precalculated normalmap of the terrain, which you can use instead of computing it from the heightmap
 `u_terrain_colormap`                | `sampler2D`      | `RGBA8` | The color map, which is the one modified by the color brush. The alpha channel is used for holes.
 `u_terrain_splatmap`                | `sampler2D`      | `RGBA8` | The classic 4-component splatmap, where each channel determines the weight of a given texture. The sum of each channel across all splatmaps must be 1.0.
@@ -899,7 +914,7 @@ func test():
 The same goes for the heightmap and grass maps, however at time of writing, there are several issues with editing it in game:
 
 - Normals of the terrain don't automatically update, you have to calculate them yourself by also modifying the normalmap. This is a bit tedious and expensive, however it may be improved in the future. Alternatively you could compute them in shader, but it makes rendering a bit more expensive.
-- The collider won't update either, for the same reason mentionned in the [section about collisions in the editor](#Collisions). You can force it to update by calling `update_collider()` but it can cause a hiccup.
+- The collider won't update either, for the same reason mentioned in the [section about collisions in the editor](#Collisions). You can force it to update by calling `update_collider()` but it can cause a hiccup.
 
 
 ### Procedural generation
@@ -1132,11 +1147,12 @@ If none of the initial checks help and you want to post a new issue, do the foll
 
 ### Terrain not saving / not up to date / not showing
 
-This issue happened a few times and had various causes so if the checks mentionned before don't help:
+This issue happened a few times and had various causes so if the checks mentioned before don't help:
 
 - Check the contents of your terrain's data folder. It must contain a `.hterrain` file and a few textures.
 - If they are present, make sure Godot has imported those textures. If it didn't, unfocus the editor, and focus it back (you should see a short progress bar as it does it)
 - Check if you used Ctrl+Z (undo) after a non-undoable action, like described in [issue #101](https://github.com/Zylann/godot_heightmap_plugin/issues/101)
+- Make sure your `res://addons` folder is named `addons` *exactly lowercase*. It should not be named `Addons`. Plugins can fail if this convention is not respected.
 - If your problem relates to collisions in editor, update the collider using `Terrain -> Update Editor Collider`, because this one does not update automatically yet
 - Godot seems to randomly forget where the terrain saver is, but I need help to find out why because I could never reproduce it. See [issue #120](https://github.com/Zylann/godot_heightmap_plugin/issues/120)
 

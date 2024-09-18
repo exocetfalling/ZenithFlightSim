@@ -4,10 +4,10 @@ class_name PID_Controller
 var _prev_error: float = 0.0
 var _integral: float = 0.0
 var _int_max = 200
-export var _Kp: float = 0.01
-export var _Ki: float = 2
-export var _Kd: float = 0
-export var _dt = 0.01
+@export var _Kp: float = 0.01
+@export var _Ki: float = 2
+@export var _Kd: float = 0
+@export var _dt = 0.01
 
 
 func _ready():

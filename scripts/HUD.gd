@@ -45,26 +45,26 @@ func _process(_delta):
 	display_nav_range = $'../../'.waypoint_data.y
 	display_nav_waypoint = $MFD/Page_NAV/Waypoint_Select.item_pressed
 	
-	$Text_Line_1/Speed_Data/Variable.text = "%03d" % stepify($'../../'.pfd_spd, 1)
-	$Text_Line_1/Alt_Data/Variable.text = "%05d" % stepify($'../../'.pfd_alt, 1)
-	$Text_Line_1/Heading_Data/Variable.text = "%03d" % stepify($'../../'.pfd_hdg, 1)
-	$Text_Line_2/Flaps_Data/Variable.text = "%01d" % stepify(display_flaps, 1)
-	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % stepify($'../../'.gear_current, 0.01)
+	$Text_Line_1/Speed_Data/Variable.text = "%03d" % snapped($'../../'.pfd_spd, 1)
+	$Text_Line_1/Alt_Data/Variable.text = "%05d" % snapped($'../../'.pfd_alt, 1)
+	$Text_Line_1/Heading_Data/Variable.text = "%03d" % snapped($'../../'.pfd_hdg, 1)
+	$Text_Line_2/Flaps_Data/Variable.text = "%01d" % snapped(display_flaps, 1)
+	$Text_Line_2/Gear_Data/Variable.text = "%.2f" % snapped($'../../'.gear_current, 0.01)
 	
 	var centre_position = get_viewport_rect().size/2
 	get_node("Boresight").position = centre_position
 	
 	# PFD 
 	get_node("PFD/EADI_Image").rotation_degrees = -display_roll
-	get_node("PFD/EADI_Image").position.y = (display_pitch / 90 * 260) * cos(deg2rad(display_roll))
-	get_node("PFD/EADI_Image").position.x = get_node("PFD/EADI_Image").position.y * tan(deg2rad($'../../'.pfd_roll))
+	get_node("PFD/EADI_Image").position.y = (display_pitch / 90 * 260) * cos(deg_to_rad(display_roll))
+	get_node("PFD/EADI_Image").position.x = get_node("PFD/EADI_Image").position.y * tan(deg_to_rad($'../../'.pfd_roll))
 	
-	get_node("PFD/Box_SPD").text = "%03d" % stepify($'../../'.pfd_spd, 1)
-	get_node("PFD/Box_ALT").text = "%05d" % stepify($'../../'.pfd_alt, 1)
-	get_node("PFD/Box_HDG").text = "%03d" % stepify($'../../'.pfd_hdg, 1)
+	get_node("PFD/Box_SPD").text = "%03d" % snapped($'../../'.pfd_spd, 1)
+	get_node("PFD/Box_ALT").text = "%05d" % snapped($'../../'.pfd_alt, 1)
+	get_node("PFD/Box_HDG").text = "%03d" % snapped($'../../'.pfd_hdg, 1)
 	
-	get_node("PFD/Box_TRIM").text = "%.1f" % stepify(display_trim, 0.1)
-	get_node("PFD/Box_FLAPS").text = "%01d" % stepify(display_flaps, 1)
+	get_node("PFD/Box_TRIM").text = "%.1f" % snapped(display_trim, 0.1)
+	get_node("PFD/Box_FLAPS").text = "%01d" % snapped(display_flaps, 1)
 	
 	if (display_gear == 1):
 		get_node("PFD/Gear_Indicator").default_color = Color8(22, 222, 22)

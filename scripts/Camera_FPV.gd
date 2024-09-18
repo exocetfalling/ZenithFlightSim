@@ -1,4 +1,4 @@
-extends Camera
+extends Camera3D
 
 
 # Declare member variables here. Examples:
@@ -37,9 +37,9 @@ func _process(delta):
 	else:
 		fpv_angles.y = -fpv_angles.y
 	
-	fpv_angles_deg.x = rad2deg(fpv_angles.x)
-	fpv_angles_deg.y = rad2deg(fpv_angles.y)
-	fpv_angles_deg.z = rad2deg(fpv_angles.z)
+	fpv_angles_deg.x = rad_to_deg(fpv_angles.x)
+	fpv_angles_deg.y = rad_to_deg(fpv_angles.y)
+	fpv_angles_deg.z = rad_to_deg(fpv_angles.z)
 	
 	AeroDataBus.aircraft_cam_global_rotation_deg = fpv_angles_deg
 	

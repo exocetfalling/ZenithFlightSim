@@ -10,7 +10,7 @@ var item_pressed = 'WPT XX'
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	popup = get_popup()
-	popup.connect("id_pressed", self, "_on_item_pressed")
+	popup.connect("id_pressed", Callable(self, "_on_item_pressed"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

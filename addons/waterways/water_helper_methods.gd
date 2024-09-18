@@ -29,7 +29,7 @@ static func reset_all_colliders(node):
 	for n in node.get_children():
 		if n.get_child_count() > 0:
 			reset_all_colliders(n)
-		if n is CollisionShape:
+		if n is CollisionShape3D:
 			if n.disabled == false:
 				n.disabled = true
 				n.disabled = false
@@ -59,12 +59,12 @@ static func generate_river_width_values(curve : Curve3D, steps : int, step_lengt
 		var closest_point : int
 		for c_point in curve.get_point_count() - 1:
 			for i in 100:
-				var interpolate := float(i) / 100.0
-				var pos = curve.interpolate(c_point, interpolate)
+				var sample := float(i) / 100.0
+				var pos = curve.sample(c_point, sample)
 				var dist = pos.distance_to(target_pos)
 				if dist < closest_dist:
 					closest_dist = dist
-					closest_interpolate = interpolate
+					closest_interpolate = sample
 					closest_point = c_point
 		river_width_values.append( lerp(widths[closest_point], widths[closest_point + 1], closest_interpolate) )
 	
@@ -157,27 +157,27 @@ static func generate_river_mesh(curve : Curve3D, steps : int, step_length_divs :
 	return mesh3
 
 
-static func generate_collisionmap(image : Image, mesh_instance : MeshInstance, raycast_dist : float, raycast_layers : int, steps : int, step_length_divs : int, step_width_divs : int, river) -> Image:
-	var space_state := mesh_instance.get_world().direct_space_state
+static func generate_collisionmap(image : Image, mesh_instance : MeshInstance3D, raycast_dist : float, raycast_layers : int, steps : int, step_length_divs : int, step_width_divs : int, river) -> Image:
+	var space_state := mesh_instance.get_world_3d().direct_space_state
 	
-	var uv2 := mesh_instance.mesh.surface_get_arrays(0)[5] as PoolVector2Array
-	var verts := mesh_instance.mesh.surface_get_arrays(0)[0] as PoolVector3Array
+	var uv2 := mesh_instance.mesh.surface_get_arrays(0)[5] as PackedVector2Array
+	var verts := mesh_instance.mesh.surface_get_arrays(0)[0] as PackedVector3Array
 	# We need to move the verts into world space
-	var world_verts := PoolVector3Array()
+	var world_verts := PackedVector3Array()
 	for v in verts.size():
-		world_verts.append( mesh_instance.global_transform.xform(verts[v]) )
+		world_verts.append( mesh_instance.global_transform * (verts[v]) )
 	
 	var tris_in_step_quad := step_length_divs * step_width_divs * 2
 	var side := calculate_side(steps)
 	var percentage = 0.0
 	river.emit_signal("progress_notified", percentage, "Calculating Collisions (" + str(image.get_width()) + "x" + str(image.get_width()) + ")")
-	yield(river.get_tree(), "idle_frame")
+	await river.get_tree().idle_frame
 	for x in image.get_width():
 		var cur_percentage = float(x) / float(image.get_width())
 		if cur_percentage > percentage + 0.1:
 			percentage += 0.1
 			river.emit_signal("progress_notified", percentage, "Calculating Collisions (" + str(image.get_width()) + "x" + str(image.get_width()) + ")")
-			yield(river.get_tree(), "idle_frame")
+			await river.get_tree().idle_frame
 		for y in image.get_height():
 			var uv_coordinate := Vector2( ( 0.5 + float(x))  / float(image.get_width()), ( 0.5 + float(y)) / float(image.get_height()) )
 			var baryatric_coords : Vector3
@@ -193,7 +193,7 @@ static func generate_collisionmap(image : Image, mesh_instance : MeshInstance, r
 			
 			for tris in tris_in_step_quad:
 				var offset_tris : int = (tris_in_step_quad * step_quad) + tris
-				var triangle := PoolVector2Array()
+				var triangle := PackedVector2Array()
 				triangle.append(uv2[offset_tris * 3])
 				triangle.append(uv2[offset_tris * 3 + 1])
 				triangle.append(uv2[offset_tris * 3 + 2])
@@ -235,11 +235,11 @@ static func add_margins(image : Image, resolution : float, margin : float) -> Im
 	
 	var image_with_margins := Image.new()
 	image_with_margins.create(with_margins_size, with_margins_size, true, Image.FORMAT_RGB8)
-	image_with_margins.lock()
+	false # image_with_margins.lock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	image_with_margins.blend_rect(image, Rect2(0.0, resolution - margin, resolution, margin), Vector2(margin + margin, 0.0))
 	image_with_margins.blend_rect(image, Rect2(0.0, 0.0, resolution, resolution), Vector2(margin, margin))
 	image_with_margins.blend_rect(image, Rect2(0.0, 0.0, resolution, margin), Vector2(0.0, resolution + margin))
-	image_with_margins.unlock()
+	false # image_with_margins.unlock() # TODOConverter3To4, Image no longer requires locking, `false` helps to not break one line if/else, so it can freely be removed
 	
 	return image_with_margins
 
@@ -248,7 +248,7 @@ static func reorder_params(unordered_params : Array) -> Array:
 	var ordered = []
 	
 	for param in unordered_params:
-		if param.hint_string != "Texture":
+		if param.hint_string != "Texture2D":
 			ordered.append(param)
 		else:
 			#find the last index in ordered with the same

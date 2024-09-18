@@ -14,5 +14,5 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if($Options/ButtonMainMenu.pressed == true):
-		get_tree().change_scene("res://uires/menu_main/menu_main.tscn")
+	if($Options/ButtonMainMenu.button_pressed == true):
+		get_tree().change_scene_to_file("res://uires/menu_main/menu_main.tscn")

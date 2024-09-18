@@ -1,18 +1,18 @@
 [gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://resources/TestScene_V2_slot2_albedo_bump.packed_tex" type="Texture" id=1]
-[ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture" id=2]
-[ext_resource path="res://resources/slot0_normal_roughness.packed_tex" type="Texture" id=3]
-[ext_resource path="res://resources/TestScene_V2_slot1_albedo_bump.packed_tex" type="Texture" id=4]
-[ext_resource path="res://resources/TestScene_V2_slot3_normal_roughness.packed_tex" type="Texture" id=5]
-[ext_resource path="res://resources/TestScene_V2_slot3_albedo_bump.packed_tex" type="Texture" id=6]
-[ext_resource path="res://resources/slot1_albedo_bump.packed_tex" type="Texture" id=7]
-[ext_resource path="res://resources/slot0_albedo_bump.packed_tex" type="Texture" id=8]
-[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=9]
-[ext_resource path="res://resources/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture" id=10]
-[ext_resource path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture" id=11]
-[ext_resource path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture" id=12]
-[ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture" id=13]
+[ext_resource path="res://resources/TestScene_V2_slot2_albedo_bump.packed_tex" type="Texture2D" id=1]
+[ext_resource path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" type="Texture2D" id=2]
+[ext_resource path="res://resources/slot0_normal_roughness.packed_tex" type="Texture2D" id=3]
+[ext_resource path="res://resources/TestScene_V2_slot1_albedo_bump.packed_tex" type="Texture2D" id=4]
+[ext_resource path="res://resources/TestScene_V2_slot3_normal_roughness.packed_tex" type="Texture2D" id=5]
+[ext_resource path="res://resources/TestScene_V2_slot3_albedo_bump.packed_tex" type="Texture2D" id=6]
+[ext_resource path="res://resources/slot1_albedo_bump.packed_tex" type="Texture2D" id=7]
+[ext_resource path="res://resources/slot0_albedo_bump.packed_tex" type="Texture2D" id=8]
+[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture2D" id=9]
+[ext_resource path="res://resources/TestScene_V2_slot2_normal_roughness.packed_tex" type="Texture2D" id=10]
+[ext_resource path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" type="Texture2D" id=11]
+[ext_resource path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" type="Texture2D" id=12]
+[ext_resource path="res://resources/slot1_normal_roughness.packed_tex" type="Texture2D" id=13]
 [ext_resource path="res://assets/Terrain_PBR/terrain_island/data.hterrain" type="Resource" id=14]
 [ext_resource path="res://assets/Terrain_PBR/terrain_ocean/data.hterrain" type="Resource" id=15]
 [ext_resource path="res://scenes/Plane_V3.tscn" type="PackedScene" id=16]
@@ -29,12 +29,12 @@ script = ExtResource( 17 )
 mode = 0
 textures = [ [ ExtResource( 8 ), ExtResource( 7 ) ], [ ExtResource( 3 ), ExtResource( 13 ) ] ]
 
-[node name="TestScene_V3" type="Spatial"]
+[node name="TestScene_V3" type="Node3D"]
 
-[node name="XForm_Island" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
+[node name="XForm_Island" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -25000, 0, -25000 )
 
-[node name="Terrain_Island" type="Spatial" parent="XForm_Island"]
+[node name="Terrain_Island" type="Node3D" parent="XForm_Island"]
 script = ExtResource( 18 )
 map_scale = Vector3( 100, 100, 100 )
 _terrain_data = ExtResource( 14 )
@@ -54,10 +54,10 @@ shader_params/u_globalmap_blend_start = null
 shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
-[node name="XForm_Ocean" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500000, 0, -500000 )
+[node name="XForm_Ocean" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -500000, 0, -500000 )
 
-[node name="HTerrain" type="Spatial" parent="XForm_Ocean"]
+[node name="HTerrain" type="Node3D" parent="XForm_Ocean"]
 script = ExtResource( 18 )
 map_scale = Vector3( 2000, 2000, 2000 )
 _terrain_data = ExtResource( 15 )
@@ -78,7 +78,7 @@ shader_params/u_globalmap_blend_distance = null
 shader_params/u_colormap_opacity_per_texture = Plane( 1, 1, 1, 1 )
 
 [node name="Runway" type="Sprite3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 200, 0 )
 pixel_size = 1.0
 axis = 1
 transparent = false

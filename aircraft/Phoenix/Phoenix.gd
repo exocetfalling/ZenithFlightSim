@@ -111,8 +111,8 @@ func _physics_process(delta):
 	$HUDShared.hud_pitch = adc_pitch
 	$HUDShared.hud_roll = adc_roll
 	
-	$HUDShared.hud_angle_inertial_x = rad2deg(adc_angle_inertial_x)
-	$HUDShared.hud_angle_inertial_y = rad2deg(adc_angle_inertial_y)
+	$HUDShared.hud_angle_inertial_x = rad_to_deg(adc_angle_inertial_x)
+	$HUDShared.hud_angle_inertial_y = rad_to_deg(adc_angle_inertial_y)
 	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
@@ -132,7 +132,7 @@ func _physics_process(delta):
 	
 	
 	if ($RadioAltimeter.is_colliding() == true):
-		adc_alt_agl = (global_translation - $RadioAltimeter.get_collision_point()).length()
+		adc_alt_agl = (global_position - $RadioAltimeter.get_collision_point()).length()
 	else:
 		# Set value to show sensor is out of range
 		adc_alt_agl = 9999
@@ -234,7 +234,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Ruddervator_L.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Ruddervator_L.rotation.z)
 	
 	$AeroSurface_Ruddervator_R.rotation = \
@@ -243,7 +243,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Ruddervator_R.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Ruddervator_R.rotation.z)
 	
 	pos_wing_l = $AeroSurface_Wing_L.pos_force_rel
@@ -263,9 +263,9 @@ func _physics_process(delta):
 	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
 	
 	# Gear animations
-	$LG_Point_NLG/Strut_Lower.translation.y = $VehicleWheel_NLG.translation.y + 0.85
-	$LG_Point_MLG_L/Strut_Lower.translation.y = $VehicleWheel_MLG_L.translation.y + 0.5
-	$LG_Point_MLG_R/Strut_Lower.translation.y = $VehicleWheel_MLG_R.translation.y + 0.5
+	$LG_Point_NLG/Strut_Lower.position.y = $VehicleWheel_NLG.position.y + 0.85
+	$LG_Point_MLG_L/Strut_Lower.position.y = $VehicleWheel_MLG_L.position.y + 0.5
+	$LG_Point_MLG_R/Strut_Lower.position.y = $VehicleWheel_MLG_R.position.y + 0.5
 	
 	$LG_Point_NLG.rotation.x   = (1 - gear_current) * (-PI/2)
 	$LG_Point_MLG_L.rotation.z = (1 - gear_current) * (+PI/2)

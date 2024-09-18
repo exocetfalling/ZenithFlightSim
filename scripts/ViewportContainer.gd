@@ -1,4 +1,4 @@
-extends ViewportContainer
+extends SubViewportContainer
 
 #onready var viewport = get_node("Viewport")
 

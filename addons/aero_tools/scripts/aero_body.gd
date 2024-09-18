@@ -1,4 +1,4 @@
-extends VehicleBody
+extends VehicleBody3D
 
 # Class for aircraft
 # For different atmospheres override calc_atmo_properties()
@@ -9,7 +9,7 @@ class_name AeroBody
 # 0 - none
 # 1 - player
 # 2 - AI
-export var control_type : int = 0
+@export var control_type : int = 0
 
 # Air temperature, K
 var air_temperature : float = 288.0
@@ -197,15 +197,15 @@ func add_force_local(force: Vector3, pos: Vector3):
 	var force_local
 	var pos_local
 	
-	pos_local = self.transform.basis.xform(pos)
-	force_local = self.transform.basis.xform(force)
-	self.add_force(force_local, pos_local)
+	pos_local = self.transform.basis * (pos)
+	force_local = self.transform.basis * (force)
+	self.apply_force(pos_local, force_local)
 
 func add_torque_local(torque: Vector3):
 	var torque_local
 
-	torque_local = self.transform.basis.xform(torque)
-	self.add_torque(torque_local)
+	torque_local = self.transform.basis * (torque)
+	self.apply_torque(torque_local)
 
 func calc_atmo_properties(height_metres):
 	# Store atmospheric properties as Vector3
@@ -267,14 +267,14 @@ func find_bearing_and_range_to(vec_pos_target, vec_pos_source):
 	var vec_delta_pos = vec_pos_target - vec_pos_source
 	var vec_delta_pos_2d = Vector2(vec_delta_pos.x, vec_delta_pos.z)
 	var vec_delta_pos_2d_norm = vec_delta_pos_2d.normalized()
-	var bearing_to = fmod(-rad2deg(atan2(vec_delta_pos_2d_norm.x, vec_delta_pos_2d_norm.y)) + 360, 360)
+	var bearing_to = fmod(-rad_to_deg(atan2(vec_delta_pos_2d_norm.x, vec_delta_pos_2d_norm.y)) + 360, 360)
 	var range_to = vec_delta_pos_2d.length()
 	return Vector2(bearing_to, range_to)
 
 func find_angles_and_distance_to_target(vec_pos_target):
 	var vec_delta_local = to_local(vec_pos_target)
-	var pitch_to = rad2deg(atan2(vec_delta_local.y, -vec_delta_local.z))
-	var yaw_to = rad2deg(atan2(vec_delta_local.x, -vec_delta_local.z))
+	var pitch_to = rad_to_deg(atan2(vec_delta_local.y, -vec_delta_local.z))
+	var yaw_to = rad_to_deg(atan2(vec_delta_local.x, -vec_delta_local.z))
 	var range_to = vec_delta_local.length()
 	return Vector3(yaw_to, pitch_to, range_to)
 
@@ -300,13 +300,13 @@ func _physics_process(delta):
 	get_input(delta)
 	
 	linear_velocity_total = self.linear_velocity.length()
-	linear_velocity_local = (self.transform.basis.xform_inv(linear_velocity))
+	linear_velocity_local = ((linear_velocity) * self.transform.basis)
 	
-	airspeed_true_vector = linear_velocity_local + self.transform.basis.xform_inv(linear_velocity_wind)
+	airspeed_true_vector = linear_velocity_local + (linear_velocity_wind) * self.transform.basis
 	airspeed_true_total = airspeed_true_vector.length()
 	
 	angular_velocity_local = angular_velocity
-	angular_velocity_local_deg = Vector3(rad2deg(angular_velocity_local.x), rad2deg(angular_velocity_local.y), rad2deg(angular_velocity_local.z))
+	angular_velocity_local_deg = Vector3(rad_to_deg(angular_velocity_local.x), rad_to_deg(angular_velocity_local.y), rad_to_deg(angular_velocity_local.z))
 	
 	air_temperature = calc_atmo_properties(global_transform.origin.y).x
 	air_pressure = calc_atmo_properties(global_transform.origin.y).y
@@ -326,13 +326,13 @@ func _physics_process(delta):
 	angle_alpha = atan2(-airspeed_true_vector.y, -airspeed_true_vector.z)
 	angle_beta = atan2(-airspeed_true_vector.x, -airspeed_true_vector.z)
 	
-	angle_alpha_deg = rad2deg(angle_alpha)
-	angle_beta_deg = rad2deg(angle_beta)
+	angle_alpha_deg = rad_to_deg(angle_alpha)
+	angle_beta_deg = rad_to_deg(angle_beta)
 	
 	angle_inertial_y = atan2(-linear_velocity_local.y, -linear_velocity_local.z)
 	angle_inertial_x = atan2(+linear_velocity_local.x, -linear_velocity_local.z)
-	angle_inertial_y_deg = rad2deg(angle_inertial_y)
-	angle_inertial_x_deg = rad2deg(angle_inertial_x)
+	angle_inertial_y_deg = rad_to_deg(angle_inertial_y)
+	angle_inertial_x_deg = rad_to_deg(angle_inertial_x)
 	
 	# KTAS to KIAS 
 	adc_spd_indicated = sqrt(2 * air_pressure_dynamic / 1.225)

@@ -4,7 +4,7 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var use_IAS : bool = true
+@export var use_IAS : bool = true
 
 var hud_scale_vertical: float = 0
 
@@ -28,7 +28,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera().fov
+	hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera_3d().fov
 	
 	$GaugeSPD.value_displayed = hud_spd
 	$GaugeHDG.value_displayed = hud_hdg
@@ -37,7 +37,7 @@ func _process(delta):
 	$Centre.position = get_viewport_rect().size / 2
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
 	$Centre/Wings.position.y = \
-		(rad2deg(get_viewport().get_camera().global_rotation.x) - hud_pitch) \
+		(rad_to_deg(get_viewport().get_camera_3d().global_rotation.x) - hud_pitch) \
 		* hud_scale_vertical
 	$Centre/Wings/FPM.position.x = hud_angle_inertial_x * hud_scale_vertical
 	$Centre/Wings/FPM.position.y = hud_angle_inertial_y * hud_scale_vertical

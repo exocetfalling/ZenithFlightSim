@@ -1,15 +1,15 @@
-tool
+@tool
 extends Control
 
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var mark_line_length : float = 1000
-export var mark_line_width : float = 5
-export var mark_pitch_value : float = 10
-export var mark_pitch_value_visible : bool = true
-export var mark_line_gap : float = 300
+@export var mark_line_length : float = 1000
+@export var mark_line_width : float = 5
+@export var mark_pitch_value : float = 10
+@export var mark_pitch_value_visible : bool = true
+@export var mark_line_gap : float = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,11 +18,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		pass
 		# Code to execute in editor.
 
-	if not Engine.editor_hint:
+	if not Engine.is_editor_hint():
 		pass
 		# Code to execute in game.
 

@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 var fuel = 100
 
 signal exploded
@@ -15,9 +15,9 @@ func _ready():
 	pass # Replace with function body.
 
 func add_force_local(force: Vector3, pos: Vector3):
-	pos_local = self.transform.basis.xform(pos)
-	force_local = self.transform.basis.xform(force)
-	self.add_force(force_local, pos_local)
+	pos_local = self.transform.basis * (pos)
+	force_local = self.transform.basis * (force)
+	self.apply_force(pos_local, force_local)
 
 func _on_bomb_body_entered(body):
 	emit_signal("exploded", transform.origin)

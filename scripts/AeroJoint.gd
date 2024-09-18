@@ -1,4 +1,4 @@
-extends Generic6DOFJoint
+extends Generic6DOFJoint3D
 
 class_name AeroJoint
 
@@ -7,21 +7,21 @@ class_name AeroJoint
 # var b = "text"
 
 # Is it a servo? 
-export var is_servo : bool = false
+@export var is_servo : bool = false
 
 # Location of hinge relative to centre of gravity (root)
 var hinge_pos : Vector3 = Vector3.ZERO
 
 # Hinge limits 
-export (float, -90.0,  0.0) var angle_lower_limit : float = -15.0
-export (float,   0.0, 90.0) var angle_upper_limit : float =  15.0
+@export var angle_lower_limit : float = -15.0 # (float, -90.0,  0.0)
+@export var angle_upper_limit : float =  15.0 # (float,   0.0, 90.0)
 
 
 # Inputs to the control surface will be scaled by these values 
 # Useful for mixed controls (elevons, spoilerons, etc.)
-export var scalar_control_pitch : float = 1.00
-export var scalar_control_roll : float = 1.00
-export var scalar_control_yaw : float = 1.00
+@export var scalar_control_pitch : float = 1.00
+@export var scalar_control_roll : float = 1.00
+@export var scalar_control_yaw : float = 1.00
 
 # Commanded values from the FBW/player/AI 
 var input_command_value : float = 0.00
@@ -44,7 +44,7 @@ func _ready():
 #		DebugOverlay.stats.add_property(self, "input_command_value", "round")
 #		DebugOverlay.stats.add_property(self, "output_deflection_rate", "round")
 #		DebugOverlay.stats.add_property(self, "output_angle", "round")
-		hinge_pos = self.translation
+		hinge_pos = self.position
 		output_node = get_node(self.get("nodes/node_b"))
 		self.set("angular_limit_x/lower_angle", angle_lower_limit)
 		self.set("angular_limit_x/upper_angle", angle_upper_limit)

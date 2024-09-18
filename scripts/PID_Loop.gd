@@ -12,9 +12,9 @@ var proportional = 0.00
 var integral = 0.00
 var derivative = 0.00
 
-export var term_P = 0.00
-export var term_I = 0.00
-export var term_D = 0.00
+@export var term_P = 0.00
+@export var term_I = 0.00
+@export var term_D = 0.00
 
 var output_P = 0.00
 var output_I = 0.00

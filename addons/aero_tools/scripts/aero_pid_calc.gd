@@ -17,12 +17,12 @@ var value_error_current = 0.00
 var value_error_previous = 0.00
 var value_error_delta = 0.00
 
-export var term_P = 0.00
-export var term_I = 0.00
-export var term_D = 0.00
+@export var term_P = 0.00
+@export var term_I = 0.00
+@export var term_D = 0.00
 
 # Maximum integral value, beyond whick clamping occurs
-export var integral_max = 100.00
+@export var integral_max = 100.00
 
 var output_P = 0.00
 var output_I = 0.00
@@ -32,7 +32,7 @@ var output_total = 0.00
 # Real-time tuning
 
 # Will it be tuned at runtime?
-export var param_tuning_active = true
+@export var param_tuning_active = true
 
 # Enum-like thing?
 # 0 = P

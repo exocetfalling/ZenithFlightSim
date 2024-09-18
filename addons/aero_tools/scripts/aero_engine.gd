@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 class_name AeroEngine
 
@@ -7,17 +7,17 @@ class_name AeroEngine
 # var b = "text"
 
 # Thrust in N
-export var thrust_rated : float = 1000
+@export var thrust_rated : float = 1000
 var thrust_output : float = 0.00
 var thrust_output_vector : Vector3 = Vector3.ZERO
 
 var throttle_current : float = 0.00
 
 var vel_freestream : float = 0.00
-export var vel_exhaust : float = 0.00
+@export var vel_exhaust : float = 0.00
 var vel_delta : float = 0.00
 
-export var fan_radius : float = 1.00
+@export var fan_radius : float = 1.00
 var fan_area : float = 3.14
 var air_density : float = 1.2 
 

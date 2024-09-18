@@ -1,6 +1,6 @@
 # Copyright © 2021 Kasper Arnklit Frandsen - MIT License
 # See `LICENSE.md` included in the source distribution for details.
-extends EditorSpatialGizmoPlugin
+extends EditorNode3DGizmoPlugin
 
 
 const RiverManager = preload("./river_manager.gd")
@@ -55,16 +55,16 @@ func _init() -> void:
 	handles_width_mat.set_albedo(            Color(0.0, 1.0, 1.0, 0.25))
 	handles_width_mat_wd.set_albedo(         Color(0.0, 1.0, 1.0, 1.0))
 
-	handles_center_mat.set_flag(           SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, true)
-	handles_center_mat_wd.set_flag(        SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, false)
-	handles_control_points_mat.set_flag(   SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, true)
-	handles_control_points_mat_wd.set_flag(SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, false)
-	handles_width_mat.set_flag(            SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, true)
-	handles_width_mat_wd.set_flag(         SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, false)
+	handles_center_mat.set_flag(           StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, true)
+	handles_center_mat_wd.set_flag(        StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, false)
+	handles_control_points_mat.set_flag(   StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, true)
+	handles_control_points_mat_wd.set_flag(StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, false)
+	handles_width_mat.set_flag(            StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, true)
+	handles_width_mat_wd.set_flag(         StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, false)
 
-	var mat = SpatialMaterial.new()
-	mat.set_flag(SpatialMaterial.FLAG_UNSHADED, true)
-	mat.set_flag(SpatialMaterial.FLAG_DISABLE_DEPTH_TEST, true)
+	var mat = StandardMaterial3D.new()
+	mat.set_flag(StandardMaterial3D.FLAG_UNSHADED, true)
+	mat.set_flag(StandardMaterial3D.FLAG_DISABLE_DEPTH_TEST, true)
 	mat.set_albedo(Color(1.0, 1.0, 0.0))
 	mat.render_priority = 10
 	add_material("path", mat)
@@ -83,7 +83,7 @@ func has_gizmo(spatial) -> bool:
 	return spatial is RiverManager
 
 
-func get_handle_name(gizmo: EditorSpatialGizmo, index: int) -> String:
+func _get_handle_name(gizmo: EditorNode3DGizmo, index: int) -> String:
 	return "Handle " + String(index)
 
 # Handles are pushed to separate handle lists, one per material (using gizmo.add_handles).
@@ -162,8 +162,8 @@ func _get_point_index(curve_index: int, is_center: bool, is_cp_in: bool, is_cp_o
 		return point_count * 3 + 1 + curve_index * 2
 
 
-func get_handle_value(gizmo: EditorSpatialGizmo, index: int):
-	var river : RiverManager = gizmo.get_spatial_node()
+func _get_handle_value(gizmo: EditorNode3DGizmo, index: int):
+	var river : RiverManager = gizmo.get_node_3d()
 	var point_count = river.curve.get_point_count()
 	if _is_center_point(index, point_count):
 		return river.curve.get_point_position(_get_curve_index(index, point_count))
@@ -176,14 +176,14 @@ func get_handle_value(gizmo: EditorSpatialGizmo, index: int):
 
 
 # Called when handle is moved
-func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Vector2) -> void:
-	var river : RiverManager = gizmo.get_spatial_node()
-	var space_state := river.get_world().direct_space_state
+func set_handle(gizmo: EditorNode3DGizmo, index: int, camera: Camera3D, point: Vector2) -> void:
+	var river : RiverManager = gizmo.get_node_3d()
+	var space_state := river.get_world_3d().direct_space_state
 
-	var global_transform : Transform = river.transform
+	var global_transform : Transform3D = river.transform
 	if river.is_inside_tree():
 		global_transform = river.get_global_transform()
-	var global_inverse: Transform = global_transform.affine_inverse()
+	var global_inverse: Transform3D = global_transform.affine_inverse()
 
 	var ray_from = camera.project_ray_origin(point)
 	var ray_dir = camera.project_ray_normal(point)
@@ -218,7 +218,7 @@ func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Ve
 		var z := river.curve.get_point_out(p_index).normalized()
 		var x := z.cross(Vector3.DOWN).normalized()
 		var y := z.cross(x).normalized()
-		_handle_base_transform = Transform(
+		_handle_base_transform = Transform3D(
 			Basis(x, y, z) * global_transform.basis,
 			old_pos_global
 		)
@@ -241,7 +241,7 @@ func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Ve
 		elif editor_plugin.constraint in AXIS_MAPPING:
 			var axis: Vector3 = AXIS_MAPPING[editor_plugin.constraint]
 			if editor_plugin.local_editing:
-				axis = _handle_base_transform.basis.xform(axis)
+				axis = _handle_base_transform.basis * (axis)
 			var axis_from = old_pos_global + (axis * AXIS_CONSTRAINT_LENGTH)
 			var axis_to = old_pos_global - (axis * AXIS_CONSTRAINT_LENGTH)
 			var ray_to = ray_from + (ray_dir * AXIS_CONSTRAINT_LENGTH)
@@ -251,7 +251,7 @@ func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Ve
 		elif editor_plugin.constraint in PLANE_MAPPING:
 			var normal: Vector3 = PLANE_MAPPING[editor_plugin.constraint]
 			if editor_plugin.local_editing:
-				normal = _handle_base_transform.basis.xform(normal)
+				normal = _handle_base_transform.basis * (normal)
 			var projected := old_pos_global.project(normal)
 			var direction := sign(projected.dot(normal))
 			var distance := direction * projected.length()
@@ -285,8 +285,8 @@ func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Ve
 			p2 = river.curve.get_point_out(p_index).cross(Vector3.UP).normalized() * 4096
 		if is_width_right:
 			p2 = river.curve.get_point_out(p_index).cross(Vector3.DOWN).normalized() * 4096
-		var g1 = global_inverse.xform(ray_from)
-		var g2 = global_inverse.xform(ray_from + ray_dir * 4096)
+		var g1 = global_inverse * (ray_from)
+		var g2 = global_inverse * (ray_from + ray_dir * 4096)
 		
 		var geo_points = Geometry.get_closest_points_between_segments(p1, p2, g1, g2)
 		var dir = geo_points[0].distance_to(base) - old_pos.distance_to(base)
@@ -299,12 +299,12 @@ func set_handle(gizmo: EditorSpatialGizmo, index: int, camera: Camera, point: Ve
 	redraw(gizmo)
 
 # Handle Undo / Redo of handle movements
-func commit_handle(gizmo: EditorSpatialGizmo, index: int, restore, cancel: bool = false) -> void:
-	var river : RiverManager = gizmo.get_spatial_node()
+func _commit_handle(gizmo: EditorNode3DGizmo, index: int, restore, cancel: bool = false) -> void:
+	var river : RiverManager = gizmo.get_node_3d()
 	var point_count = river.curve.get_point_count()
 
 	var ur = editor_plugin.get_undo_redo()
-	ur.create_action("Change River Shape")
+	ur.create_action("Change River Shape3D")
 
 	var p_index = _get_curve_index(index, point_count)
 	if _is_center_point(index, point_count):
@@ -329,16 +329,16 @@ func commit_handle(gizmo: EditorSpatialGizmo, index: int, restore, cancel: bool 
 	ur.add_do_method(river, "properties_changed")
 	ur.add_do_method(river, "set_materials", "i_valid_flowmap", false)
 	ur.add_do_property(river, "valid_flowmap", false)
-	ur.add_do_method(river, "update_configuration_warning")
+	ur.add_do_method(river, "update_configuration_warnings")
 	ur.add_undo_method(river, "properties_changed")
 	ur.add_undo_method(river, "set_materials", "i_valid_flowmap", river.valid_flowmap)
 	ur.add_undo_property(river, "valid_flowmap", river.valid_flowmap)
-	ur.add_undo_method(river, "update_configuration_warning")
+	ur.add_undo_method(river, "update_configuration_warnings")
 	ur.commit_action()
 	
 	redraw(gizmo)
 
-func redraw(gizmo: EditorSpatialGizmo) -> void:
+func redraw(gizmo: EditorNode3DGizmo) -> void:
 	# Work around for issue where using "get_material" doesn't return a
 	# material when redraw is being called manually from _set_handle()
 	# so I'm caching the materials instead
@@ -348,16 +348,16 @@ func redraw(gizmo: EditorSpatialGizmo) -> void:
 		_handle_lines_mat = get_material("handle_lines", gizmo)
 	gizmo.clear()
 	
-	var river := gizmo.get_spatial_node() as RiverManager
+	var river := gizmo.get_node_3d() as RiverManager
 	
-	if not river.is_connected("river_changed", self, "redraw"):
-		river.connect("river_changed", self, "redraw", [gizmo])
+	if not river.is_connected("river_changed", Callable(self, "redraw")):
+		river.connect("river_changed", Callable(self, "redraw").bind(gizmo))
 	
 	_draw_path(gizmo, river.curve)
 	_draw_handles(gizmo, river)
 
-func _draw_path(gizmo: EditorSpatialGizmo, curve : Curve3D) -> void:
-	var path = PoolVector3Array()
+func _draw_path(gizmo: EditorNode3DGizmo, curve : Curve3D) -> void:
+	var path = PackedVector3Array()
 	var baked_points = curve.get_baked_points()
 	
 	for i in baked_points.size() - 1:
@@ -366,14 +366,14 @@ func _draw_path(gizmo: EditorSpatialGizmo, curve : Curve3D) -> void:
 	
 	gizmo.add_lines(path, _path_mat)
 
-func _draw_handles(gizmo: EditorSpatialGizmo, river : RiverManager) -> void:
-	var lines = PoolVector3Array()
-	var handles_center = PoolVector3Array()
-	var handles_center_wd = PoolVector3Array()
-	var handles_control_points = PoolVector3Array()
-	var handles_control_points_wd = PoolVector3Array()
-	var handles_width = PoolVector3Array()
-	var handles_width_wd = PoolVector3Array()
+func _draw_handles(gizmo: EditorNode3DGizmo, river : RiverManager) -> void:
+	var lines = PackedVector3Array()
+	var handles_center = PackedVector3Array()
+	var handles_center_wd = PackedVector3Array()
+	var handles_control_points = PackedVector3Array()
+	var handles_control_points_wd = PackedVector3Array()
+	var handles_width = PackedVector3Array()
+	var handles_width_wd = PackedVector3Array()
 	var point_count = river.curve.get_point_count()
 	for i in point_count:
 		var point_pos = river.curve.get_point_position(i)

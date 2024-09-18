@@ -13,25 +13,25 @@ mark_pitch_value_visible = false
 mark_line_gap = 0.0
 
 [node name="MarkP10" parent="." instance=ExtResource( 2 )]
-margin_top = -200.0
-margin_bottom = -200.0
+offset_top = -200.0
+offset_bottom = -200.0
 mark_line_length = 500.0
 mark_pitch_value = 10.0
 
 [node name="MarkN10" parent="." instance=ExtResource( 2 )]
-margin_top = 200.0
-margin_bottom = 200.0
+offset_top = 200.0
+offset_bottom = 200.0
 mark_line_length = 500.0
 mark_pitch_value = 10.0
 
 [node name="MarkP20" parent="." instance=ExtResource( 2 )]
-margin_top = -400.0
-margin_bottom = -400.0
+offset_top = -400.0
+offset_bottom = -400.0
 mark_line_length = 500.0
 mark_pitch_value = 20.0
 
 [node name="MarkN20" parent="." instance=ExtResource( 2 )]
-margin_top = 400.0
-margin_bottom = 400.0
+offset_top = 400.0
+offset_bottom = 400.0
 mark_line_length = 500.0
 mark_pitch_value = 20.0

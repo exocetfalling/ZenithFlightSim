@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 # Class for aerodynamic surfaces
 # Be sure to set vel_body variable using parent velocity data
@@ -9,13 +9,13 @@ class_name AeroSurface
 # var a = 2
 # var b = "text"
 
-export var length_chord_root : float = 1.00
-export var length_chord_tip : float = 1.00
-export var length_span : float = 1.00
-export var angle_sweep : float = 0.00
+@export var length_chord_root : float = 1.00
+@export var length_chord_tip : float = 1.00
+@export var length_span : float = 1.00
+@export var angle_sweep : float = 0.00
 
 # Position of centre of pressure
-export var pos_COP : Vector3 = Vector3.ZERO
+@export var pos_COP : Vector3 = Vector3.ZERO
 
 # Relative force position given control deflection
 var pos_force_rel : Vector3 = Vector3.ZERO
@@ -25,7 +25,7 @@ var pos_body_rel : Vector3 = Vector3.ZERO
 
 # Lift effeciency, varies by planform
 # 0.7 for rectangular wings
-export var surface_lift_effeciency : float = 0.7
+@export var surface_lift_effeciency : float = 0.7
 
 var area_surface : float = 1.00
 
@@ -77,7 +77,7 @@ func update_atmo_data():
 	air_pressure = atmo_data.y
 	air_density = atmo_data.z
 	
-	vel_surface = (self.transform.basis.xform_inv(vel_body))
+	vel_surface = ((vel_body) * self.transform.basis)
 	vel_total = vel_surface.length()
 	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
 	
@@ -133,8 +133,8 @@ func calc_alpha_beta():
 	angle_alpha = atan2(-vel_surface.y, -vel_surface.z)
 	angle_beta = atan2(-vel_surface.x, -vel_surface.z)
 	
-	angle_alpha_deg = rad2deg(angle_alpha)
-	angle_beta_deg = rad2deg(angle_beta)
+	angle_alpha_deg = rad_to_deg(angle_alpha)
+	angle_beta_deg = rad_to_deg(angle_beta)
 
 
 func calc_force_vectors():
@@ -153,9 +153,9 @@ func calc_force_vectors():
 	
 	force_drag_surface_vector = force_drag_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
 	
-	pos_force_rel.x = translation.x
-	pos_force_rel.y = translation.y + sin(-rotation.x) * pos_COP.z
-	pos_force_rel.z = translation.z + cos(-rotation.x) * pos_COP.z
+	pos_force_rel.x = position.x
+	pos_force_rel.y = position.y + sin(-rotation.x) * pos_COP.z
+	pos_force_rel.z = position.z + cos(-rotation.x) * pos_COP.z
 
 
 # Called when the node enters the scene tree for the first time.
