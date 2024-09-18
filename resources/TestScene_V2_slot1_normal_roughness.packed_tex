@@ -1,8 +1,0 @@
-{
-	"contains_albedo": false,
-	"resolution": 512,
-	"src": {
-		"a": "res://assets/Terrain_PBR/materials/ground/ground_roughness.png",
-		"rgb": "res://assets/Terrain_PBR/materials/ground/ground_normal.png"
-	}
-}

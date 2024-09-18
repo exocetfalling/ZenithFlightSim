@@ -67,7 +67,7 @@ var _touch_index : int = -1
 #### FUNCTIONS ####
 
 func _ready() -> void:
-	if not OS.has_feature() and visibility_mode == VisibilityMode.TOUCHSCREEN_ONLY:
+	if not OS.has_touchscreen_ui_hint() and visibility_mode == VisibilityMode.TOUCHSCREEN_ONLY:
 		hide()
 
 func _input(event: InputEvent) -> void:

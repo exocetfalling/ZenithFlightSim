@@ -1,8 +1,0 @@
-{
-	"contains_albedo": false,
-	"resolution": 1024,
-	"src": {
-		"a": "res://assets/Terrain_PBR/materials/water/water_roughness.png",
-		"rgb": "res://assets/Terrain_PBR/materials/water/water_normal.png"
-	}
-}
