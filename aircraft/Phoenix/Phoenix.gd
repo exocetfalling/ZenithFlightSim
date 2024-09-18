@@ -234,7 +234,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Ruddervator_L.rotation.z) \
 			)\
-			super.rotated(Vector3.FORWARD, \
+			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Ruddervator_L.rotation.z)
 	
 	$AeroSurface_Ruddervator_R.rotation = \
@@ -243,7 +243,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Ruddervator_R.rotation.z) \
 			)\
-			super.rotated(Vector3.FORWARD, \
+			.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Ruddervator_R.rotation.z)
 	
 	pos_wing_l = $AeroSurface_Wing_L.pos_force_rel
@@ -358,7 +358,7 @@ func get_input(delta):
 
 func _integrate_forces(_state):
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/3 * input_throttle), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
 	
 	# Forces from surfaces 
 	add_force_local(force_wing_l, pos_wing_l)

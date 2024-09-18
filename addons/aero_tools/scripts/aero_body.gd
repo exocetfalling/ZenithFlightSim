@@ -199,7 +199,7 @@ func add_force_local(force: Vector3, pos: Vector3):
 	
 	pos_local = self.transform.basis * (pos)
 	force_local = self.transform.basis * (force)
-	self.apply_force(pos_local, force_local)
+	self.apply_force(force_local, pos_local)
 
 func add_torque_local(torque: Vector3):
 	var torque_local
@@ -260,7 +260,7 @@ func calc_braking_force():
 	else:
 		braking_coeff = 0
 	
-	braking_force = braking_coeff * weight * input_braking
+	braking_force = braking_coeff * mass * get_gravity().length() * input_braking
 	return braking_force
 
 func find_bearing_and_range_to(vec_pos_target, vec_pos_source):

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dal6e1h1ie6rl"]
+
+[ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://aircraft/Phoenix/Phoenix.tscn" id="1_cshou"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw2ny"]
+albedo_color = Color(1.20327e-08, 0.167202, 0.0650762, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5yjbj"]
+material = SubResource("StandardMaterial3D_xw2ny")
+size = Vector2(100000, 100000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[node name="TestScene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("WorldBoundaryShape3D_k4k5h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_5yjbj")
+
+[node name="Phoenix" parent="." instance=ExtResource("1_cshou")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29281, 0)

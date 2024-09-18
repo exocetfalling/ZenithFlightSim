@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c1pfxxsltbikv"]
+[gd_scene load_steps=12 format=3 uid="uid://c1pfxxsltbikv"]
 
 [ext_resource type="Script" path="res://aircraft/Phoenix/Phoenix.gd" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://bwtcvur732fvd" path="res://addons/aero_tools/uires/hud_shared/hud_shared.tscn" id="4"]
 [ext_resource type="Environment" uid="uid://dawhrmbdg5ggd" path="res://resources/camera_env.tres" id="5"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="6"]
-[ext_resource type="PackedScene" uid="uid://c4lctpxogn5m4" path="res://addons/aero_tools/shared/wheel_small/Wheel_Medium.tscn" id="7"]
 [ext_resource type="Script" path="res://addons/aero_tools/cameras/Camera_FPV.gd" id="8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
@@ -25,6 +24,8 @@ albedo_color = Color(0.0784314, 0.0705882, 0.0745098, 1)
 
 [node name="Phoenix" type="VehicleBody3D"]
 mass = 800.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0, -1)
 can_sleep = false
 continuous_cd = true
 angular_damp = 2.0
@@ -234,7 +235,6 @@ material = ExtResource("3")
 [node name="CameraFPV" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
 environment = ExtResource("5")
-current = true
 fov = 60.0
 far = 1e+06
 script = ExtResource("8")
@@ -243,6 +243,7 @@ script = ExtResource("8")
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10)
 cull_mask = 1048557
 environment = ExtResource("5")
+current = true
 fov = 60.0
 far = 100000.0
 
@@ -280,11 +281,31 @@ material = ExtResource("3")
 [node name="Wheels" type="Node3D" parent="LG_Point_NLG/Strut_Lower/Axle"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Wheel_Medium_L" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels" instance=ExtResource("7")]
+[node name="Wheel_Medium_L" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(-2, 1.74846e-07, 0, -1.74846e-07, -2, 0, 0, 0, 2, -0.08, 0, 0)
+script = null
 
-[node name="Wheel_Medium_R" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels" instance=ExtResource("7")]
+[node name="Wheel_Medium_R" parent="LG_Point_NLG/Strut_Lower/Axle/Wheels"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(-2, 1.74846e-07, 0, -1.74846e-07, -2, 0, 0, 0, 2, 0.08, 0, 0)
+script = null
 
 [node name="LG_Point_MLG_L" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.35)
@@ -312,8 +333,18 @@ material = ExtResource("3")
 [node name="Wheels" type="Node3D" parent="LG_Point_MLG_L/Strut_Lower/Axle"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Wheel_Medium" parent="LG_Point_MLG_L/Strut_Lower/Axle/Wheels" instance=ExtResource("7")]
+[node name="Wheel_Medium" parent="LG_Point_MLG_L/Strut_Lower/Axle/Wheels"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.08, 0, 0)
+script = null
 
 [node name="LG_Point_MLG_R" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.35)
@@ -341,8 +372,18 @@ material = ExtResource("3")
 [node name="Wheels" type="Node3D" parent="LG_Point_MLG_R/Strut_Lower/Axle"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Wheel_Medium" parent="LG_Point_MLG_R/Strut_Lower/Axle/Wheels" instance=ExtResource("7")]
+[node name="Wheel_Medium" parent="LG_Point_MLG_R/Strut_Lower/Axle/Wheels"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.08, 0, 0)
+script = null
 
 [node name="RadioAltimeter" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1000, 0)

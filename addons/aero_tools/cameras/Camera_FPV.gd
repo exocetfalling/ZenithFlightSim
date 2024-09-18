@@ -82,8 +82,8 @@ func get_input(delta):
 	else:
 		# If rotation is less than 5 deg total, centre view
 		if (rotation_degrees.length() <= 5):
-			rotation_degrees.x = lerp(rotation_degrees.x, 0, 0.2)
-			rotation_degrees.y = lerp(rotation_degrees.y, 0, 0.2)
+			rotation_degrees.x = lerp(rotation_degrees.x, 0.0, 0.2)
+			rotation_degrees.y = lerp(rotation_degrees.y, 0.0, 0.2)
 		
 		timer_running = false
 		mouse_delta = Vector2.ZERO
