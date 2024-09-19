@@ -6,7 +6,7 @@
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw2ny"]
-albedo_color = Color(1.20327e-08, 0.167202, 0.0650762, 1)
+albedo_color = Color(0.326784, 0.55629, 0.293291, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5yjbj"]
 material = SubResource("StandardMaterial3D_xw2ny")

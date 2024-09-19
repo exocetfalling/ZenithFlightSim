@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ZenithFlightSim"
-run/main_scene="res://scenes/TestScene_V2.tscn"
+run/main_scene="res://addons/aero_tools/scenes/test_scene/test_scene.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://resources/icon.png"
 

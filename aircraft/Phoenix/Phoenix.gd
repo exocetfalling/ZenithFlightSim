@@ -194,6 +194,8 @@ func _physics_process(delta):
 	else:
 		ground_contact = false
 	
+	get_input(delta)
+	
 	# Draw lines
 #	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
 func get_input(delta):
@@ -254,9 +256,9 @@ func get_input(delta):
 		if (Input.is_action_just_pressed("camera_toggle")):
 			camera_mode = camera_mode + 1
 		if (camera_mode == 0):
-			$Camera_FPV.current = true
+			$CameraFPV.current = true
 		if (camera_mode == 1):
-			$Camera_Ext.current = true
+			$CameraExt.current = true
 		if (camera_mode > 1):
 			camera_mode = 0
 		
