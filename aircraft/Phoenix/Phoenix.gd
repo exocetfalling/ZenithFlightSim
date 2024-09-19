@@ -200,6 +200,8 @@ func _physics_process(delta):
 	# Move surfaces
 	$AileronL.rotation.x = +PI/6 * output_aileron
 	$AileronR.rotation.x = -PI/6 * output_aileron
+	
+	$RuddervatorR.rotation = Vector3(0, 0, PI/4).rotated(Vector3.RIGHT, output_elevator)
 
 
 func get_input(delta):
