@@ -1,6 +1,5 @@
 extends AeroBody
 
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -39,6 +38,8 @@ func _ready():
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
+	super(delta)
+	
 	if (control_type == 1):
 		# Panel updates
 		AeroDataBus.aircraft_pitch = adc_pitch
@@ -124,10 +125,29 @@ func _physics_process(delta):
 		output_rudder_l = 0
 		output_rudder_r = 0
 	
-	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_aileron -output_elevator -3 * output_rudder_l)
-	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_aileron -output_elevator +3 * output_rudder_l)
-	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_aileron -output_elevator -3 * output_rudder_r)
-	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_aileron -output_elevator +3 * output_rudder_r)
+	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_aileron - output_elevator - 3 * output_rudder_l)
+	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_aileron - output_elevator + 3 * output_rudder_l)
+	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_aileron - output_elevator - 3 * output_rudder_r)
+	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_aileron - output_elevator + 3 * output_rudder_r)
+	
+	get_input(delta)
+	
+	# Thrust forces
+	apply_force_local(Vector3(0, 0, -mass * 10 * input_throttle), Vector3(0, 0, 0))
+	
+	# Forces from surfaces 
+	
+	for child in get_children():
+		if child is AeroSurface:
+			apply_force_local(child.force_total_surface_vector, child.position)
+	
+	apply_force_local(forceWingl, posWingl)
+	apply_force_local(forceWingr, posWingr)
+	
+	apply_force_local(force_control_L1, pos_control_L1)
+	apply_force_local(force_control_L2, pos_control_L2)
+	apply_force_local(force_control_R1, pos_control_R1)
+	apply_force_local(force_control_R2, pos_control_R2)
 
 func get_input(delta):
 	# Check if aircraft is under player control
@@ -145,18 +165,3 @@ func get_input(delta):
 		
 		# Yaw input
 		input_rudder = -Input.get_axis("yaw_right", "yaw_left")
-
-func _integrate_forces(_state):
-	# Gravity
-#	add_central_force(Vector3(0, -weight, 0))
-	# Thrust forces
-	apply_force_local(Vector3(0, 0, -get_gravity().length() * input_throttle), Vector3(0, -0.1, 0))
-	
-	# Forces from surfaces 
-	apply_force_local(forceWingl, posWingl)
-	apply_force_local(forceWingr, posWingr)
-	
-	apply_force_local(force_control_L1, pos_control_L1)
-	apply_force_local(force_control_L2, pos_control_L2)
-	apply_force_local(force_control_R1, pos_control_R1)
-	apply_force_local(force_control_R2, pos_control_R2)

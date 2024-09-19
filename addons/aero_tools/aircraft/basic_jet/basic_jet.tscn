@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbc1kevq70ttk"]
+
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_body.gd" id="1_nugfj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0c5h7"]
+radius = 1.0
+height = 8.0
+
+[node name="BasicJet" type="VehicleBody3D"]
+script = ExtResource("1_nugfj")
+
+[node name="CollisionShapeFuse" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_0c5h7")

@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://kdv65p3h3dkx"
-path="res://.godot/imported/ZFS_WING_DELTA.gltf-13b01a90c93c0d8b1abbf2a1c0e05959.scn"
+path="res://.godot/imported/ZFS_WING_DELTA.gltf-61e849a808b4f8f486f18843200e582b.scn"
 
 [deps]
 
-source_file="res://assets/aircraft_parts/ZFS_WING_DELTA.gltf"
-dest_files=["res://.godot/imported/ZFS_WING_DELTA.gltf-13b01a90c93c0d8b1abbf2a1c0e05959.scn"]
+source_file="res://addons/aero_tools/assets/aircraft_parts/ZFS_WING_DELTA.gltf"
+dest_files=["res://.godot/imported/ZFS_WING_DELTA.gltf-61e849a808b4f8f486f18843200e582b.scn"]
 
 [params]
 

@@ -269,3 +269,6 @@ func get_input(delta):
 			else:
 				AeroDataBus.aircraft_nav_active = false
 		
+
+func _integrate_forces(state):
+	

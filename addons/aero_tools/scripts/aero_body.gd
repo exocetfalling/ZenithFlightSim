@@ -1,9 +1,10 @@
+class_name AeroBody
+
 extends VehicleBody3D
 
 # Class for aircraft
 # For different atmospheres override calc_atmo_properties()
 # Mars, Titan etc.
-class_name AeroBody
 
 # Type of control
 # 0 - none
@@ -21,7 +22,7 @@ var air_pressure : float = 101325
 var air_pressure_dynamic : float = 0.00
 
 # Air density, kg/m^3
-var air_density = 1.2
+var air_density: float = 1.2
 
 var linear_velocity_corrected = Vector3.ZERO
 
@@ -31,99 +32,99 @@ var airspeed_true_total : float = 0.00
 
 var linear_velocity_wind : Vector3 = Vector3.ZERO
 
-var linear_velocity_total = 0
+var linear_velocity_total: float = 0
 
 var angular_velocity_local = Vector3.ZERO
 var angular_velocity_local_deg = Vector3.ZERO
 
-var adc_spd_indicated = 0
-var adc_spd_true = 0
-var adc_spd_ground = 0
+var adc_spd_indicated: float = 0
+var adc_spd_true: float = 0
+var adc_spd_ground: float = 0
 
-var adc_alt_asl = 0
-var adc_alt_agl = 0
+var adc_alt_asl: float = 0
+var adc_alt_agl: float = 0
 
-var adc_hdg = 0
+var adc_hdg: float = 0
 
-var adc_throttle = 0
+var adc_throttle: float = 0
 
-var adc_pitch = 0
-var adc_roll = 0
+var adc_pitch: float = 0
+var adc_roll: float = 0
 
-var adc_alpha = 0
-var adc_beta = 0
+var adc_alpha: float = 0
+var adc_beta: float = 0
 
-var adc_angle_inertial_y = 0
-var adc_angle_inertial_x = 0
+var adc_angle_inertial_y: float = 0
+var adc_angle_inertial_x: float = 0
 
-var adc_fpa = 0
-var tgt_fpa = 0
-var adc_trk = 0
-var tgt_trk = 0
+var adc_fpa: float = 0
+var tgt_fpa: float = 0
+var adc_trk: float = 0
+var tgt_trk: float = 0
 
 var adc_stall = false
 
-var throttle_max = 1
-var throttle_min = 0
-var input_throttle = 0
+var throttle_max: float = 1
+var throttle_min: float = 0
+var input_throttle: float = 0
 
 var autopilot_on = 0
-var tgt_pitch = 0
-var tgt_roll = 0
+var tgt_pitch: float = 0
+var tgt_roll: float = 0
 
-var angle_alpha = 0
-var angle_alpha_deg = 0
-var angle_beta = 0
-var angle_beta_deg = 0 
+var angle_alpha: float = 0
+var angle_alpha_deg: float = 0
+var angle_beta: float = 0
+var angle_beta_deg: float = 0 
 
 # Inertial-derived angles to calculate trajectory offset by wind
-var angle_inertial_y = 0
-var angle_inertial_y_deg = 0
-var angle_inertial_x = 0
-var angle_inertial_x_deg = 0 
+var angle_inertial_y: float = 0
+var angle_inertial_y_deg: float = 0
+var angle_inertial_x: float = 0
+var angle_inertial_x_deg: float = 0 
 
 # Deflection in radians
-var deflection_control_max = PI/12
-var deflection_flaps_max = PI/6
-var angle_incidence = 0.02
+var deflection_control_max: float = PI/12
+var deflection_flaps_max: float = PI/6
+var angle_incidence: float = 0.02
 
-var input_elevator = 0
-var current_elevator = 0
-var output_elevator = 0
+var input_elevator: float = 0
+var current_elevator: float = 0
+var output_elevator: float = 0
 
-var current_aileron = 0
-var input_aileron = 0
-var output_aileron = 0
+var current_aileron: float = 0
+var input_aileron: float = 0
+var output_aileron: float = 0
 
-var current_rudder = 0
-var input_rudder = 0
-var output_rudder = 0
-var output_yaw_damper = 0
+var current_rudder: float = 0
+var input_rudder: float = 0
+var output_rudder: float = 0
+var output_yaw_damper: float = 0
 
-var current_flaps = 0
-var input_flaps = 0
-var output_flaps = 0
-var flaps_max = 1
-var flaps_min = 0
+var current_flaps: float = 0
+var input_flaps: float = 0
+var output_flaps: float = 0
+var flaps_max: float = 1
+var flaps_min: float = 0
 
-var current_elevator_trim = 0
-var input_elevator_trim = 0
-var output_elevator_trim = 0
+var current_elevator_trim: float = 0
+var input_elevator_trim: float = 0
+var output_elevator_trim: float = 0
 
-var input_trim_pitch_max = 1
-var input_trim_pitch_min = -1
+var input_trim_pitch_max: float = 1
+var input_trim_pitch_min: float = -1
 
-var input_braking = 0
+var input_braking: float = 0
 
-var input_joystick : Vector2 = Vector2.ZERO
+var input_joystick: Vector2 = Vector2.ZERO
 
-var gear_max = 1
-var gear_min = 0
-var gear_current = 1
-var gear_input = 1
+var gear_max: float = 1
+var gear_min: float = 0
+var gear_current: float = 1
+var gear_input: float = 1
 
-var deflection_rate = 1/(PI/6)
-var deflection_rate_flaps = 1/(2 * PI)
+var deflection_rate: float = 1/(PI/6)
+var deflection_rate_flaps: float = 1/(2 * PI)
 
 # FBW variables
 
@@ -301,13 +302,13 @@ func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
 func _physics_process(delta):
 	get_input(delta)
 	
-	linear_velocity_total = self.linear_velocity.length()
-	linear_velocity_local = ((linear_velocity) * self.transform.basis)
+	linear_velocity_total = linear_velocity.length()
+	linear_velocity_local = linear_velocity * global_basis
 	
-	airspeed_true_vector = linear_velocity_local + (linear_velocity_wind) * self.transform.basis
+	airspeed_true_vector = linear_velocity_local + linear_velocity_wind * global_basis
 	airspeed_true_total = airspeed_true_vector.length()
 	
-	angular_velocity_local = angular_velocity
+	angular_velocity_local = angular_velocity * global_basis
 	angular_velocity_local_deg = Vector3(rad_to_deg(angular_velocity_local.x), rad_to_deg(angular_velocity_local.y), rad_to_deg(angular_velocity_local.z))
 	
 	air_temperature = calc_atmo_properties(global_transform.origin.y).x
