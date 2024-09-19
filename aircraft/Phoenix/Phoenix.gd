@@ -201,8 +201,23 @@ func _physics_process(delta):
 	$AileronL.rotation.x = +PI/6 * output_aileron
 	$AileronR.rotation.x = -PI/6 * output_aileron
 	
-	$RuddervatorR.rotation = Vector3(0, 0, PI/4).rotated(Vector3.RIGHT, output_elevator)
-
+	$RuddervatorL.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator + output_elevator_trim + output_rudder)), \
+			0, \
+			($RuddervatorL.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$RuddervatorL.rotation.z)
+	
+	$RuddervatorR.rotation = \
+		Vector3( \
+			(-0.1 * (output_elevator + output_elevator_trim - output_rudder)), \
+			0, \
+			($RuddervatorR.rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-$RuddervatorR.rotation.z)
 
 func get_input(delta):
 	# Check if aircraft is under player control
