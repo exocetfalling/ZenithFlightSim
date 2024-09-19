@@ -193,15 +193,17 @@ func _calc_alpha(vel_up, vel_fwd):
 func _calc_beta(vel_right, vel_fwd):
 	return atan2(-vel_right, vel_fwd)
 	
-func add_force_local(force: Vector3, pos: Vector3):
-	var force_local
-	var pos_local
+func apply_force_local(force_local: Vector3, pos_local: Vector3):
+	var force_global: Vector3
+	var pos_global: Vector3
 	
-	pos_local = self.transform.basis * (pos)
-	force_local = self.transform.basis * (force)
-	self.apply_force(force_local, pos_local)
+	force_global = self.global_basis * (force_local)
+	pos_global = self.global_basis * (pos_local)
+	
+	self.apply_force(force_global, pos_global)
 
-func add_torque_local(torque: Vector3):
+
+func apply_torque_local(torque: Vector3):
 	var torque_local
 
 	torque_local = self.transform.basis * (torque)

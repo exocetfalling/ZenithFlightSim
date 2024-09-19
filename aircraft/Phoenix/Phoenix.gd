@@ -165,10 +165,10 @@ func _physics_process(delta):
 		if child is AeroSurface:
 			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
 			child.vel_body = airspeed_true_vector
-			add_force_local(child.force_total_surface_vector * child.basis, child.position)
+			apply_force_local(child.force_total_surface_vector * child.basis, child.position)
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
+	apply_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
 
 	# Clamping
 	input_flaps = clamp(input_flaps, flaps_min, flaps_max)
