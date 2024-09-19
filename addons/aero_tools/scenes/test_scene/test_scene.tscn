@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dal6e1h1ie6rl"]
+[gd_scene load_steps=6 format=3 uid="uid://dal6e1h1ie6rl"]
 
 [ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://aircraft/Phoenix/Phoenix.tscn" id="1_cshou"]
+[ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="2_t85q7"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
@@ -25,3 +26,7 @@ mesh = SubResource("PlaneMesh_5yjbj")
 
 [node name="Phoenix" parent="." instance=ExtResource("1_cshou")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29281, 0)
+control_type = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_t85q7")

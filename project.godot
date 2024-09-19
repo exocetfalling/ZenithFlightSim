@@ -32,6 +32,10 @@ window/size/fullscreen=true
 
 enabled=PackedStringArray("res://addons/aero_tools/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [gui]
 
 theme/use_hidpi=true

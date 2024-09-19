@@ -43,10 +43,10 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "adc_trk", "round")
 #	DebugOverlay.stats.add_property(self, "adc_stall", "")
-#	DebugOverlay.stats.add_property(self, "input_elevator", "round")
+	DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
-#	DebugOverlay.stats.add_property(self, "input_throttle", "round")
+	DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
@@ -161,103 +161,15 @@ func _physics_process(delta):
 		output_rudder = -1
 	
 	# Aero forces
-	$AeroSurface_Wing_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Wing_L.vel_body = airspeed_true_vector
-	force_wing_l = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Wing_L.force_total_surface_vector, \
-			$AeroSurface_Wing_L.rotation \
-			)
-	$AeroSurface_Wing_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Wing_R.vel_body = airspeed_true_vector
-	force_wing_r = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Wing_R.force_total_surface_vector, \
-			$AeroSurface_Wing_R.rotation \
-			)
+	for child in get_children():
+		if child is AeroSurface:
+			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
+			child.vel_body = airspeed_true_vector
+			add_force_local(child.force_total_surface_vector * child.basis, child.position)
 	
-	$AeroSurface_Aileron_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Aileron_L.vel_body = airspeed_true_vector
-	force_aileron_l = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Aileron_L.force_total_surface_vector, \
-			$AeroSurface_Aileron_L.rotation \
-			)
-	
-	$AeroSurface_Aileron_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Aileron_R.vel_body = airspeed_true_vector
-	force_aileron_r = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Aileron_R.force_total_surface_vector, \
-			$AeroSurface_Aileron_R.rotation \
-			)
-	
-	$AeroSurface_Flap_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Flap_L.vel_body = airspeed_true_vector
-	force_flap_l = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Flap_L.force_total_surface_vector, \
-			$AeroSurface_Flap_L.rotation \
-		)
-	$AeroSurface_Flap_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Flap_R.vel_body = airspeed_true_vector
-	force_flap_r = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Flap_R.force_total_surface_vector, \
-			$AeroSurface_Flap_R.rotation \
-		)
-	
-	$AeroSurface_Ruddervator_L.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Ruddervator_L.vel_body = airspeed_true_vector
-	force_ruddervator_l = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Ruddervator_L.force_total_surface_vector, \
-			$AeroSurface_Ruddervator_L.rotation \
-			)
-	$AeroSurface_Ruddervator_R.atmo_data = calc_atmo_properties(global_transform.origin.y)
-	$AeroSurface_Ruddervator_R.vel_body = airspeed_true_vector
-	force_ruddervator_r = \
-		calc_force_rotated_from_surface( \
-			$AeroSurface_Ruddervator_R.force_total_surface_vector, \
-			$AeroSurface_Ruddervator_R.rotation \
-			)
-	
-	$AeroSurface_Aileron_L.rotation.x =  0.2 * output_aileron
-	$AeroSurface_Aileron_R.rotation.x = -0.2 * output_aileron
-	
-	$AeroSurface_Flap_L.rotation.x = 0.2 * output_flaps
-	$AeroSurface_Flap_R.rotation.x = 0.2 * output_flaps
-	
-	$AeroSurface_Ruddervator_L.rotation = \
-		Vector3( \
-			(-0.1 * (output_elevator + output_elevator_trim + output_rudder)), \
-			0, \
-			($AeroSurface_Ruddervator_L.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Ruddervator_L.rotation.z)
-	
-	$AeroSurface_Ruddervator_R.rotation = \
-		Vector3( \
-			(-0.1 * (output_elevator + output_elevator_trim - output_rudder)), \
-			0, \
-			($AeroSurface_Ruddervator_R.rotation.z) \
-			)\
-			.rotated(Vector3.FORWARD, \
-		-$AeroSurface_Ruddervator_R.rotation.z)
-	
-	pos_wing_l = $AeroSurface_Wing_L.pos_force_rel
-	pos_wing_r = $AeroSurface_Wing_R.pos_force_rel
+	# Thrust forces
+	add_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
 
-	pos_aileron_l = $AeroSurface_Aileron_L.pos_force_rel
-	pos_aileron_r = $AeroSurface_Aileron_R.pos_force_rel
-
-	pos_flap_l = $AeroSurface_Flap_L.pos_force_rel
-	pos_flap_r = $AeroSurface_Flap_R.pos_force_rel
-
-	pos_ruddervator_l = $AeroSurface_Ruddervator_L.pos_force_rel
-	pos_ruddervator_r = $AeroSurface_Ruddervator_R.pos_force_rel
-	
 	# Clamping
 	input_flaps = clamp(input_flaps, flaps_min, flaps_max)
 	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
@@ -355,22 +267,3 @@ func get_input(delta):
 			else:
 				AeroDataBus.aircraft_nav_active = false
 		
-
-func _integrate_forces(_state):
-	# Thrust forces
-	add_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
-	
-	# Forces from surfaces 
-	add_force_local(force_wing_l, pos_wing_l)
-	add_force_local(force_wing_r, pos_wing_r)
-	
-	add_force_local(force_aileron_l, pos_aileron_l)
-	add_force_local(force_aileron_r, pos_aileron_r)
-	
-	add_force_local(force_flap_l, pos_flap_l)
-	add_force_local(force_flap_r, pos_flap_r)
-	
-	add_force_local(force_ruddervator_l, pos_ruddervator_l)
-	add_force_local(force_ruddervator_r, pos_ruddervator_r)
-	
-	
