@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dal6e1h1ie6rl"]
 
-[ext_resource type="PackedScene" uid="uid://dt7qga5c5sa4f" path="res://addons/aero_tools/aircraft/archer/archer.tscn" id="2_8p4ps"]
 [ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="2_t85q7"]
 [ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="3_6sowo"]
+[ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://aircraft/Phoenix/Phoenix.tscn" id="3_oic21"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
@@ -28,8 +28,7 @@ mesh = SubResource("PlaneMesh_5yjbj")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_t85q7")
 
-[node name="Archer" parent="." instance=ExtResource("2_8p4ps")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.696, 1475)
-control_type = 1
+[node name="Phoenix" parent="." instance=ExtResource("3_oic21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.426, 1475)
 
 [node name="Runway" parent="." instance=ExtResource("3_6sowo")]

@@ -125,10 +125,10 @@ func _physics_process(delta):
 		output_rudder_l = 0
 		output_rudder_r = 0
 	
-	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_aileron - output_elevator - 3 * output_rudder_l)
-	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_aileron - output_elevator + 3 * output_rudder_l)
-	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_aileron - output_elevator - 3 * output_rudder_r)
-	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_aileron - output_elevator + 3 * output_rudder_r)
+	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_aileron - output_elevator - 1 * output_rudder_l)
+	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_aileron - output_elevator + 1 * output_rudder_l)
+	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_aileron - output_elevator - 1 * output_rudder_r)
+	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_aileron - output_elevator + 1 * output_rudder_r)
 	
 	get_input(delta)
 	

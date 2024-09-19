@@ -33,7 +33,7 @@ func _process(delta):
 		camera_fov = get_viewport().get_camera_3d().fov
 		display_distance = get_viewport().size.y / 2 / tan(deg_to_rad(camera_fov) / 2)
 		hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera_3d().fov
-		rotation = rad_to_deg(get_viewport().get_camera_3d().global_rotation.z)
+		rotation = get_viewport().get_camera_3d().global_rotation.z
 #		rect_position.y = rad2deg(get_viewport().get_camera().global_rotation.x * hud_scale_vertical)
 		position.y = \
 			rad_to_deg(get_viewport().get_camera_3d().global_rotation.x \

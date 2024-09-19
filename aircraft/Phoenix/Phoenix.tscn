@@ -32,7 +32,6 @@ can_sleep = false
 continuous_cd = true
 angular_damp = 2.0
 script = ExtResource("1")
-control_type = null
 
 [node name="CollisionShapeFuse" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1)
@@ -143,7 +142,7 @@ sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="AeroSurface_Aileron_L" type="Node3D" parent="."]
+[node name="AileronL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -151,7 +150,7 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Aileron_L"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronL"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
@@ -159,7 +158,7 @@ sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="AeroSurface_Aileron_R" type="Node3D" parent="."]
+[node name="AileronR" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -167,7 +166,7 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Aileron_R"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronR"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
@@ -265,13 +264,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -2.8)
 [node name="Strut_Upper" type="CSGCylinder3D" parent="LG_Point_NLG"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 radius = 0.02
-height = 0.5
+height = 0.25
 sides = 32
 material = ExtResource("3")
 
 [node name="Strut_Lower" type="CSGCylinder3D" parent="LG_Point_NLG"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 radius = 0.015
+height = 1.0
 sides = 32
 material = ExtResource("3")
 
@@ -298,6 +298,7 @@ material = ExtResource("3")
 [node name="Strut_Lower" type="CSGCylinder3D" parent="LG_Point_MLG_L"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 radius = 0.015
+height = 1.0
 sides = 32
 material = ExtResource("3")
 
@@ -324,6 +325,7 @@ material = ExtResource("3")
 [node name="Strut_Lower" type="CSGCylinder3D" parent="LG_Point_MLG_R"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 radius = 0.015
+height = 1.0
 sides = 32
 material = ExtResource("3")
 

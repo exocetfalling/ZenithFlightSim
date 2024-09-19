@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
-[ext_resource type="PackedScene" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://b3g28rsgsjcxx" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bnb4sufeloij4" path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" id="4"]
 
 [node name="HUDShared" type="Control"]
@@ -10,6 +10,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("2")
 
 [node name="GaugeSPD" parent="." instance=ExtResource("1")]
@@ -70,3 +72,5 @@ width = 3.0
 [node name="HUDLadder" parent="Centre" instance=ExtResource("3")]
 layout_mode = 3
 anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2

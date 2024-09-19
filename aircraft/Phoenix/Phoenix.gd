@@ -97,6 +97,9 @@ func _nosewheel_gains(speed):
 
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
+	#get_input(delta)
+	super(delta)
+	
 	if (angle_alpha_deg > 15):
 		adc_stall = true
 	else:
@@ -194,10 +197,11 @@ func _physics_process(delta):
 	else:
 		ground_contact = false
 	
-	get_input(delta)
-	
-	# Draw lines
-#	LineDrawer.DrawLine(self.global_transform.origin, wpt_current_coordinates, Color(0, 1, 0))
+	# Move surfaces
+	$AileronL.rotation.x = +PI/6 * output_aileron
+	$AileronR.rotation.x = -PI/6 * output_aileron
+
+
 func get_input(delta):
 	# Check if aircraft is under player control
 	if (control_type == 1):
@@ -268,7 +272,3 @@ func get_input(delta):
 				AeroDataBus.aircraft_nav_active = true
 			else:
 				AeroDataBus.aircraft_nav_active = false
-		
-
-func _integrate_forces(state):
-	
