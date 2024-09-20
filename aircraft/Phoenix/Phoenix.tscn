@@ -81,61 +81,61 @@ suspension_max_force = 100000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="AeroSurface_Fuse" type="Node3D" parent="."]
+[node name="Fuse" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("2")
 length_chord_root = 0.001
 length_chord_tip = 0.001
 length_span = 0.001
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fuse"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 height = 8.0
 sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="CSGSphere_Nose" type="CSGSphere3D" parent="AeroSurface_Fuse/CSGCylinder3D"]
+[node name="CSGSphere_Nose" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 4, 0)
 radial_segments = 32
 rings = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="CSGSphere_Tail" type="CSGSphere3D" parent="AeroSurface_Fuse/CSGCylinder3D"]
+[node name="CSGSphere_Tail" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4, 0)
 radial_segments = 32
 rings = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Fuse/CSGCylinder3D/CSGSphere_Tail"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse/CSGCylinder3D/CSGSphere_Tail"]
 operation = 2
 radius = 0.2
 sides = 32
 cone = true
 material = SubResource("3")
 
-[node name="AeroSurface_Wing_L" type="Node3D" parent="."]
+[node name="WingL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Wing_L"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingL"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="AeroSurface_Wing_R" type="Node3D" parent="."]
+[node name="WingR" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Wing_R"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingR"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
@@ -174,7 +174,7 @@ sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="AeroSurface_Flap_L" type="Node3D" parent="."]
+[node name="FlapL" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -182,7 +182,7 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Flap_L"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapL"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
@@ -190,7 +190,7 @@ sides = 32
 smooth_faces = false
 material = ExtResource("3")
 
-[node name="AeroSurface_Flap_R" type="Node3D" parent="."]
+[node name="FlapR" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -198,7 +198,7 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurface_Flap_R"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapR"]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4

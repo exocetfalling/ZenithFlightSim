@@ -201,6 +201,9 @@ func _physics_process(delta):
 	$AileronL.rotation.x = +PI/6 * output_aileron
 	$AileronR.rotation.x = -PI/6 * output_aileron
 	
+	$FlapL.rotation.x = +PI/6 * output_flaps
+	$FlapR.rotation.x = +PI/6 * output_flaps
+	
 	$RuddervatorL.rotation = \
 		Vector3( \
 			(-0.1 * (output_elevator + output_elevator_trim + output_rudder)), \
