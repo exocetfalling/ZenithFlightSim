@@ -167,8 +167,8 @@ func _physics_process(delta):
 	for child in get_children():
 		if child is AeroSurface:
 			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
-			child.vel_body = airspeed_true_vector
-			apply_force_local(child.force_total_surface_vector * child.basis, child.position)
+			child.vel_body = airspeed_true_vector * child.basis
+			apply_force_local(child.force_total_surface_vector * child.basis.inverse(), child.position)
 	
 	# Thrust forces
 	apply_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
@@ -178,19 +178,19 @@ func _physics_process(delta):
 	input_throttle = clamp(input_throttle, throttle_min, throttle_max)
 	
 	# Gear animations
-	$LG_Point_NLG/Strut_Lower.position.y = $VehicleWheel_NLG.position.y + 0.85
-	$LG_Point_MLG_L/Strut_Lower.position.y = $VehicleWheel_MLG_L.position.y + 0.5
-	$LG_Point_MLG_R/Strut_Lower.position.y = $VehicleWheel_MLG_R.position.y + 0.5
+	$LGPointNLG/StrutLower.position.y = $WheelNLG.position.y + 0.85
+	$LGPointMLGLeft/StrutLower.position.y = $WheelMLGLeft.position.y + 0.5
+	$LGPointMLGRight/StrutLower.position.y = $WheelMLGRight.position.y + 0.5
 	
-	$LG_Point_NLG.rotation.x   = (1 - gear_current) * (-PI/2)
-	$LG_Point_MLG_L.rotation.z = (1 - gear_current) * (+PI/2)
-	$LG_Point_MLG_R.rotation.z = (1 - gear_current) * (-PI/2)
+	$LGPointNLG.rotation.x = (1 - gear_current) * (-PI/2)
+	$LGPointMLGLeft.rotation.z = (1 - gear_current) * (+PI/2)
+	$LGPointMLGRight.rotation.z = (1 - gear_current) * (-PI/2)
 
 	# Detect ground contact
 	if (\
-	$VehicleWheel_NLG.is_in_contact() == true || \
-	$VehicleWheel_MLG_L.is_in_contact() == true || \
-	$VehicleWheel_MLG_R.is_in_contact() == true
+	$WheelNLG.is_in_contact() == true || \
+	$WheelMLGLeft.is_in_contact() == true || \
+	$WheelMLGRight.is_in_contact() == true
 	):
 		ground_contact = true
 	

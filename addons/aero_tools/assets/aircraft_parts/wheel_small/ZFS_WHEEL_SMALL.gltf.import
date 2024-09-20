@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://kdv65p3h3dkx"
-path="res://.godot/imported/ZFS_WING_DELTA.gltf-61e849a808b4f8f486f18843200e582b.scn"
+uid="uid://cwbr3cny0enlj"
+path="res://.godot/imported/ZFS_WHEEL_SMALL.gltf-f9e94ab8060adadd7a9a1697762dbd7e.scn"
 
 [deps]
 
-source_file="res://addons/aero_tools/assets/aircraft_parts/ZFS_WING_DELTA.gltf"
-dest_files=["res://.godot/imported/ZFS_WING_DELTA.gltf-61e849a808b4f8f486f18843200e582b.scn"]
+source_file="res://addons/aero_tools/assets/aircraft_parts/wheel_small/ZFS_WHEEL_SMALL.gltf"
+dest_files=["res://.godot/imported/ZFS_WHEEL_SMALL.gltf-f9e94ab8060adadd7a9a1697762dbd7e.scn"]
 
 [params]
 

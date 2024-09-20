@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource type="PackedScene" uid="uid://cwbr3cny0enlj" path="res://addons/aero_tools/shared/wheel_small/ZFS_WHEEL_SMALL.gltf" id="1"]
-
-[node name="ZFS_WHEEL_SMALL" instance=ExtResource( 1 )]
