@@ -41,11 +41,11 @@ shape = SubResource("1")
 [node name="CollisionShapeWing" type="CollisionShape3D" parent="."]
 shape = SubResource("2")
 
-[node name="CollisionShape_Tail_L" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeTailLeft" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.057, 1.032, 5)
 shape = SubResource("4")
 
-[node name="CollisionShape_Tail_R" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeTailRight" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.057, 1.032, 5)
 shape = SubResource("4")
 
@@ -93,21 +93,18 @@ length_span = 0.001
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 height = 8.0
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="CSGSphereNose" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 4, 0)
 radial_segments = 32
 rings = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="CSGSphereTail" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4, 0)
 radial_segments = 32
 rings = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse/CSGCylinder3D/CSGSphereTail"]
@@ -127,7 +124,6 @@ pos_COP = Vector3(0, 0, -0.25)
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="WingR" type="Node3D" parent="."]
@@ -140,7 +136,6 @@ pos_COP = Vector3(0, 0, -0.25)
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="AileronL" type="Node3D" parent="."]
@@ -156,7 +151,6 @@ transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0
 radius = 0.125
 height = 2.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="AileronR" type="Node3D" parent="."]
@@ -172,7 +166,6 @@ transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0
 radius = 0.125
 height = 2.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="FlapL" type="Node3D" parent="."]
@@ -188,7 +181,6 @@ transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0
 radius = 0.125
 height = 2.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="FlapR" type="Node3D" parent="."]
@@ -204,7 +196,6 @@ transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0
 radius = 0.125
 height = 2.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="RuddervatorL" type="Node3D" parent="."]
@@ -218,7 +209,6 @@ length_span = 2.0
 transform = Transform3D(0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="RuddervatorR" type="Node3D" parent="."]
@@ -232,7 +222,6 @@ length_span = 2.0
 transform = Transform3D(0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.4
 sides = 32
-smooth_faces = false
 material = ExtResource("3")
 
 [node name="CameraFPV" type="Camera3D" parent="."]
@@ -283,14 +272,11 @@ height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="Wheels" type="Node3D" parent="LGPointNLG/StrutLower/Axle"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+[node name="WheelLeft" parent="LGPointNLG/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelMedium1" parent="LGPointNLG/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.07, 0, 0)
-
-[node name="WheelMedium2" parent="LGPointNLG/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.07, 0, 0)
+[node name="WheelRight" parent="LGPointNLG/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
 [node name="LGPointMLGLeft" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.35)
@@ -316,14 +302,11 @@ height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="Wheels" type="Node3D" parent="LGPointMLGLeft/StrutLower/Axle"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+[node name="WheelLeft" parent="LGPointMLGLeft/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelMedium1" parent="LGPointMLGLeft/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.07, 0, 0)
-
-[node name="WheelMedium2" parent="LGPointMLGLeft/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.07, 0, 0)
+[node name="WheelRight" parent="LGPointMLGLeft/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
 [node name="LGPointMLGRight" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.35)
@@ -349,14 +332,11 @@ height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="Wheels" type="Node3D" parent="LGPointMLGRight/StrutLower/Axle"]
-transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+[node name="WheelLeft" parent="LGPointMLGRight/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelMedium1" parent="LGPointMLGRight/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.07, 0, 0)
-
-[node name="WheelMedium2" parent="LGPointMLGRight/StrutLower/Axle/Wheels" instance=ExtResource("7_hervv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.07, 0, 0)
+[node name="WheelRight" parent="LGPointMLGRight/StrutLower/Axle" instance=ExtResource("7_hervv")]
+transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
 [node name="RadioAltimeter" type="RayCast3D" parent="."]
 target_position = Vector3(0, -1000, 0)
