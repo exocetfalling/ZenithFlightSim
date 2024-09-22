@@ -70,7 +70,3 @@ points = PackedVector2Array(0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0
 width = 3.0
 
 [node name="HUDLadder" parent="Centre" instance=ExtResource("3")]
-layout_mode = 3
-anchors_preset = 15
-grow_horizontal = 2
-grow_vertical = 2

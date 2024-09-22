@@ -162,16 +162,16 @@ func calc_force_vectors():
 func _ready():
 	area_surface = (length_chord_root + length_chord_tip) / 2 * length_span
 	
-#	DebugOverlay.stats.add_property(self, "surface_area", "round")
-	DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
-	DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
-#	DebugOverlay.stats.add_property(self, "coeffecient_lift", "round")
-#	DebugOverlay.stats.add_property(self, "coeffecient_drag", "round")
-#	DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
-#	DebugOverlay.stats.add_property(self, "pos_force_rel", "")
-#	DebugOverlay.stats.add_property(self, "atmo_data", "round")
+	#DebugOverlay.stats.add_property(self, "surface_area", "round")
+	#DebugOverlay.stats.add_property(self, "angle_alpha_deg", "round")
+	#DebugOverlay.stats.add_property(self, "angle_beta_deg", "round")
+	#DebugOverlay.stats.add_property(self, "coeffecient_lift", "round")
+	#DebugOverlay.stats.add_property(self, "coeffecient_drag", "round")
+	#DebugOverlay.stats.add_property(self, "force_lift_surface_vector", "round")
+	#DebugOverlay.stats.add_property(self, "force_drag_surface_vector", "round")
+	#DebugOverlay.stats.add_property(self, "force_total_surface_vector", "round")
+	#DebugOverlay.stats.add_property(self, "pos_force_rel", "")
+	#DebugOverlay.stats.add_property(self, "atmo_data", "round")
 	pass # Replace with function body.
 
 func _physics_process(delta):

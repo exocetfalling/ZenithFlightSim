@@ -43,10 +43,10 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "adc_trk", "round")
 #	DebugOverlay.stats.add_property(self, "adc_stall", "")
-	DebugOverlay.stats.add_property(self, "input_elevator", "round")
+	#DebugOverlay.stats.add_property(self, "input_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "input_aileron", "round")
 #	DebugOverlay.stats.add_property(self, "input_rudder", "round")
-	DebugOverlay.stats.add_property(self, "input_throttle", "round")
+	#DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
 #	DebugOverlay.stats.add_property(self, "output_elevator", "round")
 #	DebugOverlay.stats.add_property(self, "output_aileron", "round")
@@ -198,8 +198,8 @@ func _physics_process(delta):
 		ground_contact = false
 	
 	# Move surfaces
-	$AileronL.rotation.x = +PI/6 * output_aileron
-	$AileronR.rotation.x = -PI/6 * output_aileron
+	$AileronL.rotation.x = + PI/12 * output_aileron
+	$AileronR.rotation.x = - PI/12 * output_aileron
 	
 	$FlapL.rotation.x = +PI/6 * output_flaps
 	$FlapR.rotation.x = +PI/6 * output_flaps
