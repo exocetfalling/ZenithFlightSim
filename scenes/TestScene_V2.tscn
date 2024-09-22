@@ -11,14 +11,14 @@
 [ext_resource type="Texture2D" path="res://resources/slot1_albedo_bump.packed_tex" id="9"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="10"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="11"]
-[ext_resource type="PackedScene" path="res://scenes/Runway.tscn" id="12"]
+[ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="12"]
 [ext_resource type="PackedScene" path="res://addons/virtual-joystick/joystick/virtual_joystick.tscn" id="13"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot1_normal_roughness.packed_tex" id="14"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot0_normal_roughness.packed_tex" id="15"]
 [ext_resource type="Texture2D" path="res://resources/slot1_normal_roughness.packed_tex" id="16"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot2_normal_roughness.packed_tex" id="17"]
 [ext_resource type="Resource" path="res://addons/aero_tools/shared/terrain_pbr/terrain_ocean/data.hterrain" id="18"]
-[ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://aircraft/Phoenix/Phoenix.tscn" id="19"]
+[ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://addons/aero_tools/aircraft/phoenix/phoenix.tscn" id="19"]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 11 )

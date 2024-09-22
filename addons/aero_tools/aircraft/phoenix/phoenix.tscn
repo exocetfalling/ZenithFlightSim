@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://c1pfxxsltbikv"]
 
-[ext_resource type="Script" path="res://aircraft/Phoenix/Phoenix.gd" id="1"]
+[ext_resource type="Script" path="res://addons/aero_tools/aircraft/phoenix/phoenix.gd" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
 [ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://bwtcvur732fvd" path="res://addons/aero_tools/uires/hud_shared/hud_shared.tscn" id="4"]
