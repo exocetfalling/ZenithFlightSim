@@ -128,14 +128,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 26.4024, 1475)
 
 [node name="Island" parent="." instance=ExtResource("5_5x4lh")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1000, 0)
 light_color = Color(0.985491, 0.954266, 0.882074, 1)
 light_energy = 2.0
 shadow_enabled = true
 shadow_opacity = 0.9
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Seafloor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
 mesh = SubResource("PlaneMesh_20uoi")
 

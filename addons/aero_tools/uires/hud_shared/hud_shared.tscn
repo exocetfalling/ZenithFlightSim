@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwtcvur732fvd"]
 
-[ext_resource type="PackedScene" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://ctd0otb88d5ug" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://b3g28rsgsjcxx" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bnb4sufeloij4" path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" id="4"]
@@ -15,37 +15,43 @@ grow_vertical = 2
 script = ExtResource("2")
 
 [node name="GaugeSPD" parent="." instance=ExtResource("1")]
-anchors_preset = 0
-anchor_right = 0.1
-anchor_bottom = 0.2
+layout_mode = 1
+offset_right = 200.0
+offset_bottom = 150.0
 label_displayed = "SPD"
 
 [node name="GaugeHDG" parent="." instance=ExtResource("1")]
-anchors_preset = 0
-anchor_left = 0.45
-anchor_right = 0.55
-anchor_bottom = 0.2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0
+offset_right = 100.0
+offset_bottom = 150.0
+grow_horizontal = 2
 label_displayed = "HDG"
 
 [node name="GaugeALT" parent="." instance=ExtResource("1")]
-anchors_preset = 0
-anchor_left = 0.9
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.2
+offset_left = -200.0
+offset_bottom = 150.0
+grow_horizontal = 0
 label_displayed = "ALT"
 value_maximum = 99999.0
 value_minimum = -1.0
 value_digits = 5
 
 [node name="GaugeTHR" parent="." instance=ExtResource("1")]
-anchors_preset = 0
-anchor_left = 0.5
+layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -960.0
-offset_top = -150.0
-offset_right = 960.0
+grow_horizontal = 2
+grow_vertical = 0
 label_displayed = "THR"
 
 [node name="Centre" type="Node2D" parent="."]

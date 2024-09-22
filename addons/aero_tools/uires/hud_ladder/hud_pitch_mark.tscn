@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbseqfyuudt22"]
 
-[ext_resource type="Theme" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="2"]
+[ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="2"]
 
 [sub_resource type="GDScript" id="1"]
 script/source = "@tool

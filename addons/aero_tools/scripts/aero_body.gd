@@ -138,6 +138,9 @@ var tgt_rates = Vector3.ZERO
 # Pitch, yaw, roll, to be sent to servos
 var fbw_output = Vector3.ZERO
 
+# Body cross-sectional areas
+@export var body_xsec_areas: Vector3 = Vector3.ONE
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -300,6 +303,16 @@ func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
 	
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	# Aero forces
+	for child in get_children():
+		if child is AeroSurface:
+			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
+			child.vel_body = airspeed_true_vector * child.basis
+			apply_force_local(child.force_total_surface_vector * child.basis.inverse(), child.position)
+	
+	# Angular drag
+	apply_torque_local(-1 * angular_velocity_local * angular_velocity_local * air_density * body_xsec_areas)
+	
 	get_input(delta)
 	
 	linear_velocity_total = linear_velocity.length()
@@ -385,6 +398,7 @@ func _physics_process(delta):
 	input_elevator_trim = clamp(input_elevator_trim, input_trim_pitch_min, input_trim_pitch_max)
 	
 	output_rudder = clamp(output_rudder, -1, 1)
+
 
 func get_input(delta):
 	pass

@@ -163,13 +163,6 @@ func _physics_process(delta):
 	if (output_rudder < -1):
 		output_rudder = -1
 	
-	# Aero forces
-	for child in get_children():
-		if child is AeroSurface:
-			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
-			child.vel_body = airspeed_true_vector * child.basis
-			apply_force_local(child.force_total_surface_vector * child.basis.inverse(), child.position)
-	
 	# Thrust forces
 	apply_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
 

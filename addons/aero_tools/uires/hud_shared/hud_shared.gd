@@ -33,6 +33,7 @@ func _process(delta):
 	$GaugeSPD.value_displayed = hud_spd
 	$GaugeHDG.value_displayed = hud_hdg
 	$GaugeALT.value_displayed = hud_alt
+	$GaugeTHR.value_displayed = hud_thr
 	
 	$Centre.position = get_viewport_rect().size / 2
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
