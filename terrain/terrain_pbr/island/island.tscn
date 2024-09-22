@@ -1,19 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://cobcn3ll2u8m0"]
+[gd_scene load_steps=13 format=3 uid="uid://cobcn3ll2u8m0"]
 
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_c0xk6"]
 [ext_resource type="Resource" path="res://terrain/terrain_pbr/island/data.hterrain" id="2_oj7wn"]
 [ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_igv41"]
-[ext_resource type="Texture2D" uid="uid://dk21g2dopnm3k" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_albedo_bump.png" id="4_jqdyt"]
-[ext_resource type="Texture2D" uid="uid://cklvmnyugj0mj" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_albedo_bump.png" id="5_7nh2e"]
-[ext_resource type="Texture2D" uid="uid://dhhqtp4x8s50s" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_albedo_bump.png" id="6_5vn5x"]
-[ext_resource type="Texture2D" uid="uid://b7jcolo8v7nue" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_normal_roughness.png" id="7_cwmc1"]
-[ext_resource type="Texture2D" uid="uid://bo6rn33dpwq8r" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_normal_roughness.png" id="8_hywb5"]
-[ext_resource type="Texture2D" uid="uid://cvss2dlvjnkot" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_normal_roughness.png" id="9_sxcm2"]
+[ext_resource type="Texture2D" uid="uid://kvr5bhwk0xey" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_albedo_bump.png" id="4_jqdyt"]
+[ext_resource type="Texture2D" uid="uid://k40c1b3tv4a4" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_albedo_bump.png" id="5_7nh2e"]
+[ext_resource type="Texture2D" uid="uid://gn1rif7t5olu" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_albedo_bump.png" id="6_5vn5x"]
+[ext_resource type="Texture2D" uid="uid://cjjn051qgsmy0" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_normal_roughness.png" id="7_cwmc1"]
+[ext_resource type="Texture2D" uid="uid://8gklyp86atp7" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_normal_roughness.png" id="8_hywb5"]
+[ext_resource type="Texture2D" uid="uid://buiju4nmlxvvc" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_normal_roughness.png" id="9_sxcm2"]
+[ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="10_f3jux"]
 
 [sub_resource type="Resource" id="Resource_5ppsj"]
 script = ExtResource("3_igv41")
 mode = 0
 textures = [[ExtResource("4_jqdyt"), ExtResource("5_7nh2e"), ExtResource("6_5vn5x")], [ExtResource("7_cwmc1"), ExtResource("8_hywb5"), ExtResource("9_sxcm2")]]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kvbck"]
+size = Vector2(10000, 10000)
+subdivide_width = 100
+subdivide_depth = 100
 
 [node name="Island" type="Node3D"]
 
@@ -39,3 +45,10 @@ shader_params/u_tile_reduction = Vector4(1, 1, 1, 1)
 shader_params/u_globalmap_blend_start = 0.0
 shader_params/u_globalmap_blend_distance = 0.0
 shader_params/u_colormap_opacity_per_texture = null
+
+[node name="Runway" parent="." instance=ExtResource("10_f3jux")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 20, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("PlaneMesh_kvbck")

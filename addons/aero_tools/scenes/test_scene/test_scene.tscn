@@ -1,9 +1,8 @@
-[gd_scene load_steps=23 format=3 uid="uid://dal6e1h1ie6rl"]
+[gd_scene load_steps=26 format=3 uid="uid://dal6e1h1ie6rl"]
 
 [ext_resource type="Script" path="res://addons/boujie_water_shader/prefabs/ocean_prefab.gd" id="1_onui2"]
 [ext_resource type="Material" uid="uid://cu46b100244nd" path="res://addons/boujie_water_shader/prefabs/deep_ocean_material.tres" id="2_naben"]
 [ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="2_t85q7"]
-[ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="3_6sowo"]
 [ext_resource type="Script" path="res://addons/boujie_water_shader/types/camera_follower_3d.gd" id="3_hwm0m"]
 [ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://addons/aero_tools/aircraft/phoenix/phoenix.tscn" id="3_oic21"]
 [ext_resource type="Script" path="res://addons/boujie_water_shader/types/water_material_designer.gd" id="4_i4nkn"]
@@ -15,6 +14,8 @@
 [ext_resource type="Resource" uid="uid://1wsbw638p6o2" path="res://example/boujie_water_shader/foam_waves/foam2.tres" id="9_efqqn"]
 [ext_resource type="Resource" uid="uid://dp2iua60m7f8m" path="res://example/boujie_water_shader/uv_waves/uvwave1.tres" id="10_yl6st"]
 [ext_resource type="Resource" uid="uid://3g1mc132n1al" path="res://example/boujie_water_shader/uv_waves/uvwave2.tres" id="11_s05yl"]
+[ext_resource type="Texture2D" uid="uid://dltyp42rhn43p" path="res://terrain/terrain_pbr/materials/ground/ground_albedo.png" id="15_5l34y"]
+[ext_resource type="Texture2D" uid="uid://cpp35yyy7moxr" path="res://terrain/terrain_pbr/materials/ground/ground_normal.png" id="16_rgesq"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
@@ -72,11 +73,23 @@ frequency = 0.004
 speed = 0.05
 phase_degrees = 0.0
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt4sg"]
+albedo_texture = ExtResource("15_5l34y")
+normal_texture = ExtResource("16_rgesq")
+uv1_scale = Vector3(0.001, 0.001, 0.001)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_20uoi"]
+material = SubResource("StandardMaterial3D_pt4sg")
+size = Vector2(100000, 100000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
 [node name="TestScene" type="Node3D"]
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
 shape = SubResource("WorldBoundaryShape3D_k4k5h")
 
 [node name="DeepOcean" type="Node3D" parent="."]
@@ -111,10 +124,7 @@ uv_waves = Array[ExtResource("5_vxqnw")]([ExtResource("10_yl6st"), ExtResource("
 environment = ExtResource("2_t85q7")
 
 [node name="Phoenix" parent="." instance=ExtResource("3_oic21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 306.426, 1475)
-
-[node name="Runway" parent="." instance=ExtResource("3_6sowo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 300, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 26.4024, 1475)
 
 [node name="Island" parent="." instance=ExtResource("5_5x4lh")]
 
@@ -123,5 +133,10 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1000, 0
 light_color = Color(0.985491, 0.954266, 0.882074, 1)
 light_energy = 2.0
 shadow_enabled = true
+shadow_opacity = 0.9
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+mesh = SubResource("PlaneMesh_20uoi")
 
 [connection signal="updated_lod" from="DeepOcean/WaterMaterialDesigner" to="DeepOcean" method="_on_water_material_designer_updated_lod"]
