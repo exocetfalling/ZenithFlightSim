@@ -29,6 +29,7 @@ albedo_color = Color(0.0784314, 0.0705882, 0.0745098, 1)
 mass = 800.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, -1)
+inertia = Vector3(5000, 4000, 3000)
 can_sleep = false
 continuous_cd = true
 angular_damp = 3.0

@@ -1,19 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://dal6e1h1ie6rl"]
+[gd_scene load_steps=23 format=3 uid="uid://dal6e1h1ie6rl"]
 
+[ext_resource type="Script" path="res://addons/boujie_water_shader/prefabs/ocean_prefab.gd" id="1_onui2"]
+[ext_resource type="Material" uid="uid://cu46b100244nd" path="res://addons/boujie_water_shader/prefabs/deep_ocean_material.tres" id="2_naben"]
 [ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="2_t85q7"]
 [ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="3_6sowo"]
+[ext_resource type="Script" path="res://addons/boujie_water_shader/types/camera_follower_3d.gd" id="3_hwm0m"]
 [ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://addons/aero_tools/aircraft/phoenix/phoenix.tscn" id="3_oic21"]
+[ext_resource type="Script" path="res://addons/boujie_water_shader/types/water_material_designer.gd" id="4_i4nkn"]
+[ext_resource type="PackedScene" uid="uid://cobcn3ll2u8m0" path="res://terrain/terrain_pbr/island/island.tscn" id="5_5x4lh"]
+[ext_resource type="Script" path="res://addons/boujie_water_shader/types/gerstner_wave.gd" id="5_vxqnw"]
+[ext_resource type="Resource" uid="uid://cxeeuqlnw0v08" path="res://example/boujie_water_shader/height_waves/height4.tres" id="6_wqf7n"]
+[ext_resource type="Resource" uid="uid://c33noe5oxh41i" path="res://example/boujie_water_shader/height_waves/height2.tres" id="7_4kkh7"]
+[ext_resource type="Resource" uid="uid://bf2pvto4lly3o" path="res://example/boujie_water_shader/foam_waves/foam1.tres" id="8_kwi0l"]
+[ext_resource type="Resource" uid="uid://1wsbw638p6o2" path="res://example/boujie_water_shader/foam_waves/foam2.tres" id="9_efqqn"]
+[ext_resource type="Resource" uid="uid://dp2iua60m7f8m" path="res://example/boujie_water_shader/uv_waves/uvwave1.tres" id="10_yl6st"]
+[ext_resource type="Resource" uid="uid://3g1mc132n1al" path="res://example/boujie_water_shader/uv_waves/uvwave2.tres" id="11_s05yl"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw2ny"]
-albedo_color = Color(0.326784, 0.55629, 0.293291, 1)
+[sub_resource type="Resource" id="Resource_h6ky8"]
+script = ExtResource("5_vxqnw")
+steepness = 10.0
+amplitude = 2.0
+direction_degrees = 15.0
+frequency = 0.02
+speed = 1.0
+phase_degrees = 0.0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_5yjbj"]
-material = SubResource("StandardMaterial3D_xw2ny")
-size = Vector2(100000, 100000)
-subdivide_width = 1000
-subdivide_depth = 1000
+[sub_resource type="Resource" id="Resource_gq4b8"]
+script = ExtResource("5_vxqnw")
+steepness = 0.05
+amplitude = 0.004
+direction_degrees = 70.702
+frequency = 2.0
+speed = 1.0
+phase_degrees = 0.0
+
+[sub_resource type="Resource" id="Resource_ewn38"]
+script = ExtResource("5_vxqnw")
+steepness = 2.0
+amplitude = 1.5
+direction_degrees = 15.0
+frequency = 0.02
+speed = 1.0
+phase_degrees = -40.0
+
+[sub_resource type="Resource" id="Resource_v8fws"]
+script = ExtResource("5_vxqnw")
+steepness = 0.45
+amplitude = 0.7
+direction_degrees = 281.195
+frequency = 0.03
+speed = 3.0
+phase_degrees = 0.0
+
+[sub_resource type="Resource" id="Resource_pwrcy"]
+script = ExtResource("5_vxqnw")
+steepness = 1.3
+amplitude = 2.0
+direction_degrees = 88.25
+frequency = 0.001
+speed = 0.05
+phase_degrees = 0.0
+
+[sub_resource type="Resource" id="Resource_ei3rv"]
+script = ExtResource("5_vxqnw")
+steepness = 1.5
+amplitude = 1.0
+direction_degrees = 151.5
+frequency = 0.004
+speed = 0.05
+phase_degrees = 0.0
 
 [node name="TestScene" type="Node3D"]
 
@@ -22,13 +79,49 @@ subdivide_depth = 1000
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("WorldBoundaryShape3D_k4k5h")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("PlaneMesh_5yjbj")
+[node name="DeepOcean" type="Node3D" parent="."]
+script = ExtResource("1_onui2")
+material = ExtResource("2_naben")
+levels_of_detail = 5
+unit_size = 2.0
+far_edge = 100000
+
+[node name="CameraFollower3D" type="Node3D" parent="DeepOcean"]
+script = ExtResource("3_hwm0m")
+target_path = NodePath("..")
+snap = true
+snap_unit = 32.0
+
+[node name="WaterMaterialDesigner" type="Node" parent="DeepOcean"]
+script = ExtResource("4_i4nkn")
+material = ExtResource("2_naben")
+update_on_ready = true
+update_when_camera_far_changes = true
+ocean_path = NodePath("..")
+camera_follower_path = NodePath("../CameraFollower3D")
+distance_fade_far = 40000
+distance_fade_softness = 0.323
+wave_fade_far = 2000
+wave_fade_softness = 0.641
+height_waves = Array[ExtResource("5_vxqnw")]([SubResource("Resource_h6ky8"), SubResource("Resource_gq4b8"), ExtResource("6_wqf7n"), ExtResource("7_4kkh7")])
+foam_waves = Array[ExtResource("5_vxqnw")]([SubResource("Resource_ewn38"), SubResource("Resource_v8fws"), SubResource("Resource_pwrcy"), SubResource("Resource_ei3rv"), ExtResource("8_kwi0l"), ExtResource("9_efqqn")])
+uv_waves = Array[ExtResource("5_vxqnw")]([ExtResource("10_yl6st"), ExtResource("11_s05yl")])
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_t85q7")
 
 [node name="Phoenix" parent="." instance=ExtResource("3_oic21")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.426, 1475)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 306.426, 1475)
 
 [node name="Runway" parent="." instance=ExtResource("3_6sowo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 300, 0)
+
+[node name="Island" parent="." instance=ExtResource("5_5x4lh")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 1000, 0)
+light_color = Color(0.985491, 0.954266, 0.882074, 1)
+light_energy = 2.0
+shadow_enabled = true
+
+[connection signal="updated_lod" from="DeepOcean/WaterMaterialDesigner" to="DeepOcean" method="_on_water_material_designer_updated_lod"]

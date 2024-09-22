@@ -2,7 +2,7 @@
 
 [ext_resource type="Resource" path="res://addons/aero_tools/shared/terrain_pbr/terrain_island/data.hterrain" id="1"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot0_albedo_bump.packed_tex" id="2"]
-[ext_resource type="Texture2D" uid="uid://bqabsf3oupsih" path="res://addons/aero_tools/shared/terrain_pbr/materials/concrete/concrete_albedo.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bqabsf3oupsih" path="res://terrain/terrain_pbr/materials/concrete/concrete_albedo.png" id="3"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot1_albedo_bump.packed_tex" id="4"]
 [ext_resource type="Texture2D" path="res://resources/slot0_normal_roughness.packed_tex" id="5"]
 [ext_resource type="Texture2D" path="res://resources/TestScene_V2_slot3_normal_roughness.packed_tex" id="6"]

@@ -1,0 +1,41 @@
+[gd_scene load_steps=11 format=3 uid="uid://cobcn3ll2u8m0"]
+
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_c0xk6"]
+[ext_resource type="Resource" path="res://terrain/terrain_pbr/island/data.hterrain" id="2_oj7wn"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_igv41"]
+[ext_resource type="Texture2D" uid="uid://dk21g2dopnm3k" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_albedo_bump.png" id="4_jqdyt"]
+[ext_resource type="Texture2D" uid="uid://cklvmnyugj0mj" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_albedo_bump.png" id="5_7nh2e"]
+[ext_resource type="Texture2D" uid="uid://dhhqtp4x8s50s" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_albedo_bump.png" id="6_5vn5x"]
+[ext_resource type="Texture2D" uid="uid://b7jcolo8v7nue" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_normal_roughness.png" id="7_cwmc1"]
+[ext_resource type="Texture2D" uid="uid://bo6rn33dpwq8r" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_normal_roughness.png" id="8_hywb5"]
+[ext_resource type="Texture2D" uid="uid://cvss2dlvjnkot" path="res://terrain/terrain_pbr/materials/concrete/island_slot2_normal_roughness.png" id="9_sxcm2"]
+
+[sub_resource type="Resource" id="Resource_5ppsj"]
+script = ExtResource("3_igv41")
+mode = 0
+textures = [[ExtResource("4_jqdyt"), ExtResource("5_7nh2e"), ExtResource("6_5vn5x")], [ExtResource("7_cwmc1"), ExtResource("8_hywb5"), ExtResource("9_sxcm2")]]
+
+[node name="Island" type="Node3D"]
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("1_c0xk6")
+map_scale = Vector3(10, 10, 10)
+centered = true
+_terrain_data = ExtResource("2_oj7wn")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_5ppsj")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale_per_texture = Vector4(1, 1, 1, 1)
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = false
+shader_params/u_tile_reduction = Vector4(1, 1, 1, 1)
+shader_params/u_globalmap_blend_start = 0.0
+shader_params/u_globalmap_blend_distance = 0.0
+shader_params/u_colormap_opacity_per_texture = null
