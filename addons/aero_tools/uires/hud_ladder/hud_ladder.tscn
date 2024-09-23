@@ -16,6 +16,18 @@ script = ExtResource("1")
 mark_pitch_value_visible = false
 mark_line_gap = 0.0
 
+[node name="MarkP05" parent="." instance=ExtResource("2")]
+offset_top = -100.0
+offset_bottom = -100.0
+mark_line_length = 500.0
+mark_pitch_value = 5.0
+
+[node name="MarkN05" parent="." instance=ExtResource("2")]
+offset_top = 100.0
+offset_bottom = 100.0
+mark_line_length = 500.0
+mark_pitch_value = 5.0
+
 [node name="MarkP10" parent="." instance=ExtResource("2")]
 offset_top = -200.0
 offset_bottom = -200.0

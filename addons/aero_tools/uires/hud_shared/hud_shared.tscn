@@ -49,6 +49,7 @@ anchor_right = 1.0
 offset_left = -200.0
 offset_bottom = 200.0
 grow_horizontal = 0
+value_maximum = 99999.0
 value_digits = 5
 
 [node name="Centre" type="Node2D" parent="."]

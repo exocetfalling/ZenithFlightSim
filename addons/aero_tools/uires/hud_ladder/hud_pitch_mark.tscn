@@ -43,8 +43,8 @@ func _process(delta):
 	$LabelNode1.position.x = -(mark_line_length/2 + 50)
 	$LabelNode2.position.x = +(mark_line_length/2 + 50)
 #	get_node(\"Speed_Data\").text = (\"SPD\\n%03d\" % [AeroDataBus.aircraft_spd_indicated])
-	$LabelNode1/Label.text = (\"%02d\" % [mark_pitch_value])
-	$LabelNode2/Label.text = (\"%02d\" % [mark_pitch_value])
+	$LabelNode1/Label.text = (\"%01d\" % [mark_pitch_value])
+	$LabelNode2/Label.text = (\"%01d\" % [mark_pitch_value])
 	
 	if (mark_pitch_value_visible == true):
 		$LabelNode1.visible = true
@@ -77,7 +77,7 @@ offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0
 offset_bottom = 40.0
-text = "00"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
@@ -90,7 +90,7 @@ offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0
 offset_bottom = 40.0
-text = "00"
+text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
