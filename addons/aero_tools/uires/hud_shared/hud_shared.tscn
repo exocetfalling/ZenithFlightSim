@@ -63,7 +63,7 @@ value_digits = 5
 
 [node name="Centre" type="Node2D" parent="."]
 z_index = 1
-position = Vector2(960, 540)
+position = Vector2(767, 536)
 
 [node name="Mask" type="PointLight2D" parent="Centre"]
 z_index = 1

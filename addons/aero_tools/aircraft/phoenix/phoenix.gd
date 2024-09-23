@@ -147,7 +147,7 @@ func _physics_process(delta):
 			( \
 			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 15, adc_rates.x)
 			)
-			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.1 * angle_beta_deg
+			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.05 * angle_beta_deg
 		else:
 			input_elevator_trim = 0
 			$PIDCalcPitchRate.integral = 0

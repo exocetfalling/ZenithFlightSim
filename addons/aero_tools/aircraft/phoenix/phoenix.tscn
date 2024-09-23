@@ -243,10 +243,10 @@ far = 100000.0
 
 [node name="PIDCalcPitchRate" type="Node" parent="."]
 script = ExtResource("6")
-term_P = 0.25
+term_P = 0.1
 term_I = 1.0
 term_D = 0.01
-integral_max = 20.0
+integral_max = 50.0
 param_tuning_active = false
 
 [node name="LGPointNLG" type="Node3D" parent="."]
