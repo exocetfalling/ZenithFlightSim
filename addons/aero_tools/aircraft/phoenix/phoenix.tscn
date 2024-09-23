@@ -228,7 +228,7 @@ material = ExtResource("3")
 [node name="CameraFPV" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
 environment = ExtResource("4_8iccb")
-fov = 60.0
+fov = 25.0
 far = 1e+06
 script = ExtResource("8")
 
