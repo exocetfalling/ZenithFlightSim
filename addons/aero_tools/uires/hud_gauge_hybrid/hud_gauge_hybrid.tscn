@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx7q2r1a78pq3"]
+
+[ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1_3w2o1"]
+[ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.gd" id="2_alwtt"]
+
+[node name="HUDGaugeHybrid" type="Control"]
+custom_minimum_size = Vector2(240, 240)
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_3w2o1")
+script = ExtResource("2_alwtt")
+label_displayed = ""
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -0.5
+offset_right = 0.5
+offset_bottom = 56.0
+grow_horizontal = 2
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.0
+offset_top = -28.0
+offset_right = 44.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "000"
+horizontal_alignment = 1
+
+[node name="Centre" type="Node2D" parent="."]
+position = Vector2(120, 120)
+
+[node name="Mark0" type="Line2D" parent="Centre"]
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark1" type="Line2D" parent="Centre"]
+rotation = 0.628319
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark2" type="Line2D" parent="Centre"]
+rotation = 1.25664
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark3" type="Line2D" parent="Centre"]
+rotation = 1.88496
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark4" type="Line2D" parent="Centre"]
+rotation = 2.51327
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark5" type="Line2D" parent="Centre"]
+rotation = 3.14159
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark6" type="Line2D" parent="Centre"]
+rotation = 3.76991
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark7" type="Line2D" parent="Centre"]
+rotation = 4.39823
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark8" type="Line2D" parent="Centre"]
+rotation = 5.02655
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Mark9" type="Line2D" parent="Centre"]
+rotation = 5.65487
+points = PackedVector2Array(0, -100, 0, -115)
+begin_cap_mode = 2
+end_cap_mode = 2
+
+[node name="Needle" type="Line2D" parent="Centre"]
+points = PackedVector2Array(0, -80, 0, -115)
+width = 5.0
+begin_cap_mode = 2
+end_cap_mode = 2

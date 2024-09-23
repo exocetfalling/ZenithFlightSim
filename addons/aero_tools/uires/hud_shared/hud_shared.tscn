@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwtcvur732fvd"]
+[gd_scene load_steps=6 format=3 uid="uid://bwtcvur732fvd"]
 
 [ext_resource type="PackedScene" uid="uid://ctd0otb88d5ug" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://cx7q2r1a78pq3" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.tscn" id="2_4tg88"]
 [ext_resource type="PackedScene" uid="uid://b3g28rsgsjcxx" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bnb4sufeloij4" path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" id="4"]
 
@@ -14,11 +15,10 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
-[node name="GaugeSPD" parent="." instance=ExtResource("1")]
+[node name="GaugeSPD" parent="." instance=ExtResource("2_4tg88")]
 layout_mode = 1
 offset_right = 200.0
-offset_bottom = 150.0
-label_displayed = "SPD"
+offset_bottom = 200.0
 
 [node name="GaugeHDG" parent="." instance=ExtResource("1")]
 layout_mode = 1
@@ -29,20 +29,7 @@ offset_left = -100.0
 offset_right = 100.0
 offset_bottom = 150.0
 grow_horizontal = 2
-label_displayed = "HDG"
-
-[node name="GaugeALT" parent="." instance=ExtResource("1")]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -200.0
-offset_bottom = 150.0
-grow_horizontal = 0
-label_displayed = "ALT"
-value_maximum = 99999.0
-value_minimum = -1.0
-value_digits = 5
+label_displayed = "MAG"
 
 [node name="GaugeTHR" parent="." instance=ExtResource("1")]
 layout_mode = 1
@@ -53,6 +40,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 label_displayed = "THR"
+
+[node name="GaugeALT" parent="." instance=ExtResource("2_4tg88")]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+value_digits = 5
 
 [node name="Centre" type="Node2D" parent="."]
 z_index = 1
