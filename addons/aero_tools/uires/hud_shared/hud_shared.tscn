@@ -72,10 +72,8 @@ range_z_min = 1
 range_z_max = 2
 texture = ExtResource("4")
 
-[node name="Wings" type="Node2D" parent="Centre"]
-
-[node name="Line2D" type="Line2D" parent="Centre/Wings"]
-points = PackedVector2Array(-150, 0, -50, 0, 0, 50, 50, 0, 150, 0)
+[node name="Wings" type="Line2D" parent="Centre"]
+points = PackedVector2Array(-50, 0, -20, 1, 0, 20, 20, 0, 50, 0)
 width = 5.0
 
 [node name="FPM" type="Line2D" parent="Centre/Wings"]
