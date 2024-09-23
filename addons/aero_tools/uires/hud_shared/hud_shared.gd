@@ -35,7 +35,7 @@ func _process(delta):
 	$GaugeALT.value_displayed = hud_alt
 	$GaugeTHR.value_displayed = hud_thr
 	
-	$Centre.position = get_viewport_rect().size / 2
+	$Centre.global_position = get_viewport_rect().size / 2
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
 	$Centre/Wings.position.y = \
 		(rad_to_deg(get_viewport().get_camera_3d().global_rotation.x) - hud_pitch) \
