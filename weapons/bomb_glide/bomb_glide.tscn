@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://scenes/FPV_HUD.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="2"]
-[ext_resource type="Script" path="res://scripts/Derivative_Calc.gd" id="3"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_deriv_calc.gd" id="3"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="4"]
 [ext_resource type="Script" path="res://weapons/bomb_glide/bomb_glide.gd" id="5"]
 [ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="6"]

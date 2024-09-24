@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwtcvur732fvd"]
+[gd_scene load_steps=10 format=3 uid="uid://bwtcvur732fvd"]
 
 [ext_resource type="PackedScene" uid="uid://ctd0otb88d5ug" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cx7q2r1a78pq3" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.tscn" id="2_4tg88"]
 [ext_resource type="PackedScene" uid="uid://b3g28rsgsjcxx" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bnb4sufeloij4" path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://bg7j5e0wn6kbg" path="res://addons/aero_tools/uires/hud_gauge_gear/hud_gauge_gear.tscn" id="5_oyef8"]
+[ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="6_77yiv"]
 [ext_resource type="PackedScene" uid="uid://8cdj0kbjbkw3" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.tscn" id="6_pxmt5"]
+[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_deriv_calc.gd" id="7_4semm"]
 
 [node name="HUDShared" type="Control"]
 layout_mode = 3
@@ -17,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2")
 
-[node name="GaugeSPD" parent="." instance=ExtResource("2_4tg88")]
+[node name="GaugeSpeed" parent="." instance=ExtResource("2_4tg88")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -27,7 +30,7 @@ offset_right = 240.0
 offset_bottom = 120.0
 grow_vertical = 2
 
-[node name="GaugeHDG" parent="." instance=ExtResource("6_pxmt5")]
+[node name="GaugeHeading" parent="." instance=ExtResource("6_pxmt5")]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -40,18 +43,7 @@ offset_right = 120.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="GaugeTHR" parent="." instance=ExtResource("1")]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-label_displayed = "THR"
-
-[node name="GaugeALT" parent="." instance=ExtResource("2_4tg88")]
+[node name="GaugeAltitude" parent="." instance=ExtResource("2_4tg88")]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -59,12 +51,67 @@ anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
 offset_left = -240.0
-offset_top = -120.0
-offset_bottom = 120.0
+offset_top = -122.0
+offset_bottom = 118.0
 grow_horizontal = 0
 grow_vertical = 2
 value_maximum = 99999.0
 value_digits = 5
+
+[node name="GaugeThrottle" parent="." instance=ExtResource("1")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+offset_right = 200.0
+offset_bottom = -150.0
+grow_vertical = 0
+label_displayed = "THR"
+
+[node name="GaugeTrim" parent="." instance=ExtResource("1")]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -150.0
+offset_right = 200.0
+grow_vertical = 0
+label_displayed = "TRIM"
+value_maximum = 9.0
+value_minimum = 0.0
+value_digits_int = 4
+value_digits_frac = 1
+value_signed = true
+
+[node name="GaugeFlaps" parent="." instance=ExtResource("1")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -300.0
+offset_bottom = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+label_displayed = "FLAPS"
+value_maximum = 9.0
+value_minimum = 0.0
+value_digits_int = 1
+
+[node name="GaugeGear" parent="." instance=ExtResource("5_oyef8")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -150.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="Centre" type="Node2D" parent="."]
 z_index = 1
@@ -85,4 +132,56 @@ width = 5.0
 points = PackedVector2Array(0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40)
 width = 3.0
 
+[node name="AccTrend" type="Node2D" parent="Centre/Wings/FPM"]
+
+[node name="Chevron1" type="Line2D" parent="Centre/Wings/FPM/AccTrend"]
+position = Vector2(-55, 0)
+points = PackedVector2Array(-20, -20, 0, 0, -20, 20)
+width = 3.0
+
+[node name="Chevron2" type="Line2D" parent="Centre/Wings/FPM/AccTrend"]
+position = Vector2(55, 0)
+points = PackedVector2Array(20, -20, 0, 0, 20, 20)
+width = 3.0
+
+[node name="GearInd" type="Node2D" parent="Centre/Wings"]
+visible = false
+position = Vector2(0, 40)
+
+[node name="Tris" type="Node2D" parent="Centre/Wings/GearInd"]
+
+[node name="NLG" type="Line2D" parent="Centre/Wings/GearInd/Tris"]
+points = PackedVector2Array(-10, 0, 0, 10, 10, 0)
+closed = true
+width = 2.0
+
+[node name="MLGLeft" type="Line2D" parent="Centre/Wings/GearInd/Tris"]
+position = Vector2(-30, 0)
+points = PackedVector2Array(-10, 0, 0, 10, 10, 0)
+closed = true
+width = 2.0
+
+[node name="MLGRight" type="Line2D" parent="Centre/Wings/GearInd/Tris"]
+position = Vector2(30, 0)
+points = PackedVector2Array(-10, 0, 0, 10, 10, 0)
+closed = true
+width = 2.0
+
+[node name="Transit" type="Label" parent="Centre/Wings/GearInd"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -45.5
+offset_top = 20.0
+offset_right = 45.5
+offset_bottom = 45.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme = ExtResource("6_77yiv")
+theme_override_font_sizes/font_size = 20
+text = "TRANSIT"
+
 [node name="HUDLadder" parent="Centre" instance=ExtResource("3")]
+
+[node name="SpeedDeriv" type="Node" parent="."]
+script = ExtResource("7_4semm")

@@ -245,7 +245,7 @@ far = 100000.0
 script = ExtResource("6")
 term_P = 0.1
 term_I = 1.0
-term_D = 0.01
+term_D = 0.05
 integral_max = 50.0
 param_tuning_active = false
 

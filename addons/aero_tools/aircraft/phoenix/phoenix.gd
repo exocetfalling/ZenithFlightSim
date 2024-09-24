@@ -117,6 +117,10 @@ func _physics_process(delta):
 	$HUDShared.hud_angle_inertial_x = rad_to_deg(adc_angle_inertial_x)
 	$HUDShared.hud_angle_inertial_y = rad_to_deg(adc_angle_inertial_y)
 	
+	$HUDShared.hud_flaps = input_flaps
+	$HUDShared.hud_gear = gear_current
+	$HUDShared.hud_trim = output_elevator_trim
+	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
 	if (gear_current > gear_input):
