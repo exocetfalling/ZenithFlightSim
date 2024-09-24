@@ -18,7 +18,7 @@ var hud_thr: float = 0
 var hud_flaps: float = 0
 var hud_trim: float = 0
 var hud_gear: float = 1
-
+var hud_ap_mode: int = 0
 var hud_angle_inertial_y: float = 0
 var hud_angle_inertial_x: float = 0
 
@@ -60,3 +60,8 @@ func _process(delta):
 		#$Centre/Wings/GearInd/Transit.visible = true
 	#else:
 		#$Centre/Wings/GearInd/Transit.visible = false
+	
+	if hud_ap_mode == 0:
+		$FMA/Status/CWS.visible = false
+	if hud_ap_mode == 1:
+		$FMA/Status/CWS.visible = true

@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://8cdj0kbjbkw3"]
 
-[ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1_o40j7"]
+[ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="1_t07ji"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.gd" id="2_covb7"]
 
 [node name="HUDGaugeCompass" type="Control"]
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 3
 anchors_preset = 0
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 script = ExtResource("2_covb7")
 label_displayed = ""
 value_displayed = 360.0
@@ -52,7 +52,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark0"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -63,7 +63,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "36"
 horizontal_alignment = 1
@@ -76,7 +76,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark1"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -87,7 +87,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "03"
 horizontal_alignment = 1
@@ -100,7 +100,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark2"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -111,7 +111,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "06"
 horizontal_alignment = 1
@@ -124,7 +124,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark3"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -135,7 +135,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "09"
 horizontal_alignment = 1
@@ -148,7 +148,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark4"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -159,7 +159,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "12"
 horizontal_alignment = 1
@@ -172,7 +172,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark5"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -183,7 +183,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "15"
 horizontal_alignment = 1
@@ -196,7 +196,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark6"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -207,7 +207,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "18"
 horizontal_alignment = 1
@@ -220,7 +220,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark7"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -231,7 +231,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "21"
 horizontal_alignment = 1
@@ -244,7 +244,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark8"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -255,7 +255,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "24"
 horizontal_alignment = 1
@@ -268,7 +268,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark9"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -279,7 +279,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "27"
 horizontal_alignment = 1
@@ -292,7 +292,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark10"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -303,7 +303,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "30"
 horizontal_alignment = 1
@@ -316,7 +316,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Label" type="Label" parent="Centre/Mark11"]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -327,7 +327,7 @@ offset_right = 19.5
 offset_bottom = -78.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_o40j7")
+theme = ExtResource("1_t07ji")
 theme_override_font_sizes/font_size = 30
 text = "33"
 horizontal_alignment = 1

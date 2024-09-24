@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwtcvur732fvd"]
+[gd_scene load_steps=12 format=3 uid="uid://bwtcvur732fvd"]
 
 [ext_resource type="PackedScene" uid="uid://ctd0otb88d5ug" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
@@ -9,6 +9,8 @@
 [ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="6_77yiv"]
 [ext_resource type="PackedScene" uid="uid://8cdj0kbjbkw3" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.tscn" id="6_pxmt5"]
 [ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_deriv_calc.gd" id="7_4semm"]
+[ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="7_fidrc"]
+[ext_resource type="PackedScene" uid="uid://bu1wf1vuuyf3y" path="res://addons/aero_tools/uires/hud_fma/hud_fma.tscn" id="10_x7xiu"]
 
 [node name="HUDShared" type="Control"]
 layout_mode = 3
@@ -18,6 +20,7 @@ anchor_right = 0.9
 anchor_bottom = 0.95
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("6_77yiv")
 script = ExtResource("2")
 
 [node name="GaugeSpeed" parent="." instance=ExtResource("2_4tg88")]
@@ -177,7 +180,7 @@ offset_right = 45.5
 offset_bottom = 45.0
 grow_horizontal = 2
 size_flags_horizontal = 4
-theme = ExtResource("6_77yiv")
+theme = ExtResource("7_fidrc")
 theme_override_font_sizes/font_size = 20
 text = "TRANSIT"
 
@@ -185,3 +188,6 @@ text = "TRANSIT"
 
 [node name="SpeedDeriv" type="Node" parent="."]
 script = ExtResource("7_4semm")
+
+[node name="FMA" parent="." instance=ExtResource("10_x7xiu")]
+layout_mode = 1

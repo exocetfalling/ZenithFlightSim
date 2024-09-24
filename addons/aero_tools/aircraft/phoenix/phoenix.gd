@@ -121,6 +121,8 @@ func _physics_process(delta):
 	$HUDShared.hud_gear = gear_current
 	$HUDShared.hud_trim = output_elevator_trim
 	
+	$HUDShared.hud_ap_mode = autopilot_on
+	
 	if (gear_current < gear_input):
 		gear_current = gear_current + 0.2 * delta
 	if (gear_current > gear_input):
@@ -145,7 +147,7 @@ func _physics_process(delta):
 		adc_alt_agl = 9999
 	
 	if ((autopilot_on == 1) && (adc_alt_agl >= 15)):
-		if ((abs(adc_roll) < 30) && (abs(adc_pitch) < 15)):
+		if abs(adc_roll) < 30 && abs(adc_pitch) < 15 && adc_stall == false:
 			input_elevator_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
