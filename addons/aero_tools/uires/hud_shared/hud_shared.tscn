@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwtcvur732fvd"]
+[gd_scene load_steps=7 format=3 uid="uid://bwtcvur732fvd"]
 
 [ext_resource type="PackedScene" uid="uid://ctd0otb88d5ug" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.tscn" id="1"]
 [ext_resource type="Script" path="res://addons/aero_tools/uires/hud_shared/hud_shared.gd" id="2"]
 [ext_resource type="PackedScene" uid="uid://cx7q2r1a78pq3" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.tscn" id="2_4tg88"]
 [ext_resource type="PackedScene" uid="uid://b3g28rsgsjcxx" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.tscn" id="3"]
 [ext_resource type="Texture2D" uid="uid://bnb4sufeloij4" path="res://addons/aero_tools/uires/hud_shared/hud_shared_mask.png" id="4"]
+[ext_resource type="PackedScene" uid="uid://8cdj0kbjbkw3" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.tscn" id="6_pxmt5"]
 
 [node name="HUDShared" type="Control"]
 layout_mode = 3
@@ -25,18 +26,21 @@ offset_right = 240.0
 offset_bottom = 120.0
 grow_vertical = 2
 
-[node name="GaugeHDG" parent="." instance=ExtResource("1")]
+[node name="GaugeHDG" parent="." instance=ExtResource("6_pxmt5")]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -100.0
-offset_right = 100.0
-offset_bottom = 150.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -240.0
+offset_right = 120.0
 grow_horizontal = 2
-label_displayed = "MAG"
+grow_vertical = 0
 
 [node name="GaugeTHR" parent="." instance=ExtResource("1")]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0

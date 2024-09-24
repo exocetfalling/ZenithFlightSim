@@ -356,7 +356,7 @@ func _physics_process(delta):
 	adc_spd_ground = linear_velocity_total
 	
 
-	if ((rotation_degrees.y) >= 0):
+	if ((rotation_degrees.y) > -1):
 		adc_hdg = -rotation_degrees.y + 360
 	else:
 		adc_hdg = -rotation_degrees.y
