@@ -4,18 +4,19 @@
 [ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://addons/aero_tools/aircraft/phoenix/phoenix.tscn" id="3_oic21"]
 [ext_resource type="PackedScene" uid="uid://ignpdv10rx52" path="res://addons/boujie_water_shader/prefabs/deep_ocean.tscn" id="4_og01j"]
 [ext_resource type="PackedScene" uid="uid://cobcn3ll2u8m0" path="res://terrain/terrain_pbr/island/island.tscn" id="5_5x4lh"]
-[ext_resource type="Texture2D" uid="uid://dltyp42rhn43p" path="res://terrain/terrain_pbr/materials/ground/ground_albedo.png" id="15_5l34y"]
-[ext_resource type="Texture2D" uid="uid://cpp35yyy7moxr" path="res://terrain/terrain_pbr/materials/ground/ground_normal.png" id="16_rgesq"]
+[ext_resource type="Texture2D" uid="uid://rugv16de3fkt" path="res://terrain/terrain_pbr/materials/water/water_albedo.png" id="5_lhnr5"]
+[ext_resource type="Texture2D" uid="uid://mhg080ysygjv" path="res://terrain/terrain_pbr/materials/water/water_normal.png" id="6_ltuf8"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pt4sg"]
-albedo_texture = ExtResource("15_5l34y")
-normal_texture = ExtResource("16_rgesq")
-uv1_scale = Vector3(0.001, 0.001, 0.001)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyt75"]
+albedo_texture = ExtResource("5_lhnr5")
+normal_enabled = true
+normal_texture = ExtResource("6_ltuf8")
+uv1_scale = Vector3(100, 100, 100)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_20uoi"]
-material = SubResource("StandardMaterial3D_pt4sg")
+material = SubResource("StandardMaterial3D_wyt75")
 size = Vector2(100000, 100000)
 subdivide_width = 1000
 subdivide_depth = 1000
