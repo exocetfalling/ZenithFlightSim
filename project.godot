@@ -30,7 +30,7 @@ window/size/fullscreen=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/aero_tools/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
+enabled=PackedStringArray("res://addons/aero_tools/plugin.cfg", "res://addons/boujie_water_shader/plugin.cfg", "res://addons/multimesh_scatter/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")
 
 [filesystem]
 
