@@ -6,6 +6,8 @@ extends VehicleBody3D
 # For different atmospheres override calc_atmo_properties()
 # Mars, Titan etc.
 
+@export var debug_draw: bool = false
+
 # Type of control
 # 0 - none
 # 1 - player
@@ -399,6 +401,13 @@ func _physics_process(delta):
 	
 	output_rudder = clamp(output_rudder, -1, 1)
 
-
+func _process(delta: float) -> void:
+	for child in get_children():
+		if child is AeroSurface:
+			if debug_draw:
+				DebugDraw3D.draw_line( \
+					child.global_position, \
+					child.global_position + child.force_total_surface_vector * child.basis.inverse() * 0.001, \
+					Color.AQUA)
 func get_input(delta):
 	pass

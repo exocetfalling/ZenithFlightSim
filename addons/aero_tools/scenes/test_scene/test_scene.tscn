@@ -34,6 +34,7 @@ environment = ExtResource("2_t85q7")
 
 [node name="Phoenix" parent="." instance=ExtResource("3_oic21")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 26.4024, 1475)
+debug_draw = true
 
 [node name="Island" parent="." instance=ExtResource("5_5x4lh")]
 

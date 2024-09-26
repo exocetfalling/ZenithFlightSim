@@ -221,6 +221,7 @@ func _physics_process(delta):
 			.rotated(Vector3.FORWARD, \
 		-$RuddervatorR.rotation.z)
 
+
 func get_input(delta):
 	# Check if aircraft is under player control
 	if (control_type == 1):
