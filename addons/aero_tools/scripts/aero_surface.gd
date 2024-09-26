@@ -81,6 +81,12 @@ func update_atmo_data():
 	
 	linear_velocity_surface = (linear_velocity_body) * self.transform.basis
 	
+	linear_velocity_surface.y += angular_velocity_body.z * position.x
+	linear_velocity_surface.y += angular_velocity_body.z * position.y
+	
+	linear_velocity_surface.z += angular_velocity_body.y * position.x
+	linear_velocity_surface.z += angular_velocity_body.x * position.y
+	
 	linear_velocity_total = linear_velocity_surface.length()
 	air_pressure_dynamic = 0.5 * air_density * pow(linear_velocity_total, 2)
 	
