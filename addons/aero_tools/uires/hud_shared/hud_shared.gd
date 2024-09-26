@@ -45,7 +45,7 @@ func _process(delta):
 	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
 	$Centre/Wings.position.y = \
 		(rad_to_deg(get_viewport().get_camera_3d().global_rotation.x) - hud_pitch) \
-		* hud_scale_vertical
+		* hud_scale_vertical * cos(get_viewport().get_camera_3d().global_rotation.z)
 	$Centre/Wings/FPM.position.x = hud_angle_inertial_x * hud_scale_vertical
 	$Centre/Wings/FPM.position.y = hud_angle_inertial_y * hud_scale_vertical
 	
