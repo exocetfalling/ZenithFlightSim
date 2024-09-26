@@ -148,10 +148,10 @@ func calc_force_vectors():
 			(cos(angle_beta) * force_drag_surface_magnitude) \
 			)
 	
+	force_drag_surface_vector = force_drag_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
+	
 	force_total_surface_vector = \
 		(force_lift_surface_vector + force_drag_surface_vector)
-	
-	force_drag_surface_vector = force_drag_surface_vector.rotated(Vector3.RIGHT, -angle_alpha)
 	
 	pos_force_rel.x = position.x
 	pos_force_rel.y = position.y + sin(-rotation.x) * pos_COP.z
