@@ -1,7 +1,7 @@
 extends Node3D
 
 # Class for aerodynamic surfaces
-# Be sure to set vel_body variable using parent velocity data
+# Be sure to set linear_velocity_body variable using parent velocity data
 # Also provide atmospheric data by setting atmo_data variable
 class_name AeroSurface
 
@@ -38,11 +38,11 @@ var coeffecient_drag : float = 0.00
 # Drag coeffecient at zero lift
 var coeffecient_drag_zero_lift : float = 0.005
 
-var vel_body : Vector3 = Vector3.ZERO
-var vel_surface : Vector3 = Vector3.ZERO
-var vel_total : float = 0.00
+var linear_velocity_body : Vector3 = Vector3.ZERO
+var linear_velocity_surface : Vector3 = Vector3.ZERO
+var linear_velocity_total : float = 0.00
 
-var vel_delta = Vector3.ZERO
+var linear_velocity_delta = Vector3.ZERO
 
 var angle_alpha = 0
 var angle_alpha_deg = 0
@@ -77,11 +77,12 @@ func update_atmo_data():
 	air_pressure = atmo_data.y
 	air_density = atmo_data.z
 	
-	vel_surface = ((vel_body) * self.transform.basis)
-	vel_total = vel_surface.length()
-	air_pressure_dynamic = 0.5 * air_density * pow(vel_total, 2)
+	linear_velocity_surface = (linear_velocity_body) * self.transform.basis
 	
-	vel_delta = vel_surface - vel_body
+	linear_velocity_total = linear_velocity_surface.length()
+	air_pressure_dynamic = 0.5 * air_density * pow(linear_velocity_total, 2)
+	
+	linear_velocity_delta = linear_velocity_surface - linear_velocity_body
 
 
 # Lift coeffecient calculation function
@@ -122,16 +123,16 @@ func calc_drag_coeff():
 	
 func calc_lift_magnitude():
 	force_lift_surface_magnitude = \
-		0.5 * air_density * pow(vel_total, 2) * area_surface * coeffecient_lift
+		0.5 * air_density * pow(linear_velocity_total, 2) * area_surface * coeffecient_lift
 	
 func calc_drag_magnitude():
 	force_drag_surface_magnitude = \
-		0.5 * air_density * pow(vel_total, 2) * area_surface * coeffecient_drag
+		0.5 * air_density * pow(linear_velocity_total, 2) * area_surface * coeffecient_drag
 
 
 func calc_alpha_beta():
-	angle_alpha = atan2(-vel_surface.y, -vel_surface.z)
-	angle_beta = atan2(-vel_surface.x, -vel_surface.z)
+	angle_alpha = atan2(-linear_velocity_surface.y, -linear_velocity_surface.z)
+	angle_beta = atan2(-linear_velocity_surface.x, -linear_velocity_surface.z)
 	
 	angle_alpha_deg = rad_to_deg(angle_alpha)
 	angle_beta_deg = rad_to_deg(angle_beta)

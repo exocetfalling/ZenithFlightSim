@@ -309,7 +309,7 @@ func _physics_process(delta):
 	for child in get_children():
 		if child is AeroSurface:
 			child.atmo_data = calc_atmo_properties(global_transform.origin.y)
-			child.vel_body = airspeed_true_vector * child.basis
+			child.linear_velocity_body = airspeed_true_vector * child.basis
 			apply_force_local(child.force_total_surface_vector * child.basis.inverse(), child.position)
 	
 	# Angular drag
