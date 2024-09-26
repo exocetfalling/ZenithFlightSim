@@ -38,6 +38,8 @@ var coeffecient_drag : float = 0.00
 # Drag coeffecient at zero lift
 var coeffecient_drag_zero_lift : float = 0.005
 
+# Velocities
+var angular_velocity_body : Vector3 = Vector3.ZERO
 var linear_velocity_body : Vector3 = Vector3.ZERO
 var linear_velocity_surface : Vector3 = Vector3.ZERO
 var linear_velocity_total : float = 0.00
