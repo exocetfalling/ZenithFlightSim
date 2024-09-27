@@ -281,8 +281,10 @@ func get_input(delta):
 			camera_mode = camera_mode + 1
 		if (camera_mode == 0):
 			$CameraFPV.current = true
+			$HUDShared.visible = true
 		if (camera_mode == 1):
 			$CameraExt.current = true
+			$HUDShared.visible = false
 		if (camera_mode > 1):
 			camera_mode = 0
 		
