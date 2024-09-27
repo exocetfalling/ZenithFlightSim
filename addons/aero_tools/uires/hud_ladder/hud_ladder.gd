@@ -32,6 +32,7 @@ func _process(delta):
 
 	# Code to execute both in editor and in game.
 	if (get_viewport().get_camera_3d() != null):
+		centre_position = get_viewport().size / 2
 		camera_fov = get_viewport().get_camera_3d().fov
 		display_distance = get_viewport().size.y / 2 / tan(deg_to_rad(camera_fov) / 2)
 		hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera_3d().fov
