@@ -12,6 +12,8 @@ extends Control
 var camera_fov : float = 60
 
 var display_distance : float = 100
+var centre_position: Vector2 = Vector2(960, 540)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -35,20 +37,17 @@ func _process(delta):
 		hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera_3d().fov
 		rotation = get_viewport().get_camera_3d().global_rotation.z
 #		rect_position.y = rad2deg(get_viewport().get_camera().global_rotation.x * hud_scale_vertical)
-		position.y = \
-			rad_to_deg(get_viewport().get_camera_3d().global_rotation.x \
-			* hud_scale_vertical) \
-			* cos(get_viewport().get_camera_3d().global_rotation.z)
-		position.x = -position.y * tan(get_viewport().get_camera_3d().global_rotation.z)
+		global_position = centre_position
+		$Pivot.position.y = rad_to_deg(get_viewport().get_camera_3d().global_rotation.x) * hud_scale_vertical
 	else:
 		camera_fov = 60
 		display_distance = 500
 	# for child in get_child():
-	$MarkP05.position.y = -hud_scale_vertical * +5
-	$MarkN05.position.y = -hud_scale_vertical * -5
+	$Pivot/MarkP05.position.y = -hud_scale_vertical * +5
+	$Pivot/MarkN05.position.y = -hud_scale_vertical * -5
 	
-	$MarkP10.position.y = -hud_scale_vertical * +10
-	$MarkN10.position.y = -hud_scale_vertical * -10
+	$Pivot/MarkP10.position.y = -hud_scale_vertical * +10
+	$Pivot/MarkN10.position.y = -hud_scale_vertical * -10
 	
-	$MarkP20.position.y = -hud_scale_vertical * +20
-	$MarkN20.position.y = -hud_scale_vertical * -20
+	$Pivot/MarkP20.position.y = -hud_scale_vertical * +20
+	$Pivot/MarkN20.position.y = -hud_scale_vertical * -20
