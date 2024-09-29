@@ -116,7 +116,7 @@ cone = true
 material = SubResource("3")
 
 [node name="WingL" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, -3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999987, -0.00523597, 0, 0.00523597, 0.999987, -3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
@@ -131,7 +131,7 @@ material = ExtResource("3")
 size = Vector3(0.1, 0, 0.1)
 
 [node name="WingR" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 3, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.999987, -0.00523597, 0, 0.00523597, 0.999987, 3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
