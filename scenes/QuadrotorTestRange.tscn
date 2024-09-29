@@ -10,10 +10,10 @@ script = ExtResource( 2 )
 mode = 0
 textures = [ [  ], [  ] ]
 
-[node name="QuadrotorTestRange" type="Spatial"]
+[node name="QuadrotorTestRange" type="Node3D"]
 
-[node name="HTerrain" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5000, 0, -5000 )
+[node name="HTerrain" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5000, 0, -5000 )
 script = ExtResource( 1 )
 lod_scale = 2.0
 map_scale = Vector3( 10, 10, 10 )
@@ -32,4 +32,4 @@ shader_params/u_triplanar = false
 shader_params/u_tile_reduction = Plane( 0, 0, 0, 0 )
 
 [node name="UAV_Lite" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217641, 0 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.217641, 0 )

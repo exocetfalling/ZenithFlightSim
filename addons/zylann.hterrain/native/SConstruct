@@ -4,19 +4,20 @@ import os
 opts = Variables([], ARGUMENTS)
 
 # Gets the standard flags CC, CCX, etc.
-env = DefaultEnvironment()
+env = Environment(ENV = os.environ)
 
 # Define our options
 opts.Add(EnumVariable('target', "Compilation target", 'debug', ['debug', 'release']))
 opts.Add(EnumVariable('platform', "Compilation platform", '', ['', 'windows', 'linux', 'osx']))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
+opts.Add(EnumVariable('macos_arch', "Target macOS architecture", 'universal', ['universal', 'x86_64', 'arm64']))
 
 # Hardcoded ones
 target_path = "bin/"
 TARGET_NAME = "hterrain_native"
 
 # Local dependency paths
-godot_headers_path = "godot-cpp/godot_headers/"
+godot_headers_path = "godot-cpp/godot-headers/"
 cpp_bindings_path = "godot-cpp/"
 cpp_bindings_library = "libgodot-cpp"
 
@@ -49,9 +50,11 @@ if env['platform'] == "osx":
     cpp_bindings_library += '.osx'
     if env['target'] == 'debug':
         env.Append(CCFLAGS = ['-g', '-O2', '-arch', 'x86_64'])
+        env.Append(CXXFLAGS = ['-std=c++17'])
         env.Append(LINKFLAGS = ['-arch', 'x86_64'])
     else:
         env.Append(CCFLAGS = ['-g', '-O3', '-arch', 'x86_64'])
+        env.Append(CXXFLAGS = ['-std=c++17'])
         env.Append(LINKFLAGS = ['-arch', 'x86_64'])
 
 elif env['platform'] == "linux":
@@ -71,7 +74,7 @@ elif env['platform'] == "windows":
     cpp_bindings_library += '.windows'
     # This makes sure to keep the session environment variables on windows,
     # that way you can run scons in a vs 2017 prompt and it will find all the required tools
-    env.Append(ENV = os.environ)
+    #env.Append(ENV = os.environ)
 
     env.Append(CPPDEFINES = ['WIN32', '_WIN32', '_WINDOWS', '_CRT_SECURE_NO_WARNINGS'])
     env.Append(CCFLAGS = ['-W3', '-GR'])
@@ -88,7 +91,10 @@ if env['target'] == 'debug':
 else:
     cpp_bindings_library += '.release'
 
-cpp_bindings_library += '.' + str(bits)
+if env['macos_arch'] == 'universal':
+    cpp_bindings_library += '.' + str(bits)
+else:
+    cpp_bindings_library += '.' + env['macos_arch']
 
 # make sure our binding library is properly included
 env.Append(CPPPATH = [

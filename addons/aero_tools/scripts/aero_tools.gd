@@ -1,4 +1,4 @@
-tool
+@tool
 extends EditorPlugin
 
 # Replace this value with a PascalCase autoload name, as per the GDScript style guide.

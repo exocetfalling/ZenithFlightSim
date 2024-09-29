@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 # The size of the quad mesh itself.
 var quad_mesh_size
@@ -11,22 +11,22 @@ var last_mouse_pos3D = null
 # The last processed input touch/mouse event. To calculate relative movement.
 var last_mouse_pos2D = null
 
-onready var node_viewport = $Viewport
-onready var node_quad = $Quad
-onready var node_area = $Quad/Area
+@onready var node_viewport = $SubViewport
+@onready var node_quad = $Quad
+@onready var node_area = $Quad/Area3D
 
 func _ready():
-	node_area.connect("mouse_entered", self, "_mouse_entered_area")
+	node_area.connect("mouse_entered", Callable(self, "_mouse_entered_area"))
 
 	# If the material is NOT set to use billboard settings, then avoid running billboard specific code
-	if node_quad.get_surface_material(0).params_billboard_mode == 0:
+	if node_quad.get_surface_override_material(0).params_billboard_mode == 0:
 		set_process(false)
 
 	if OS.get_current_video_driver() == OS.VIDEO_DRIVER_GLES2:
 		# Required to prevent the texture from being too dark when using GLES2.
 		# This should be left to `true` in GLES3 to prevent the texture from looking
 		# washed out there.
-		node_quad.get_surface_material(0).flags_albedo_tex_force_srgb = false
+		node_quad.get_surface_override_material(0).flags_albedo_tex_force_srgb = false
 
 
 func _process(_delta):
@@ -119,7 +119,7 @@ func handle_mouse(event):
 
 
 func find_mouse(global_position):
-	var camera = get_viewport().get_camera()
+	var camera = get_viewport().get_camera_3d()
 
 	# From camera center to the mouse position in the Area
 	var from = camera.project_ray_origin(global_position)
@@ -128,7 +128,7 @@ func find_mouse(global_position):
 
 
 	# Manually raycasts the are to find the mouse position
-	var result = get_world().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
+	var result = get_world_3d().direct_space_state.intersect_ray(from, to, [], node_area.collision_layer,false,true) #for 3.1 changes
 
 	if result.size() > 0:
 		return result.position
@@ -156,15 +156,15 @@ func find_further_distance_to(origin):
 
 
 func rotate_area_to_billboard():
-	var billboard_mode = node_quad.get_surface_material(0).params_billboard_mode
+	var billboard_mode = node_quad.get_surface_override_material(0).params_billboard_mode
 
 	# Try to match the area with the material's billboard setting, if enabled
 	if billboard_mode > 0:
 		# Get the camera
-		var camera = get_viewport().get_camera()
+		var camera = get_viewport().get_camera_3d()
 		# Look in the same direction as the camera
 		var look = camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
-		look = node_area.translation + look
+		look = node_area.position + look
 
 		# Y-Billboard: Lock Y rotation, but gives bad results if the camera is tilted.
 		if billboard_mode == 2:

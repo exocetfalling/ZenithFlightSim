@@ -21,20 +21,20 @@ var tape_hdg_spacing = 200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$PFD/EADI/Tape_SPD/ABV.rect_position.y = \
-		$PFD/EADI/Tape_SPD/REF.rect_position.y - tape_spd_spacing
-	$PFD/EADI/Tape_SPD/BLW.rect_position.y = \
-		$PFD/EADI/Tape_SPD/REF.rect_position.y + tape_spd_spacing
+	$PFD/EADI/Tape_SPD/ABV.position.y = \
+		$PFD/EADI/Tape_SPD/REF.position.y - tape_spd_spacing
+	$PFD/EADI/Tape_SPD/BLW.position.y = \
+		$PFD/EADI/Tape_SPD/REF.position.y + tape_spd_spacing
 	
-	$PFD/EADI/Tape_ALT/ABV.rect_position.y = \
-		$PFD/EADI/Tape_ALT/REF.rect_position.y - tape_alt_spacing
-	$PFD/EADI/Tape_ALT/BLW.rect_position.y = \
-		$PFD/EADI/Tape_ALT/REF.rect_position.y + tape_alt_spacing
+	$PFD/EADI/Tape_ALT/ABV.position.y = \
+		$PFD/EADI/Tape_ALT/REF.position.y - tape_alt_spacing
+	$PFD/EADI/Tape_ALT/BLW.position.y = \
+		$PFD/EADI/Tape_ALT/REF.position.y + tape_alt_spacing
 	
-	$PFD/EADI/Tape_HDG/ABV.rect_position.x = \
-		$PFD/EADI/Tape_HDG/REF.rect_position.x + tape_hdg_spacing
-	$PFD/EADI/Tape_HDG/BLW.rect_position.x = \
-		$PFD/EADI/Tape_HDG/REF.rect_position.x - tape_hdg_spacing
+	$PFD/EADI/Tape_HDG/ABV.position.x = \
+		$PFD/EADI/Tape_HDG/REF.position.x + tape_hdg_spacing
+	$PFD/EADI/Tape_HDG/BLW.position.x = \
+		$PFD/EADI/Tape_HDG/REF.position.x - tape_hdg_spacing
 	
 	pass # Replace with function body.
 
@@ -52,7 +52,7 @@ func _process(delta):
 	if (AeroDataBus.aircraft_ap == 0): 
 		pass
 	
-	tape_spd_ref = stepify(AeroDataBus.aircraft_spd_indicated, tape_spd_step)
+	tape_spd_ref = snapped(AeroDataBus.aircraft_spd_indicated, tape_spd_step)
 	$PFD/EADI/Tape_SPD/REF.text = ("%03d -" % [tape_spd_ref])
 	$PFD/EADI/Tape_SPD/ABV.text = ("%03d -" % [tape_spd_ref + tape_spd_step])
 	$PFD/EADI/Tape_SPD/BLW.text = ("%03d -" % [tape_spd_ref - tape_spd_step])
@@ -65,7 +65,7 @@ func _process(delta):
 	$PFD/EADI/Tape_SPD.position.y = 500 + \
 		(AeroDataBus.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
 	
-	tape_alt_ref = stepify(AeroDataBus.aircraft_alt_barometric, tape_alt_step)
+	tape_alt_ref = snapped(AeroDataBus.aircraft_alt_barometric, tape_alt_step)
 	$PFD/EADI/Tape_ALT/REF.text = ("- %05d" % [tape_alt_ref])
 	$PFD/EADI/Tape_ALT/ABV.text = ("- %05d" % [tape_alt_ref + tape_alt_step])
 	$PFD/EADI/Tape_ALT/BLW.text = ("- %05d" % [tape_alt_ref - tape_alt_step])
@@ -78,7 +78,7 @@ func _process(delta):
 	$PFD/EADI/Tape_ALT.position.y = 500 + \
 		(AeroDataBus.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
-	tape_hdg_ref = stepify(AeroDataBus.aircraft_hdg, tape_hdg_step)
+	tape_hdg_ref = snapped(AeroDataBus.aircraft_hdg, tape_hdg_step)
 	
 	tape_hdg_abv = fmod(tape_hdg_ref + tape_hdg_step + 360, 360)
 	tape_hdg_blw = fmod(tape_hdg_ref - tape_hdg_step + 360, 360)
@@ -94,6 +94,6 @@ func _process(delta):
 	$PFD/EADI/Box_ALT/Value.text = ("%05d" % [AeroDataBus.aircraft_alt_barometric])
 	$PFD/EADI/Box_HDG/Value.text = ("%03d" % [AeroDataBus.aircraft_hdg])
 	
-	get_node("PFD/EADI/Viewport/XForm_Roll").rotation_degrees = -AeroDataBus.aircraft_roll
-	get_node("PFD/EADI/Viewport/XForm_Roll/XForm_Pitch").position.y = AeroDataBus.aircraft_pitch * 20
+	get_node("PFD/EADI/SubViewport/XForm_Roll").rotation_degrees = -AeroDataBus.aircraft_roll
+	get_node("PFD/EADI/SubViewport/XForm_Roll/XForm_Pitch").position.y = AeroDataBus.aircraft_pitch * 20
 	

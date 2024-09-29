@@ -1,4 +1,4 @@
-extends Light2D
+extends PointLight2D
 
 
 # Declare member variables here. Examples:

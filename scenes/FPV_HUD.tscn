@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/FPV_HUD.gd" type="Script" id=1]
-[ext_resource path="res://resources/MFD_Font.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/FPV_HUD/FPV_HUD_Mask.bmp" type="Texture" id=3]
-[ext_resource path="res://resources/MFD_Font_Small.tres" type="DynamicFont" id=4]
+[ext_resource path="res://resources/MFD_Font.tres" type="FontFile" id=2]
+[ext_resource path="res://assets/FPV_HUD/FPV_HUD_Mask.bmp" type="Texture2D" id=3]
+[ext_resource path="res://resources/MFD_Font_Small.tres" type="FontFile" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.482353, 0, 0.27451 )
@@ -23,7 +23,7 @@ border_color = Color( 0, 1, 0, 1 )
 modulate = Color( 1, 1, 1, 0.894118 )
 script = ExtResource( 1 )
 
-[node name="EADI" type="Light2D" parent="."]
+[node name="EADI" type="PointLight2D" parent="."]
 position = Vector2( 960, 540 )
 texture = ExtResource( 3 )
 mode = 3
@@ -31,13 +31,13 @@ range_z_min = 0
 range_z_max = 0
 
 [node name="Aircraft" type="Line2D" parent="EADI"]
-points = PoolVector2Array( -50, 25, 0, 0, 50, 25 )
+points = PackedVector2Array( -50, 25, 0, 0, 50, 25 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Marker_WPT" type="Line2D" parent="EADI/Aircraft"]
 visible = false
-points = PoolVector2Array( 0, -30, 30, -30, 30, 30, -30, 30, -30, -30, 0, -30 )
+points = PackedVector2Array( 0, -30, 30, -30, 30, 30, -30, 30, -30, -30, 0, -30 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -47,13 +47,13 @@ light_mask = 0
 [node name="XForm_Pitch" type="Node2D" parent="EADI/XForm_Roll"]
 
 [node name="Horizon" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch"]
-points = PoolVector2Array( -500, 0, 500, 0 )
+points = PackedVector2Array( -600, 0, 600, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Ladder_P05" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, -90 )
-points = PoolVector2Array( -50, 0, 50, 0 )
+points = PackedVector2Array( -50, 0, 50, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -61,12 +61,12 @@ default_color = Color( 0, 1, 0, 1 )
 position = Vector2( -70, 0 )
 
 [node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05/Ref_L"]
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 40.0
-margin_bottom = 49.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "5"
 align = 1
 
@@ -74,18 +74,18 @@ align = 1
 position = Vector2( 70, 0 )
 
 [node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P05/Ref_R"]
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 40.0
-margin_bottom = 49.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "5"
 align = 1
 
 [node name="Ladder_N05" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, 90 )
-points = PoolVector2Array( -50, 0, 50, 0 )
+points = PackedVector2Array( -50, 0, 50, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -93,12 +93,12 @@ default_color = Color( 0, 1, 0, 1 )
 position = Vector2( -70, 0 )
 
 [node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05/Ref_L"]
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 40.0
-margin_bottom = 49.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "5"
 align = 1
 
@@ -106,60 +106,60 @@ align = 1
 position = Vector2( 70, 0 )
 
 [node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N05/Ref_R"]
-margin_left = -39.0
-margin_top = -21.0
-margin_right = 40.0
-margin_bottom = 49.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+offset_left = -39.0
+offset_top = -21.0
+offset_right = 40.0
+offset_bottom = 49.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "5"
 align = 1
 
 [node name="Ladder_P02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 visible = false
 position = Vector2( 0, -45 )
-points = PoolVector2Array( -25, 0, 25, 0 )
+points = PackedVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Ladder_N02" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 visible = false
 position = Vector2( 0, 45 )
-points = PoolVector2Array( -25, 0, 25, 0 )
+points = PackedVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Ladder_P10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, -180 )
-points = PoolVector2Array( -100, 0, 100, 0 )
+points = PackedVector2Array( -100, 0, 100, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10"]
-margin_left = 110.0
-margin_top = -25.0
-margin_right = 162.0
-margin_bottom = 24.0
+offset_left = 110.0
+offset_top = -25.0
+offset_right = 162.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "10"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P10"]
-margin_left = -160.0
-margin_top = -25.0
-margin_right = -108.0
-margin_bottom = 24.0
+offset_left = -160.0
+offset_top = -25.0
+offset_right = -108.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "10"
 align = 1
 valign = 1
@@ -170,35 +170,35 @@ __meta__ = {
 
 [node name="Ladder_N10" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, 180 )
-points = PoolVector2Array( -100, 0, 100, 0 )
+points = PackedVector2Array( -100, 0, 100, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
-margin_left = 110.0
-margin_top = -25.0
-margin_right = 162.0
-margin_bottom = 24.0
+offset_left = 110.0
+offset_top = -25.0
+offset_right = 162.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "10"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N10"]
-margin_left = -160.0
-margin_top = -25.0
-margin_right = -108.0
-margin_bottom = 24.0
+offset_left = -160.0
+offset_top = -25.0
+offset_right = -108.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "10"
 align = 1
 valign = 1
@@ -209,20 +209,20 @@ __meta__ = {
 
 [node name="Ladder_P20" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, -360 )
-points = PoolVector2Array( -250, 0, 250, 0 )
+points = PackedVector2Array( -250, 0, 250, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20"]
-margin_left = 260.0
-margin_top = -25.0
-margin_right = 312.0
-margin_bottom = 24.0
+offset_left = 260.0
+offset_top = -25.0
+offset_right = 312.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "20"
 align = 1
 valign = 1
@@ -232,15 +232,15 @@ __meta__ = {
 }
 
 [node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_P20"]
-margin_left = -310.0
-margin_top = -25.0
-margin_right = -258.0
-margin_bottom = 24.0
+offset_left = -310.0
+offset_top = -25.0
+offset_right = -258.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "20"
 align = 1
 valign = 1
@@ -251,20 +251,20 @@ __meta__ = {
 
 [node name="Ladder_N20" type="Line2D" parent="EADI/XForm_Roll/XForm_Pitch/Horizon"]
 position = Vector2( 0, 360 )
-points = PoolVector2Array( -250, 0, 250, 0 )
+points = PackedVector2Array( -250, 0, 250, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_L" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20"]
-margin_left = 260.0
-margin_top = -25.0
-margin_right = 312.0
-margin_bottom = 24.0
+offset_left = 260.0
+offset_top = -25.0
+offset_right = 312.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "20"
 align = 1
 valign = 1
@@ -274,15 +274,15 @@ __meta__ = {
 }
 
 [node name="Label_R" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Ladder_N20"]
-margin_left = -310.0
-margin_top = -25.0
-margin_right = -258.0
-margin_bottom = 24.0
+offset_left = -310.0
+offset_top = -25.0
+offset_right = -258.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_colors/font_outline_color = Color( 0, 0, 0, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "20"
 align = 1
 valign = 1
@@ -295,18 +295,19 @@ __meta__ = {
 position = Vector2( 0, 54 )
 
 [node name="Label" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline"]
-margin_left = -56.0
-margin_top = -18.0
-margin_right = 56.0
-margin_bottom = 14.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = -56.0
+offset_top = -18.0
+offset_right = 56.0
+offset_bottom = 14.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "-------"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Tape_HDG" type="Node2D" parent="EADI/XForm_Roll/XForm_Pitch"]
+visible = false
 modulate = Color( 0, 1, 0, 1 )
 light_mask = 0
 position = Vector2( 0, -20 )
@@ -314,15 +315,15 @@ position = Vector2( 0, -20 )
 [node name="ABV2" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
 anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
+offset_left = -39.0
+offset_top = -35.5
+offset_right = 39.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "XXX
 |"
 align = 1
@@ -332,15 +333,15 @@ uppercase = true
 [node name="ABV1" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
 anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
+offset_left = -39.0
+offset_top = -35.5
+offset_right = 39.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "XXX
 |"
 align = 1
@@ -351,15 +352,15 @@ uppercase = true
 anchor_top = 0.15
 anchor_right = 1.0
 anchor_bottom = 0.35
-margin_left = -24.0
-margin_top = -35.0
-margin_right = 24.0
-margin_bottom = 35.0
+offset_left = -24.0
+offset_top = -35.0
+offset_right = 24.0
+offset_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "XXX
 |"
 align = 1
@@ -369,15 +370,15 @@ uppercase = true
 [node name="BLW1" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
 anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
+offset_left = -39.0
+offset_top = -35.5
+offset_right = 39.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "XXX
 |"
 align = 1
@@ -390,15 +391,15 @@ __meta__ = {
 [node name="BLW2" type="Label" parent="EADI/XForm_Roll/XForm_Pitch/Tape_HDG"]
 anchor_top = 0.15
 anchor_bottom = 0.35
-margin_left = -39.0
-margin_top = -35.5
-margin_right = 39.0
-margin_bottom = 34.5
+offset_left = -39.0
+offset_top = -35.5
+offset_right = 39.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "XXX
 |"
 align = 1
@@ -413,12 +414,12 @@ __meta__ = {
 [node name="Line2D" type="Line2D" parent="EADI/XForm_Roll/Indicator_Roll"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 20, 20, -20, 20, 0, 0 )
+points = PackedVector2Array( 0, 0, 20, 20, -20, 20, 0, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="FPM" type="Line2D" parent="EADI"]
-points = PoolVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
+points = PackedVector2Array( 0, -40, 0, -20, 20, 0, 20, 0, 20, 0, 40, 0, 20, 0, 0, 20, -20, 0, -40, 0, -20, 0, 0, -20, 0, -40 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -429,7 +430,7 @@ default_color = Color( 0, 1, 0, 1 )
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/Zero"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 20, -20, -20, -20, 0, 0 )
+points = PackedVector2Array( 0, 0, 20, -20, -20, -20, 0, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -439,7 +440,7 @@ rotation = 0.174533
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P10"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -449,7 +450,7 @@ rotation = -0.174533
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N10"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -459,7 +460,7 @@ rotation = 0.349066
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P20"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -469,7 +470,7 @@ rotation = -0.349066
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N20"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -479,7 +480,7 @@ rotation = 0.523599
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/P30"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -489,7 +490,7 @@ rotation = -0.523599
 [node name="Line2D" type="Line2D" parent="EADI/Mark_Angles/N30"]
 position = Vector2( 0, -350 )
 z_index = 1
-points = PoolVector2Array( 0, 0, 0, -20 )
+points = PackedVector2Array( 0, 0, 0, -20 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -497,7 +498,7 @@ default_color = Color( 0, 1, 0, 1 )
 visible = false
 
 [node name="Line2D" type="Line2D" parent="Aimpoint"]
-points = PoolVector2Array( 0, -20, 20, 0, 0, 20, -20, 0, 0, -20 )
+points = PackedVector2Array( 0, -20, 20, 0, 0, 20, -20, 0, 0, -20 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 begin_cap_mode = 1
@@ -510,13 +511,13 @@ position = Vector2( 960, 540 )
 [node name="Speed_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = -940.0
-margin_top = -520.0
-margin_right = 940.0
-margin_bottom = 520.0
+offset_left = -940.0
+offset_top = -520.0
+offset_right = 940.0
+offset_bottom = 520.0
 size_flags_vertical = 1
-custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "SPEED
 XXX"
 uppercase = true
@@ -527,13 +528,13 @@ __meta__ = {
 [node name="Heading_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = -940.0
-margin_top = -520.0
-margin_right = 940.0
-margin_bottom = 520.0
+offset_left = -940.0
+offset_top = -520.0
+offset_right = 940.0
+offset_bottom = 520.0
 size_flags_vertical = 1
-custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "HDG
 XXX"
 align = 1
@@ -545,13 +546,13 @@ __meta__ = {
 [node name="Alt_Data" type="Label" parent="HUD_Centre"]
 visible = false
 light_mask = 8
-margin_left = -940.0
-margin_top = -520.0
-margin_right = 940.0
-margin_bottom = 520.0
+offset_left = -940.0
+offset_top = -520.0
+offset_right = 940.0
+offset_bottom = 520.0
 size_flags_vertical = 1
-custom_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
-custom_fonts/font = ExtResource( 2 )
+theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "ALT
 XXXXX"
 align = 2
@@ -562,7 +563,7 @@ __meta__ = {
 
 [node name="Tape_SPD" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( -760, 0 )
+position = Vector2( -850, 0 )
 z_index = 1
 
 [node name="ABV2" type="Label" parent="HUD_Centre/Tape_SPD"]
@@ -572,7 +573,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "XXX -"
 align = 1
 valign = 1
@@ -585,7 +586,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "XXX -"
 align = 1
 valign = 1
@@ -598,7 +599,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "XXX -"
 align = 1
 valign = 1
@@ -611,7 +612,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "XXX -"
 align = 1
 valign = 1
@@ -627,7 +628,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "XXX -"
 align = 1
 valign = 1
@@ -638,7 +639,7 @@ __meta__ = {
 
 [node name="Tape_ALT" type="Node2D" parent="HUD_Centre"]
 modulate = Color( 0, 1, 0, 1 )
-position = Vector2( 740, 0 )
+position = Vector2( 820, 0 )
 z_index = 1
 
 [node name="ABV2" type="Label" parent="HUD_Centre/Tape_ALT"]
@@ -648,7 +649,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "- XXXXX"
 align = 1
 valign = 1
@@ -664,7 +665,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "- XXXXX"
 align = 1
 valign = 1
@@ -680,7 +681,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "- XXXXX"
 align = 1
 valign = 1
@@ -696,7 +697,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "- XXXXX"
 align = 1
 valign = 1
@@ -712,7 +713,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 5
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 2 )
+theme_override_fonts/font = ExtResource( 2 )
 text = "- XXXXX"
 align = 1
 valign = 1
@@ -722,49 +723,52 @@ __meta__ = {
 }
 
 [node name="Div_SPD" type="Line2D" parent="HUD_Centre"]
+visible = false
 position = Vector2( -560, 0 )
-points = PoolVector2Array( 0, -400, 0, 400 )
+points = PackedVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Div_aLT" type="Line2D" parent="HUD_Centre"]
+visible = false
 position = Vector2( 560, 0 )
-points = PoolVector2Array( 0, -400, 0, 400 )
+points = PackedVector2Array( 0, -400, 0, 400 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle_SPD" type="Line2D" parent="HUD_Centre"]
-position = Vector2( -585, 0 )
-points = PoolVector2Array( -25, 0, 25, 0 )
+position = Vector2( -768, 0 )
+z_index = 1
+points = PackedVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle_ALT" type="Line2D" parent="HUD_Centre"]
-position = Vector2( 585, 0 )
-points = PoolVector2Array( -25, 0, 25, 0 )
+position = Vector2( 711, 0 )
+points = PackedVector2Array( -25, 0, 25, 0 )
 width = 3.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Label_SPD" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = -835.0
-margin_top = -410.0
-margin_right = -707.0
-margin_bottom = -378.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = -910.0
+offset_top = -410.0
+offset_right = -782.0
+offset_bottom = -378.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "SPD / KN"
 align = 1
 uppercase = true
 
 [node name="Label_ALT" type="Label" parent="HUD_Centre"]
 light_mask = 2
-margin_left = 670.0
-margin_top = -410.0
-margin_right = 798.0
-margin_bottom = -378.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = 770.0
+offset_top = -410.0
+offset_right = 908.0
+offset_bottom = -378.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "ALT / FT"
 align = 1
 uppercase = true
@@ -772,23 +776,23 @@ uppercase = true
 [node name="Indicator_THR" type="ProgressBar" parent="HUD_Centre"]
 show_behind_parent = true
 light_mask = 2
-margin_left = -860.0
-margin_top = 460.0
-margin_right = -660.0
-margin_bottom = 510.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+offset_left = -860.0
+offset_top = 460.0
+offset_right = -660.0
+offset_bottom = 510.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_styles/fg = SubResource( 1 )
+theme_override_styles/bg = SubResource( 2 )
 value = 50.0
 
 [node name="Label" type="Label" parent="HUD_Centre/Indicator_THR"]
 light_mask = 2
-margin_left = -60.0
-margin_top = 8.0
-margin_right = -12.0
-margin_bottom = 40.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = -60.0
+offset_top = 8.0
+offset_right = -12.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "THR"
 align = 1
 valign = 1
@@ -796,22 +800,22 @@ valign = 1
 [node name="Indicator_FLAPS" type="ProgressBar" parent="HUD_Centre"]
 show_behind_parent = true
 light_mask = 2
-margin_left = -860.0
-margin_top = 360.0
-margin_right = -660.0
-margin_bottom = 410.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+offset_left = -860.0
+offset_top = 360.0
+offset_right = -660.0
+offset_bottom = 410.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_styles/fg = SubResource( 1 )
+theme_override_styles/bg = SubResource( 2 )
 max_value = 1.0
 
 [node name="Label" type="Label" parent="HUD_Centre/Indicator_FLAPS"]
 light_mask = 2
-margin_left = -91.0
-margin_top = 8.0
-margin_bottom = 40.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = -91.0
+offset_top = 8.0
+offset_bottom = 40.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "FLAP"
 align = 1
 valign = 1
@@ -820,23 +824,23 @@ uppercase = true
 [node name="Indicator_TRIM" type="Line2D" parent="HUD_Centre"]
 light_mask = 2
 position = Vector2( 900, 410 )
-points = PoolVector2Array( -20, -50, 0, -50, 0, 0, -10, 0, 0, 0, 0, 50, -20, 50 )
+points = PackedVector2Array( -20, -50, 0, -50, 0, 0, -10, 0, 0, 0, 0, 50, -20, 50 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Caret" type="Polygon2D" parent="HUD_Centre/Indicator_TRIM"]
 light_mask = 2
 color = Color( 0, 1, 0, 1 )
-polygon = PoolVector2Array( 0, 0, -10, 5, -10, -5 )
+polygon = PackedVector2Array( 0, 0, -10, 5, -10, -5 )
 
 [node name="Label" type="Label" parent="HUD_Centre/Indicator_TRIM"]
 light_mask = 2
-margin_left = -200.0
-margin_top = -16.0
-margin_right = -40.0
-margin_bottom = 16.0
-custom_colors/font_color = Color( 0, 1, 0, 1 )
-custom_fonts/font = ExtResource( 4 )
+offset_left = -200.0
+offset_top = -16.0
+offset_right = -40.0
+offset_bottom = 16.0
+theme_override_colors/font_color = Color( 0, 1, 0, 1 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "TRIM +X.X"
 
 [node name="Status_CWS" type="Node2D" parent="HUD_Centre"]
@@ -845,11 +849,11 @@ position = Vector2( 0, -430 )
 z_index = 1
 
 [node name="Label" type="Label" parent="HUD_Centre/Status_CWS"]
-margin_left = -40.0
-margin_top = -25.0
-margin_right = 40.0
-margin_bottom = 25.0
-custom_fonts/font = ExtResource( 2 )
+offset_left = -40.0
+offset_top = -25.0
+offset_right = 40.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource( 2 )
 text = "CWS"
 align = 1
 
@@ -887,7 +891,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "36"
 align = 1
 valign = 1
@@ -903,7 +907,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "03"
 align = 1
 valign = 1
@@ -919,7 +923,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "06"
 align = 1
 valign = 1
@@ -935,7 +939,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "09"
 align = 1
 valign = 1
@@ -951,7 +955,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "12"
 align = 1
 valign = 1
@@ -967,7 +971,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "15"
 align = 1
 valign = 1
@@ -983,7 +987,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "18"
 align = 1
 valign = 1
@@ -999,7 +1003,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "21"
 align = 1
 valign = 1
@@ -1015,7 +1019,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "24"
 align = 1
 valign = 1
@@ -1031,7 +1035,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "27"
 align = 1
 valign = 1
@@ -1047,7 +1051,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "30"
 align = 1
 valign = 1
@@ -1063,19 +1067,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 4 )
+theme_override_fonts/font = ExtResource( 4 )
 text = "33"
 align = 1
 valign = 1
 
 [node name="Datum" type="Line2D" parent="Compass"]
 position = Vector2( 0, -150 )
-points = PoolVector2Array( 0, 0, 10, 0, 0, 20, -10, 0, 0, 0 )
+points = PackedVector2Array( 0, 0, 10, 0, 0, 20, -10, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
 [node name="Needle" type="Line2D" parent="Compass"]
-points = PoolVector2Array( 0, 60, 0, -45, 5, -45, 0, -60, -5, -45, 0, -45 )
+points = PackedVector2Array( 0, 60, 0, -45, 5, -45, 0, -60, -5, -45, 0, -45 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )
 
@@ -1084,6 +1088,6 @@ visible = false
 position = Vector2( 960, 540 )
 
 [node name="Line2D" type="Line2D" parent="Boresight"]
-points = PoolVector2Array( 0, 0, 0, -50, 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0 )
+points = PackedVector2Array( 0, 0, 0, -50, 0, 0, 50, 0, 0, 0, 0, 50, 0, 0, -50, 0, 0, 0 )
 width = 2.0
 default_color = Color( 0, 1, 0, 1 )

@@ -3,22 +3,22 @@
 [ext_resource path="res://addons/zylann.hterrain/hterrain.gd" type="Script" id=1]
 [ext_resource path="res://addons/zylann.hterrain/hterrain_texture_set.gd" type="Script" id=2]
 [ext_resource path="res://assets/Terrain/data.hterrain" type="Resource" id=3]
-[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture" id=4]
+[ext_resource path="res://assets/Runway/Runway.bmp" type="Texture2D" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 mode = 0
 textures = [ [  ], [  ] ]
 
-[sub_resource type="SpatialMaterial" id=2]
+[sub_resource type="StandardMaterial3D" id=2]
 flags_unshaded = true
 params_depth_draw_mode = 1
 albedo_texture = ExtResource( 4 )
 
-[node name="Spatial" type="Spatial"]
+[node name="Node3D" type="Node3D"]
 
-[node name="HTerrain" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20000, -2000, -20000 )
+[node name="HTerrain" type="Node3D" parent="."]
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, -20000, -2000, -20000 )
 script = ExtResource( 1 )
 map_scale = Vector3( 100, 100, 100 )
 _terrain_data = ExtResource( 3 )
@@ -32,7 +32,7 @@ custom_globalmap_shader = null
 texture_set = SubResource( 1 )
 
 [node name="Runway" type="Sprite3D" parent="HTerrain"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20000, 2300.05, 20000 )
+transform = Transform3D( 1, 0, 0, 0, 1, 0, 0, 0, 1, 20000, 2300.05, 20000 )
 material_override = SubResource( 2 )
 cast_shadow = 0
 extra_cull_margin = 869.95

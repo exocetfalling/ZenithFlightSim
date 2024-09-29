@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://dal6e1h1ie6rl"]
+
+[ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="2_t85q7"]
+[ext_resource type="PackedScene" uid="uid://c1pfxxsltbikv" path="res://addons/aero_tools/aircraft/phoenix/phoenix.tscn" id="3_oic21"]
+[ext_resource type="PackedScene" uid="uid://ignpdv10rx52" path="res://addons/boujie_water_shader/prefabs/deep_ocean.tscn" id="4_og01j"]
+[ext_resource type="PackedScene" uid="uid://cobcn3ll2u8m0" path="res://terrain/terrain_pbr/island/island.tscn" id="5_5x4lh"]
+[ext_resource type="Texture2D" uid="uid://rugv16de3fkt" path="res://terrain/terrain_pbr/materials/water/water_albedo.png" id="5_lhnr5"]
+[ext_resource type="Texture2D" uid="uid://mhg080ysygjv" path="res://terrain/terrain_pbr/materials/water/water_normal.png" id="6_ltuf8"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_k4k5h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyt75"]
+albedo_texture = ExtResource("5_lhnr5")
+normal_enabled = true
+normal_texture = ExtResource("6_ltuf8")
+uv1_scale = Vector3(100, 100, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_20uoi"]
+material = SubResource("StandardMaterial3D_wyt75")
+size = Vector2(100000, 100000)
+subdivide_width = 1000
+subdivide_depth = 1000
+
+[node name="TestScene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+shape = SubResource("WorldBoundaryShape3D_k4k5h")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("2_t85q7")
+
+[node name="Phoenix" parent="." instance=ExtResource("3_oic21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 26.4024, 1475)
+debug_draw = true
+
+[node name="Island" parent="." instance=ExtResource("5_5x4lh")]
+
+[node name="DeepOcean" parent="." instance=ExtResource("4_og01j")]
+far_edge = 40000
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, -0.707107, 0.707107, 0, 0.707107, 0.707107, -1, 3.09086e-08, -3.09086e-08, 0, 1000, 0)
+light_color = Color(0.985491, 0.954266, 0.882074, 1)
+light_energy = 2.0
+shadow_enabled = true
+shadow_opacity = 0.9
+
+[node name="Seafloor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -30, 0)
+mesh = SubResource("PlaneMesh_20uoi")

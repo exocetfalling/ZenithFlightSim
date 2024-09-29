@@ -1,0 +1,112 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu1wf1vuuyf3y"]
+
+[ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="1_ag18x"]
+
+[node name="FMA" type="GridContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -204.5
+offset_right = 204.5
+offset_bottom = 53.0
+grow_horizontal = 2
+theme = ExtResource("1_ag18x")
+columns = 9
+
+[node name="Autothrust" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+
+[node name="BLANK" type="Label" parent="Autothrust"]
+layout_mode = 2
+text = "     "
+
+[node name="SPEED" type="Label" parent="Autothrust"]
+visible = false
+layout_mode = 2
+text = "SPEED"
+
+[node name="Div1" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+text = "|
+|"
+
+[node name="Vertical" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+
+[node name="BLANK" type="Label" parent="Vertical"]
+layout_mode = 2
+text = "     "
+
+[node name="GS" type="Label" parent="Vertical"]
+visible = false
+layout_mode = 2
+text = " G/S "
+
+[node name="Div2" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+text = "|
+|"
+
+[node name="Lateral" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+
+[node name="BLANK" type="Label" parent="Lateral"]
+layout_mode = 2
+text = "     "
+
+[node name="LOC" type="Label" parent="Lateral"]
+visible = false
+layout_mode = 2
+text = " LOC "
+
+[node name="Div3" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+text = "|
+|"
+
+[node name="ApprData" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+
+[node name="BLANK" type="Label" parent="ApprData"]
+layout_mode = 2
+text = "     "
+
+[node name="APPR1" type="Label" parent="ApprData"]
+visible = false
+layout_mode = 2
+text = "APPR1"
+
+[node name="Div4" type="Label" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+text = "|
+|"
+
+[node name="Status" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_ag18x")
+
+[node name="AP ON" type="Label" parent="Status"]
+visible = false
+layout_mode = 2
+text = "AP ON"
+
+[node name="FD ON" type="Label" parent="Status"]
+visible = false
+layout_mode = 2
+text = "FD ON"
+
+[node name="CWS" type="Label" parent="Status"]
+layout_mode = 2
+text = "  CWS"
+
+[node name="BLANK" type="Label" parent="Status"]
+layout_mode = 2
+text = "     "

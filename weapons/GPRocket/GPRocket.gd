@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -138,15 +138,15 @@ func _calc_beta(vel_right, vel_fwd):
 	return atan2(-vel_right, vel_fwd)
 	
 func add_force_local(force: Vector3, pos: Vector3):
-	pos_local = self.transform.basis.xform(pos)
-	force_local = self.transform.basis.xform(force)
-	self.add_force(force_local, pos_local)
+	pos_local = self.transform.basis * (pos)
+	force_local = self.transform.basis * (force)
+	self.apply_force(pos_local, force_local)
 
 
 func find_angles_and_distance_to_target(vec_pos_target):
 	var vec_delta_local = to_local(vec_pos_target)
-	var pitch_to = rad2deg(atan2(vec_delta_local.y, -vec_delta_local.z))
-	var yaw_to = rad2deg(atan2(vec_delta_local.x, -vec_delta_local.z))
+	var pitch_to = rad_to_deg(atan2(vec_delta_local.y, -vec_delta_local.z))
+	var yaw_to = rad_to_deg(atan2(vec_delta_local.x, -vec_delta_local.z))
 	var range_to = vec_delta_local.length()
 	return Vector3(yaw_to, pitch_to, range_to)
 
@@ -158,8 +158,8 @@ func _process(delta):
 	angle_alpha = _calc_alpha(linear_velocity_local.y, linear_velocity_local.z)
 	angle_beta = _calc_beta(linear_velocity_local.x, linear_velocity_local.z)
 	
-	angle_alpha_deg = rad2deg(angle_alpha)
-	angle_beta_deg = rad2deg(angle_beta)
+	angle_alpha_deg = rad_to_deg(angle_alpha)
+	angle_beta_deg = rad_to_deg(angle_beta)
 
 	# Lift/drag calculations (helpers for add_force_local)
 	
@@ -194,10 +194,10 @@ func _process(delta):
 		if (fuel <= 0):
 			$Particles.visible = false
 	
-	if (($RayCast.is_colliding() == true) && (launched == true)):
+	if (($RayCast3D.is_colliding() == true) && (launched == true)):
 		emit_signal("exploded", transform.origin)
 		fuel = 0
-		var clone = explosion_scene.instance()
+		var clone = explosion_scene.instantiate()
 		var scene_root = get_tree().root.get_children()[0]
 		scene_root.add_child(clone)
 		clone.global_transform = self.global_transform

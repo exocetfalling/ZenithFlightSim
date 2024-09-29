@@ -35,9 +35,9 @@ var output_joystick : Vector2 = Vector2.ZERO
 func _ready():
 	pass # Replace with function body.
 	control_type = 1
-	DebugOverlay.stats.add_property(self, "tgt_data", "")
-	DebugOverlay.stats.add_property(self, "tgt_data_deriv", "")
-	DebugOverlay.stats.add_property(self, "cmd_vector", "")
+#	DebugOverlay.stats.add_property(self, "tgt_data", "")
+#	DebugOverlay.stats.add_property(self, "tgt_data_deriv", "")
+#	DebugOverlay.stats.add_property(self, "cmd_vector", "")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
@@ -119,7 +119,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F1.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F1.rotation.z)
 	
 	$AeroSurface_Fin_F2.rotation = \
@@ -128,7 +128,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F2.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F2.rotation.z)
 	
 	$AeroSurface_Fin_F3.rotation = \
@@ -137,7 +137,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F3.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F3.rotation.z)
 	
 	$AeroSurface_Fin_F4.rotation = \
@@ -146,7 +146,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_F4.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F4.rotation.z)
 	
 	$AeroSurface_Fin_R1.rotation = \
@@ -155,7 +155,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R1.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_F1.rotation.z)
 	
 	$AeroSurface_Fin_R2.rotation = \
@@ -164,7 +164,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R2.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R2.rotation.z)
 	
 	$AeroSurface_Fin_R3.rotation = \
@@ -173,7 +173,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R3.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R3.rotation.z)
 	
 	$AeroSurface_Fin_R4.rotation = \
@@ -182,7 +182,7 @@ func _physics_process(delta):
 			0, \
 			($AeroSurface_Fin_R4.rotation.z) \
 			)\
-			.rotated(Vector3.FORWARD, \
+			super.rotated(Vector3.FORWARD, \
 		-$AeroSurface_Fin_R4.rotation.z)
 	
 	# X, Y, Z axes differ from Vec2 and Vec3
@@ -198,6 +198,9 @@ func _physics_process(delta):
 		AeroDataBus.aircraft_alpha = adc_alpha
 		AeroDataBus.aircraft_beta = adc_beta
 		
+		AeroDataBus.aircraft_mu = adc_mu
+		AeroDataBus.aircraft_nu = adc_nu
+
 		if (Global.setting_units == 0):
 			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated
 			AeroDataBus.aircraft_spd_true = adc_spd_true
@@ -222,7 +225,7 @@ func _integrate_forces(_state):
 #	add_central_force(Vector3(0, -weight, 0))
 	
 	# Thrust forces
-	add_force_local(Vector3(0, 0, -weight/2 * input_throttle), Vector3(0, 0, 0))
+	add_force_local(Vector3(0, 0, -weight * input_throttle), Vector3(0, 0, 0))
 	
 	# Forces from surfaces 
 	add_force_local(force_fin_f1, pos_fin_f1)

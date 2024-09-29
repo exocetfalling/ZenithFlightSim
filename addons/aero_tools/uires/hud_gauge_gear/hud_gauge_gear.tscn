@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bg7j5e0wn6kbg"]
+
+[ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1_bexp4"]
+[ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_gear/hud_gauge_gear.gd" id="2_1gdvm"]
+
+[node name="HUDGaugeGear" type="Control"]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 3
+anchors_preset = 0
+theme = ExtResource("1_bexp4")
+script = ExtResource("2_1gdvm")
+label_displayed = "GEAR"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 0.5
+text = "GEAR"
+horizontal_alignment = 1
+
+[node name="Value" type="Label" parent="."]
+layout_mode = 0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "UP"
+horizontal_alignment = 1

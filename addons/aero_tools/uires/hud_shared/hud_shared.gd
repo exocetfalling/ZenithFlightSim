@@ -4,9 +4,23 @@ extends Control
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-export var use_IAS : bool = true
-var camera_rotation : Vector3 = Vector3.ZERO
-var camera_rotation_degrees : Vector3 = Vector3.ZERO
+@export var use_IAS : bool = true
+
+var hud_scale_vertical: float = 0
+
+var hud_pitch: float = 0
+var hud_roll: float = 0
+
+var hud_spd: float = 0
+var hud_hdg: float = 0
+var hud_alt: float = 0
+var hud_thr: float = 0
+var hud_flaps: float = 0
+var hud_trim: float = 0
+var hud_gear: float = 1
+var hud_ap_mode: int = 0
+var hud_angle_inertial_y: float = 0
+var hud_angle_inertial_x: float = 0
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,21 +31,37 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if (use_IAS == true):
-		$GaugeSPD.value_displayed = AeroDataBus.aircraft_spd_indicated
-	else:
-		$GaugeSPD.value_displayed = AeroDataBus.aircraft_spd_true
+	hud_scale_vertical = get_viewport().size.y / get_viewport().get_camera_3d().fov
 	
-	$GaugeHDG.value_displayed = AeroDataBus.aircraft_hdg
-	$GaugeALT.value_displayed = AeroDataBus.aircraft_alt_barometric
+	$GaugeSpeed.value_displayed = hud_spd
+	$GaugeHeading.value_displayed = hud_hdg
+	$GaugeAltitude.value_displayed = hud_alt
+	$GaugeThrottle.value_displayed = hud_thr
+	$GaugeFlaps.value_displayed = hud_flaps * 4
+	$GaugeTrim.value_displayed = hud_trim
+	$GaugeGear.value_displayed = hud_gear
 	
-	$HUDNode.position = get_viewport_rect().size / 2
+	$Centre.global_position = get_viewport_rect().size / 2
+	$Centre/Mask.scale = get_viewport_rect().size.y / 1080 * Vector2.ONE
+	$Centre/Wings.position.y = \
+		(rad_to_deg(get_viewport().get_camera_3d().global_rotation.x) - hud_pitch) \
+		* hud_scale_vertical * cos(get_viewport().get_camera_3d().global_rotation.z)
+	$Centre/Wings/FPM.position.x = hud_angle_inertial_x * hud_scale_vertical
+	$Centre/Wings/FPM.position.y = hud_angle_inertial_y * hud_scale_vertical
 	
-	if (get_viewport().get_camera() != null):
-		$GaugeFOV.value_displayed = get_viewport().get_camera().fov
-		camera_rotation = get_viewport().get_camera().global_transform.basis.get_euler()
-		
-		camera_rotation_degrees.x = rad2deg(camera_rotation.x)
-		camera_rotation_degrees.y = rad2deg(camera_rotation.y)
-		camera_rotation_degrees.z = rad2deg(camera_rotation.z)
-		
+	$Centre/Wings/FPM/AccTrend.position.y = -20 * $SpeedDeriv.calc_derivative(hud_spd, delta)
+	
+	#if hud_gear > 0.5:
+		#$Centre/Wings/GearInd/Tris.visible = true
+	#else:
+		#$Centre/Wings/GearInd/Tris.visible = false
+	
+	#if hud_gear > 0 and hud_gear < 1:
+		#$Centre/Wings/GearInd/Transit.visible = true
+	#else:
+		#$Centre/Wings/GearInd/Transit.visible = false
+	
+	if hud_ap_mode == 0:
+		$FMA/Status/CWS.visible = false
+	if hud_ap_mode == 1:
+		$FMA/Status/CWS.visible = true

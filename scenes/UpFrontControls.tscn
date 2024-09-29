@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://resources/MFD_OSB_Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://resources/MFD_OSB_Font.tres" type="FontFile" id=1]
 [ext_resource path="res://scripts/UpFrontControls.gd" type="Script" id=2]
 
 [node name="UpFrontControls" type="HBoxContainer"]
@@ -12,156 +12,156 @@ __meta__ = {
 }
 
 [node name="Modes_Main" type="VBoxContainer" parent="."]
-margin_right = 300.0
-margin_bottom = 268.0
-rect_min_size = Vector2( 300, 0 )
+offset_right = 300.0
+offset_bottom = 268.0
+custom_minimum_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AP" type="Button" parent="Modes_Main"]
-margin_right = 300.0
-margin_bottom = 61.0
-custom_fonts/font = ExtResource( 1 )
+offset_right = 300.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "A/P"
 
 [node name="FD" type="Button" parent="Modes_Main"]
-margin_top = 69.0
-margin_right = 300.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 69.0
+offset_right = 300.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "F/D"
 
 [node name="YD" type="Button" parent="Modes_Main"]
-margin_top = 138.0
-margin_right = 300.0
-margin_bottom = 199.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 138.0
+offset_right = 300.0
+offset_bottom = 199.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "Y/D"
 
 [node name="FBW" type="Button" parent="Modes_Main"]
-margin_top = 207.0
-margin_right = 300.0
-margin_bottom = 268.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 207.0
+offset_right = 300.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "FBW"
 
 [node name="Modes_Vertical" type="VBoxContainer" parent="."]
-margin_left = 308.0
-margin_right = 608.0
-margin_bottom = 268.0
-rect_min_size = Vector2( 300, 0 )
+offset_left = 308.0
+offset_right = 608.0
+offset_bottom = 268.0
+custom_minimum_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ALT" type="Button" parent="Modes_Vertical"]
-margin_right = 300.0
-margin_bottom = 61.0
-custom_fonts/font = ExtResource( 1 )
+offset_right = 300.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "ALT HOLD"
 
 [node name="VS" type="Button" parent="Modes_Vertical"]
-margin_top = 69.0
-margin_right = 300.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 69.0
+offset_right = 300.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "V/S HOLD"
 
 [node name="FLCH" type="Button" parent="Modes_Vertical"]
-margin_top = 138.0
-margin_right = 300.0
-margin_bottom = 199.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 138.0
+offset_right = 300.0
+offset_bottom = 199.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "FLCH SPD"
 
 [node name="VNAV" type="Button" parent="Modes_Vertical"]
-margin_top = 207.0
-margin_right = 300.0
-margin_bottom = 268.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 207.0
+offset_right = 300.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "FMS VNAV"
 
 [node name="Modes_Lateral" type="VBoxContainer" parent="."]
-margin_left = 616.0
-margin_right = 916.0
-margin_bottom = 268.0
-rect_min_size = Vector2( 300, 0 )
+offset_left = 616.0
+offset_right = 916.0
+offset_bottom = 268.0
+custom_minimum_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ATT" type="Button" parent="Modes_Lateral"]
-margin_right = 300.0
-margin_bottom = 61.0
-custom_fonts/font = ExtResource( 1 )
+offset_right = 300.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "ATT HOLD"
 
 [node name="HDG" type="Button" parent="Modes_Lateral"]
-margin_top = 69.0
-margin_right = 300.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 69.0
+offset_right = 300.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "HDG SEL"
 
 [node name="LOC" type="Button" parent="Modes_Lateral"]
-margin_top = 138.0
-margin_right = 300.0
-margin_bottom = 199.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 138.0
+offset_right = 300.0
+offset_bottom = 199.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "VOR LOC"
 
 [node name="LNAV" type="Button" parent="Modes_Lateral"]
-margin_top = 207.0
-margin_right = 300.0
-margin_bottom = 268.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 207.0
+offset_right = 300.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "FMS LNAV"
 
 [node name="Waypoints" type="VBoxContainer" parent="."]
-margin_left = 924.0
-margin_right = 1224.0
-margin_bottom = 268.0
-rect_min_size = Vector2( 300, 0 )
+offset_left = 924.0
+offset_right = 1224.0
+offset_bottom = 268.0
+custom_minimum_size = Vector2( 300, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Next" type="Button" parent="Waypoints"]
-margin_right = 300.0
-margin_bottom = 61.0
-custom_fonts/font = ExtResource( 1 )
+offset_right = 300.0
+offset_bottom = 61.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "WPT NEXT"
 
 [node name="Home" type="Button" parent="Waypoints"]
-margin_top = 69.0
-margin_right = 300.0
-margin_bottom = 130.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 69.0
+offset_right = 300.0
+offset_bottom = 130.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "WPT HOME"
 
 [node name="Last" type="Button" parent="Waypoints"]
-margin_top = 138.0
-margin_right = 300.0
-margin_bottom = 199.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 138.0
+offset_right = 300.0
+offset_bottom = 199.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "WPT LAST"
 
 [node name="Prev" type="Button" parent="Waypoints"]
-margin_top = 207.0
-margin_right = 300.0
-margin_bottom = 268.0
-custom_fonts/font = ExtResource( 1 )
+offset_top = 207.0
+offset_right = 300.0
+offset_bottom = 268.0
+theme_override_fonts/font = ExtResource( 1 )
 text = "WPT PREV"

@@ -73,8 +73,8 @@ func _process(_delta):
 	# HUD
 	
 	get_node('HUD/HUD_Ladder').rotation_degrees = -AeroDataBus.aircraft_roll
-	get_node('HUD/HUD_Ladder').position.y = (AeroDataBus.aircraft_pitch / 90 * 3200) * cos(deg2rad(AeroDataBus.aircraft_roll))
-	get_node('HUD/HUD_Ladder').position.x = get_node('HUD/HUD_Ladder').position.y * tan(deg2rad(AeroDataBus.aircraft_roll))
+	get_node('HUD/HUD_Ladder').position.y = (AeroDataBus.aircraft_pitch / 90 * 3200) * cos(deg_to_rad(AeroDataBus.aircraft_roll))
+	get_node('HUD/HUD_Ladder').position.x = get_node('HUD/HUD_Ladder').position.y * tan(deg_to_rad(AeroDataBus.aircraft_roll))
 	
 	get_node("Speed_Data").text = ("SPD\n%03d" % [AeroDataBus.aircraft_spd_indicated])
 	get_node("Alt_Data").text = ("ALT\n%05d" % [AeroDataBus.aircraft_alt_barometric])

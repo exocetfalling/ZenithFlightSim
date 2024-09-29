@@ -1,19 +1,19 @@
-extends Spatial
+extends Node3D
 
-export (NodePath) var target
+@export var target: NodePath
 
-export (float, 0.0, 2.0) var rotation_speed = PI/2
+@export var rotation_speed = PI/2 # (float, 0.0, 2.0)
 
 # mouse properties
-export (bool) var mouse_control = false
-export (float, 0.001, 0.1) var mouse_sensitivity = 0.005
-export (bool) var invert_y = false
-export (bool) var invert_x = false
+@export var mouse_control: bool = false
+@export var mouse_sensitivity = 0.005 # (float, 0.001, 0.1)
+@export var invert_y: bool = false
+@export var invert_x: bool = false
 
 # zoom settings
-export (float) var max_zoom = 3.0
-export (float) var min_zoom = 0.4
-export (float, 0.05, 1.0) var zoom_speed = 0.09
+@export var max_zoom: float = 3.0
+@export var min_zoom: float = 0.4
+@export var zoom_speed = 0.09 # (float, 0.05, 1.0)
 
 var zoom = 1.0
 

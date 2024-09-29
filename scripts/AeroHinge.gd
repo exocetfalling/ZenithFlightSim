@@ -1,4 +1,4 @@
-extends Generic6DOFJoint
+extends Generic6DOFJoint3D
 
 class_name AeroJoint
 
@@ -11,9 +11,9 @@ var hinge_pos : Vector3 = Vector3.ZERO
 
 # Inputs to the control surface will be scaled by these values 
 # Useful for mixed controls (elevons, spoilerons, etc.)
-export var scalar_control_pitch : float = 1.00
-export var scalar_control_roll : float = 1.00
-export var scalar_control_yaw : float = 1.00
+@export var scalar_control_pitch : float = 1.00
+@export var scalar_control_roll : float = 1.00
+@export var scalar_control_yaw : float = 1.00
 
 # Commanded values from the FBW/player/AI 
 var command_pitch : float = 0.00
@@ -23,7 +23,7 @@ var command_yaw : float = 0.00
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	DebugOverlay.stats.add_property(self, "hinge_pos", "round")
-	hinge_pos = self.translation
+	hinge_pos = self.position
 	pass # Replace with function body.
 
 

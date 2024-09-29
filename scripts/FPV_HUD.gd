@@ -34,7 +34,7 @@ var tape_hdg_blw2 = 0
 var tape_hdg_step = 10
 var tape_hdg_spacing = 200
 
-export var hmd_power : bool = true
+@export var hmd_power : bool = true
 var hmd_blanked : bool = false
 
 var fpv_angles : Vector3 = Vector3.ZERO
@@ -51,24 +51,24 @@ func _format_hdg(heading):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# Position and space elements that don't change size du8ring runtime
-	$HUD_Centre/Tape_SPD/ABV1.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF0.rect_position.y - 1 * tape_spd_spacing
-	$HUD_Centre/Tape_SPD/ABV2.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF0.rect_position.y - 2 * tape_spd_spacing
-	$HUD_Centre/Tape_SPD/BLW1.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF0.rect_position.y + 1 * tape_spd_spacing
-	$HUD_Centre/Tape_SPD/BLW2.rect_position.y = \
-		$HUD_Centre/Tape_SPD/REF0.rect_position.y + 2 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/ABV1.position.y = \
+		$HUD_Centre/Tape_SPD/REF0.position.y - 1 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/ABV2.position.y = \
+		$HUD_Centre/Tape_SPD/REF0.position.y - 2 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/BLW1.position.y = \
+		$HUD_Centre/Tape_SPD/REF0.position.y + 1 * tape_spd_spacing
+	$HUD_Centre/Tape_SPD/BLW2.position.y = \
+		$HUD_Centre/Tape_SPD/REF0.position.y + 2 * tape_spd_spacing
 
 	
-	$HUD_Centre/Tape_ALT/ABV1.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF0.rect_position.y - 1 * tape_alt_spacing
-	$HUD_Centre/Tape_ALT/ABV2.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF0.rect_position.y - 2 * tape_alt_spacing
-	$HUD_Centre/Tape_ALT/BLW1.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 1 * tape_alt_spacing
-	$HUD_Centre/Tape_ALT/BLW2.rect_position.y = \
-		$HUD_Centre/Tape_ALT/REF0.rect_position.y + 2 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/ABV1.position.y = \
+		$HUD_Centre/Tape_ALT/REF0.position.y - 1 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/ABV2.position.y = \
+		$HUD_Centre/Tape_ALT/REF0.position.y - 2 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/BLW1.position.y = \
+		$HUD_Centre/Tape_ALT/REF0.position.y + 1 * tape_alt_spacing
+	$HUD_Centre/Tape_ALT/BLW2.position.y = \
+		$HUD_Centre/Tape_ALT/REF0.position.y + 2 * tape_alt_spacing
 	
 #	DebugOverlay.stats.add_property(self, "fpv_angles", "round")
 
@@ -92,9 +92,9 @@ func _process(delta):
 	
 	# Keep aircraft symbol pointing at boresight
 	$EADI/Aircraft.position.x = \
-		display_distance * tan(deg2rad(fpv_angles.y))
+		display_distance * tan(deg_to_rad(fpv_angles.y))
 	$EADI/Aircraft.position.y = \
-		display_distance * tan(deg2rad(fpv_angles.x))
+		display_distance * tan(deg_to_rad(fpv_angles.x))
 	
 	# HUD scaling
 	hud_scale_factor = get_viewport_rect().size / Vector2(1920, 1080)
@@ -104,7 +104,7 @@ func _process(delta):
 	$Compass.scale = Vector2(hud_scale_factor.y, hud_scale_factor.y)
 	
 	# Calculate the virtual distance the HUD is positioned for
-	display_distance = viewport_centre.y / tan(deg2rad(cam_fov / 2))
+	display_distance = viewport_centre.y / tan(deg_to_rad(cam_fov / 2))
 #	
 	if (AeroDataBus.aircraft_cam_rotation_deg.length() <= 5):
 		$Boresight.visible = false
@@ -143,9 +143,9 @@ func _process(delta):
 		$EADI/XForm_Roll/XForm_Pitch/Horizon/Waterline.visible = true
 	
 	$EADI/FPM.position.x = \
-		display_distance * tan(deg2rad(-AeroDataBus.aircraft_nu))
+		display_distance * tan(deg_to_rad(-AeroDataBus.aircraft_nu))
 	$EADI/FPM.position.y = \
-		display_distance * tan(deg2rad(AeroDataBus.aircraft_mu))
+		display_distance * tan(deg_to_rad(AeroDataBus.aircraft_mu))
 	
 	# Waypoint indications
 	if (\
@@ -155,9 +155,9 @@ func _process(delta):
 		):
 		$EADI/Aircraft/Marker_WPT.visible = true
 		$EADI/Aircraft/Marker_WPT.position.x = \
-			display_distance * tan(deg2rad(AeroDataBus.aircraft_nav_waypoint_data.x))
+			display_distance * tan(deg_to_rad(AeroDataBus.aircraft_nav_waypoint_data.x))
 		$EADI/Aircraft/Marker_WPT.position.y = \
-			display_distance * tan(deg2rad(-AeroDataBus.aircraft_nav_waypoint_data.y))
+			display_distance * tan(deg_to_rad(-AeroDataBus.aircraft_nav_waypoint_data.y))
 		$EADI/Aircraft/Marker_WPT.rotation_degrees = -AeroDataBus.aircraft_roll
 	else:
 		$EADI/Aircraft/Marker_WPT.visible = false
@@ -173,7 +173,7 @@ func _process(delta):
 #	get_node("Alt_Data").text = ("ALT\n%05d" % [AeroDataBus.aircraft_alt_barometric])
 #	get_node("Heading_Data").text = ("HDG\n%03d" % [AeroDataBus.aircraft_hdg])
 
-	tape_spd_ref = stepify(AeroDataBus.aircraft_spd_indicated, tape_spd_step)
+	tape_spd_ref = snapped(AeroDataBus.aircraft_spd_indicated, tape_spd_step)
 	$HUD_Centre/Tape_SPD/REF0.text = ("%03d -" % [tape_spd_ref])
 	$HUD_Centre/Tape_SPD/ABV1.text = ("%03d -" % [tape_spd_ref + 1 * tape_spd_step])
 	$HUD_Centre/Tape_SPD/ABV2.text = ("%03d -" % [tape_spd_ref + 2 * tape_spd_step])
@@ -190,7 +190,7 @@ func _process(delta):
 	$HUD_Centre/Tape_SPD.position.y = \
 		(AeroDataBus.aircraft_spd_indicated - tape_spd_ref) * (tape_spd_spacing / tape_spd_step)
 	
-	tape_alt_ref = stepify(AeroDataBus.aircraft_alt_barometric, tape_alt_step)
+	tape_alt_ref = snapped(AeroDataBus.aircraft_alt_barometric, tape_alt_step)
 	$HUD_Centre/Tape_ALT/REF0.text = ("- %05d" % [tape_alt_ref])
 	$HUD_Centre/Tape_ALT/ABV1.text = ("- %05d" % [tape_alt_ref + 1 * tape_alt_step])
 	$HUD_Centre/Tape_ALT/ABV2.text = ("- %05d" % [tape_alt_ref + 2 * tape_alt_step])
@@ -208,7 +208,7 @@ func _process(delta):
 		(AeroDataBus.aircraft_alt_barometric - tape_alt_ref) * (tape_alt_spacing / tape_alt_step)
 	
 
-	tape_hdg_ref = stepify(AeroDataBus.aircraft_hdg, tape_hdg_step)
+	tape_hdg_ref = snapped(AeroDataBus.aircraft_hdg, tape_hdg_step)
 	tape_hdg_abv1 = _format_hdg(tape_hdg_ref + 1 * tape_hdg_step)
 	tape_hdg_abv2 = _format_hdg(tape_hdg_ref + 2 * tape_hdg_step)
 	tape_hdg_blw1 = _format_hdg(tape_hdg_ref - 1 * tape_hdg_step)
@@ -225,14 +225,14 @@ func _process(delta):
 	
 	tape_hdg_spacing = 10 * get_viewport_rect().size.y/cam_fov
 	
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x + 1 * tape_hdg_spacing
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x + 2 * tape_hdg_spacing
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x - 1 * tape_hdg_spacing
-	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.rect_position.x = \
-		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.rect_position.x - 2 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV1.position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.position.x + 1 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/ABV2.position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.position.x + 2 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW1.position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.position.x - 1 * tape_hdg_spacing
+	$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/BLW2.position.x = \
+		$EADI/XForm_Roll/XForm_Pitch/Tape_HDG/REF0.position.x - 2 * tape_hdg_spacing
 	
 	$HUD_Centre/Indicator_THR.value = AeroDataBus.aircraft_throttle * 100
 	$HUD_Centre/Indicator_FLAPS.value = AeroDataBus.aircraft_flaps

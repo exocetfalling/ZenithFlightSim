@@ -89,7 +89,7 @@ func _physics_process(delta):
 		
 		
 		if ($RadioAltimeter.is_colliding() == true):
-			adc_alt_radio = (global_translation - $RadioAltimeter.get_collision_point()).length()
+			adc_alt_radio = (global_position - $RadioAltimeter.get_collision_point()).length()
 		else:
 			# Set value to show sensor is out of range
 			adc_alt_radio = 9999
@@ -99,9 +99,9 @@ func _physics_process(delta):
 		if (camera_mode == 1):
 			$Camera_FPV/FPV_HUD.visible = false
 		
-		tgt_rates.x = deg2rad(input_joystick.y * 10)
-		tgt_rates.y = deg2rad(input_rudder * 10)
-		tgt_rates.z = deg2rad(input_joystick.x * 10)
+		tgt_rates.x = deg_to_rad(input_joystick.y * 10)
+		tgt_rates.y = deg_to_rad(input_rudder * 10)
+		tgt_rates.z = deg_to_rad(input_joystick.x * 10)
 		
 #		cmd_sas = 5 * (tgt_rates - adc_rates)
 		
@@ -133,12 +133,12 @@ func _physics_process(delta):
 		add_torque_local(Vector3(cmd_sas.x, -cmd_sas.y, -cmd_sas.z))
 		
 		# Basic drag
-		add_central_force(-0.2 * air_density * (linear_velocity + linear_velocity_wind).length_squared() * (linear_velocity + linear_velocity_wind).normalized())
+		apply_central_force(-0.2 * air_density * (linear_velocity + linear_velocity_wind).length_squared() * (linear_velocity + linear_velocity_wind).normalized())
 		
 		# Simplistic camera motion
-		$Camera_Ext.translation.x = - 0.2 * linear_velocity_local.x
-		$Camera_Ext.translation.y = 2 - 0.2 * linear_velocity_local.y
-		$Camera_Ext.translation.z = 10 - 0.2 * linear_velocity_local.z
+		$Camera_Ext.position.x = - 0.2 * linear_velocity_local.x
+		$Camera_Ext.position.y = 2 - 0.2 * linear_velocity_local.y
+		$Camera_Ext.position.z = 10 - 0.2 * linear_velocity_local.z
 		
 func get_input(delta):
 	# Check if aircraft is under player control

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2cd2huv0lvsr"]
+
+[ext_resource type="PackedScene" uid="uid://kdv65p3h3dkx" path="res://addons/aero_tools/assets/aircraft_parts/wing_delta/ZFS_WING_DELTA.gltf" id="1"]
+
+[node name="ZFS_WING_DELTA" instance=ExtResource("1")]
+
+[node name="node2" parent="node0" index="1"]
+visible = false

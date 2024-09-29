@@ -25,7 +25,7 @@ var hmd_scale_factor : float = 1.00
 var viewport_centre : Vector2 = Vector2(960, 540)
 
 # Visible only if outside HUD/panel FOV
-export var hmd_power : bool = true
+@export var hmd_power : bool = true
 var hmd_blanked : bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -45,13 +45,13 @@ func _process(delta):
 	
 	viewport_centre = get_viewport_rect().size/2
 	
-	body_angles_deg.x = rad2deg(body_angles.x)
-	body_angles_deg.y = rad2deg(body_angles.y)
-	body_angles_deg.z = rad2deg(body_angles.z)
+	body_angles_deg.x = rad_to_deg(body_angles.x)
+	body_angles_deg.y = rad_to_deg(body_angles.y)
+	body_angles_deg.z = rad_to_deg(body_angles.z)
 	
-	HMD_angles_deg.x = rad2deg(HMD_angles.x)
-	HMD_angles_deg.y = rad2deg(HMD_angles.y)
-	HMD_angles_deg.z = rad2deg(HMD_angles.z)
+	HMD_angles_deg.x = rad_to_deg(HMD_angles.x)
+	HMD_angles_deg.y = rad_to_deg(HMD_angles.y)
+	HMD_angles_deg.z = rad_to_deg(HMD_angles.z)
 	
 	
 	position = viewport_centre

@@ -10,7 +10,7 @@ var value_delta = 0.00
 
 var integral = 0.00
 
-export var term_I = 0.00
+@export var term_I = 0.00
 
 var output_I = 0.00
 

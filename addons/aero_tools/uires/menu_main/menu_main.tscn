@@ -25,34 +25,34 @@ anchor_bottom = 1.0
 size_flags_vertical = 3
 
 [node name="ButtonFreeFlight" type="Button" parent="Options"]
-margin_right = 1728.0
-margin_bottom = 79.0
+offset_right = 1728.0
+offset_bottom = 79.0
 text = "Free Flight"
 
 [node name="ButtonTutorials" type="Button" parent="Options"]
-margin_top = 83.0
-margin_right = 1728.0
-margin_bottom = 162.0
+offset_top = 83.0
+offset_right = 1728.0
+offset_bottom = 162.0
 disabled = true
 text = "Tutorials"
 
 [node name="ButtonMissions" type="Button" parent="Options"]
-margin_top = 166.0
-margin_right = 1728.0
-margin_bottom = 245.0
+offset_top = 166.0
+offset_right = 1728.0
+offset_bottom = 245.0
 disabled = true
 text = "Missions"
 
 [node name="ButtonCredits" type="Button" parent="Options"]
-margin_top = 249.0
-margin_right = 1728.0
-margin_bottom = 328.0
+offset_top = 249.0
+offset_right = 1728.0
+offset_bottom = 328.0
 disabled = true
 text = "Credits"
 
 [node name="ButtonExit" type="Button" parent="Options"]
-margin_top = 332.0
-margin_right = 1728.0
-margin_bottom = 411.0
+offset_top = 332.0
+offset_right = 1728.0
+offset_bottom = 411.0
 disabled = true
 text = "Exit"

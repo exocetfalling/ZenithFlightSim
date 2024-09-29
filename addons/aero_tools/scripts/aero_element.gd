@@ -1,4 +1,4 @@
-extends RigidBody
+extends RigidBody3D
 
 class_name AeroElement
 
@@ -8,12 +8,12 @@ class_name AeroElement
 # var a = 2
 # var b = "text"
 
-export var element_length : float = 1.00
-export var element_radius : float = 1.00
+@export var element_length : float = 1.00
+@export var element_radius : float = 1.00
 var element_ref_area : float = 0
 
 # Position of centre of pressure
-export var pos_COP : Vector3 = Vector3.ZERO
+@export var pos_COP : Vector3 = Vector3.ZERO
 
 # Relative force position given control deflection
 var pos_force_rel : Vector3 = Vector3.ZERO
@@ -85,7 +85,7 @@ func _ready():
 func _physics_process(delta):	
 	air_pressure_dynamic = 0.5 * air_density * pow(linear_velocity_total, 2)
 	
-	vel_surface = (self.transform.basis.xform_inv(vel_body))
+	vel_surface = ((vel_body) * self.transform.basis)
 	linear_velocity_total = vel_surface.length()
 	
 	vel_delta = vel_surface - vel_body
@@ -93,8 +93,8 @@ func _physics_process(delta):
 	angle_alpha = _calc_alpha(vel_surface.y, -vel_surface.z)
 	angle_beta = _calc_beta(vel_surface.x, -vel_surface.z)
 	
-	angle_alpha_deg = rad2deg(angle_alpha)
-	angle_beta_deg = rad2deg(angle_beta)
+	angle_alpha_deg = rad_to_deg(angle_alpha)
+	angle_beta_deg = rad_to_deg(angle_beta)
 	
 	coeffecient_drag = \
 		_calc_drag_coeff(angle_alpha, angle_beta)
@@ -113,9 +113,9 @@ func _physics_process(delta):
 	
 	force_total_element_vector = force_drag_element_vector
 	
-	pos_force_rel.x = translation.x
-	pos_force_rel.y = translation.y + sin(-rotation.x) * pos_COP.z
-	pos_force_rel.z = translation.z + cos(-rotation.x) * pos_COP.z
+	pos_force_rel.x = position.x
+	pos_force_rel.y = position.y + sin(-rotation.x) * pos_COP.z
+	pos_force_rel.z = position.z + cos(-rotation.x) * pos_COP.z
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://wi4xnoxmfdvj"
+path="res://.godot/imported/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh"
+
+[deps]
+
+files=["res://.godot/imported/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh"]
+
+source_file="res://assets/tree/fir_fixed.obj"
+dest_files=["res://.godot/imported/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh", "res://.godot/imported/fir_fixed.obj-c0da6142168453df32da631ff7f939b1.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
