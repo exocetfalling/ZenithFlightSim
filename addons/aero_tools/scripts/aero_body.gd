@@ -414,5 +414,12 @@ func _process(delta: float) -> void:
 					child.global_position, \
 					child.global_position + child.force_drag_surface_vector * child.global_basis.inverse() * 0.001, \
 					Color.RED)
+				DebugDraw3D.draw_box(
+					to_global(child.position),
+					child.global_basis,
+					Vector3(child.length_span, 0.1, (child.length_chord_root + child.length_chord_tip) / 2),
+					Color.GREEN,
+					true
+					)
 func get_input(delta):
 	pass
