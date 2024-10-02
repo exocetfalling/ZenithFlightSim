@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bu1wf1vuuyf3y" path="res://addons/aero_tools/uires/hud_fma/hud_fma.tscn" id="10_x7xiu"]
 
 [node name="HUDShared" type="Control"]
+modulate = Color(0, 1, 0, 1)
 layout_mode = 3
 anchor_left = 0.1
 anchor_top = 0.05
