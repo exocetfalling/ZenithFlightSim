@@ -302,7 +302,21 @@ func calc_vel_local_with_offset(vel_linear_local, angular_velocity_local, pos_of
 
 func calc_force_rotated_from_surface(force_vector, surface_node_rotation):
 	return force_vector.rotated(Vector3(0, 0, -1), -surface_node_rotation.z)
-	
+
+
+func calc_surface_rotation(base_rotation, target_value):
+	var final_rotation: Vector3 = Vector3.ZERO
+	final_rotation = \
+		Vector3( \
+			(target_value), \
+			0, \
+			(base_rotation.z) \
+			)\
+			.rotated(Vector3.FORWARD, \
+		-base_rotation.z)
+	return final_rotation
+
+
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	# Aero forces
