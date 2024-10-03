@@ -19,8 +19,8 @@ var pos_control_L2 : Vector3 = Vector3.ZERO
 var pos_control_R1 : Vector3 = Vector3.ZERO
 var pos_control_R2 : Vector3 = Vector3.ZERO
 
-var output_rudder_l : float = 0
-var output_rudder_r : float = 0
+var output_yaw_l : float = 0
+var output_yaw_r : float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,26 +42,28 @@ func _physics_process(delta):
 	
 	if (control_type == 1):
 		# Panel updates
-		AeroDataBus.aircraft_pitch = adc_pitch
-		AeroDataBus.aircraft_roll = adc_roll
-		AeroDataBus.aircraft_alpha = adc_alpha
-		AeroDataBus.aircraft_beta = adc_beta
+		#AeroDataBus.aircraft_pitch = adc_pitch
+		#AeroDataBus.aircraft_roll = adc_roll
+		#AeroDataBus.aircraft_alpha = adc_alpha
+		#AeroDataBus.aircraft_beta = adc_beta
+		#
+		#if (Global.setting_units == 0):
+			#AeroDataBus.aircraft_spd_indicated = adc_spd_indicated
+			#AeroDataBus.aircraft_spd_true = adc_spd_true
+			#AeroDataBus.aircraft_alt_barometric = adc_alt_asl
+		#if (Global.setting_units == 1):
+			#AeroDataBus.aircraft_spd_indicated = adc_spd_indicated * 2
+			#AeroDataBus.aircraft_spd_true = adc_spd_true * 2
+			#AeroDataBus.aircraft_alt_barometric = adc_alt_asl * 3.2809
+		#
+		#AeroDataBus.aircraft_hdg = adc_hdg
+		#AeroDataBus.aircraft_flaps = input_flaps * 4
+		#AeroDataBus.aircraft_trim = output_pitch_trim
+		#AeroDataBus.aircraft_gear = gear_current
+		#AeroDataBus.aircraft_throttle = input_throttle
+		#AeroDataBus.aircraft_ap = autopilot_on
 		
-		if (Global.setting_units == 0):
-			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated
-			AeroDataBus.aircraft_spd_true = adc_spd_true
-			AeroDataBus.aircraft_alt_barometric = adc_alt_asl
-		if (Global.setting_units == 1):
-			AeroDataBus.aircraft_spd_indicated = adc_spd_indicated * 2
-			AeroDataBus.aircraft_spd_true = adc_spd_true * 2
-			AeroDataBus.aircraft_alt_barometric = adc_alt_asl * 3.2809
-		
-		AeroDataBus.aircraft_hdg = adc_hdg
-		AeroDataBus.aircraft_flaps = input_flaps * 4
-		AeroDataBus.aircraft_trim = output_elevator_trim
-		AeroDataBus.aircraft_gear = gear_current
-		AeroDataBus.aircraft_throttle = input_throttle
-		AeroDataBus.aircraft_ap = autopilot_on
+		pass
 	
 	# Aero forces
 	$AeroSurfaceWingL.vel_body = airspeed_true_vector
@@ -111,24 +113,24 @@ func _physics_process(delta):
 	pos_control_R1 = $AeroSurfaceCtrlR1.pos_force_rel
 	pos_control_R2 = $AeroSurfaceCtrlR2.pos_force_rel
 	
-	output_aileron = lerp(input_joystick.x, output_aileron, 0.50)
-	output_elevator = lerp(input_joystick.y, output_elevator, 0.50)
-	output_rudder = lerp(input_rudder, output_rudder, 0.50)
+	output_roll = lerp(input_joystick.x, output_roll, 0.50)
+	output_pitch = lerp(input_joystick.y, output_pitch, 0.50)
+	output_yaw = lerp(input_yaw, output_yaw, 0.50)
 	
-	if (output_rudder < 0): 
-		output_rudder_l = -output_rudder
-		output_rudder_r = 0
-	if (output_rudder > 0):
-		output_rudder_r = +output_rudder
-		output_rudder_l = 0
-	if (output_rudder == 0):
-		output_rudder_l = 0
-		output_rudder_r = 0
+	if (output_yaw < 0): 
+		output_yaw_l = -output_yaw
+		output_yaw_r = 0
+	if (output_yaw > 0):
+		output_yaw_r = +output_yaw
+		output_yaw_l = 0
+	if (output_yaw == 0):
+		output_yaw_l = 0
+		output_yaw_r = 0
 	
-	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_aileron - output_elevator - 1 * output_rudder_l)
-	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_aileron - output_elevator + 1 * output_rudder_l)
-	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_aileron - output_elevator - 1 * output_rudder_r)
-	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_aileron - output_elevator + 1 * output_rudder_r)
+	$AeroSurfaceCtrlL1.rotation.x = 0.2 * (+output_roll - output_pitch - 1 * output_yaw_l)
+	$AeroSurfaceCtrlL2.rotation.x = 0.2 * (+output_roll - output_pitch + 1 * output_yaw_l)
+	$AeroSurfaceCtrlR1.rotation.x = 0.2 * (-output_roll - output_pitch - 1 * output_yaw_r)
+	$AeroSurfaceCtrlR2.rotation.x = 0.2 * (-output_roll - output_pitch + 1 * output_yaw_r)
 	
 	get_input(delta)
 	
@@ -164,4 +166,4 @@ func get_input(delta):
 		input_joystick = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up")
 		
 		# Yaw input
-		input_rudder = -Input.get_axis("yaw_right", "yaw_left")
+		input_yaw = -Input.get_axis("yaw_right", "yaw_left")
