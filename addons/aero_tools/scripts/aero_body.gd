@@ -90,17 +90,17 @@ var deflection_control_max: float = PI/12
 var deflection_flaps_max: float = PI/6
 var angle_incidence: float = 0.02
 
-var input_elevator: float = 0
-var current_elevator: float = 0
-var output_elevator: float = 0
+var input_pitch: float = 0
+var current_pitch: float = 0
+var output_pitch: float = 0
 
-var current_aileron: float = 0
-var input_aileron: float = 0
-var output_aileron: float = 0
+var current_roll: float = 0
+var input_roll: float = 0
+var output_roll: float = 0
 
-var current_rudder: float = 0
-var input_rudder: float = 0
-var output_rudder: float = 0
+var current_yaw: float = 0
+var input_yaw: float = 0
+var output_yaw: float = 0
 var output_yaw_damper: float = 0
 
 var current_flaps: float = 0
@@ -109,9 +109,9 @@ var output_flaps: float = 0
 var flaps_max: float = 1
 var flaps_min: float = 0
 
-var current_elevator_trim: float = 0
-var input_elevator_trim: float = 0
-var output_elevator_trim: float = 0
+var current_pitch_trim: float = 0
+var input_pitch_trim: float = 0
+var output_pitch_trim: float = 0
 
 var input_trim_pitch_max: float = 1
 var input_trim_pitch_min: float = -1
@@ -334,12 +334,12 @@ func _physics_process(delta):
 	air_pressure_dynamic = 0.5 * air_density * pow(airspeed_true_total, 2)
 
 	# Output delays
-	output_aileron = interpolate_linear(output_aileron, input_joystick.x, deflection_rate, delta)
-	output_elevator = interpolate_linear(output_elevator, input_joystick.y, deflection_rate, delta)
-	output_rudder = interpolate_linear(output_rudder, input_rudder + output_yaw_damper, deflection_rate, delta)
+	output_roll = interpolate_linear(output_roll, input_joystick.x, deflection_rate, delta)
+	output_pitch = interpolate_linear(output_pitch, input_joystick.y, deflection_rate, delta)
+	output_yaw = interpolate_linear(output_yaw, input_yaw + output_yaw_damper, deflection_rate, delta)
 	
 	output_flaps = interpolate_linear(output_flaps, input_flaps, deflection_rate_flaps, delta)
-	output_elevator_trim = interpolate_linear(output_elevator_trim, input_elevator_trim, deflection_rate, delta)
+	output_pitch_trim = interpolate_linear(output_pitch_trim, input_pitch_trim, deflection_rate, delta)
 	
 	# Key angles
 	angle_alpha = atan2(-airspeed_true_vector.y, -airspeed_true_vector.z)
@@ -398,9 +398,9 @@ func _physics_process(delta):
 	if (abs(gear_current - gear_input) < 0.01):
 		gear_current = gear_input
 	
-	input_elevator_trim = clamp(input_elevator_trim, input_trim_pitch_min, input_trim_pitch_max)
+	input_pitch_trim = clamp(input_pitch_trim, input_trim_pitch_min, input_trim_pitch_max)
 	
-	output_rudder = clamp(output_rudder, -1, 1)
+	output_yaw = clamp(output_yaw, -1, 1)
 
 func _process(delta: float) -> void:
 	for child in get_children():

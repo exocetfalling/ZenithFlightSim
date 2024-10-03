@@ -3,24 +3,24 @@ extends AeroBody
 var force_wing_l : Vector3 = Vector3.ZERO
 var force_wing_r : Vector3 = Vector3.ZERO
 
-var force_aileron_l : Vector3 = Vector3.ZERO
-var force_aileron_r : Vector3 = Vector3.ZERO
+var force_roll_l : Vector3 = Vector3.ZERO
+var force_roll_r : Vector3 = Vector3.ZERO
 var force_flap_l : Vector3 = Vector3.ZERO
 var force_flap_r : Vector3 = Vector3.ZERO
 
-var force_ruddervator_l : Vector3 = Vector3.ZERO
-var force_ruddervator_r : Vector3 = Vector3.ZERO
+var force_yawvator_l : Vector3 = Vector3.ZERO
+var force_yawvator_r : Vector3 = Vector3.ZERO
 
 var pos_wing_l : Vector3 = Vector3.ZERO
 var pos_wing_r : Vector3 = Vector3.ZERO
 
-var pos_aileron_l : Vector3 = Vector3.ZERO
-var pos_aileron_r : Vector3 = Vector3.ZERO
+var pos_roll_l : Vector3 = Vector3.ZERO
+var pos_roll_r : Vector3 = Vector3.ZERO
 var pos_flap_l : Vector3 = Vector3.ZERO
 var pos_flap_r : Vector3 = Vector3.ZERO
 
-var pos_ruddervator_l : Vector3 = Vector3.ZERO
-var pos_ruddervator_r : Vector3 = Vector3.ZERO
+var pos_yawvator_l : Vector3 = Vector3.ZERO
+var pos_yawvator_r : Vector3 = Vector3.ZERO
 
 var camera_mode : int = 0
 var camera_mouse_delta = 0
@@ -43,14 +43,14 @@ func _ready():
 #	DebugOverlay.stats.add_property(self, "adc_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "adc_trk", "round")
 #	DebugOverlay.stats.add_property(self, "adc_stall", "")
-	#DebugOverlay.stats.add_property(self, "input_elevator", "round")
-#	DebugOverlay.stats.add_property(self, "input_aileron", "round")
-#	DebugOverlay.stats.add_property(self, "input_rudder", "round")
+	#DebugOverlay.stats.add_property(self, "input_pitch", "round")
+#	DebugOverlay.stats.add_property(self, "input_roll", "round")
+#	DebugOverlay.stats.add_property(self, "input_yaw", "round")
 	#DebugOverlay.stats.add_property(self, "input_throttle", "round")
 #	DebugOverlay.stats.add_property(self, "air_pressure_dynamic", "round")
-#	DebugOverlay.stats.add_property(self, "output_elevator", "round")
-#	DebugOverlay.stats.add_property(self, "output_aileron", "round")
-#	DebugOverlay.stats.add_property(self, "output_rudder", "round")
+#	DebugOverlay.stats.add_property(self, "output_pitch", "round")
+#	DebugOverlay.stats.add_property(self, "output_roll", "round")
+#	DebugOverlay.stats.add_property(self, "output_yaw", "round")
 #	DebugOverlay.stats.add_property(self, "adc_pitch", "round")
 #	DebugOverlay.stats.add_property(self, "tgt_fpa", "round")
 #	DebugOverlay.stats.add_property(self, "linear_velocity_local", "round")
@@ -119,7 +119,7 @@ func _physics_process(delta):
 	
 	$HUDShared.hud_flaps = input_flaps
 	$HUDShared.hud_gear = gear_current
-	$HUDShared.hud_trim = output_elevator_trim
+	$HUDShared.hud_trim = output_pitch_trim
 	
 	$HUDShared.hud_ap_mode = autopilot_on
 	
@@ -148,26 +148,26 @@ func _physics_process(delta):
 	
 	if ((autopilot_on == 1) && (adc_alt_agl >= 15)):
 		if abs(adc_roll) < 30 && abs(adc_pitch) < 15 && adc_stall == false:
-			input_elevator_trim = \
+			input_pitch_trim = \
 			calc_fcs_gains(air_pressure_dynamic) * \
 			( \
 			$PIDCalcPitchRate.calc_PID_output(input_joystick.y * 15, adc_rates.x)
 			)
-			input_rudder += calc_fcs_gains(air_pressure_dynamic) * -0.05 * angle_beta_deg
+			input_yaw += calc_fcs_gains(air_pressure_dynamic) * -0.05 * angle_beta_deg
 		else:
-			input_elevator_trim = 0
+			input_pitch_trim = 0
 			$PIDCalcPitchRate.integral = 0
 		
 		
-	if (input_elevator_trim > input_trim_pitch_max):
-		input_elevator_trim = input_trim_pitch_max
-	if (input_elevator_trim < input_trim_pitch_min):
-		input_elevator_trim = input_trim_pitch_min
+	if (input_pitch_trim > input_trim_pitch_max):
+		input_pitch_trim = input_trim_pitch_max
+	if (input_pitch_trim < input_trim_pitch_min):
+		input_pitch_trim = input_trim_pitch_min
 	
-	if (output_rudder > 1):
-		output_rudder = 1
-	if (output_rudder < -1):
-		output_rudder = -1
+	if (output_yaw > 1):
+		output_yaw = 1
+	if (output_yaw < -1):
+		output_yaw = -1
 	
 	# Thrust forces
 	apply_force_local(Vector3(0, 0, -mass * get_gravity().length() /3 * input_throttle), Vector3(0, 0, 0))
@@ -197,15 +197,15 @@ func _physics_process(delta):
 		ground_contact = false
 	
 	# Move surfaces
-	$AileronL.rotation.x = + PI/12 * output_aileron
-	$AileronR.rotation.x = - PI/12 * output_aileron
+	$AileronL.rotation.x = + PI/12 * output_roll
+	$AileronR.rotation.x = - PI/12 * output_roll
 	
 	$FlapL.rotation.x = +PI/6 * output_flaps
 	$FlapR.rotation.x = +PI/6 * output_flaps
 	
 	$RuddervatorL.rotation = \
 		Vector3( \
-			(-0.1 * (output_elevator + output_elevator_trim + output_rudder)), \
+			(-0.1 * (output_pitch + output_pitch_trim + output_yaw)), \
 			0, \
 			($RuddervatorL.rotation.z) \
 			)\
@@ -214,7 +214,7 @@ func _physics_process(delta):
 	
 	$RuddervatorR.rotation = \
 		Vector3( \
-			(-0.1 * (output_elevator + output_elevator_trim - output_rudder)), \
+			(-0.1 * (output_pitch + output_pitch_trim - output_yaw)), \
 			0, \
 			($RuddervatorR.rotation.z) \
 			)\
@@ -236,7 +236,7 @@ func get_input(delta):
 		input_joystick.y = Input.get_axis("pitch_down", "pitch_up")
 		
 		# Yaw input
-		input_rudder = Input.get_axis("yaw_left", "yaw_right")
+		input_yaw = Input.get_axis("yaw_left", "yaw_right")
 		
 		# Flaps input
 		if (Input.is_action_just_pressed("flaps_down")):
@@ -247,9 +247,9 @@ func get_input(delta):
 		# Trim input
 		
 		if (Input.is_action_pressed("trim_pitch_up")):
-			input_elevator_trim += 0.2 * delta 
+			input_pitch_trim += 0.2 * delta 
 		if (Input.is_action_pressed("trim_pitch_down")):
-			input_elevator_trim -= 0.2 * delta 
+			input_pitch_trim -= 0.2 * delta 
 
 		# Gear input
 		if (Input.is_action_just_pressed("gear_toggle")):
@@ -274,7 +274,7 @@ func get_input(delta):
 		brake = input_braking * 50
 		
 		# NWS input
-		steering = -0.5 * _nosewheel_gains(linear_velocity_total) * output_rudder
+		steering = -0.5 * _nosewheel_gains(linear_velocity_total) * output_yaw
 		
 		# Cameras
 		if (Input.is_action_just_pressed("camera_toggle")):
