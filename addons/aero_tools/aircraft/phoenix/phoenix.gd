@@ -302,10 +302,9 @@ func calc_ccip_pos():
 	var ccip_position: Vector3 = Vector3.ZERO
 	var ccip_tof: float = 0
 	
-	ccip_velocity.y = sqrt(pow(linear_velocity.y, 2) + 2 * (-9.81) * global_position.y)
-	ccip_tof = 10
-	#ccip_tof = (ccip_velocity.y - linear_velocity.y) / (-9.81)
-	ccip_position.y = 0
+	ccip_velocity.y = -sqrt(pow(linear_velocity.y, 2) + 2 * (-9.81) * -adc_alt_agl)
+	ccip_tof = (ccip_velocity.y - linear_velocity.y) / (-9.81)
+	ccip_position.y = global_position.y - adc_alt_agl
 	ccip_position.x = global_position.x + linear_velocity.x * ccip_tof
 	ccip_position.z = global_position.z + linear_velocity.z * ccip_tof
 	
