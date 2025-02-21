@@ -79,22 +79,6 @@ func _ready():
 	pass
 
 
-# NWS gains
-func _nosewheel_gains(speed):
-	var speed_1 = 5
-	var speed_2 = 40
-	
-	var gain_1 = 1
-	var gain_2 = 0
-	
-	if (speed < speed_1):
-		return gain_1
-	elif ((speed > speed_1) && (speed < speed_2)):
-		return ((gain_2 - gain_1) / (speed_2 - speed_1)) * (speed - speed_1) + gain_1
-	else:
-		return 0
-
-
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta): 
 	#get_input(delta)
@@ -139,6 +123,7 @@ func _physics_process(delta):
 	$RadioAltimeter.rotation_degrees.x = clamp(-adc_pitch, -30, +30)
 	$RadioAltimeter.rotation_degrees.z = clamp(+adc_roll, -30, +30)
 	
+	$CCIP.global_position = calc_ccip_pos()
 	
 	if ($RadioAltimeter.is_colliding() == true):
 		adc_alt_agl = (global_position - $RadioAltimeter.get_collision_point()).length()
@@ -294,3 +279,34 @@ func get_input(delta):
 				AeroDataBus.aircraft_nav_active = true
 			else:
 				AeroDataBus.aircraft_nav_active = false
+
+
+# NWS gains
+func _nosewheel_gains(speed):
+	var speed_1 = 5
+	var speed_2 = 40
+	
+	var gain_1 = 1
+	var gain_2 = 0
+	
+	if (speed < speed_1):
+		return gain_1
+	elif ((speed > speed_1) && (speed < speed_2)):
+		return ((gain_2 - gain_1) / (speed_2 - speed_1)) * (speed - speed_1) + gain_1
+	else:
+		return 0
+
+
+func calc_ccip_pos():
+	var ccip_velocity: Vector3 = Vector3.ZERO
+	var ccip_position: Vector3 = Vector3.ZERO
+	var ccip_tof: float = 0
+	
+	ccip_velocity.y = sqrt(pow(linear_velocity.y, 2) + 2 * (-9.81) * global_position.y)
+	ccip_tof = 10
+	#ccip_tof = (ccip_velocity.y - linear_velocity.y) / (-9.81)
+	ccip_position.y = 0
+	ccip_position.x = global_position.x + linear_velocity.x * ccip_tof
+	ccip_position.z = global_position.z + linear_velocity.z * ccip_tof
+	
+	return ccip_position

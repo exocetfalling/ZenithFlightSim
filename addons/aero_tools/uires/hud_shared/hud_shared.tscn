@@ -129,7 +129,7 @@ range_z_max = 2
 texture = ExtResource("4")
 
 [node name="Wings" type="Line2D" parent="Centre"]
-points = PackedVector2Array(-50, 0, -20, 1, 0, 20, 20, 0, 50, 0)
+points = PackedVector2Array(-50, 0, -20, 0, 0, 20, 20, 0, 50, 0)
 width = 5.0
 
 [node name="FPM" type="Line2D" parent="Centre/Wings"]
@@ -184,6 +184,13 @@ size_flags_horizontal = 4
 theme = ExtResource("7_fidrc")
 theme_override_font_sizes/font_size = 20
 text = "TRANSIT"
+
+[node name="ImpactPoint" type="Node2D" parent="Centre/Wings"]
+
+[node name="Line2D" type="Line2D" parent="Centre/Wings/ImpactPoint"]
+points = PackedVector2Array(0, -5, 5, 0, 0, 5, -5, 0)
+closed = true
+width = 2.0
 
 [node name="SpeedDeriv" type="Node" parent="."]
 script = ExtResource("7_4semm")

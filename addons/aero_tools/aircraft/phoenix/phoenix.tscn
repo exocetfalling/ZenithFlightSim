@@ -346,3 +346,8 @@ transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.
 target_position = Vector3(0, -1000, 0)
 
 [node name="HUDShared" parent="." instance=ExtResource("4")]
+
+[node name="CCIP" type="CSGSphere3D" parent="."]
+radius = 10.0
+radial_segments = 32
+rings = 32
