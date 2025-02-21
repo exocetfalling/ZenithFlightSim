@@ -348,6 +348,7 @@ target_position = Vector3(0, -1000, 0)
 [node name="HUDShared" parent="." instance=ExtResource("4")]
 
 [node name="CCIP" type="CSGSphere3D" parent="."]
+visible = false
 radius = 10.0
 radial_segments = 32
 rings = 32

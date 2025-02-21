@@ -30,6 +30,9 @@ var ground_contact_NLG = false
 var ground_contact_MLG_L = false
 var ground_contact_MLG_R = false
 
+var ccip_position: Vector3 = Vector3.ZERO
+var ccip_position_local: Vector3 = Vector3.ZERO
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -123,7 +126,10 @@ func _physics_process(delta):
 	$RadioAltimeter.rotation_degrees.x = clamp(-adc_pitch, -30, +30)
 	$RadioAltimeter.rotation_degrees.z = clamp(+adc_roll, -30, +30)
 	
+	# CCIP
 	$CCIP.global_position = calc_ccip_pos()
+	ccip_position = $CCIP.global_position
+	ccip_position_local = $CCIP.position
 	
 	if ($RadioAltimeter.is_colliding() == true):
 		adc_alt_agl = (global_position - $RadioAltimeter.get_collision_point()).length()

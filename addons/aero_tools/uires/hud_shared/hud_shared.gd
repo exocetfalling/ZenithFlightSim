@@ -55,6 +55,9 @@ func _process(delta):
 	$Centre/Wings/FPM/AccTrend.position.y = \
 		lerp($Centre/Wings/FPM/AccTrend.position.y, -20 * $SpeedDeriv.calc_derivative(hud_spd, delta), lerp_weights)
 	
+	$Centre/Wings/CCIP.position.y = 0
+	$Centre/Wings/CCIP.position.x = 0
+	
 	#if hud_gear > 0.5:
 		#$Centre/Wings/GearInd/Tris.visible = true
 	#else:

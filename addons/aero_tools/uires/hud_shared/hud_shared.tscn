@@ -185,9 +185,9 @@ theme = ExtResource("7_fidrc")
 theme_override_font_sizes/font_size = 20
 text = "TRANSIT"
 
-[node name="ImpactPoint" type="Node2D" parent="Centre/Wings"]
+[node name="CCIP" type="Node2D" parent="Centre/Wings"]
 
-[node name="Line2D" type="Line2D" parent="Centre/Wings/ImpactPoint"]
+[node name="Line2D" type="Line2D" parent="Centre/Wings/CCIP"]
 points = PackedVector2Array(0, -5, 5, 0, 0, 5, -5, 0)
 closed = true
 width = 2.0
