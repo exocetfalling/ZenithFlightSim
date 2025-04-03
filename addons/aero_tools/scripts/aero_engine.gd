@@ -51,6 +51,7 @@ var MOLAR_MASS_KG_OXYGEN: float = 0.032
 var MOLAR_MASS_KG_NITROGEN: float = 0.028
 var IDEAL_GAS_CONST: float = 8.314
 
+var fuel_flow: float = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -81,11 +82,13 @@ func thrust_coeff_given_airspeed_calibrated():
 # Called every physics frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	air_mass_flow_rate = air_density * inlet_area * vel_freestream
-	mol_oxygen = air_ratio_oxygen * air_mass_flow_rate / MOLAR_MASS_KG_OXYGEN
-	mol_nitrogen = air_ratio_nitrogen * air_mass_flow_rate / MOLAR_MASS_KG_NITROGEN
 	
-	press_combustion = mol_nitrogen * IDEAL_GAS_CONST * temp_combustion / vol_freestream
+	#mol_oxygen = air_ratio_oxygen * air_mass_flow_rate / MOLAR_MASS_KG_OXYGEN
+	#mol_nitrogen = air_ratio_nitrogen * air_mass_flow_rate / MOLAR_MASS_KG_NITROGEN
+	#press_combustion = mol_nitrogen * IDEAL_GAS_CONST * temp_combustion / vol_freestream
 	
-	thrust_output = air_mass_flow_rate * vel_delta + press_delta * exhaust_area
+	#thrust_output = air_mass_flow_rate * vel_delta + press_delta * exhaust_area
+	
+	thrust_output = air_mass_flow_rate * vel_delta
 	thrust_output_vector = Vector3(0, 0, -thrust_output)
 	pass
