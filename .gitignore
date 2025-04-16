@@ -1,4 +1,16 @@
 # Godot 4+ specific ignores
 .godot/
-/android/
-addons/debug_draw_3d/libs/~libdd3d.windows.editor.x86_64.dll
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_credentials.cfg
+*.import
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Mono-specific ignores
+.mono/
+data_*/
+mono_crash.*.json
