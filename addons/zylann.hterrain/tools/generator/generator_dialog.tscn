@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://cgfo1ocbdi1ug"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/generator/generator_dialog.gd" id="1"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/inspector/inspector.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/terrain_preview.tscn" id="3"]
+[ext_resource type="Script" uid="uid://cf4xxsh0cl6fm" path="res://addons/zylann.hterrain/tools/generator/generator_dialog.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://dfjip6c4olemn" path="res://addons/zylann.hterrain/tools/inspector/inspector.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://bue2flijnxa3p" path="res://addons/zylann.hterrain/tools/terrain_preview.tscn" id="3"]
 [ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="4"]
 
 [node name="GeneratorDialog" type="AcceptDialog"]

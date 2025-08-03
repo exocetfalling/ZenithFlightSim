@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://c17elgk2gyk04"]
 
-[ext_resource path="res://addons/aero_tools/uires/menu_shared/menu_shared_theme.tres" type="Theme" id=1]
-[ext_resource path="res://addons/aero_tools/uires/menu_pause/menu_pause.gd" type="Script" id=2]
+[ext_resource type="Theme" path="res://addons/aero_tools/uires/menu_shared/menu_shared_theme.tres" id="1"]
+[ext_resource type="Script" uid="uid://dmcvhfuw1iq6p" path="res://addons/aero_tools/uires/menu_pause/menu_pause.gd" id="2"]
 
 [node name="MenuPause" type="Control"]
 anchor_left = 0.3
 anchor_top = 0.3
 anchor_right = 0.7
 anchor_bottom = 0.7
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0

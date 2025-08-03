@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dgyvengqatfjw"]
 
-[ext_resource path="res://resources/MFD_Font_Small.tres" type="FontFile" id=1]
+[ext_resource type="FontFile" path="res://resources/MFD_Font_Small.tres" id="1"]
 
-[sub_resource type="Theme" id=1]
-default_font = ExtResource( 1 )
+[sub_resource type="Theme" id="1"]
+default_font = ExtResource("1")
 
 [node name="MCP" type="GridContainer"]
 anchor_right = 1.0
 offset_bottom = 208.0
 size_flags_horizontal = 3
-theme = SubResource( 1 )
+theme = SubResource("1")
 columns = 4
 
 [node name="Value_SPD" type="SpinBox" parent="."]

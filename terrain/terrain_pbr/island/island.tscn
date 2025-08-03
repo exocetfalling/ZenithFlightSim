@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=4 uid="uid://cobcn3ll2u8m0"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="1_c0xk6"]
-[ext_resource type="Resource" path="res://terrain/terrain_pbr/island/data.hterrain" id="2_oj7wn"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_igv41"]
+[ext_resource type="Script" uid="uid://cbp17n2dx7etc" path="res://addons/zylann.hterrain/hterrain.gd" id="1_c0xk6"]
+[ext_resource type="Resource" uid="uid://xr56vnm5ntpp" path="res://terrain/terrain_pbr/island/data.hterrain" id="2_oj7wn"]
+[ext_resource type="Script" uid="uid://cdspnsobhn7w4" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="3_igv41"]
 [ext_resource type="Texture2D" uid="uid://kvr5bhwk0xey" path="res://terrain/terrain_pbr/materials/concrete/island_slot0_albedo_bump.png" id="4_jqdyt"]
 [ext_resource type="Texture2D" uid="uid://k40c1b3tv4a4" path="res://terrain/terrain_pbr/materials/concrete/island_slot1_albedo_bump.png" id="5_7nh2e"]
 [ext_resource type="Texture2D" uid="uid://rugv16de3fkt" path="res://terrain/terrain_pbr/materials/water/water_albedo.png" id="6_whc5p"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://mhg080ysygjv" path="res://terrain/terrain_pbr/materials/water/water_normal.png" id="9_rtvnk"]
 [ext_resource type="PackedScene" uid="uid://e5tgeuixr4ol" path="res://scenes/Runway.tscn" id="10_f3jux"]
 [ext_resource type="ArrayMesh" uid="uid://dl84qlr7a0p7y" path="res://assets/tree/fir.obj" id="11_aq8xq"]
-[ext_resource type="Script" path="res://addons/multimesh_scatter/multimesh_scatter.gd" id="12_68dmw"]
+[ext_resource type="Script" uid="uid://crhskobigjw8l" path="res://addons/multimesh_scatter/multimesh_scatter.gd" id="12_68dmw"]
 [ext_resource type="Material" uid="uid://c7ndbylnm58s3" path="res://assets/tree/material00.material" id="13_beqdg"]
 
 [sub_resource type="Resource" id="Resource_5ppsj"]

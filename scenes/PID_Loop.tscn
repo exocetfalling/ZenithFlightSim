@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://rphovanne8h3"]
 
-[ext_resource path="res://scripts/Integral_Calc.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://c0v51s6boagib" path="res://scripts/Integral_Calc.gd" id="1"]
 
 [node name="PID_Loop" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1")

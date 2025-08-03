@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://8cdj0kbjbkw3"]
 
 [ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="1_t07ji"]
-[ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.gd" id="2_covb7"]
+[ext_resource type="Script" uid="uid://dw6u4fii1oiwe" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.gd" id="2_covb7"]
 
 [node name="HUDGaugeCompass" type="Control"]
 custom_minimum_size = Vector2(240, 240)

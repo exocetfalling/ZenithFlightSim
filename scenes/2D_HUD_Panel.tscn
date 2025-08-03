@@ -1,25 +1,25 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=17 format=3 uid="uid://c3eccbj38d0j8"]
 
-[ext_resource path="res://scripts/Main_Panel.gd" type="Script" id=1]
-[ext_resource path="res://scripts/EADI_Image.gd" type="Script" id=2]
-[ext_resource path="res://scripts/MFD_Mode.gd" type="Script" id=3]
-[ext_resource path="res://scripts/EADI_Mask.gd" type="Script" id=4]
-[ext_resource path="res://scripts/Waypoint_Select.gd" type="Script" id=5]
-[ext_resource path="res://assets/PFD/pfd_background.bmp" type="Texture2D" id=6]
-[ext_resource path="res://assets/ND/ND_Background.bmp" type="Texture2D" id=7]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip.bmp" type="Texture2D" id=8]
-[ext_resource path="res://assets/ICAWS/ICAWS_background.bmp" type="Texture2D" id=9]
-[ext_resource path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" type="Texture2D" id=10]
-[ext_resource path="res://assets/PFD/pfd_fail_x.bmp" type="Texture2D" id=11]
-[ext_resource path="res://assets/ND/ND_Rose.bmp" type="Texture2D" id=12]
-[ext_resource path="res://resources/HUD_Font.tres" type="FontFile" id=13]
-[ext_resource path="res://resources/Display_Font.tres" type="FontFile" id=14]
+[ext_resource type="Script" uid="uid://5oijrxyrjsf7" path="res://scripts/Main_Panel.gd" id="1"]
+[ext_resource type="Script" uid="uid://bs2u8gbn4p377" path="res://scripts/EADI_Image.gd" id="2"]
+[ext_resource type="Script" uid="uid://dobfde32visbx" path="res://scripts/MFD_Mode.gd" id="3"]
+[ext_resource type="Script" uid="uid://d6dub3qxsy7o" path="res://scripts/EADI_Mask.gd" id="4"]
+[ext_resource type="Script" uid="uid://bl7tojjl2o6ag" path="res://scripts/Waypoint_Select.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://b18x7an32bcjn" path="res://assets/PFD/pfd_background.bmp" id="6"]
+[ext_resource type="Texture2D" uid="uid://ci1iioigi3wxm" path="res://assets/ND/ND_Background.bmp" id="7"]
+[ext_resource type="Texture2D" uid="uid://fbdcmqjdryxp" path="res://assets/PFD/pfd_sky_ground_strip.bmp" id="8"]
+[ext_resource type="Texture2D" uid="uid://dot3kt7w77dup" path="res://assets/ICAWS/ICAWS_background.bmp" id="9"]
+[ext_resource type="Texture2D" uid="uid://i3lqqslw6taa" path="res://assets/PFD/pfd_sky_ground_strip_mask_outer.bmp" id="10"]
+[ext_resource type="Texture2D" uid="uid://ba7q3b37uxpbn" path="res://assets/PFD/pfd_fail_x.bmp" id="11"]
+[ext_resource type="Texture2D" uid="uid://doj8s0mdxyfqt" path="res://assets/ND/ND_Rose.bmp" id="12"]
+[ext_resource type="FontFile" path="res://resources/HUD_Font.tres" id="13"]
+[ext_resource type="FontFile" path="res://resources/Display_Font.tres" id="14"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0588235, 0.721569, 0.85098, 1 )
+[sub_resource type="StyleBoxFlat" id="1"]
+bg_color = Color(0.0588235, 0.721569, 0.85098, 1)
 
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0, 0, 0, 1 )
+[sub_resource type="StyleBoxFlat" id="2"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="Main_Panel" type="MarginContainer"]
 anchor_right = 1.0
@@ -28,38 +28,38 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_bottom = 20
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PFD" type="PointLight2D" parent="."]
-position = Vector2( 253.787, 819.428 )
-texture = ExtResource( 10 )
+position = Vector2(253.787, 819.428)
+texture = ExtResource("10")
 mode = 3
-script = ExtResource( 4 )
+script = ExtResource("4")
 
 [node name="Wings" type="Line2D" parent="PFD"]
 z_index = 1
-points = PackedVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+points = PackedVector2Array(-40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0)
 width = 2.0
-default_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+default_color = Color(0.152941, 0.152941, 0.152941, 1)
 antialiased = true
 
 [node name="EADI_Fail_X" type="Line2D" parent="PFD"]
 light_mask = 2
-points = PackedVector2Array( 0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0 )
-texture = ExtResource( 11 )
+points = PackedVector2Array(0, 0, 50, 50, 0, 0, -50, 50, 0, 0, -50, -50, 0, 0, 50, -50, 0, 0)
+texture = ExtResource("11")
 
 [node name="EADI_Image" type="Sprite2D" parent="PFD"]
-texture = ExtResource( 8 )
-script = ExtResource( 2 )
+texture = ExtResource("8")
+script = ExtResource("2")
 
 [node name="EADI_Background" type="Sprite2D" parent="PFD"]
 show_behind_parent = true
 light_mask = 2
-position = Vector2( 20, -14 )
-texture = ExtResource( 6 )
+position = Vector2(20, -14)
+texture = ExtResource("6")
 
 [node name="Box_SPD" type="Label" parent="PFD"]
 light_mask = 2
@@ -69,8 +69,8 @@ offset_right = -112.121
 offset_bottom = 27.6109
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "SPD
 XXX"
 align = 1
@@ -86,8 +86,8 @@ offset_left = 300.0
 offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "ALT
 XXXXX"
 align = 1
@@ -105,8 +105,8 @@ offset_right = 30.0
 offset_bottom = -109.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "HDG
 XXX"
 align = 1
@@ -124,8 +124,8 @@ offset_right = -100.0
 offset_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "FLAPS
 X"
 align = 1
@@ -143,8 +143,8 @@ offset_right = -100.0
 offset_bottom = 25.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 1, 1, 1, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "TRIM
 X.X"
 align = 1
@@ -160,8 +160,8 @@ offset_left = -18.7627
 offset_top = -248.485
 offset_right = 22.2373
 offset_bottom = 0.515259
-theme_override_fonts/font = ExtResource( 14 )
-theme_override_colors/font_color = Color( 0.101961, 0.882353, 0.0627451, 1 )
+theme_override_fonts/font = ExtResource("14")
+theme_override_colors/font_color = Color(0.101961, 0.882353, 0.0627451, 1)
 text = "CWS"
 uppercase = true
 __meta__ = {
@@ -170,24 +170,24 @@ __meta__ = {
 
 [node name="Line2D_1" type="Line2D" parent="PFD"]
 light_mask = 2
-position = Vector2( -203.848, -180.246 )
-points = PackedVector2Array( 0, 0, 450, 0 )
+position = Vector2(-203.848, -180.246)
+points = PackedVector2Array(0, 0, 450, 0)
 width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+default_color = Color(0.537255, 0.537255, 0.537255, 1)
 
 [node name="Line2D_2" type="Line2D" parent="PFD"]
 light_mask = 2
-position = Vector2( -206.848, 137.754 )
-points = PackedVector2Array( 0, 0, 450, 0 )
+position = Vector2(-206.848, 137.754)
+points = PackedVector2Array(0, 0, 450, 0)
 width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+default_color = Color(0.537255, 0.537255, 0.537255, 1)
 
 [node name="Gear_Indicator" type="Line2D" parent="PFD"]
 light_mask = 4
-position = Vector2( 3.17479, 188.494 )
-points = PackedVector2Array( -25, 0, 25, 0, 0, 25, -25, 0 )
+position = Vector2(3.17479, 188.494)
+points = PackedVector2Array(-25, 0, 25, 0, 0, 25, -25, 0)
 width = 5.0
-default_color = Color( 0.337255, 0.870588, 0.141176, 1 )
+default_color = Color(0.337255, 0.870588, 0.141176, 1)
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -198,7 +198,7 @@ offset_left = -58.7338
 offset_top = 149.612
 offset_right = 73.2662
 offset_bottom = 172.612
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "gear dn"
 align = 1
 uppercase = true
@@ -207,9 +207,9 @@ __meta__ = {
 }
 
 [node name="MFD" type="Sprite2D" parent="."]
-position = Vector2( 1650.4, 819.895 )
-texture = ExtResource( 9 )
-offset = Vector2( 0, -5 )
+position = Vector2(1650.4, 819.895)
+texture = ExtResource("9")
+offset = Vector2(0, -5)
 
 [node name="Page_KEYS" type="RichTextLabel" parent="MFD"]
 visible = false
@@ -219,7 +219,7 @@ offset_right = 205.0
 offset_bottom = 218.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource( 14 )
+theme_override_fonts/normal_font = ExtResource("14")
 bbcode_enabled = true
 text = "[color=#11aafe]Engine:[/color]
 Throttle up: W
@@ -285,7 +285,7 @@ offset_right = 205.0
 offset_bottom = 195.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource( 14 )
+theme_override_fonts/normal_font = ExtResource("14")
 bbcode_enabled = true
 text = "[color=#11aafe]PREFLIGHT[/color]
 GEAR - DN
@@ -345,7 +345,7 @@ offset_right = 205.0
 offset_bottom = 196.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_fonts/normal_font = ExtResource( 14 )
+theme_override_fonts/normal_font = ExtResource("14")
 bbcode_enabled = true
 text = "[color=#11aafe]Flying:[/color]
 See left MFD for PFD with flight data. All units are SI units for now. 
@@ -381,10 +381,10 @@ __meta__ = {
 
 [node name="Line2D_1" type="Line2D" parent="MFD"]
 light_mask = 2
-position = Vector2( -225.597, -139.343 )
-points = PackedVector2Array( 0, 0, 450, 0 )
+position = Vector2(-225.597, -139.343)
+points = PackedVector2Array(0, 0, 450, 0)
 width = 5.0
-default_color = Color( 0.537255, 0.537255, 0.537255, 1 )
+default_color = Color(0.537255, 0.537255, 0.537255, 1)
 
 [node name="MFD_Mode" type="MenuButton" parent="MFD"]
 anchor_left = 0.5
@@ -393,11 +393,11 @@ offset_left = -276.225
 offset_top = -231.122
 offset_right = -216.225
 offset_bottom = -202.122
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "MENU"
 flat = false
-items = [ "KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false, "NAV", null, 0, false, false, 3, 0, null, "", false ]
-script = ExtResource( 3 )
+items = ["KEYS", null, 0, false, false, 0, 0, null, "", false, "CHECKLIST", null, 0, false, false, 1, 0, null, "", false, "MEMO", null, 0, false, false, 2, 0, null, "", false, "NAV", null, 0, false, false, 3, 0, null, "", false]
+script = ExtResource("3")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -407,9 +407,9 @@ offset_left = -196.278
 offset_top = -201.492
 offset_right = -96.2782
 offset_bottom = -176.492
-theme_override_styles/fg = SubResource( 1 )
-theme_override_styles/bg = SubResource( 2 )
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_styles/fg = SubResource("1")
+theme_override_styles/bg = SubResource("2")
+theme_override_fonts/font = ExtResource("14")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -419,7 +419,7 @@ offset_left = 14.0
 offset_top = -27.0
 offset_right = 86.0
 offset_bottom = -4.0
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "THRUST"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -427,27 +427,27 @@ __meta__ = {
 
 [node name="Page_NAV" type="PointLight2D" parent="MFD"]
 light_mask = 4
-position = Vector2( 0, 40 )
-texture = ExtResource( 7 )
+position = Vector2(0, 40)
+texture = ExtResource("7")
 mode = 3
 range_item_cull_mask = 4
 
 [node name="ND_Rose" type="Sprite2D" parent="MFD/Page_NAV"]
 light_mask = 4
-position = Vector2( 0, 94 )
-scale = Vector2( 1.6, 1.6 )
-texture = ExtResource( 12 )
+position = Vector2(0, 94)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("12")
 
 [node name="NAV1_Pointer" type="Line2D" parent="MFD/Page_NAV/ND_Rose"]
 light_mask = 4
-scale = Vector2( 0.625, 0.625 )
-points = PackedVector2Array( 0, -150, -10, -150, 0, -170, 10, -150, 0, -150, 0, 150, 10, 150, 10, 170, 0, 160, -10, 170, -10, 170, -10, 150, 0, 150, 0, -150 )
+scale = Vector2(0.625, 0.625)
+points = PackedVector2Array(0, -150, -10, -150, 0, -170, 10, -150, 0, -150, 0, 150, 10, 150, 10, 170, 0, 160, -10, 170, -10, 170, -10, 150, 0, 150, 0, -150)
 width = 5.0
-default_color = Color( 0.670588, 0.670588, 0.670588, 1 )
+default_color = Color(0.670588, 0.670588, 0.670588, 1)
 
 [node name="HDG_Pointer" type="Line2D" parent="MFD/Page_NAV"]
-position = Vector2( 0, -160 )
-points = PackedVector2Array( -5, 0, 5, 0, 0, 10, -5, 0 )
+position = Vector2(0, -160)
+points = PackedVector2Array(-5, 0, 5, 0, 0, 10, -5, 0)
 width = 2.0
 joint_mode = 2
 begin_cap_mode = 2
@@ -459,11 +459,11 @@ offset_left = -245.947
 offset_top = -166.729
 offset_right = -149.947
 offset_bottom = -137.729
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "WPT SEL"
 flat = false
-items = [ "WPT 01", null, 0, false, false, 0, 0, null, "", false, "WPT 02", null, 0, false, false, 1, 0, null, "", false, "WPT 03", null, 0, false, false, 2, 0, null, "", false ]
-script = ExtResource( 5 )
+items = ["WPT 01", null, 0, false, false, 0, 0, null, "", false, "WPT 02", null, 0, false, false, 1, 0, null, "", false, "WPT 03", null, 0, false, false, 2, 0, null, "", false]
+script = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -473,7 +473,7 @@ offset_left = 161.518
 offset_top = -162.878
 offset_right = 233.518
 offset_bottom = -139.878
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "WPT XX"
 align = 1
 valign = 1
@@ -486,7 +486,7 @@ offset_left = 162.148
 offset_top = -132.64
 offset_right = 234.148
 offset_bottom = -109.64
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "XXX KM"
 align = 1
 valign = 1
@@ -500,7 +500,7 @@ offset_left = 163.408
 offset_top = -104.922
 offset_right = 235.408
 offset_bottom = -81.9219
-theme_override_fonts/font = ExtResource( 14 )
+theme_override_fonts/font = ExtResource("14")
 text = "XX.XXZ"
 align = 1
 valign = 1
@@ -510,12 +510,12 @@ __meta__ = {
 
 [node name="Boresight" type="Line2D" parent="."]
 visible = false
-position = Vector2( 960, 540 )
-scale = Vector2( 2, 2 )
+position = Vector2(960, 540)
+scale = Vector2(2, 2)
 z_index = 1
-points = PackedVector2Array( -40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0 )
+points = PackedVector2Array(-40, 0, -20, 0, -10, 10, 0, 0, 10, 10, 20, 0, 40, 0)
 width = 2.0
-default_color = Color( 0.176471, 0.756863, 0.176471, 1 )
+default_color = Color(0.176471, 0.756863, 0.176471, 1)
 antialiased = true
 
 [node name="Speed_Data" type="Label" parent="."]
@@ -525,8 +525,8 @@ offset_top = 20.0
 offset_right = 1900.0
 offset_bottom = 198.0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource( 13 )
-theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource("13")
+theme_override_colors/font_color = Color(0.156863, 0.858824, 0.0823529, 1)
 text = "SPEED
 XXX"
 uppercase = true
@@ -538,8 +538,8 @@ offset_top = 20.0
 offset_right = 1900.0
 offset_bottom = 198.0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource( 13 )
-theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource("13")
+theme_override_colors/font_color = Color(0.156863, 0.858824, 0.0823529, 1)
 text = "HDG
 XXX"
 align = 1
@@ -552,8 +552,8 @@ offset_top = 20.0
 offset_right = 1900.0
 offset_bottom = 198.0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource( 13 )
-theme_override_colors/font_color = Color( 0.156863, 0.858824, 0.0823529, 1 )
+theme_override_fonts/font = ExtResource("13")
+theme_override_colors/font_color = Color(0.156863, 0.858824, 0.0823529, 1)
 text = "ALT
 XXXXX"
 align = 2

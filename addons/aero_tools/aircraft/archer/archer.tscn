@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://dt7qga5c5sa4f"]
 
 [ext_resource type="PackedScene" path="res://scenes/FPV_HUD.tscn" id="1"]
-[ext_resource type="Script" path="res://addons/aero_tools/aircraft/archer/archer.gd" id="1_oowyf"]
-[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
+[ext_resource type="Script" uid="uid://byn5jb0ivhii5" path="res://addons/aero_tools/aircraft/archer/archer.gd" id="1_oowyf"]
+[ext_resource type="Script" uid="uid://bxy2u8tu5grr" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
 [ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="4"]
 
 [sub_resource type="ConvexPolygonShape3D" id="1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cx7q2r1a78pq3"]
 
 [ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1_3w2o1"]
-[ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.gd" id="2_alwtt"]
+[ext_resource type="Script" uid="uid://brjq45ic3kvk0" path="res://addons/aero_tools/uires/hud_gauge_hybrid/hud_gauge_hybrid.gd" id="2_alwtt"]
 
 [node name="HUDGaugeHybrid" type="Control"]
 custom_minimum_size = Vector2(240, 240)

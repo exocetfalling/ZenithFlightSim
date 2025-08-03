@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://dqgaomu3tr1ym" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/source_file_item_editor.tscn" id="3"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/texture_set_import_editor.gd" id="4"]
+[ext_resource type="Script" uid="uid://cmlelu5frkfv1" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/texture_set_import_editor.gd" id="4"]
 
 [node name="TextureSetImportEditor" type="AcceptDialog"]
 title = "Texture Set Import Tool"

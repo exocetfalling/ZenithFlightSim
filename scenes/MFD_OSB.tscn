@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://bo0aybypncgai"]
 
-[ext_resource path="res://resources/MFD_OSB_Font.tres" type="FontFile" id=1]
+[ext_resource type="FontFile" path="res://resources/MFD_OSB_Font.tres" id="1"]
 
 [node name="MFD_OSB" type="Node2D"]
 
@@ -9,8 +9,8 @@ offset_left = -90.0
 offset_top = -90.0
 offset_right = 90.0
 offset_bottom = 90.0
-custom_minimum_size = Vector2( 180, 180 )
-theme_override_fonts/font = ExtResource( 1 )
+custom_minimum_size = Vector2(180, 180)
+theme_override_fonts/font = ExtResource("1")
 text = "OSB XX"
 __meta__ = {
 "_edit_use_anchors_": false

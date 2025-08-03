@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbc1kevq70ttk"]
 
-[ext_resource type="Script" path="res://addons/aero_tools/scripts/aero_body.gd" id="1_nugfj"]
+[ext_resource type="Script" uid="uid://c458om1n2m25v" path="res://addons/aero_tools/scripts/aero_body.gd" id="1_nugfj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0c5h7"]
 radius = 1.0

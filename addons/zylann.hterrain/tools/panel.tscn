@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dtdgawtpwfaft"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/panel.gd" id="1"]
+[ext_resource type="Script" uid="uid://btxi6m1s11bdk" path="res://addons/zylann.hterrain/tools/panel.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bd42ig216p216" path="res://addons/zylann.hterrain/tools/brush/brush_editor.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/texture_editor/texture_editor.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://fytv7al58yo1" path="res://addons/zylann.hterrain/tools/texture_editor/texture_editor.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://do3c3jse5p7hx" path="res://addons/zylann.hterrain/tools/detail_editor/detail_editor.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://cba6k3hrwhrke" path="res://addons/zylann.hterrain/tools/minimap/minimap.tscn" id="5"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/minimap/ratio_container.gd" id="6"]
+[ext_resource type="Script" uid="uid://cd6rp85c4lid5" path="res://addons/zylann.hterrain/tools/minimap/ratio_container.gd" id="6"]
 
 [node name="Panel" type="Control"]
 custom_minimum_size = Vector2(400, 120)

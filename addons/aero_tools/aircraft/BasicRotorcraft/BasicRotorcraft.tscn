@@ -1,59 +1,59 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bcj0ui76fb4c1"]
 
-[ext_resource path="res://addons/aero_tools/scripts/aero_pid_calc.gd" type="Script" id=3]
-[ext_resource path="res://aircraft/UAV_Lite/UAV_Lite.gd" type="Script" id=4]
+[ext_resource type="Script" uid="uid://c4uce1l1x2plj" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="3"]
+[ext_resource type="Script" uid="uid://ca37f0gj66h0i" path="res://aircraft/UAV_Lite/UAV_Lite.gd" id="4"]
 
-[sub_resource type="BoxShape3D" id=1]
+[sub_resource type="BoxShape3D" id="1"]
 
 [node name="BasicRotorcraft" type="VehicleBody3D"]
 continuous_cd = true
 can_sleep = false
 linear_damp = 0.0
 angular_damp = 1.0
-script = ExtResource( 4 )
+script = ExtResource("4")
 control_type = 1
 
 [node name="PIDCalcPitch" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 0.8
 term_D = 0.4
 param_tuning_active = false
 
 [node name="PIDCalcRoll" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 0.8
 term_D = 0.4
 param_tuning_active = false
 
 [node name="PIDCalcYaw" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 0.8
 term_D = 0.4
 param_tuning_active = false
 
 [node name="PIDCalcThrust" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 0.2
 term_I = 0.2
 term_D = 0.05
 param_tuning_active = false
 
 [node name="PIDCalcVelocityX" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 2.0
 term_I = 1.0
 term_D = 1.0
 param_tuning_active = false
 
 [node name="PIDCalcVelocityY" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 2.0
 term_I = 1.0
 term_D = 1.0
 param_tuning_active = false
 
 [node name="PIDCalcVelocityZ" type="Node" parent="."]
-script = ExtResource( 3 )
+script = ExtResource("3")
 term_P = 2.0
 term_I = 1.0
 term_D = 1.0
@@ -61,7 +61,7 @@ param_tuning_active = false
 
 [node name="RadioAltimeter" type="RayCast3D" parent="."]
 enabled = true
-target_position = Vector3( 0, -1000, 0 )
+target_position = Vector3(0, -1000, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")

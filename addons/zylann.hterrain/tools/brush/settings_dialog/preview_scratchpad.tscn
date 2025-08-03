@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ng00jipfeucy"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_scratchpad.gd" id="1"]
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_painter.gd" id="2"]
+[ext_resource type="Script" uid="uid://cxnv0co1sa152" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_scratchpad.gd" id="1"]
+[ext_resource type="Script" uid="uid://detkqc6b23uv2" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_painter.gd" id="2"]
 
 [node name="PreviewScratchpad" type="Control"]
 clip_contents = true

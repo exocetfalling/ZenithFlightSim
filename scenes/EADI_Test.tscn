@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://0bifj7nmme2h"]
 
-[ext_resource path="res://assets/png_files/PFD/strip_attitude_indicator.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://xsxfglkjq5wj" path="res://assets/png_files/PFD/strip_attitude_indicator.png" id="1"]
 
 [node name="EADI_Test" type="SubViewportContainer"]
 offset_right = 40.0
@@ -10,7 +10,7 @@ __meta__ = {
 }
 
 [node name="SubViewport" type="SubViewport" parent="."]
-size = Vector2( 1000, 1000 )
+size = Vector2(1000, 1000)
 transparent_bg = true
 handle_input_locally = false
 disable_3d = true
@@ -18,6 +18,6 @@ usage = 0
 render_target_update_mode = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-position = Vector2( 500, 500 )
+position = Vector2(500, 500)
 rotation = 0.785398
-texture = ExtResource( 1 )
+texture = ExtResource("1")

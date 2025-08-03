@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bue2flijnxa3p"]
 
-[ext_resource type="Script" path="res://addons/zylann.hterrain/tools/terrain_preview.gd" id="1"]
+[ext_resource type="Script" uid="uid://bqxttnt1krmqa" path="res://addons/zylann.hterrain/tools/terrain_preview.gd" id="1"]
 
 [sub_resource type="PlaneMesh" id="3"]
 size = Vector2(256, 256)

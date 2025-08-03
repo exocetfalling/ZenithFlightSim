@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctd0otb88d5ug"]
 
 [ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1"]
-[ext_resource type="Script" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.gd" id="2"]
+[ext_resource type="Script" uid="uid://jewk071g1ior" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.gd" id="2"]
 
 [node name="HUDGaugeNumeric" type="Control"]
 custom_minimum_size = Vector2(200, 150)
