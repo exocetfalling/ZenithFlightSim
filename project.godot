@@ -17,7 +17,6 @@ config/icon="res://resources/icon.png"
 
 [autoload]
 
-Global="*res://scripts/Global.gd"
 DebugOverlay="*res://debug/DebugOverlay.tscn"
 AeroHelper="*res://addons/aero_tools/scripts/aero_helper.gd"
 AeroDataBus="*res://addons/aero_tools/scripts/aero_data_bus.gd"

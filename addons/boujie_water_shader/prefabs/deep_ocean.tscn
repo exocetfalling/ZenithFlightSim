@@ -71,7 +71,7 @@ script = ExtResource("1_ffcdn")
 material = ExtResource("2_mvet8")
 levels_of_detail = 5
 unit_size = 2.0
-far_edge = 4000.0
+far_edge = 4000
 
 [node name="CameraFollower3D" type="Node3D" parent="."]
 script = ExtResource("3_u4edm")

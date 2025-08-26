@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://gt402qqhab7j"]
 
 [ext_resource type="Script" uid="uid://cmk841855tqij" path="res://addons/zylann.hterrain/tools/resize_dialog/resize_dialog.gd" id="1"]
-[ext_resource type="Texture2D" uid="uid://b4ya0po3a4nqa" path="res://addons/zylann.hterrain/tools/icons/icon_heightmap_unmask.svg" id="2"]
-[ext_resource type="Texture2D" uid="uid://d3vie0tj3ry6k" path="res://addons/zylann.hterrain/tools/icons/icon_long_arrow_right.svg" id="3"]
-[ext_resource type="Texture2D" uid="uid://b6l5dys0awbwd" path="res://addons/zylann.hterrain/tools/icons/icon_long_arrow_down.svg" id="4"]
-[ext_resource type="Texture2D" uid="uid://bdkcgtv1r5j31" path="res://addons/zylann.hterrain/tools/icons/icon_small_circle.svg" id="5"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://clqh0p5ntgt6" path="res://addons/zylann.hterrain/tools/icons/icon_heightmap_unmask.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://jeddq2qb8m5t" path="res://addons/zylann.hterrain/tools/icons/icon_long_arrow_right.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://d0g1bqgd454x" path="res://addons/zylann.hterrain/tools/icons/icon_long_arrow_down.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://dpmi1w32gwddj" path="res://addons/zylann.hterrain/tools/icons/icon_small_circle.svg" id="5"]
+[ext_resource type="PackedScene" uid="uid://dk3elcjtwwemm" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="6"]
 
 [node name="ResizeDialog" type="AcceptDialog"]
 title = "Resize terrain"

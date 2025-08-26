@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://cqo7qhig1cax4" path="res://addons/aero_tools/aircraft/phoenix/phoenix.gd" id="1"]
 [ext_resource type="Script" uid="uid://bxy2u8tu5grr" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
-[ext_resource type="Material" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="3"]
+[ext_resource type="Material" uid="uid://dssabfw4myqq6" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://bwtcvur732fvd" path="res://addons/aero_tools/uires/hud_shared/hud_shared.tscn" id="4"]
 [ext_resource type="Environment" uid="uid://hv8jdu5g217v" path="res://addons/aero_tools/resources/zfs_basic_env.tres" id="4_8iccb"]
 [ext_resource type="Script" uid="uid://c4uce1l1x2plj" path="res://addons/aero_tools/scripts/aero_pid_calc.gd" id="6"]
 [ext_resource type="PackedScene" uid="uid://c4lctpxogn5m4" path="res://addons/aero_tools/assets/aircraft_parts/wheel_small/wheel_medium.tscn" id="7_hervv"]
-[ext_resource type="Script" uid="uid://ce0ceh30n6i6c" path="res://addons/aero_tools/cameras/Camera_FPV.gd" id="8"]
+[ext_resource type="Script" uid="uid://ce0ceh30n6i6c" path="res://addons/aero_tools/cameras/camera_fpv.gd" id="8"]
 
 [sub_resource type="CapsuleShape3D" id="1"]
 height = 8.0

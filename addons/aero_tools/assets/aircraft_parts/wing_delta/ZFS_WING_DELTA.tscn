@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d2cd2huv0lvsr"]
-
-[sub_resource type="Resource" id="Resource_4x6pg"]
-metadata/__load_path__ = "res://addons/aero_tools/assets/aircraft_parts/wing_delta/ZFS_WING_DELTA.gltf"
-
-[node name="ZFS_WING_DELTA"]
-
-[node name="node2" parent="node0" index="1"]
-visible = false

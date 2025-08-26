@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cd1gq45koyy7p" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/texture_set_editor.gd" id="1"]
 [ext_resource type="Shader" uid="uid://br7isdopirerc" path="res://addons/zylann.hterrain/tools/texture_editor/display_alpha.gdshader" id="2"]
 [ext_resource type="Shader" uid="uid://d0iwlxk8s343j" path="res://addons/zylann.hterrain/tools/texture_editor/display_color.gdshader" id="3"]
-[ext_resource type="PackedScene" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://dk3elcjtwwemm" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="5"]
 
 [sub_resource type="ShaderMaterial" id="1"]
 shader = ExtResource("3")
