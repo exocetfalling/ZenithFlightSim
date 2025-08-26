@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c500225ws7qs4"]
-
-[ext_resource type="PackedScene" uid="uid://cb63a43jswwws" path="res://assets/Quadrotor/Quadrotor.glb" id="1"]
-
-[node name="Quadrotor" instance=ExtResource("1")]
