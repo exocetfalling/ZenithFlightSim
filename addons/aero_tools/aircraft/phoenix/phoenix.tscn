@@ -251,6 +251,7 @@ far = 1e+06
 script = ExtResource("8")
 
 [node name="ColorRect" type="ColorRect" parent="CameraFPV"]
+visible = false
 material = SubResource("ShaderMaterial_a82i4")
 anchors_preset = 15
 anchor_right = 1.0
