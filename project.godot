@@ -12,14 +12,14 @@ config_version=5
 
 config/name="ZenithFlightSim"
 run/main_scene="res://addons/aero_tools/scenes/test_scene/test_scene.tscn"
-config/features=PackedStringArray("4.4")
+config/features=PackedStringArray("4.6")
 config/icon="res://resources/icon.png"
 
 [autoload]
 
 DebugOverlay="*res://debug/DebugOverlay.tscn"
-AeroHelper="*res://addons/aero_tools/scripts/aero_helper.gd"
-AeroDataBus="*res://addons/aero_tools/scripts/aero_data_bus.gd"
+AeroHelper="*uid://ds205l4sbciq0"
+AeroDataBus="*uid://co1wm3l5byjph"
 
 [display]
 
@@ -279,6 +279,7 @@ nav_mode_toggle={
 
 [rendering]
 
+anti_aliasing/quality/screen_space_aa=1
 lights_and_shadows/shadow_atlas/quadrant_0_subdiv=2
 quality/filters/use_nearest_mipmap_filter=true
 quality/filters/msaa=1

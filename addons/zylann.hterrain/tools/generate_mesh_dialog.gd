@@ -51,4 +51,3 @@ func _on_Generate_pressed():
 
 func _on_Cancel_pressed():
 	hide()
-

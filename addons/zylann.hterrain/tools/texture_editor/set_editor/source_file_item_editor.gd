@@ -57,4 +57,3 @@ func set_material(mat: Material):
 func set_enabled(enabled: bool):
 	for b in _buttons:
 		b.disabled = not enabled
-

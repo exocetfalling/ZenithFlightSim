@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://8cdj0kbjbkw3"]
+[gd_scene format=3 uid="uid://8cdj0kbjbkw3"]
 
 [ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="1_t07ji"]
 [ext_resource type="Script" uid="uid://dw6u4fii1oiwe" path="res://addons/aero_tools/uires/hud_gauge_compass/hud_gauge_compass.gd" id="2_covb7"]
 
-[node name="HUDGaugeCompass" type="Control"]
+[node name="HUDGaugeCompass" type="Control" unique_id=215009354]
 custom_minimum_size = Vector2(240, 240)
 layout_mode = 3
 anchors_preset = 0
@@ -14,7 +14,7 @@ value_displayed = 360.0
 value_maximum = 360.0
 value_minimum = 1.0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=763291018]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -25,7 +25,7 @@ offset_bottom = 56.0
 grow_horizontal = 2
 horizontal_alignment = 1
 
-[node name="Value" type="Label" parent="."]
+[node name="Value" type="Label" parent="." unique_id=1241072079]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,17 +41,17 @@ grow_vertical = 2
 text = "360"
 horizontal_alignment = 1
 
-[node name="Centre" type="Node2D" parent="."]
+[node name="Centre" type="Node2D" parent="." unique_id=1866223158]
 position = Vector2(120, 120)
 rotation = -6.28319
 
-[node name="Mark0" type="Line2D" parent="Centre"]
+[node name="Mark0" type="Line2D" parent="Centre" unique_id=274130605]
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark0"]
+[node name="Label" type="Label" parent="Centre/Mark0" unique_id=216979507]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -68,14 +68,14 @@ theme_override_font_sizes/font_size = 30
 text = "36"
 horizontal_alignment = 1
 
-[node name="Mark1" type="Line2D" parent="Centre"]
+[node name="Mark1" type="Line2D" parent="Centre" unique_id=547174003]
 rotation = 0.523599
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark1"]
+[node name="Label" type="Label" parent="Centre/Mark1" unique_id=2052475290]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -92,14 +92,14 @@ theme_override_font_sizes/font_size = 30
 text = "03"
 horizontal_alignment = 1
 
-[node name="Mark2" type="Line2D" parent="Centre"]
+[node name="Mark2" type="Line2D" parent="Centre" unique_id=1853127387]
 rotation = 1.0472
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark2"]
+[node name="Label" type="Label" parent="Centre/Mark2" unique_id=1477190564]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -116,14 +116,14 @@ theme_override_font_sizes/font_size = 30
 text = "06"
 horizontal_alignment = 1
 
-[node name="Mark3" type="Line2D" parent="Centre"]
+[node name="Mark3" type="Line2D" parent="Centre" unique_id=1048431882]
 rotation = 1.5708
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark3"]
+[node name="Label" type="Label" parent="Centre/Mark3" unique_id=1456086719]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -140,14 +140,14 @@ theme_override_font_sizes/font_size = 30
 text = "09"
 horizontal_alignment = 1
 
-[node name="Mark4" type="Line2D" parent="Centre"]
+[node name="Mark4" type="Line2D" parent="Centre" unique_id=1479325222]
 rotation = 2.0944
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark4"]
+[node name="Label" type="Label" parent="Centre/Mark4" unique_id=192430237]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -164,14 +164,14 @@ theme_override_font_sizes/font_size = 30
 text = "12"
 horizontal_alignment = 1
 
-[node name="Mark5" type="Line2D" parent="Centre"]
+[node name="Mark5" type="Line2D" parent="Centre" unique_id=1790644652]
 rotation = 2.61799
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark5"]
+[node name="Label" type="Label" parent="Centre/Mark5" unique_id=545709284]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -188,14 +188,14 @@ theme_override_font_sizes/font_size = 30
 text = "15"
 horizontal_alignment = 1
 
-[node name="Mark6" type="Line2D" parent="Centre"]
+[node name="Mark6" type="Line2D" parent="Centre" unique_id=596904021]
 rotation = 3.14159
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark6"]
+[node name="Label" type="Label" parent="Centre/Mark6" unique_id=197127502]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -212,14 +212,14 @@ theme_override_font_sizes/font_size = 30
 text = "18"
 horizontal_alignment = 1
 
-[node name="Mark7" type="Line2D" parent="Centre"]
+[node name="Mark7" type="Line2D" parent="Centre" unique_id=907505113]
 rotation = 3.66519
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark7"]
+[node name="Label" type="Label" parent="Centre/Mark7" unique_id=1914540907]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -236,14 +236,14 @@ theme_override_font_sizes/font_size = 30
 text = "21"
 horizontal_alignment = 1
 
-[node name="Mark8" type="Line2D" parent="Centre"]
+[node name="Mark8" type="Line2D" parent="Centre" unique_id=728762609]
 rotation = 4.18879
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark8"]
+[node name="Label" type="Label" parent="Centre/Mark8" unique_id=1797954256]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -260,14 +260,14 @@ theme_override_font_sizes/font_size = 30
 text = "24"
 horizontal_alignment = 1
 
-[node name="Mark9" type="Line2D" parent="Centre"]
+[node name="Mark9" type="Line2D" parent="Centre" unique_id=620545564]
 rotation = 4.71239
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark9"]
+[node name="Label" type="Label" parent="Centre/Mark9" unique_id=2112549221]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -284,14 +284,14 @@ theme_override_font_sizes/font_size = 30
 text = "27"
 horizontal_alignment = 1
 
-[node name="Mark10" type="Line2D" parent="Centre"]
+[node name="Mark10" type="Line2D" parent="Centre" unique_id=1930331257]
 rotation = 5.23599
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark10"]
+[node name="Label" type="Label" parent="Centre/Mark10" unique_id=1220746153]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -308,14 +308,14 @@ theme_override_font_sizes/font_size = 30
 text = "30"
 horizontal_alignment = 1
 
-[node name="Mark11" type="Line2D" parent="Centre"]
+[node name="Mark11" type="Line2D" parent="Centre" unique_id=1142032322]
 rotation = 5.75959
 points = PackedVector2Array(0, -70, 0, -80)
 width = 5.0
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Label" type="Label" parent="Centre/Mark11"]
+[node name="Label" type="Label" parent="Centre/Mark11" unique_id=730088000]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -332,7 +332,7 @@ theme_override_font_sizes/font_size = 30
 text = "33"
 horizontal_alignment = 1
 
-[node name="Needle" type="Line2D" parent="Centre"]
+[node name="Needle" type="Line2D" parent="Centre" unique_id=459874099]
 visible = false
 points = PackedVector2Array(0, -80, 0, -115)
 width = 5.0

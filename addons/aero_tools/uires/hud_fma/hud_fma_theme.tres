@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://d3mhbimv5tkc1"]
+[gd_resource type="Theme" format=3 uid="uid://d3mhbimv5tkc1"]
 
 [ext_resource type="FontFile" path="res://addons/aero_tools/uires/hud_shared/hud_shared_font.tres" id="1_x48ty"]
 

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3g28rsgsjcxx"]
+[gd_scene format=3 uid="uid://b3g28rsgsjcxx"]
 
 [ext_resource type="Script" uid="uid://cmisjeispcaek" path="res://addons/aero_tools/uires/hud_ladder/hud_ladder.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://bbseqfyuudt22" path="res://addons/aero_tools/uires/hud_ladder/hud_pitch_mark.tscn" id="2"]
 
-[node name="HUDLadder" type="Control"]
+[node name="HUDLadder" type="Control" unique_id=611526273]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,43 +12,43 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1")
 
-[node name="Pivot" type="Node2D" parent="."]
+[node name="Pivot" type="Node2D" parent="." unique_id=1554159103]
 
-[node name="MarkH00" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkH00" parent="Pivot" unique_id=1050011822 instance=ExtResource("2")]
 mark_pitch_value_visible = false
 mark_line_gap = 0.0
 
-[node name="MarkP05" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkP05" parent="Pivot" unique_id=312316071 instance=ExtResource("2")]
 offset_top = -100.0
 offset_bottom = -100.0
 mark_line_length = 500.0
 mark_pitch_value = 5.0
 
-[node name="MarkN05" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkN05" parent="Pivot" unique_id=1275480604 instance=ExtResource("2")]
 offset_top = 100.0
 offset_bottom = 100.0
 mark_line_length = 500.0
 mark_pitch_value = 5.0
 
-[node name="MarkP10" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkP10" parent="Pivot" unique_id=1946235354 instance=ExtResource("2")]
 offset_top = -200.0
 offset_bottom = -200.0
 mark_line_length = 500.0
 mark_pitch_value = 10.0
 
-[node name="MarkN10" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkN10" parent="Pivot" unique_id=1372225116 instance=ExtResource("2")]
 offset_top = 200.0
 offset_bottom = 200.0
 mark_line_length = 500.0
 mark_pitch_value = 10.0
 
-[node name="MarkP20" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkP20" parent="Pivot" unique_id=976256153 instance=ExtResource("2")]
 offset_top = -400.0
 offset_bottom = -400.0
 mark_line_length = 500.0
 mark_pitch_value = 20.0
 
-[node name="MarkN20" parent="Pivot" instance=ExtResource("2")]
+[node name="MarkN20" parent="Pivot" unique_id=978888473 instance=ExtResource("2")]
 offset_top = 400.0
 offset_bottom = 400.0
 mark_line_length = 500.0

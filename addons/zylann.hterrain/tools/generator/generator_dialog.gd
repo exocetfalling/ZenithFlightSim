@@ -559,4 +559,3 @@ func _process(delta):
 		# applying! So the window has one more reason to stay visible...
 		#
 		_preview.queue_redraw()
-

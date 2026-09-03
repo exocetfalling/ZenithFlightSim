@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cba6k3hrwhrke"]
+[gd_scene format=3 uid="uid://cba6k3hrwhrke"]
 
 [ext_resource type="Script" uid="uid://c2m76nhby6xqd" path="res://addons/zylann.hterrain/tools/minimap/minimap.gd" id="1"]
 [ext_resource type="Shader" uid="uid://577nyhhoyw7g" path="res://addons/zylann.hterrain/tools/minimap/minimap_normal.gdshader" id="2"]
@@ -10,7 +10,7 @@
 shader = ExtResource("2")
 shader_parameter/u_light_direction = Vector3(0.5, -0.7, 0.2)
 
-[node name="Minimap" type="Control"]
+[node name="Minimap" type="Control" unique_id=158335250]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 3
 anchors_preset = 0
@@ -18,31 +18,31 @@ offset_right = 100.0
 offset_bottom = 100.0
 script = ExtResource("1")
 
-[node name="PopupMenu" type="PopupMenu" parent="."]
+[node name="PopupMenu" type="PopupMenu" parent="." unique_id=671456469]
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1451219076]
 material = SubResource("1")
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
-[node name="X" type="ColorRect" parent="."]
+[node name="X" type="ColorRect" parent="." unique_id=1063015346]
 layout_mode = 0
 mouse_filter = 2
 color = Color(0.929412, 0.290196, 0.290196, 0.627451)
 
-[node name="Z" type="ColorRect" parent="."]
+[node name="Z" type="ColorRect" parent="." unique_id=1090884823]
 layout_mode = 0
 mouse_filter = 2
 color = Color(0.0784314, 0.501961, 1, 0.627451)
 
-[node name="Y" type="ColorRect" parent="."]
+[node name="Y" type="ColorRect" parent="." unique_id=987880187]
 layout_mode = 0
 mouse_filter = 2
 color = Color(0.207843, 0.835294, 0.152941, 0.627451)
 
-[node name="Overlay" type="Control" parent="."]
+[node name="Overlay" type="Control" parent="." unique_id=1003577180]
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -51,6 +51,6 @@ script = ExtResource("3")
 cursor_texture = ExtResource("4")
 out_of_range_texture = ExtResource("5")
 
-[node name="Cursor" type="Sprite2D" parent="Overlay"]
+[node name="Cursor" type="Sprite2D" parent="Overlay" unique_id=1987129098]
 
 [connection signal="id_pressed" from="PopupMenu" to="." method="_on_PopupMenu_id_pressed"]

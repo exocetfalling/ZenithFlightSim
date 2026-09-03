@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbseqfyuudt22"]
+[gd_scene format=3 uid="uid://bbseqfyuudt22"]
 
 [ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="2"]
 
@@ -54,25 +54,25 @@ func _process(delta):
 		$LabelNode2.visible = false
 "
 
-[node name="HUDPitchMark" type="Control"]
+[node name="HUDPitchMark" type="Control" unique_id=1461731715]
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("2")
 script = SubResource("1")
 mark_pitch_value = 0.0
 
-[node name="MarkLineL" type="Line2D" parent="."]
+[node name="MarkLineL" type="Line2D" parent="." unique_id=1302545769]
 points = PackedVector2Array(-500, 0, -150, 0)
 width = 5.0
 
-[node name="MarkLineR" type="Line2D" parent="."]
+[node name="MarkLineR" type="Line2D" parent="." unique_id=1017758834]
 points = PackedVector2Array(500, 0, 150, 0)
 width = 5.0
 
-[node name="LabelNode1" type="Node2D" parent="."]
+[node name="LabelNode1" type="Node2D" parent="." unique_id=861132807]
 position = Vector2(-550, 0)
 
-[node name="Label" type="Label" parent="LabelNode1"]
+[node name="Label" type="Label" parent="LabelNode1" unique_id=1048572149]
 offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0
@@ -83,10 +83,10 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="LabelNode2" type="Node2D" parent="."]
+[node name="LabelNode2" type="Node2D" parent="." unique_id=862269009]
 position = Vector2(550, 0)
 
-[node name="Label" type="Label" parent="LabelNode2"]
+[node name="Label" type="Label" parent="LabelNode2" unique_id=1295772349]
 offset_left = -40.0
 offset_top = -40.0
 offset_right = 40.0

@@ -67,4 +67,3 @@ func _draw():
 	var mpos = get_local_mouse_position()
 	var brush = _painter.get_brush()
 	draw_arc(mpos, 0.5 * brush.get_size(), -PI, PI, 32, Color(1, 0.2, 0.2), 2.0, true)
-

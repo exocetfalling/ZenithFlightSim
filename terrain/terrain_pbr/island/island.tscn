@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cobcn3ll2u8m0"]
+[gd_scene format=3 uid="uid://cobcn3ll2u8m0"]
 
 [ext_resource type="Script" uid="uid://cbp17n2dx7etc" path="res://addons/zylann.hterrain/hterrain.gd" id="1_c0xk6"]
 [ext_resource type="Resource" uid="uid://xr56vnm5ntpp" path="res://terrain/terrain_pbr/island/data.hterrain" id="2_oj7wn"]
@@ -21,9 +21,9 @@ size = Vector2(10000, 10000)
 subdivide_width = 100
 subdivide_depth = 100
 
-[node name="Island" type="Node3D"]
+[node name="Island" type="Node3D" unique_id=1034091354]
 
-[node name="HTerrain" type="Node3D" parent="."]
+[node name="HTerrain" type="Node3D" parent="." unique_id=466443274]
 script = ExtResource("1_c0xk6")
 map_scale = Vector3(10, 10, 10)
 centered = true
@@ -46,9 +46,9 @@ shader_params/u_globalmap_blend_start = 0.0
 shader_params/u_globalmap_blend_distance = 0.0
 shader_params/u_colormap_opacity_per_texture = null
 
-[node name="Runway" parent="." instance=ExtResource("10_f3jux")]
+[node name="Runway" parent="." unique_id=1144866861 instance=ExtResource("10_f3jux")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3330, 20, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=919476844]
 visible = false
 mesh = SubResource("PlaneMesh_kvbck")

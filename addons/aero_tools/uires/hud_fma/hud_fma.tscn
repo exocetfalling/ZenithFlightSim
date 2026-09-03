@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu1wf1vuuyf3y"]
+[gd_scene format=3 uid="uid://bu1wf1vuuyf3y"]
 
 [ext_resource type="Theme" uid="uid://d3mhbimv5tkc1" path="res://addons/aero_tools/uires/hud_fma/hud_fma_theme.tres" id="1_ag18x"]
 
-[node name="FMA" type="GridContainer"]
+[node name="FMA" type="GridContainer" unique_id=1372000562]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -13,100 +13,100 @@ grow_horizontal = 2
 theme = ExtResource("1_ag18x")
 columns = 9
 
-[node name="Autothrust" type="VBoxContainer" parent="."]
+[node name="Autothrust" type="VBoxContainer" parent="." unique_id=136989263]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 
-[node name="BLANK" type="Label" parent="Autothrust"]
+[node name="BLANK" type="Label" parent="Autothrust" unique_id=105023719]
 layout_mode = 2
 text = "     "
 
-[node name="SPEED" type="Label" parent="Autothrust"]
+[node name="SPEED" type="Label" parent="Autothrust" unique_id=1913689493]
 visible = false
 layout_mode = 2
 text = "SPEED"
 
-[node name="Div1" type="Label" parent="."]
+[node name="Div1" type="Label" parent="." unique_id=342527033]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 text = "|
 |"
 
-[node name="Vertical" type="VBoxContainer" parent="."]
+[node name="Vertical" type="VBoxContainer" parent="." unique_id=1370662794]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 
-[node name="BLANK" type="Label" parent="Vertical"]
+[node name="BLANK" type="Label" parent="Vertical" unique_id=856400814]
 layout_mode = 2
 text = "     "
 
-[node name="GS" type="Label" parent="Vertical"]
+[node name="GS" type="Label" parent="Vertical" unique_id=441816819]
 visible = false
 layout_mode = 2
 text = " G/S "
 
-[node name="Div2" type="Label" parent="."]
+[node name="Div2" type="Label" parent="." unique_id=1026305892]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 text = "|
 |"
 
-[node name="Lateral" type="VBoxContainer" parent="."]
+[node name="Lateral" type="VBoxContainer" parent="." unique_id=163318548]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 
-[node name="BLANK" type="Label" parent="Lateral"]
+[node name="BLANK" type="Label" parent="Lateral" unique_id=1488397613]
 layout_mode = 2
 text = "     "
 
-[node name="LOC" type="Label" parent="Lateral"]
+[node name="LOC" type="Label" parent="Lateral" unique_id=1901934334]
 visible = false
 layout_mode = 2
 text = " LOC "
 
-[node name="Div3" type="Label" parent="."]
+[node name="Div3" type="Label" parent="." unique_id=826636046]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 text = "|
 |"
 
-[node name="ApprData" type="VBoxContainer" parent="."]
+[node name="ApprData" type="VBoxContainer" parent="." unique_id=1204032608]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 
-[node name="BLANK" type="Label" parent="ApprData"]
+[node name="BLANK" type="Label" parent="ApprData" unique_id=1303153925]
 layout_mode = 2
 text = "     "
 
-[node name="APPR1" type="Label" parent="ApprData"]
+[node name="APPR1" type="Label" parent="ApprData" unique_id=2040491589]
 visible = false
 layout_mode = 2
 text = "APPR1"
 
-[node name="Div4" type="Label" parent="."]
+[node name="Div4" type="Label" parent="." unique_id=483481509]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 text = "|
 |"
 
-[node name="Status" type="VBoxContainer" parent="."]
+[node name="Status" type="VBoxContainer" parent="." unique_id=1768182603]
 layout_mode = 2
 theme = ExtResource("1_ag18x")
 
-[node name="AP ON" type="Label" parent="Status"]
+[node name="AP ON" type="Label" parent="Status" unique_id=1714653244]
 visible = false
 layout_mode = 2
 text = "AP ON"
 
-[node name="FD ON" type="Label" parent="Status"]
+[node name="FD ON" type="Label" parent="Status" unique_id=1603450531]
 visible = false
 layout_mode = 2
 text = "FD ON"
 
-[node name="CWS" type="Label" parent="Status"]
+[node name="CWS" type="Label" parent="Status" unique_id=498321146]
 layout_mode = 2
 text = "  CWS"
 
-[node name="BLANK" type="Label" parent="Status"]
+[node name="BLANK" type="Label" parent="Status" unique_id=1945850033]
 layout_mode = 2
 text = "     "

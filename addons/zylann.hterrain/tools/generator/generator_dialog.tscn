@@ -1,17 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgfo1ocbdi1ug"]
+[gd_scene format=3 uid="uid://cgfo1ocbdi1ug"]
 
 [ext_resource type="Script" uid="uid://cf4xxsh0cl6fm" path="res://addons/zylann.hterrain/tools/generator/generator_dialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dfjip6c4olemn" path="res://addons/zylann.hterrain/tools/inspector/inspector.tscn" id="2"]
 [ext_resource type="PackedScene" uid="uid://bue2flijnxa3p" path="res://addons/zylann.hterrain/tools/terrain_preview.tscn" id="3"]
 [ext_resource type="PackedScene" uid="uid://dk3elcjtwwemm" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="4"]
 
-[node name="GeneratorDialog" type="AcceptDialog"]
+[node name="GeneratorDialog" type="AcceptDialog" unique_id=541968865]
 title = "Generate terrain"
 size = Vector2i(1100, 780)
 min_size = Vector2i(1100, 620)
 script = ExtResource("1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1325710468]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,28 +20,27 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -18.0
 
-[node name="Editor" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Editor" type="HBoxContainer" parent="VBoxContainer" unique_id=1634318777]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Settings" type="VBoxContainer" parent="VBoxContainer/Editor"]
+[node name="Settings" type="VBoxContainer" parent="VBoxContainer/Editor" unique_id=1274517574]
 custom_minimum_size = Vector2(420, 0)
 layout_mode = 2
 
-[node name="Inspector" parent="VBoxContainer/Editor/Settings" instance=ExtResource("2")]
+[node name="Inspector" parent="VBoxContainer/Editor/Settings" unique_id=898609207 instance=ExtResource("2")]
 layout_mode = 2
 
-[node name="Preview" type="Control" parent="VBoxContainer/Editor"]
+[node name="Preview" type="Control" parent="VBoxContainer/Editor" unique_id=832973129]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TerrainPreview" parent="VBoxContainer/Editor/Preview" instance=ExtResource("3")]
+[node name="TerrainPreview" parent="VBoxContainer/Editor/Preview" unique_id=171646239 instance=ExtResource("3")]
 layout_mode = 1
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer/Editor/Preview"]
+[node name="Label" type="Label" parent="VBoxContainer/Editor/Preview" unique_id=552501417]
 layout_mode = 0
 offset_left = 5.0
 offset_top = 4.0
@@ -49,7 +48,7 @@ offset_right = 207.0
 offset_bottom = 18.0
 text = "LMB: offset, MMB: rotate"
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Editor/Preview"]
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Editor/Preview" unique_id=809336618]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -58,19 +57,19 @@ anchor_bottom = 1.0
 offset_top = -35.0
 step = 1.0
 
-[node name="Choices" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Choices" type="HBoxContainer" parent="VBoxContainer" unique_id=825340314]
 layout_mode = 2
 alignment = 1
 
-[node name="ApplyButton" type="Button" parent="VBoxContainer/Choices"]
+[node name="ApplyButton" type="Button" parent="VBoxContainer/Choices" unique_id=1524218484]
 layout_mode = 2
 text = "Apply"
 
-[node name="CancelButton" type="Button" parent="VBoxContainer/Choices"]
+[node name="CancelButton" type="Button" parent="VBoxContainer/Choices" unique_id=1744528986]
 layout_mode = 2
 text = "Cancel"
 
-[node name="DialogFitter" parent="." instance=ExtResource("4")]
+[node name="DialogFitter" parent="." unique_id=941424952 instance=ExtResource("4")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0

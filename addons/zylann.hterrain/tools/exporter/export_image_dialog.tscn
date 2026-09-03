@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bcocysgmum5ag"]
+[gd_scene format=3 uid="uid://bcocysgmum5ag"]
 
 [ext_resource type="Script" uid="uid://posrjylsqurp" path="res://addons/zylann.hterrain/tools/exporter/export_image_dialog.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://dk3elcjtwwemm" path="res://addons/zylann.hterrain/tools/util/dialog_fitter.tscn" id="2"]
 
-[node name="ExportImageDialog" type="AcceptDialog"]
+[node name="ExportImageDialog" type="AcceptDialog" unique_id=2070084058]
 size = Vector2i(500, 340)
 min_size = Vector2i(500, 250)
 script = ExtResource("1")
 
-[node name="VB" type="VBoxContainer" parent="."]
+[node name="VB" type="VBoxContainer" parent="." unique_id=646626354]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -17,45 +17,45 @@ offset_top = 8.0
 offset_right = -8.0
 offset_bottom = -18.0
 
-[node name="Grid" type="GridContainer" parent="VB"]
+[node name="Grid" type="GridContainer" parent="VB" unique_id=307792972]
 layout_mode = 2
 columns = 2
 
-[node name="OutputPathLabel" type="Label" parent="VB/Grid"]
+[node name="OutputPathLabel" type="Label" parent="VB/Grid" unique_id=284059364]
 layout_mode = 2
 text = "Output path:"
 
-[node name="OutputPath" type="HBoxContainer" parent="VB/Grid"]
+[node name="OutputPath" type="HBoxContainer" parent="VB/Grid" unique_id=676126013]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HeightmapPathLineEdit" type="LineEdit" parent="VB/Grid/OutputPath"]
+[node name="HeightmapPathLineEdit" type="LineEdit" parent="VB/Grid/OutputPath" unique_id=1320345493]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HeightmapPathBrowseButton" type="Button" parent="VB/Grid/OutputPath"]
+[node name="HeightmapPathBrowseButton" type="Button" parent="VB/Grid/OutputPath" unique_id=736350208]
 layout_mode = 2
 text = "..."
 
-[node name="FormatLabel" type="Label" parent="VB/Grid"]
+[node name="FormatLabel" type="Label" parent="VB/Grid" unique_id=511407461]
 layout_mode = 2
 text = "Format:"
 
-[node name="FormatSelector" type="OptionButton" parent="VB/Grid"]
+[node name="FormatSelector" type="OptionButton" parent="VB/Grid" unique_id=1076465668]
 layout_mode = 2
 
-[node name="HeightRangeLabel" type="Label" parent="VB/Grid"]
+[node name="HeightRangeLabel" type="Label" parent="VB/Grid" unique_id=1807411174]
 layout_mode = 2
 text = "Height range:"
 
-[node name="HeightRange" type="HBoxContainer" parent="VB/Grid"]
+[node name="HeightRange" type="HBoxContainer" parent="VB/Grid" unique_id=1953251884]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VB/Grid/HeightRange"]
+[node name="Label" type="Label" parent="VB/Grid/HeightRange" unique_id=1130615306]
 layout_mode = 2
 text = "Min"
 
-[node name="HeightRangeMin" type="SpinBox" parent="VB/Grid/HeightRange"]
+[node name="HeightRangeMin" type="SpinBox" parent="VB/Grid/HeightRange" unique_id=279722130]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 min_value = -10000.0
@@ -63,11 +63,11 @@ max_value = 10000.0
 step = 0.0
 value = -2000.0
 
-[node name="Label2" type="Label" parent="VB/Grid/HeightRange"]
+[node name="Label2" type="Label" parent="VB/Grid/HeightRange" unique_id=892015900]
 layout_mode = 2
 text = "Max"
 
-[node name="HeightRangeMax" type="SpinBox" parent="VB/Grid/HeightRange"]
+[node name="HeightRangeMax" type="SpinBox" parent="VB/Grid/HeightRange" unique_id=575942433]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 min_value = -10000.0
@@ -75,41 +75,41 @@ max_value = 10000.0
 step = 0.0
 value = 2000.0
 
-[node name="HeightRangeAutoButton" type="Button" parent="VB/Grid/HeightRange"]
+[node name="HeightRangeAutoButton" type="Button" parent="VB/Grid/HeightRange" unique_id=1840468723]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Auto"
 
-[node name="ShowInExplorerCheckbox" type="CheckBox" parent="VB"]
+[node name="ShowInExplorerCheckbox" type="CheckBox" parent="VB" unique_id=517271791]
 layout_mode = 2
 text = "Show in explorer after export"
 
-[node name="Spacer" type="Control" parent="VB"]
+[node name="Spacer" type="Control" parent="VB" unique_id=1594758808]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VB"]
+[node name="Label" type="Label" parent="VB" unique_id=1370954305]
 layout_mode = 2
 text = "Note: height range is needed for integer image formats, as they can't directly represent the real height. 8-bit formats may cause precision loss."
 autowrap_mode = 2
 
-[node name="Spacer2" type="Control" parent="VB"]
+[node name="Spacer2" type="Control" parent="VB" unique_id=1170087741]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
-[node name="Buttons" type="HBoxContainer" parent="VB"]
+[node name="Buttons" type="HBoxContainer" parent="VB" unique_id=65617699]
 layout_mode = 2
 alignment = 1
 
-[node name="ExportButton" type="Button" parent="VB/Buttons"]
+[node name="ExportButton" type="Button" parent="VB/Buttons" unique_id=1293139497]
 layout_mode = 2
 text = "Export"
 
-[node name="CancelButton" type="Button" parent="VB/Buttons"]
+[node name="CancelButton" type="Button" parent="VB/Buttons" unique_id=472137327]
 layout_mode = 2
 text = "Cancel"
 
-[node name="DialogFitter" parent="." instance=ExtResource("2")]
+[node name="DialogFitter" parent="." unique_id=283319271 instance=ExtResource("2")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0

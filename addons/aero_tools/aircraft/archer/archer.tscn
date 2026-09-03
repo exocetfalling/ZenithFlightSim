@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=4 uid="uid://dt7qga5c5sa4f"]
+[gd_scene format=4 uid="uid://dt7qga5c5sa4f"]
 
 [ext_resource type="Script" uid="uid://byn5jb0ivhii5" path="res://addons/aero_tools/aircraft/archer/archer.gd" id="1_oowyf"]
 [ext_resource type="Script" uid="uid://bxy2u8tu5grr" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
 [ext_resource type="Material" uid="uid://dssabfw4myqq6" path="res://addons/aero_tools/resources/Plane_Metal.tres" id="4"]
-
-[sub_resource type="Resource" id="Resource_y7fxt"]
-metadata/__load_path__ = "res://scenes/FPV_HUD.tscn"
 
 [sub_resource type="ConvexPolygonShape3D" id="1"]
 points = PackedVector3Array(0, 0, -4, 0, 0.00978857, -3.9906, 8, 0.0194988, 2.4072, 8, 0.00978857, 2.40172, 8, 0, 2.39937, 8, -0.00980815, 2.40172, 8, -0.0195184, 2.4072, 0, -0.00980815, -3.9906, -8, -0.0195184, 2.4072, -8, -0.00980815, 2.40172, -8, 0, 2.39937, -8, 0.00978857, 2.40172, -8, 0.0194988, 2.4072, 0, 0.0194988, -3.96163, 8, 0.0555599, 2.46672, 8, 0.0471222, 2.44714, 8, 0.0382537, 2.42991, 8, 0.0290133, 2.4166, -8, 0.0290133, 2.4166, -8, 0.0382537, 2.42991, -8, 0.0471222, 2.44714, -8, 0.0555599, 2.46672, 8, -0.0290329, 2.4166, 8, -0.0382733, 2.42991, 8, -0.0471417, 2.44714, 8, -0.0555795, 2.46672, 0, -0.0195184, -3.96163, -8, -0.0555795, 2.46672, -8, -0.0471417, 2.44714, -8, -0.0382733, 2.42991, -8, -0.0290329, 2.4166, 0, 0.0290133, -3.91464, 8, 0.0772905, 2.54581, 8, 0.070693, 2.51684, 8, 0.0634299, 2.49021, -8, 0.0634299, 2.49021, -8, 0.070693, 2.51684, -8, 0.0772905, 2.54581, 8, -0.0634495, 2.49021, 8, -0.0707126, 2.51684, 8, -0.0773101, 2.54581, 0, -0.0290329, -3.91464, -8, -0.0773101, 2.54581, -8, -0.0707126, 2.51684, -8, -0.0634495, 2.49021, 0, 0.0382537, -3.84808, 8, 0.0881754, 2.61081, 8, 0.0831441, 2.57713, -8, 0.0831441, 2.57713, -8, 0.0881754, 2.61081, 8, -0.0831637, 2.57713, 8, -0.088195, 2.61081, 0, -0.0382733, -3.84808, -8, -0.088195, 2.61081, -8, -0.0831637, 2.57713, 0, 0.0471222, -3.76429, 8, 0.0923845, 2.64683, -8, 0.0923845, 2.64683, 8, -0.0924041, 2.64683, 0, -0.0471417, -3.76429, -8, -0.0924041, 2.64683, 0, 0.0555599, -3.66327, 8, 0.0956734, 2.68363, -8, 0.0956734, 2.68363, 8, -0.095693, 2.68363, 0, -0.0555795, -3.66327, -8, -0.095693, 2.68363, 0, 0.0634299, -3.54659, 8, 0.0980619, 2.72122, -8, 0.0980619, 2.72122, 8, -0.0980814, 2.72122, 0, -0.0634495, -3.54659, -8, -0.0980814, 2.72122, 0, 0.070693, -3.41425, 8, 0.0995106, 2.76038, 0, 0.0772905, -3.26938, 0, 0.0831441, -3.1112, -8, 0.0995106, 2.76038, 8, -0.0995302, 2.76038, 0, -0.0831637, -3.1112, 0, -0.0773101, -3.26938, 0, -0.0707126, -3.41425, -8, -0.0995302, 2.76038, 8, 0.1, 2.79953, 0, 0.0881754, -2.94283, 0, 0.0923845, -2.76586, 0, 0.0956734, -2.58105, 0, 0.0980619, -2.39076, -8, 0.1, 2.79953, 8, -0.1, 2.79953, 0, -0.0980814, -2.39076, 0, -0.095693, -2.58105, 0, -0.0924041, -2.76586, 0, -0.088195, -2.94283, -8, -0.1, 2.79953, 8, 0.0995106, 2.91699, 0, 0.0995106, -2.19655, 0, 0.1, -2, -8, 0.0995106, 2.91699, 8, -0.0995302, 2.91699, 0, -0.1, -2, 0, -0.0995302, -2.19655, -8, -0.0995302, 2.91699, 8, 0.0980619, 3.03367, -8, 0.0980619, 3.03367, 8, -0.0980814, 3.03367, -8, -0.0980814, 3.03367, 8, 0.0956734, 3.148, -8, 0.0956734, 3.148, 8, -0.095693, 3.148, -8, -0.095693, 3.148, 8, 0.0923845, 3.2592, -8, 0.0923845, 3.2592, 8, -0.0924041, 3.2592, -8, -0.0924041, 3.2592, 8, 0.0881754, 3.36492, -8, 0.0881754, 3.36492, 8, -0.088195, 3.36492, -8, -0.088195, 3.36492, 8, 0.0831441, 3.46594, -8, 0.0831441, 3.46594, 8, -0.0831637, 3.46594, -8, -0.0831637, 3.46594, 8, 0.0772905, 3.56069, -8, 0.0772905, 3.56069, 8, -0.0773101, 3.56069, -8, -0.0773101, 3.56069, 8, 0.070693, 3.64839, -8, 0.070693, 3.64839, 8, -0.0707126, 3.64839, -8, -0.0707126, 3.64839, 8, 0.0634299, 3.72749, -8, 0.0634299, 3.72749, 8, -0.0634495, 3.72749, -8, -0.0634495, 3.72749, 8, 0.0555599, 3.79718, -8, 0.0555599, 3.79718, 8, -0.0555795, 3.79718, -8, -0.0555795, 3.79718, 8, 0.0471222, 3.85826, -8, 0.0471222, 3.85826, 8, -0.0471417, 3.85826, -8, -0.0471417, 3.85826, 8, 0.0382537, 3.90838, -8, 0.0382537, 3.90838, 8, -0.0382733, 3.90838, -8, -0.0382733, 3.90838, 8, 0.0290133, 3.94832, -8, 0.0290133, 3.94832, 8, -0.0290329, 3.94832, -8, -0.0290329, 3.94832, 8, 0.0194988, 3.97651, -8, 0.0194988, 3.97651, 8, -0.0195184, 3.97651, -8, -0.0195184, 3.97651, 8, 0.00978857, 3.99374, -8, 0.00978857, 3.99374, 8, -0.00980815, 3.99374, -8, -0.00980815, 3.99374, 8, 0, 4, -8, 0, 4)
@@ -44,28 +41,26 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k7ct2")
 
-[node name="Archer" type="VehicleBody3D"]
+[node name="Archer" type="VehicleBody3D" unique_id=883332756]
 mass = 15000.0
 can_sleep = false
 continuous_cd = true
 angular_damp = 3.0
 script = ExtResource("1_oowyf")
 
-[node name="CameraFPV" type="Camera3D" parent="."]
+[node name="CameraFPV" type="Camera3D" parent="." unique_id=1107500074]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 far = 100000.0
 
-[node name="FPV_HUD" parent="CameraFPV"]
-
-[node name="CameraExt" type="Camera3D" parent="."]
+[node name="CameraExt" type="Camera3D" parent="." unique_id=1404929207]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 12)
 current = true
 far = 100000.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2067889054]
 shape = SubResource("1")
 
-[node name="VehicleWheelNose" type="VehicleWheel3D" parent="."]
+[node name="VehicleWheelNose" type="VehicleWheel3D" parent="." unique_id=1296661266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, -3)
 use_as_steering = true
 wheel_radius = 0.2
@@ -76,14 +71,14 @@ suspension_max_force = 500000.0
 damping_compression = 0.99
 damping_relaxation = 0.995
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelNose"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelNose" unique_id=974113032]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.2
 height = 0.01
 sides = 32
 material = ExtResource("4")
 
-[node name="VehicleWheelMainL" type="VehicleWheel3D" parent="."]
+[node name="VehicleWheelMainL" type="VehicleWheel3D" parent="." unique_id=1907871214]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1.5, 1)
 use_as_traction = true
 wheel_radius = 0.2
@@ -94,14 +89,14 @@ suspension_max_force = 500000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelMainL"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelMainL" unique_id=106946700]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.2
 height = 0.01
 sides = 32
 material = ExtResource("4")
 
-[node name="VehicleWheelMainR" type="VehicleWheel3D" parent="."]
+[node name="VehicleWheelMainR" type="VehicleWheel3D" parent="." unique_id=94277128]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1.5, 1)
 use_as_traction = true
 wheel_radius = 0.2
@@ -112,14 +107,14 @@ suspension_max_force = 500000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelMainR"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="VehicleWheelMainR" unique_id=924335171]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.2
 height = 0.01
 sides = 32
 material = ExtResource("4")
 
-[node name="AeroSurfaceWingL" type="Node3D" parent="."]
+[node name="AeroSurfaceWingL" type="Node3D" parent="." unique_id=1930463462]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 script = ExtResource("2")
 length_chord_root = 8.0
@@ -127,7 +122,7 @@ length_chord_tip = 1.6
 length_span = 8.0
 angle_sweep = 30.0
 
-[node name="AeroSurfaceWingR" type="Node3D" parent="."]
+[node name="AeroSurfaceWingR" type="Node3D" parent="." unique_id=809956842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 script = ExtResource("2")
 length_chord_root = 8.0
@@ -135,59 +130,58 @@ length_chord_tip = 1.6
 length_span = 8.0
 angle_sweep = 30.0
 
-[node name="AeroSurfaceCtrlL1" type="Node3D" parent="."]
+[node name="AeroSurfaceCtrlL1" type="Node3D" parent="." unique_id=1791084770]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.05, 3.925)
 script = ExtResource("2")
 length_span = 6.0
 pos_COP = Vector3(0, 0, 0.5)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlL1"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlL1" unique_id=1235407575]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.5)
 height = 6.0
 sides = 32
 smooth_faces = false
 material = ExtResource("4")
 
-[node name="AeroSurfaceCtrlL2" type="Node3D" parent="."]
+[node name="AeroSurfaceCtrlL2" type="Node3D" parent="." unique_id=439520894]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, -0.05, 3.925)
 script = ExtResource("2")
 length_span = 6.0
 pos_COP = Vector3(0, 0, 0.5)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlL2"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlL2" unique_id=1080454393]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.5)
 height = 6.0
 sides = 32
 smooth_faces = false
 material = ExtResource("4")
 
-[node name="AeroSurfaceCtrlR1" type="Node3D" parent="."]
+[node name="AeroSurfaceCtrlR1" type="Node3D" parent="." unique_id=70786269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.05, 3.925)
 script = ExtResource("2")
 length_span = 6.0
 pos_COP = Vector3(0, 0, 0.5)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlR1"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlR1" unique_id=2032972882]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.5)
 height = 6.0
 sides = 32
 smooth_faces = false
 material = ExtResource("4")
 
-[node name="AeroSurfaceCtrlR2" type="Node3D" parent="."]
+[node name="AeroSurfaceCtrlR2" type="Node3D" parent="." unique_id=471656239]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.05, 3.925)
 script = ExtResource("2")
 length_span = 6.0
 pos_COP = Vector3(0, 0, 0.5)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlR2"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AeroSurfaceCtrlR2" unique_id=1382213450]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.5)
 height = 6.0
 sides = 32
 smooth_faces = false
 material = ExtResource("4")
 
-[node name="MeshWing" type="MeshInstance3D" parent="."]
+[node name="MeshWing" type="MeshInstance3D" parent="." unique_id=1568257882]
 gi_mode = 0
 mesh = SubResource("ArrayMesh_7ragy")
-skeleton = NodePath("")

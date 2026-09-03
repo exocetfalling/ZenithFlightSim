@@ -1,9 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://blfepklexyd"]
 
-[ext_resource path="res://addons/zylann.hterrain/tools/texture_editor/display_alpha.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" uid="uid://br7isdopirerc" path="res://addons/zylann.hterrain/tools/texture_editor/display_alpha.gdshader" id="1"]
 
 [resource]
-
-render_priority = 0
-shader = ExtResource( 1 )
-
+shader = ExtResource("1")

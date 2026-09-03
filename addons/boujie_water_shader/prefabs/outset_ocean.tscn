@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1ifm0554gtdb"]
+[gd_scene format=3 uid="uid://b1ifm0554gtdb"]
 
 [ext_resource type="Script" uid="uid://cy4vyakbwhede" path="res://addons/boujie_water_shader/prefabs/ocean_prefab.gd" id="1_5pvfd"]
 [ext_resource type="Material" uid="uid://cvnsu7lttsfsh" path="res://addons/boujie_water_shader/prefabs/outset_ocean_material.tres" id="2_4txqg"]
@@ -17,20 +17,20 @@
 [ext_resource type="Resource" uid="uid://dp2iua60m7f8m" path="res://example/boujie_water_shader/uv_waves/uvwave1.tres" id="17_25ere"]
 [ext_resource type="Resource" uid="uid://3g1mc132n1al" path="res://example/boujie_water_shader/uv_waves/uvwave2.tres" id="18_6100b"]
 
-[node name="OutsetOcean" type="Node3D"]
+[node name="OutsetOcean" type="Node3D" unique_id=408655970]
 script = ExtResource("1_5pvfd")
 material = ExtResource("2_4txqg")
 levels_of_detail = 5
 unit_size = 2.0
-far_edge = 4000.0
+far_edge = 4000
 
-[node name="CameraFollower3D" type="Node3D" parent="."]
+[node name="CameraFollower3D" type="Node3D" parent="." unique_id=1429560510]
 script = ExtResource("3_knos1")
 target_path = NodePath("..")
 snap = true
 snap_unit = 32.0
 
-[node name="WaterMaterialDesigner" type="Node" parent="."]
+[node name="WaterMaterialDesigner" type="Node" parent="." unique_id=726228220]
 script = ExtResource("4_u261r")
 material = ExtResource("2_4txqg")
 update_on_ready = true

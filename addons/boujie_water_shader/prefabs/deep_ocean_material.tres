@@ -1,9 +1,9 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cu46b100244nd"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://cu46b100244nd"]
 
 [ext_resource type="Shader" uid="uid://c0wedjjs0uwf3" path="res://addons/boujie_water_shader/shader/water.gdshader" id="1_l73mt"]
-[ext_resource type="Texture2D" uid="uid://dck2b16gulx5d" path="res://addons/boujie_water_shader/shader/ocean_albedo_white_highcontrast.png" id="2_8jfpx"]
-[ext_resource type="Texture2D" uid="uid://cpav8p4gip0uk" path="res://addons/boujie_water_shader/shader/refraction.png" id="3_b70bb"]
-[ext_resource type="Texture2D" uid="uid://cq0i08hinbihi" path="res://addons/boujie_water_shader/shader/foam_2.png" id="3_ln7b4"]
+[ext_resource type="Texture2D" uid="uid://c63ws27fuhaje" path="res://addons/boujie_water_shader/shader/ocean_albedo_white_highcontrast.png" id="2_8jfpx"]
+[ext_resource type="Texture2D" uid="uid://dxmacumcij605" path="res://addons/boujie_water_shader/shader/refraction.png" id="3_b70bb"]
+[ext_resource type="Texture2D" uid="uid://dmnvschclaai0" path="res://addons/boujie_water_shader/shader/foam_2.png" id="3_ln7b4"]
 
 [resource]
 render_priority = 0

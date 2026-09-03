@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://do3c3jse5p7hx"]
+[gd_scene format=3 uid="uid://do3c3jse5p7hx"]
 
 [ext_resource type="Script" uid="uid://mrs2fiwq553g" path="res://addons/zylann.hterrain/tools/detail_editor/detail_editor.gd" id="1"]
 
-[node name="DetailEditor" type="Control"]
+[node name="DetailEditor" type="Control" unique_id=330443743]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 0
@@ -10,7 +10,7 @@ offset_right = 189.0
 offset_bottom = 109.0
 script = ExtResource("1")
 
-[node name="ItemList" type="ItemList" parent="."]
+[node name="ItemList" type="ItemList" parent="." unique_id=1402832889]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -20,26 +20,26 @@ same_column_width = true
 icon_mode = 0
 fixed_icon_size = Vector2i(32, 32)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1515372708]
 layout_mode = 0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -24.0
 
-[node name="Add" type="Button" parent="HBoxContainer"]
+[node name="Add" type="Button" parent="HBoxContainer" unique_id=2133000885]
 layout_mode = 2
 text = "Add"
 
-[node name="Remove" type="Button" parent="HBoxContainer"]
+[node name="Remove" type="Button" parent="HBoxContainer" unique_id=1484093305]
 layout_mode = 2
 text = "Remove"
 
-[node name="Label" type="Label" parent="HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=594289821]
 layout_mode = 2
 text = "Details"
 
-[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="." unique_id=845977888]
 dialog_text = "Are you sure you want to remove this detail map?"
 
 [connection signal="item_selected" from="ItemList" to="." method="_on_ItemList_item_selected"]

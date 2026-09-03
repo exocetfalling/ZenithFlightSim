@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ignpdv10rx52"]
+[gd_scene format=3 uid="uid://ignpdv10rx52"]
 
 [ext_resource type="Script" uid="uid://cy4vyakbwhede" path="res://addons/boujie_water_shader/prefabs/ocean_prefab.gd" id="1_ffcdn"]
 [ext_resource type="Material" uid="uid://cu46b100244nd" path="res://addons/boujie_water_shader/prefabs/deep_ocean_material.tres" id="2_mvet8"]
@@ -18,8 +18,6 @@ steepness = 10.0
 amplitude = 2.0
 direction_degrees = 15.0
 frequency = 0.02
-speed = 1.0
-phase_degrees = 0.0
 
 [sub_resource type="Resource" id="Resource_gq4b8"]
 script = ExtResource("8_uytuc")
@@ -27,8 +25,6 @@ steepness = 0.05
 amplitude = 0.004
 direction_degrees = 70.702
 frequency = 2.0
-speed = 1.0
-phase_degrees = 0.0
 
 [sub_resource type="Resource" id="Resource_ewn38"]
 script = ExtResource("8_uytuc")
@@ -36,7 +32,6 @@ steepness = 2.0
 amplitude = 1.5
 direction_degrees = 15.0
 frequency = 0.02
-speed = 1.0
 phase_degrees = -40.0
 
 [sub_resource type="Resource" id="Resource_v8fws"]
@@ -46,7 +41,6 @@ amplitude = 0.7
 direction_degrees = 281.195
 frequency = 0.03
 speed = 3.0
-phase_degrees = 0.0
 
 [sub_resource type="Resource" id="Resource_pwrcy"]
 script = ExtResource("8_uytuc")
@@ -55,31 +49,28 @@ amplitude = 2.0
 direction_degrees = 88.25
 frequency = 0.001
 speed = 0.05
-phase_degrees = 0.0
 
 [sub_resource type="Resource" id="Resource_ei3rv"]
 script = ExtResource("8_uytuc")
 steepness = 1.5
-amplitude = 1.0
 direction_degrees = 151.5
 frequency = 0.004
 speed = 0.05
-phase_degrees = 0.0
 
-[node name="DeepOcean" type="Node3D"]
+[node name="DeepOcean" type="Node3D" unique_id=1422688609]
 script = ExtResource("1_ffcdn")
 material = ExtResource("2_mvet8")
 levels_of_detail = 5
 unit_size = 2.0
 far_edge = 4000
 
-[node name="CameraFollower3D" type="Node3D" parent="."]
+[node name="CameraFollower3D" type="Node3D" parent="." unique_id=1909923702]
 script = ExtResource("3_u4edm")
 target_path = NodePath("..")
 snap = true
 snap_unit = 32.0
 
-[node name="WaterMaterialDesigner" type="Node" parent="."]
+[node name="WaterMaterialDesigner" type="Node" parent="." unique_id=369689645]
 script = ExtResource("4_aqj8w")
 material = ExtResource("2_mvet8")
 update_on_ready = true

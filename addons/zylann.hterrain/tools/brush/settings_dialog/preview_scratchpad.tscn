@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ng00jipfeucy"]
+[gd_scene format=3 uid="uid://ng00jipfeucy"]
 
 [ext_resource type="Script" uid="uid://cxnv0co1sa152" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_scratchpad.gd" id="1"]
 [ext_resource type="Script" uid="uid://detkqc6b23uv2" path="res://addons/zylann.hterrain/tools/brush/settings_dialog/preview_painter.gd" id="2"]
 
-[node name="PreviewScratchpad" type="Control"]
+[node name="PreviewScratchpad" type="Control" unique_id=743179534]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
@@ -11,10 +11,10 @@ offset_right = 200.0
 offset_bottom = 274.0
 script = ExtResource("1")
 
-[node name="Painter" type="Node" parent="."]
+[node name="Painter" type="Node" parent="." unique_id=1518051782]
 script = ExtResource("2")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=678999216]
 show_behind_parent = true
 layout_mode = 0
 anchor_right = 1.0

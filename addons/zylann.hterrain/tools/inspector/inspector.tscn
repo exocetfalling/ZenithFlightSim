@@ -1,15 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://dfjip6c4olemn"]
+[gd_scene format=3 uid="uid://dfjip6c4olemn"]
 
 [ext_resource type="Script" uid="uid://bls0p8w5y6htm" path="res://addons/zylann.hterrain/tools/inspector/inspector.gd" id="1"]
 
-[node name="Inspector" type="VBoxContainer"]
+[node name="Inspector" type="VBoxContainer" unique_id=513033887]
 script = ExtResource("1")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=703977930]
 layout_mode = 2
 columns = 2
 
-[node name="OpenFileDialog" type="FileDialog" parent="."]
+[node name="OpenFileDialog" type="FileDialog" parent="." unique_id=2012128259]
 title = "Open a File"
 ok_button_text = "Open"
 file_mode = 0

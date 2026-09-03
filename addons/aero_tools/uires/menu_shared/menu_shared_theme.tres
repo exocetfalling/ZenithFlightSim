@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=2 format=2]
+[gd_resource type="Theme" format=3 uid="uid://cppujsal4vvdj"]
 
-[ext_resource path="res://addons/aero_tools/uires/menu_shared/menu_shared_font.tres" type="FontFile" id=1]
+[ext_resource type="FontFile" uid="uid://cymxhexs73qxk" path="res://addons/aero_tools/uires/menu_shared/menu_shared_font.tres" id="1"]
 
 [resource]
-default_font = ExtResource( 1 )
+default_font = ExtResource("1")

@@ -1,27 +1,27 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqgaomu3tr1ym"]
+[gd_scene format=3 uid="uid://dqgaomu3tr1ym"]
 
 [ext_resource type="Script" uid="uid://kr0xes1iyotv" path="res://addons/zylann.hterrain/tools/texture_editor/set_editor/source_file_item_editor.gd" id="2"]
 
-[node name="SourceFileItem" type="VBoxContainer"]
+[node name="SourceFileItem" type="VBoxContainer" unique_id=885047806]
 offset_right = 128.0
 offset_bottom = 194.0
 script = ExtResource("2")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1819831078]
 layout_mode = 2
 text = "Albedo"
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=70410394]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 expand_mode = 1
 stretch_mode = 1
 
-[node name="LoadButton" type="Button" parent="."]
+[node name="LoadButton" type="Button" parent="." unique_id=1841607130]
 layout_mode = 2
 text = "Load..."
 
-[node name="ClearButton" type="Button" parent="."]
+[node name="ClearButton" type="Button" parent="." unique_id=2139285446]
 layout_mode = 2
 text = "Clear"
 

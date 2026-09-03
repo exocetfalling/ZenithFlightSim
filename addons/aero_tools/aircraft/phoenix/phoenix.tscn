@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c1pfxxsltbikv"]
+[gd_scene format=3 uid="uid://c1pfxxsltbikv"]
 
 [ext_resource type="Script" uid="uid://cqo7qhig1cax4" path="res://addons/aero_tools/aircraft/phoenix/phoenix.gd" id="1"]
 [ext_resource type="Script" uid="uid://bxy2u8tu5grr" path="res://addons/aero_tools/scripts/aero_surface.gd" id="2"]
@@ -43,7 +43,7 @@ shader_parameter/lens_distortion_strength = 0.05
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_30stq"]
 
-[node name="Phoenix" type="VehicleBody3D"]
+[node name="Phoenix" type="VehicleBody3D" unique_id=637667548]
 mass = 800.0
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, -1)
@@ -53,22 +53,22 @@ continuous_cd = true
 angular_damp = 10.0
 script = ExtResource("1")
 
-[node name="CollisionShapeFuse" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeFuse" type="CollisionShape3D" parent="." unique_id=1418591196]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 1)
 shape = SubResource("1")
 
-[node name="CollisionShapeWing" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeWing" type="CollisionShape3D" parent="." unique_id=1628782165]
 shape = SubResource("2")
 
-[node name="CollisionShapeTailLeft" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeTailLeft" type="CollisionShape3D" parent="." unique_id=1463724123]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.057, 1.032, 5)
 shape = SubResource("4")
 
-[node name="CollisionShapeTailRight" type="CollisionShape3D" parent="."]
+[node name="CollisionShapeTailRight" type="CollisionShape3D" parent="." unique_id=1791323588]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.057, 1.032, 5)
 shape = SubResource("4")
 
-[node name="WheelNLG" type="VehicleWheel3D" parent="."]
+[node name="WheelNLG" type="VehicleWheel3D" parent="." unique_id=1296882025]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, -2.8)
 use_as_steering = true
 wheel_radius = 0.2
@@ -79,7 +79,7 @@ suspension_max_force = 100000.0
 damping_compression = 0.99
 damping_relaxation = 0.995
 
-[node name="WheelMLGLeft" type="VehicleWheel3D" parent="."]
+[node name="WheelMLGLeft" type="VehicleWheel3D" parent="." unique_id=456161416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.55, -1.2, 0.35)
 use_as_traction = true
 wheel_radius = 0.2
@@ -90,7 +90,7 @@ suspension_max_force = 100000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="WheelMLGRight" type="VehicleWheel3D" parent="."]
+[node name="WheelMLGRight" type="VehicleWheel3D" parent="." unique_id=1103549956]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55, -1.2, 0.35)
 use_as_traction = true
 wheel_radius = 0.2
@@ -101,63 +101,63 @@ suspension_max_force = 100000.0
 damping_compression = 0.95
 damping_relaxation = 0.98
 
-[node name="Fuse" type="Node3D" parent="."]
+[node name="Fuse" type="Node3D" parent="." unique_id=498561966]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 script = ExtResource("2")
 length_chord_root = 0.001
 length_chord_tip = 0.001
 length_span = 0.001
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse" unique_id=1395510521]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 height = 8.0
 sides = 32
 material = ExtResource("3")
 
-[node name="CSGSphereNose" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
+[node name="CSGSphereNose" type="CSGSphere3D" parent="Fuse/CSGCylinder3D" unique_id=432086190]
 transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 4, 0)
 radial_segments = 32
 rings = 32
 material = ExtResource("3")
 
-[node name="CSGSphereTail" type="CSGSphere3D" parent="Fuse/CSGCylinder3D"]
+[node name="CSGSphereTail" type="CSGSphere3D" parent="Fuse/CSGCylinder3D" unique_id=1574715620]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -4, 0)
 radial_segments = 32
 rings = 32
 material = ExtResource("3")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse/CSGCylinder3D/CSGSphereTail"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Fuse/CSGCylinder3D/CSGSphereTail" unique_id=494054940]
 operation = 2
 radius = 0.2
 sides = 32
 cone = true
 material = SubResource("3")
 
-[node name="WingL" type="Node3D" parent="."]
+[node name="WingL" type="Node3D" parent="." unique_id=1591897369]
 transform = Transform3D(1, 0, 0, 0, 0.999987, -0.00523597, 0, 0.00523597, 0.999987, -3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingL"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingL" unique_id=410593860]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
 material = ExtResource("3")
 
-[node name="WingR" type="Node3D" parent="."]
+[node name="WingR" type="Node3D" parent="." unique_id=1734407496]
 transform = Transform3D(1, 0, 0, 0, 0.999987, -0.00523597, 0, 0.00523597, 0.999987, 3, 0, 0)
 script = ExtResource("2")
 length_span = 5.0
 pos_COP = Vector3(0, 0, -0.25)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingR"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="WingR" unique_id=407058593]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 height = 5.0
 sides = 32
 material = ExtResource("3")
 
-[node name="AileronL" type="Node3D" parent="."]
+[node name="AileronL" type="Node3D" parent="." unique_id=946409075]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -165,14 +165,14 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronL"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronL" unique_id=734532030]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
 sides = 32
 material = ExtResource("3")
 
-[node name="AileronR" type="Node3D" parent="."]
+[node name="AileronR" type="Node3D" parent="." unique_id=1113354501]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -180,14 +180,14 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronR"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="AileronR" unique_id=1827102208]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
 sides = 32
 material = ExtResource("3")
 
-[node name="FlapL" type="Node3D" parent="."]
+[node name="FlapL" type="Node3D" parent="." unique_id=1644064502]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -195,14 +195,14 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapL"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapL" unique_id=1777399192]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
 sides = 32
 material = ExtResource("3")
 
-[node name="FlapR" type="Node3D" parent="."]
+[node name="FlapR" type="Node3D" parent="." unique_id=204262468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 0, 0.5)
 script = ExtResource("2")
 length_chord_root = 0.25
@@ -210,47 +210,47 @@ length_chord_tip = 0.25
 length_span = 2.4
 pos_COP = Vector3(0, 0, 0.125)
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapR"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="FlapR" unique_id=253881071]
 transform = Transform3D(-4.37114e-09, 1, 0, -0.1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0.125)
 radius = 0.125
 height = 2.4
 sides = 32
 material = ExtResource("3")
 
-[node name="RuddervatorL" type="Node3D" parent="."]
+[node name="RuddervatorL" type="Node3D" parent="." unique_id=1809492675]
 transform = Transform3D(0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0, 1, -1.075, 1.05, 5)
 script = ExtResource("2")
 length_chord_root = 0.8
 length_chord_tip = 0.8
 length_span = 2.0
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RuddervatorL"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RuddervatorL" unique_id=1194589664]
 transform = Transform3D(0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.4
 sides = 32
 material = ExtResource("3")
 
-[node name="RuddervatorR" type="Node3D" parent="."]
+[node name="RuddervatorR" type="Node3D" parent="." unique_id=865906141]
 transform = Transform3D(0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1, 1.075, 1.05, 5)
 script = ExtResource("2")
 length_chord_root = 0.8
 length_chord_tip = 0.8
 length_span = 2.0
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RuddervatorR"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="RuddervatorR" unique_id=1768785799]
 transform = Transform3D(0, 1, 0, -0.1, -8.9407e-08, 0, 0, 0, 1, 0, 0, 0)
 radius = 0.4
 sides = 32
 material = ExtResource("3")
 
-[node name="CameraFPV" type="Camera3D" parent="."]
+[node name="CameraFPV" type="Camera3D" parent="." unique_id=887806800]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5)
 environment = ExtResource("4_8iccb")
 fov = 25.0
-far = 1e+06
+far = 1000000.0
 script = ExtResource("8")
 
-[node name="ColorRect" type="ColorRect" parent="CameraFPV"]
+[node name="ColorRect" type="ColorRect" parent="CameraFPV" unique_id=1626806606]
 visible = false
 material = SubResource("ShaderMaterial_a82i4")
 anchors_preset = 15
@@ -259,7 +259,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CameraExt" type="Camera3D" parent="."]
+[node name="CameraExt" type="Camera3D" parent="." unique_id=860711379]
 transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 2, 10)
 cull_mask = 1048557
 environment = ExtResource("4_8iccb")
@@ -268,7 +268,7 @@ current = true
 fov = 60.0
 far = 100000.0
 
-[node name="PIDCalcPitchRate" type="Node" parent="."]
+[node name="PIDCalcPitchRate" type="Node" parent="." unique_id=104343750]
 script = ExtResource("6")
 term_P = 0.1
 term_I = 1.0
@@ -276,102 +276,102 @@ term_D = 0.05
 integral_max = 50.0
 param_tuning_active = false
 
-[node name="LGPointNLG" type="Node3D" parent="."]
+[node name="LGPointNLG" type="Node3D" parent="." unique_id=508109466]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -2.8)
 
-[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointNLG"]
+[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointNLG" unique_id=1931911897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 radius = 0.02
 height = 0.25
 sides = 32
 material = ExtResource("3")
 
-[node name="StrutLower" type="CSGCylinder3D" parent="LGPointNLG"]
+[node name="StrutLower" type="CSGCylinder3D" parent="LGPointNLG" unique_id=269109636]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45, 0)
 radius = 0.015
 height = 1.0
 sides = 32
 material = ExtResource("3")
 
-[node name="Axle" type="CSGCylinder3D" parent="LGPointNLG/StrutLower"]
+[node name="Axle" type="CSGCylinder3D" parent="LGPointNLG/StrutLower" unique_id=572978979]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, 0)
 radius = 0.01
 height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="WheelLeft" parent="LGPointNLG/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelLeft" parent="LGPointNLG/StrutLower/Axle" unique_id=1059504586 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelRight" parent="LGPointNLG/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelRight" parent="LGPointNLG/StrutLower/Axle" unique_id=1317924150 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
-[node name="LGPointMLGLeft" type="Node3D" parent="."]
+[node name="LGPointMLGLeft" type="Node3D" parent="." unique_id=1164953718]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.35)
 
-[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointMLGLeft"]
+[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointMLGLeft" unique_id=1867153441]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 radius = 0.02
 height = 0.5
 sides = 32
 material = ExtResource("3")
 
-[node name="StrutLower" type="CSGCylinder3D" parent="LGPointMLGLeft"]
+[node name="StrutLower" type="CSGCylinder3D" parent="LGPointMLGLeft" unique_id=1002235078]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 radius = 0.015
 height = 1.0
 sides = 32
 material = ExtResource("3")
 
-[node name="Axle" type="CSGCylinder3D" parent="LGPointMLGLeft/StrutLower"]
+[node name="Axle" type="CSGCylinder3D" parent="LGPointMLGLeft/StrutLower" unique_id=1988787451]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, 0)
 radius = 0.01
 height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="WheelLeft" parent="LGPointMLGLeft/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelLeft" parent="LGPointMLGLeft/StrutLower/Axle" unique_id=1887891163 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelRight" parent="LGPointMLGLeft/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelRight" parent="LGPointMLGLeft/StrutLower/Axle" unique_id=62965028 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
-[node name="LGPointMLGRight" type="Node3D" parent="."]
+[node name="LGPointMLGRight" type="Node3D" parent="." unique_id=75940468]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.35)
 
-[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointMLGRight"]
+[node name="StrutUpper" type="CSGCylinder3D" parent="LGPointMLGRight" unique_id=758792537]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 radius = 0.02
 height = 0.5
 sides = 32
 material = ExtResource("3")
 
-[node name="StrutLower" type="CSGCylinder3D" parent="LGPointMLGRight"]
+[node name="StrutLower" type="CSGCylinder3D" parent="LGPointMLGRight" unique_id=315911392]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0)
 radius = 0.015
 height = 1.0
 sides = 32
 material = ExtResource("3")
 
-[node name="Axle" type="CSGCylinder3D" parent="LGPointMLGRight/StrutLower"]
+[node name="Axle" type="CSGCylinder3D" parent="LGPointMLGRight/StrutLower" unique_id=1707589809]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.5, 0)
 radius = 0.01
 height = 0.08
 sides = 32
 material = ExtResource("3")
 
-[node name="WheelLeft" parent="LGPointMLGRight/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelLeft" parent="LGPointMLGRight/StrutLower/Axle" unique_id=10651965 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, 0.0700001, 0)
 
-[node name="WheelRight" parent="LGPointMLGRight/StrutLower/Axle" instance=ExtResource("7_hervv")]
+[node name="WheelRight" parent="LGPointMLGRight/StrutLower/Axle" unique_id=1388500870 instance=ExtResource("7_hervv")]
 transform = Transform3D(-8.74228e-08, 2, 0, -2, -8.74228e-08, 0, 0, 0, 2, 0, -0.0700001, 0)
 
-[node name="RadioAltimeter" type="RayCast3D" parent="."]
+[node name="RadioAltimeter" type="RayCast3D" parent="." unique_id=2003585294]
 target_position = Vector3(0, -1000, 0)
 
-[node name="HUDShared" parent="." instance=ExtResource("4")]
+[node name="HUDShared" parent="." unique_id=2043421561 instance=ExtResource("4")]
 
-[node name="CCIP" type="CSGSphere3D" parent="."]
+[node name="CCIP" type="CSGSphere3D" parent="." unique_id=1259618191]
 visible = false
 radius = 10.0
 radial_segments = 32

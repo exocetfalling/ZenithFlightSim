@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuagegibp4wcj"]
+[gd_scene format=3 uid="uid://cuagegibp4wcj"]
 
 [ext_resource type="Material" uid="uid://dm15sg1uklilb" path="res://example/boujie_water_shader/pedestal/pedestal_material.tres" id="1_bx14s"]
 [ext_resource type="ArrayMesh" uid="uid://bx51e82e1ihlw" path="res://example/boujie_water_shader/obelisk/pyramid_pillar.obj" id="2_r0max"]
@@ -16,19 +16,19 @@ bottom_radius = 3.5
 height = 10.0
 cap_top = false
 
-[node name="Pedestal" type="Node3D"]
+[node name="Pedestal" type="Node3D" unique_id=227662125]
 
-[node name="Platform" type="MeshInstance3D" parent="."]
+[node name="Platform" type="MeshInstance3D" parent="." unique_id=1283194826]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 mesh = SubResource("CylinderMesh_x43j5")
 surface_material_override/0 = ExtResource("1_bx14s")
 
-[node name="Foundation" type="MeshInstance3D" parent="."]
+[node name="Foundation" type="MeshInstance3D" parent="." unique_id=1730870454]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
 mesh = SubResource("CylinderMesh_bn3rb")
 surface_material_override/0 = ExtResource("1_bx14s")
 
-[node name="Capstone" type="MeshInstance3D" parent="."]
+[node name="Capstone" type="MeshInstance3D" parent="." unique_id=475015969]
 transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0.4, 0)
 mesh = ExtResource("2_r0max")
 skeleton = NodePath("../..")

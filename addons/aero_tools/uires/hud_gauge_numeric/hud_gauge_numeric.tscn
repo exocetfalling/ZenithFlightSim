@@ -1,23 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctd0otb88d5ug"]
+[gd_scene format=3 uid="uid://ctd0otb88d5ug"]
 
 [ext_resource type="Theme" uid="uid://47sin25x34e5" path="res://addons/aero_tools/uires/hud_shared/hud_shared_theme.tres" id="1"]
 [ext_resource type="Script" uid="uid://jewk071g1ior" path="res://addons/aero_tools/uires/hud_gauge_numeric/hud_gauge_numeric.gd" id="2"]
 
-[node name="HUDGaugeNumeric" type="Control"]
+[node name="HUDGaugeNumeric" type="Control" unique_id=1565531495]
 custom_minimum_size = Vector2(200, 150)
 layout_mode = 3
 anchors_preset = 0
 theme = ExtResource("1")
 script = ExtResource("2")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=447150162]
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 0.5
 text = "Label"
 horizontal_alignment = 1
 
-[node name="Value" type="Label" parent="."]
+[node name="Value" type="Label" parent="." unique_id=1942221157]
 layout_mode = 0
 anchor_top = 0.5
 anchor_right = 1.0
